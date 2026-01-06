@@ -37,6 +37,7 @@
         <a id="top" tab-index="-1" aria-hidden="true"></a>
 
         <header class="ct-header ct-theme-light" role="banner">
+          {% if site.data.navs.crosssitenav %}
           <div class="ct-header__top hide-xxs show-m">
             <div class="container">
               <div class="row">
@@ -57,16 +58,17 @@
                 <div class="col-xxs-12 col-m-8">
                   <!-- <div class="ct-header__content-top3">{{ HEADER_TOP_3 }}</div> -->
 
-                  {% if site.data.navs.crosssitenav %}
+                  
                     {% include sitesnav.html %}
-                  {% endif %}
+                  
 
                 </div>
               </div>
             </div>
+            
           </div>
 
-
+{% endif %}
 
 
           <div class="ct-header__middle">
@@ -74,7 +76,7 @@
               <div class="row">
                 <div class="col-xxs-12">
                   <div class="ct-header__content-middle1">
-                    Logo
+                    {{ HEADER_MIDDLE_1 }}
                   </div>
                 </div>
               </div>
@@ -84,7 +86,31 @@
               <div class="row row--no-wrap">
                 <div class="col col--no-grow">
                   <div class="ct-header__content-middle2">
-                    {{ HEADER_MIDDLE_2 }}
+<div id="block-bdga-header-sitebranding" data-drupal-settingstray="editable" class="block block-system block-system-branding-block">
+  
+    
+        
+
+      <a class="ct-logo ct-theme-light ct-logo--inline settings-tray-editable" href="https://www.digital.gov.au/">
+  
+                          
+
+  <img class="ct-image ct-theme-light ct-logo__image ct-logo__image--desktop hide-xxs show-l" src="https://www.digital.gov.au/sites/default/files/Australian-Government-Coat-of-Arms_1.png" alt="Australian Government logo - Home" data-once="imageAltCheck">
+              
+
+  <img class="ct-image ct-theme-light ct-logo__image ct-logo__image--mobile hide-l" src="https://www.digital.gov.au/sites/default/files/Australian-Government-Coat-of-Arms_2.png" alt="Australian Government logo - Home" data-once="imageAltCheck">
+                              <span class="ct-logo__stripe hide-xxs show-l"></span>
+                    
+
+  <img class="ct-image ct-theme-light ct-logo__image ct-logo__image--desktop hide-xxs show-l" src="https://www.digital.gov.au/sites/default/files/digital.gov_.au__1.svg" alt="digital.gov.au beta logo - Home" data-once="imageAltCheck">
+              
+
+  <img class="ct-image ct-theme-light ct-logo__image ct-logo__image--mobile hide-xxs" src="https://www.digital.gov.au/sites/default/files/digital.gov_.au__2.svg" alt="digital.gov.au beta logo - Home" data-once="imageAltCheck">
+            
+      </a>
+    
+  
+  </div>
                   </div>
                 </div>
 
