@@ -1,0 +1,23 @@
+mainnav:
+  - title: 'Get started'
+    url: /plan/
+    subfolderitems:
+      - title: 'Plan your digital content'
+        url: /
+      - title: 'Prepare to publish'
+        url: /
+  - title: 'Patterns'
+    url: /patterns/
+  - title: 'Templates'
+    url: /templates/
+    
+
+legalfooternav:
+  - title: 'Accessibility'
+    url: /
+  - title: 'Privacy'
+    url: /
+  - title: 'Copyright and disclaimers'
+    url: /
+  - title: 'Sitemap'
+    url: /
