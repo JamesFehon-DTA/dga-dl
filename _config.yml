@@ -25,6 +25,16 @@ baseurl: "/dga-dl" # the subpath of your site, e.g. /blog
 url: "https://jamesfehon-dta.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 
 
+collections:
+  patterns:
+    output: true
+    permalink: /patterns/:path/
+    
+  templates:
+    output: true
+    permalink: /templates/:path/
+
+
 
 # Build settings
 # theme: minima
@@ -50,3 +60,4 @@ url: "https://jamesfehon-dta.github.io/" # the base hostname & protocol for your
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+

@@ -1,0 +1,81 @@
+
+
+<div class="ct-list ct-theme-light ct-vertical-spacing-inset--top">
+  <div class="ct-list__inner">
+
+
+{% if include.list__header %}
+    <div class="ct-list__header">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxs-12 col-m-9">
+            <h2 class="ct-heading ct-theme-light ct-list__title">
+              <!-- {{ current_domain.name }} -->
+            </h2>
+          </div>
+          <div class="col-xxs-12 col-m-3"></div>
+        </div>
+      </div>
+    </div>
+{% endif %}
+<!-- 
+    <div class="container ct-list__rows-above">
+      <div class="row">
+        <div class="col-xxs-12">
+          <div class="ct-paragraph ct-theme-light ct-paragraph--regular">
+            <h2 class="ct-heading ct-theme-light">
+              {{ domain.domain }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+ 	
+    <div class="ct-list__rows ct-vertical-spacing-inset--bottom">
+      <div class="container" aria-live="polite">
+
+      <div class="row row--equal-heights-content row--vertically-spaced" >
+          <!-- <div class="col-xxs-12">
+            <h2 class="ct-heading ct-theme-light">
+              {{ domain.domain }}
+            </h2>
+        </div> -->
+
+      
+      {% for card in cards %}
+
+
+          <div class="col-xxs-12 col-m-4">
+            <div
+              class="ct-navigation-card ct-theme-light ct-navigation-card--with-link"
+            >
+
+              <div class="ct-navigation-card__content">
+                <h3 class="ct-navigation-card__title">
+                  <a class="ct-navigation-card__title-link" href="{{ card.url }}">
+                     {{ card.title }}
+                  </a>
+                </h3>
+
+                <div
+                  class="ct-paragraph ct-theme-light ct-paragraph--regular ct-paragraph--no-margin ct-navigation-card__summary"
+                >
+                    {{ card.description }}
+                </div>
+
+                
+              </div>
+          </div>
+      </div>
+
+    {% endfor %}
+
+    </div>
+          
+
+
+</div></div>
+
+
+</div></div>
