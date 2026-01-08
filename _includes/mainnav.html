@@ -118,7 +118,7 @@
      {% for item in site.data.navs.mainnav %}
        
         <li class="ct-menu__item ct-menu__item--level-0   ">
-          <a class="ct-link ct-theme-light     ct-menu__item__link" href="{{ item.url }}"
+          <a class="ct-link ct-theme-light     ct-menu__item__link" href="{{ item.url | relative_url }}"
             title="{{ item.title }}" ><span class="ct-text-icon__text">
           
           
