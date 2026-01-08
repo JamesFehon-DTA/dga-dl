@@ -29,6 +29,10 @@ collections:
   patterns:
     output: true
     permalink: /patterns/:path/
+
+  components:
+    output: true
+    permalink: /components/:path/
     
   templates:
     output: true

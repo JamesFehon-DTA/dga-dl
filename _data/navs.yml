@@ -7,8 +7,10 @@ mainnav:
         url: /
       - title: 'Prepare to publish'
         url: /
-  - title: 'Patterns'
-    url: /patterns/
+  - title: 'Components'
+    url: /components/
+  # - title: 'Patterns'
+  #   url: /patterns/
   - title: 'Templates'
     url: /templates/
     
