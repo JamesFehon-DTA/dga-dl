@@ -7,13 +7,6 @@ url: '/'
 
 {::options parse_block_html="true" /}
 
-<div class="ct-basic-content ct-theme-light">
-<div class="container">
-<div class="row">
-<div class="col-xxs-12">
-
-{{ page.description }}
-{: .ct-text-large}
 
 ## Style Manual guidance
 
@@ -31,8 +24,3 @@ url: '/'
   - [Microsoft 365 Copilot: Summary of evaluation findings](https://www.digital.gov.au/initiatives/copilot-trial/summary-evaluation-findings)
 
 
-
-</div>
-</div>
-</div>
-</div>
