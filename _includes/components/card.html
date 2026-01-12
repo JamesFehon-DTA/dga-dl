@@ -1,10 +1,22 @@
 
           <div class=" {{ include.widths }}">
             <div
-              class="ct-navigation-card ct-theme-light ct-navigation-card--with-image ct-navigation-card--with-link ct-navigation-card--card-clickable"
-            >
+  class="ct-navigation-card ct-theme-light ct-navigation-card--with-image ct-navigation-card--with-link ct-navigation-card--image-as-icon ct-navigation-card--card-clickable"
+>
+            
 
               <div class="ct-navigation-card__content">
+                    <div class="ct-navigation-card__icon">
+      <div
+        class="ct-icon ct-icon--size-extra-large ct-navigation-card__icon__image"
+      >
+        <img
+          class="ct-image ct-theme-light"
+          src="https://design-system.agriculture.gov.au/_next/static/media/accordion.bc43b569.svg"
+          alt="Image alt text"
+        />
+      </div>
+    </div>
                 <{{ include.headingLevel }} class="ct-navigation-card__title">
                   <a class="ct-navigation-card__title-link" href="{{ include.url }}">
                      {{ include.title }}

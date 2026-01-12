@@ -9,8 +9,8 @@ mainnav:
         url: /
   - title: 'Components'
     url: /components/
-  # - title: 'Patterns'
-  #   url: /patterns/
+  - title: 'Patterns'
+    url: /patterns/
   - title: 'Templates'
     url: /templates/
     
