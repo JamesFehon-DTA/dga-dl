@@ -5,17 +5,6 @@ description: "Page navigation displayed with an 'On this page' heading and a lis
 url: '/'
 ---
 
-{::options parse_block_html="true" /}
-
-<div class="ct-basic-content ct-theme-light">
-<div class="container">
-<div class="row">
-<div class="col-xxs-12">
-
-{{ page.description }}
-{: .ct-text-large}
-
-
 
 ## Examples 
 - Long
@@ -25,7 +14,3 @@ url: '/'
   - [Digital Investment Plan (DIP) Guidebook](https://www.digital.gov.au/investment/strategic-planning/digital-investment-plans-dips/digital-investment-plan-dip-guidebook)
 - Short
   - [Benefits Management Policy Guidance](https://www.digital.gov.au/policy/benefits-management-policy/guidance)
-</div>
-</div>
-</div>
-</div>
