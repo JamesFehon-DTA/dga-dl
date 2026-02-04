@@ -16,6 +16,26 @@ url: '/'
 [Reports \| Australian Government Style Manual](https://www.stylemanual.gov.au/content-types/reports) 
 </cite>
 
+# Structure
+```
+Introduction
+Section A
+├── Item A1
+│   ├── Subitem A1.1
+│   └── Subitem A1.2
+└── Item A2
+    ├── Subitem A2.1
+    └── Subitem A2.2
+Section B
+├── Item B1
+└── Item B2
+Appendices
+├── Appendix 1
+├── Appendix 2
+└── Appendix 3
+```
+
+
 ## Examples 
 - Long form
   - [Major Digital Projects Report](https://www.digital.gov.au/initiatives/MDPR/foreword)
