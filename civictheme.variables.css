@@ -1409,6 +1409,7 @@ html {
    For inputs/controls/media where fill would be disruptive.
    ========================================================= */
    
+   .ct-logo:focus-visible,
    input:focus-visible,
    select:focus-visible,
    textarea:focus-visible,
