@@ -1,4 +1,35 @@
 html {
+   /* =========================================================
+      AUTO THEME: prefers-color-scheme → Night
+      ---------------------------------------------------------
+      In dark mode, generic --ct-color-* resolves to Night.
+   ========================================================= */
+@media (prefers-color-scheme: dark) {
+  html {
+    --ct-color-heading: var(--ct-color-night-heading);
+    --ct-color-body: var(--ct-color-night-body);
+    --ct-color-background-light: var(--ct-color-night-background-light);
+    --ct-color-background: var(--ct-color-night-background);
+    --ct-color-background-dark: var(--ct-color-night-background-dark);
+    --ct-color-border-light: var(--ct-color-night-border-light);
+    --ct-color-border: var(--ct-color-night-border);
+    --ct-color-border-dark: var(--ct-color-night-border-dark);
+
+    --ct-color-interaction-text: var(--ct-color-night-interaction-text);
+    --ct-color-interaction-background: var(--ct-color-night-interaction-background);
+    --ct-color-interaction-hover-text: var(--ct-color-night-interaction-hover-text);
+    --ct-color-interaction-hover-background: var(--ct-color-night-interaction-hover-background);
+
+    --ct-color-information: var(--ct-color-night-information);
+    --ct-color-warning: var(--ct-color-night-warning);
+    --ct-color-error: var(--ct-color-night-error);
+    --ct-color-success: var(--ct-color-night-success);
+
+    --ct-color-brand1: var(--ct-color-night-brand1);
+    --ct-color-brand2: var(--ct-color-night-brand2);
+    --ct-color-brand3: var(--ct-color-night-brand3);
+  }
+}
 /* =========================================================
    GLOBAL SEMANTIC COLOURS
    ========================================================= */
@@ -261,7 +292,6 @@ html {
 
    --ct-outline-width: 2px;            /* default for most elements */
    --ct-outline-width-text: 4px;       /* for focus blocks (links + block items) */
-   --ct-outline-offset: 2px;           /* keep existing behaviour consistent */
    
 /* =========================================================
    EXISTING STYLES
@@ -1276,6 +1306,41 @@ html {
    --ct-radio-dark-outline-color: var(--ct-color-focus);
    --ct-select-light-outline-color: var(--ct-color-focus);
    --ct-select-dark-outline-color: var(--ct-color-focus);
+
+/* =========================================================
+   FOCUS OVERRIDES (TOKEN LEVEL)
+   ---------------------------------------------------------
+   Ensure all component focus outlines use Focus yellow.
+   Keep the legacy interaction-focus (purple) defined, but
+   do not use it for keyboard focus.
+   ========================================================= */
+   
+   --ct-chip-light-focus-outline-color: var(--ct-color-focus);
+   --ct-chip-dark-focus-outline-color: var(--ct-color-focus);
+   
+   --ct-button-light-primary-focus-outline-color: var(--ct-color-focus);
+   --ct-button-dark-primary-focus-outline-color: var(--ct-color-focus);
+   --ct-button-light-secondary-focus-outline-color: var(--ct-color-focus);
+   --ct-button-dark-secondary-focus-outline-color: var(--ct-color-focus);
+   --ct-button-light-tertiary-focus-outline-color: var(--ct-color-focus);
+   --ct-button-dark-tertiary-focus-outline-color: var(--ct-color-focus);
+   
+   --ct-input-light-outline-color: var(--ct-color-focus);
+   --ct-input-dark-outline-color: var(--ct-color-focus);
+   --ct-textfield-light-outline-color: var(--ct-color-focus);
+   --ct-textfield-dark-outline-color: var(--ct-color-focus);
+   --ct-textarea-light-outline-color: var(--ct-color-focus);
+   --ct-textarea-dark-outline-color: var(--ct-color-focus);
+   --ct-select-light-outline-color: var(--ct-color-focus);
+   --ct-select-dark-outline-color: var(--ct-color-focus);
+   
+   --ct-checkbox-light-outline-color: var(--ct-color-focus);
+   --ct-checkbox-dark-outline-color: var(--ct-color-focus);
+   --ct-radio-light-outline-color: var(--ct-color-focus);
+   --ct-radio-dark-outline-color: var(--ct-color-focus);
+   
+   /* Anything else that has an outline token */
+   --ct-back-to-top-outline-color: var(--ct-color-focus);
    
 }
 @media (min-width: 768px) {
@@ -1380,17 +1445,18 @@ html {
      background: var(--ct-color-focus);
      color: var(--ct-color-focus-text);
      box-shadow: 0 0 0 var(--ct-outline-width-text) var(--ct-color-focus);
+     /* padding: 2px 4px; */
    }
    
    /* Links: square focus block + padding + underline cue */
    a:focus-visible {
-     padding: 2px 4px;
      border-radius: 0;
      text-decoration: underline;
      text-decoration-thickness: 2px;
      text-underline-offset: 2px;
    }
-   
+
+
    /* Ensure visited doesn't override focused text */
    a:focus-visible:visited {
      color: var(--ct-color-focus-text);
@@ -1413,7 +1479,6 @@ html {
    input:focus-visible,
    select:focus-visible,
    textarea:focus-visible,
-   button:focus-visible:not(.ct-focus-text),
    .ct-focus-outline:focus-visible {
      outline: var(--ct-outline-width) solid var(--ct-color-focus);
      outline-offset: var(--ct-outline-offset);
