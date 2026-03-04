@@ -1,4 +1,10 @@
 html {
+/* =========================================================
+   GLOBAL SEMANTIC COLOURS
+   ========================================================= */
+  --ct-color-focus: #ffdd00;
+  --ct-color-focus-text: #010509; /* near-black on yellow */
+  
   --ct-color-light-heading: #002a39;
   --ct-color-light-body: #33444a;
   --ct-color-light-background-light: #fdfdfd;
@@ -41,6 +47,94 @@ html {
   --ct-color-dark-brand1: #61daff;
   --ct-color-dark-brand2: #003a4f;
   --ct-color-dark-brand3: #00698f;
+
+/* =========================================================
+   LIGHT THEME ALIASES (DEFAULT)
+   ---------------------------------------------------------
+   Allows components to use --ct-color-* without theme suffix
+   ========================================================= */
+
+--ct-color-heading: var(--ct-color-light-heading);
+--ct-color-body: var(--ct-color-light-body);
+--ct-color-background-light: var(--ct-color-light-background-light);
+--ct-color-background: var(--ct-color-light-background);
+--ct-color-background-dark: var(--ct-color-light-background-dark);
+--ct-color-border-light: var(--ct-color-light-border-light);
+--ct-color-border: var(--ct-color-light-border);
+--ct-color-border-dark: var(--ct-color-light-border-dark);
+
+--ct-color-interaction-text: var(--ct-color-light-interaction-text);
+--ct-color-interaction-background: var(--ct-color-light-interaction-background);
+--ct-color-interaction-hover-text: var(--ct-color-light-interaction-hover-text);
+--ct-color-interaction-hover-background: var(--ct-color-light-interaction-hover-background);
+
+--ct-color-information: var(--ct-color-light-information);
+--ct-color-warning: var(--ct-color-light-warning);
+--ct-color-error: var(--ct-color-light-error);
+--ct-color-success: var(--ct-color-light-success);
+
+--ct-color-brand1: var(--ct-color-light-brand1);
+--ct-color-brand2: var(--ct-color-light-brand2);
+--ct-color-brand3: var(--ct-color-light-brand3);
+
+/* =========================================================
+   NIGHT THEME (CANONICAL DARK)
+   ========================================================= */
+
+--ct-color-night-heading: var(--ct-color-dark-heading);
+--ct-color-night-body: var(--ct-color-dark-body);
+--ct-color-night-background-light: var(--ct-color-dark-background-light);
+--ct-color-night-background: var(--ct-color-dark-background);
+--ct-color-night-background-dark: var(--ct-color-dark-background-dark);
+--ct-color-night-border-light: var(--ct-color-dark-border-light);
+--ct-color-night-border: var(--ct-color-dark-border);
+--ct-color-night-border-dark: var(--ct-color-dark-border-dark);
+
+--ct-color-night-interaction-text: var(--ct-color-dark-interaction-text);
+--ct-color-night-interaction-background: var(--ct-color-dark-interaction-background);
+--ct-color-night-interaction-hover-text: var(--ct-color-dark-interaction-hover-text);
+--ct-color-night-interaction-hover-background: var(--ct-color-dark-interaction-hover-background);
+
+--ct-color-night-information: var(--ct-color-dark-information);
+--ct-color-night-warning: var(--ct-color-dark-warning);
+--ct-color-night-error: var(--ct-color-dark-error);
+--ct-color-night-success: var(--ct-color-dark-success);
+
+--ct-color-night-brand1: var(--ct-color-dark-brand1);
+--ct-color-night-brand2: var(--ct-color-dark-brand2);
+--ct-color-night-brand3: var(--ct-color-dark-brand3);
+
+/* =========================================================
+   ALTERNATE THEME (BACKWARDS COMPATIBILITY)
+   ---------------------------------------------------------
+   -dark remains valid
+   -alternate is the new semantic name
+   ========================================================= */
+
+--ct-color-alternate-heading: var(--ct-color-dark-heading);
+--ct-color-alternate-body: var(--ct-color-dark-body);
+--ct-color-alternate-background-light: var(--ct-color-dark-background-light);
+--ct-color-alternate-background: var(--ct-color-dark-background);
+--ct-color-alternate-background-dark: var(--ct-color-dark-background-dark);
+--ct-color-alternate-border-light: var(--ct-color-dark-border-light);
+--ct-color-alternate-border: var(--ct-color-dark-border);
+--ct-color-alternate-border-dark: var(--ct-color-dark-border-dark);
+
+--ct-color-alternate-interaction-text: var(--ct-color-dark-interaction-text);
+--ct-color-alternate-interaction-background: var(--ct-color-dark-interaction-background);
+--ct-color-alternate-interaction-hover-text: var(--ct-color-dark-interaction-hover-text);
+--ct-color-alternate-interaction-hover-background: var(--ct-color-dark-interaction-hover-background);
+
+--ct-color-alternate-information: var(--ct-color-dark-information);
+--ct-color-alternate-warning: var(--ct-color-dark-warning);
+--ct-color-alternate-error: var(--ct-color-dark-error);
+--ct-color-alternate-success: var(--ct-color-dark-success);
+  
+/* =========================================================
+   EXISTING STYLES
+   ========================================================= */
+
+  
   --ct-typography-display-font-size: 2rem;
   --ct-typography-display-line-height: 2.5rem;
   --ct-typography-display-font-name: "Lexend", sans-serif;
@@ -139,8 +233,27 @@ html {
   --ct-collapsible-light-icon-color: var(--ct-color-light-body);
   --ct-collapsible-dark-color: var(--ct-color-dark-body);
   --ct-collapsible-dark-icon-color: var(--ct-color-dark-body);
-  --ct-outline-light: var(--ct-color-light-interaction-focus);
-  --ct-outline-dark: var(--ct-color-dark-interaction-focus);
+  
+  /* --ct-outline-light: var(--ct-color-light-interaction-focus);
+  --ct-outline-dark: var(--ct-color-dark-interaction-focus); */
+
+/* =========================================================
+   FOCUS (KEYBOARD)
+   ---------------------------------------------------------
+   Single invariant colour across themes
+   ========================================================= */
+
+--ct-outline-light: var(--ct-color-focus);
+--ct-outline-dark: var(--ct-color-focus);
+
+/* Optional explicit aliases */
+--ct-outline: var(--ct-color-focus);
+--ct-outline-text: var(--ct-color-focus-text);
+  
+/* =========================================================
+   EXISTING STYLES
+   ========================================================= */
+  
   --ct-chip-border-width: 0.0625rem;
   --ct-chip-light-background-color: var(--ct-color-light-interaction-text);
   --ct-chip-light-border-color: var(--ct-color-light-interaction-background);
