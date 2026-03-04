@@ -1439,7 +1439,7 @@ html {
    - block focus targets (cards/tiles/list items) that contain text
    ========================================================= */
    
-   a:focus-visible,
+   a:focus-visible:not(.ct-logo),
    .ct-focus-text:focus-visible {
      outline: none; /* use box-shadow to avoid layout shift */
      background: var(--ct-color-focus);
@@ -1475,7 +1475,6 @@ html {
    For inputs/controls/media where fill would be disruptive.
    ========================================================= */
    
-   .ct-logo:focus-visible,
    input:focus-visible,
    select:focus-visible,
    textarea:focus-visible,
