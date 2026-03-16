@@ -1,7 +1,7 @@
 ---
 layout: content
-title: 'Focus'
-description: 'A single purple focus ring token provides a consistent, high-contrast keyboard navigation indicator across all components and surfaces.'
+title: 'Focus management'
+description: 'The focus indicator shows which element has focus. Good focus management helps all users track their position, but it is essential for people with low vision.'
 foundation-type: Accessibility
 url: '/'
 demo: false
@@ -9,13 +9,35 @@ demo: false
 
 {{ page.description }}
 
+## Focus management in this system
+
+Focus management is considered throughout the design system — in every component and pattern. A clear, consistent focus indicator is provided without requiring per-component customisation.
+
+## Requirements
+
+- A focus indicator that is visually distinct from both the default and hover states.
+- Focus indicators meet a minimum contrast ratio of 3:1 against adjacent colours and backgrounds (WCAG SC 1.4.11).
+- Keyboard focus is always visible.
+- Focus indicators are not removed unless an equivalent visual indicator is provided.
+- When a focused object is deleted — for example, closing a section alert — focus moves to the next appropriate element.
+
+## Benefits
+
+- Makes it easier to locate interactive elements and focusable sections on the page for users with low vision.
+- Ensures users can track their position when navigating via keyboard.
+- Reduces accidental interactions by clearly defining interactive areas.
+- Assists users with limitations in executive function, attention, or short-term memory to find the focus location on the page.
+- Restores focus after an action has taken place — for example, closing a drawer.
+
+---
+
 ## Approach
 
-The system uses a single `--focus-ring` token — an AgDS-style purple (`hue: 285°`) — applied uniformly as an `outline` on all focusable elements. This approach:
+The system uses a single `--focus-ring` token — a purple (`hue: 285°`) applied uniformly as an `outline` on all focusable elements. This approach:
 
 - avoids hue collision with all four status colours (success `155°`, warning `85°`, danger `25°`, info `245°`)
-- avoids hue collision with the brand accent (`~255°`)
-- provides a visually distinct, easily recognised focus state
+- avoids hue collision with the brand accent (`~240°`) and the cool-neutral surface hue (`255°`)
+- provides a visually distinct, easily recognised focus state consistent across every component
 - works on both light and dark surfaces without requiring a compound indicator
 
 ## Token
@@ -24,7 +46,7 @@ The system uses a single `--focus-ring` token — an AgDS-style purple (`hue: 28
 |---|---|---|
 | `--focus-ring` | `oklch(0.50 0.22 285)` | `oklch(0.72 0.20 285)` |
 
-The Lightness shifts between modes (`0.50` → `0.72`) to maintain sufficient contrast against dark backgrounds. Chroma is marginally reduced in dark mode (`0.22` → `0.20`) to avoid the ring appearing overly vivid.
+Lightness shifts between modes (`0.50` → `0.72`) to maintain sufficient contrast against dark backgrounds. Chroma is marginally reduced in dark mode (`0.22` → `0.20`) to avoid the ring appearing overly vivid against the navy surface.
 
 ## Implementation
 
@@ -45,7 +67,7 @@ Primary buttons use a larger offset to lift the ring off the filled surface:
 }
 ```
 
-Inputs use zero offset so the ring sits flush with the field border:
+Inputs use zero offset so the ring sits flush against the field border:
 
 ```css
 .input:focus-visible {
@@ -57,17 +79,8 @@ Inputs use zero offset so the ring sits flush with the field border:
 
 ## Contrast
 
-WCAG 2.1 SC 1.4.11 (Non-text Contrast) requires a minimum **3:1** contrast ratio between the focus indicator and the adjacent colours. The purple ring at `oklch(0.50 0.22 285)` achieves this against the system's lightest surface (`--bg-body`) in light mode, and `oklch(0.72 0.20 285)` achieves it against the darkest surface in dark mode.
+WCAG SC 1.4.11 (Non-text Contrast) requires a minimum **3:1** ratio between the focus indicator and the adjacent colours. The purple ring at `oklch(0.50 0.22 285)` achieves this against the system's lightest surface (`--bg-body`) in light mode. The dark mode value `oklch(0.72 0.20 285)` achieves it against the deepest dark surface.
 
-## Why not GOV.UK yellow
-
-GOV.UK uses a compound focus model: yellow outline plus a black underline or border. This works because yellow (`~88°`) lacks sufficient contrast on white without a secondary dark element. In a cool-neutral system:
-
-- yellow (`~85°`) shares a hue with the warning status colour, creating semantic ambiguity
-- the compound model requires two tokens and two CSS declarations per component
-- yellow reads as warm against a cool-neutral surface palette
-
-The purple single-ring approach resolves all three issues.
 
 ## Do
 
@@ -75,6 +88,7 @@ The purple single-ring approach resolves all three issues.
 - use `outline` rather than `box-shadow` for the focus ring — `outline` is not clipped by `overflow: hidden` and is respected by Windows High Contrast Mode
 - increase `outline-offset` on filled surfaces (buttons, chips) to visually separate the ring from the element
 - test focus visibility against both light and dark mode surfaces
+- manage focus explicitly when content changes — move focus to the next logical element after a section alert closes, a drawer dismisses, or a modal confirms
 
 ## Don't
 
@@ -82,7 +96,14 @@ The purple single-ring approach resolves all three issues.
 - suppress the focus ring with `outline: none` or `outline: 0` without providing an equivalent replacement
 - use `box-shadow` as the sole focus indicator — it is clipped by parent `overflow: hidden` and invisible in Windows High Contrast Mode
 - change the focus colour per component — a single consistent ring aids recognition
+- confuse the focus ring with `--glow` — glow is a pointer-hover signal, not a keyboard navigation signal
+
+## WCAG references
+
+- [Understanding SC 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html)
+- [Understanding SC 2.4.7 Focus Visible](https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html)
 
 ## Related foundations
 
-- [Colour](/docs/_foundations/colour) — Token system and mode-switching
+- [Colour](/dga-dl/foundations/colour) — Token system and mode-switching
+- [Elevation](/dga-dl/foundations/elevation) — Glow token, distinct from focus ring
