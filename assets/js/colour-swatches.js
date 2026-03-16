@@ -1,70 +1,96 @@
 /**
  * colour-swatches.js
- * Inserts a colour swatch square into the Name cell of colour token tables.
- * Looks for tables where the second column header is "Value", reads the OKLCH
- * value from that cell, and prepends a swatch to the Name cell.
+ * Inserts a colour swatch into any <td> cell whose <code> content is a CSS
+ * colour value (oklch, oklab, lch, lab, hsl, rgb, hex, color()). Works across
+ * any token table structure — Name/Value, Token/Light/Dark, etc.
+ *
+ * Pins min-width on:
+ *   - Name/Token columns (first col, no swatch) — aligns token names
+ *   - Value columns (any col with swatches) — swatch width + code text
  */
 (function () {
   'use strict';
 
+  const SWATCH_SIZE = 2;    // em — keep in sync with SWATCH_STYLE width/height
+  const SWATCH_GAP  = 0.4;  // em — margin-right
+
   const SWATCH_STYLE = [
-    'display:inline-block',
-    'width:1.75rem',
-    'height:1.75rem',
+    'display:block',
+    'width:' + SWATCH_SIZE + 'em',
+    'height:' + SWATCH_SIZE + 'em',
     'border-radius:3px',
-    'vertical-align:middle',
-    'margin-right:0.5em',
-    // Subtle inset ring so near-white swatches are visible on white backgrounds
+    'margin-bottom:0.4em',
     'box-shadow:inset 0 0 0 1px rgba(0,0,0,0.14)',
-    'flex-shrink:0',
   ].join(';');
 
-  function insertSwatches(table) {
-    // Only process tables where the second <th> text is "Value"
-    const headers = table.querySelectorAll('thead th');
-    if (headers.length < 2) return;
-    if (headers[1].textContent.trim().toLowerCase() !== 'value') return;
+  // Matches any CSS colour function or hex value
+  const COLOUR_RE = /^(oklch|oklab|lch|lab|rgb|rgba|hsl|hsla|hwb|color)\s*\(|^#[0-9a-fA-F]{3,8}$/;
 
-    const rows = table.querySelectorAll('tbody tr');
+  function looksLikeColour(str) {
+    return COLOUR_RE.test(str.trim());
+  }
 
-    // Pre-pass: find the longest name in this table so all first cells share
-    // the same min-width and the column is consistent across every row.
-    // ch is measured against the <td> font — add 2em for swatch (1em) + gap (0.5em) + margin (0.5em).
-    let maxLen = 0;
-    rows.forEach(function (row) {
-      const nameCell = row.querySelector('td:nth-child(1)');
-      if (!nameCell) return;
-      const codeEl = nameCell.querySelector('code');
-      const len = (codeEl || nameCell).textContent.trim().length;
-      if (len > maxLen) maxLen = len;
-    });
-    const minWidth = 'calc(' + maxLen + 'ch + 2.5em)';
+  function processTable(table) {
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+    if (!rows.length) return;
+
+    // colMaxLen[i] = longest colour value string (in chars) found in column i
+    const colMaxLen = {};
 
     rows.forEach(function (row) {
-      const nameCell = row.querySelector('td:nth-child(1)');
-      const valueCell = row.querySelector('td:nth-child(2)');
-      if (!nameCell || !valueCell) return;
+      Array.from(row.querySelectorAll('td')).forEach(function (cell, colIdx) {
+        const codeEl = cell.querySelector('code');
+        if (!codeEl) return;
+        const value = codeEl.textContent.trim();
+        if (!looksLikeColour(value)) return;
 
-      // Value is wrapped in a <code> element by the markdown renderer
-      const codeEl = valueCell.querySelector('code');
-      const colourValue = codeEl
-        ? codeEl.textContent.trim()
-        : valueCell.textContent.trim();
+        const swatch = document.createElement('div');
+        swatch.setAttribute('aria-hidden', 'true');
+        swatch.setAttribute('style', SWATCH_STYLE + ';background:' + value);
+        codeEl.parentNode.insertBefore(swatch, codeEl);
 
-      // Skip rows without a recognisable colour value
-      if (!colourValue) return;
-
-      const swatch = document.createElement('span');
-      swatch.setAttribute('aria-hidden', 'true');
-      swatch.setAttribute('style', SWATCH_STYLE + ';background:' + colourValue);
-
-      nameCell.style.minWidth = minWidth;
-      nameCell.insertBefore(swatch, nameCell.firstChild);
+        const len = value.length;
+        if (!colMaxLen[colIdx] || len > colMaxLen[colIdx]) colMaxLen[colIdx] = len;
+      });
     });
+
+    if (!Object.keys(colMaxLen).length) return;
+
+    // Pin min-width on value columns — swatch is stacked above code, not beside it,
+    // so width is driven by the code text length only
+    rows.forEach(function (row) {
+      Array.from(row.querySelectorAll('td')).forEach(function (cell, colIdx) {
+        if (!colMaxLen[colIdx]) return;
+        cell.style.minWidth = 'calc(' + colMaxLen[colIdx] + 'ch + 0.5em)';
+      });
+    });
+
+    // Pin min-width on the first column when its header is "Name" or "Token"
+    // (no swatch in this column — just aligns token names across rows)
+    const firstHeader = table.querySelector('thead th:first-child');
+    if (!firstHeader) return;
+    const headerText = firstHeader.textContent.trim().toLowerCase();
+    if (headerText !== 'name' && headerText !== 'token') return;
+
+    let maxNameLen = 0;
+    rows.forEach(function (row) {
+      const cell = row.querySelector('td:first-child');
+      if (!cell) return;
+      const codeEl = cell.querySelector('code');
+      const len = (codeEl || cell).textContent.trim().length;
+      if (len > maxNameLen) maxNameLen = len;
+    });
+
+    if (maxNameLen > 0) {
+      rows.forEach(function (row) {
+        const cell = row.querySelector('td:first-child');
+        if (cell) cell.style.minWidth = 'calc(' + maxNameLen + 'ch + 0.5em)';
+      });
+    }
   }
 
   function init() {
-    document.querySelectorAll('table').forEach(insertSwatches);
+    document.querySelectorAll('table').forEach(processTable);
   }
 
   if (document.readyState === 'loading') {
