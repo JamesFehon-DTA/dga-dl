@@ -7,7 +7,6 @@ url: '/'
 demo: false
 ---
 
-{{ page.description }}
 
 ## Focus management in this system
 

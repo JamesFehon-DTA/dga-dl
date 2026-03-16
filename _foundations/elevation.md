@@ -7,7 +7,6 @@ url: '/'
 demo: false
 ---
 
-{{ page.description }}
 
 ## Shadow vs glow
 
