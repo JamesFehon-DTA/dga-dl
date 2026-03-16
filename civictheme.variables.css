@@ -1,129 +1,171 @@
 html {
-  --ct-color-light-heading: #002a39;
-  --ct-color-light-body: #33444a;
-  --ct-color-light-background-light: #fdfdfd;
-  --ct-color-light-background: #e6e9eb;
-  --ct-color-light-background-dark: #b8babc;
-  --ct-color-light-border-light: #adafb0;
-  --ct-color-light-border: #5c5d5e;
-  --ct-color-light-border-dark: #171718;
-  --ct-color-light-interaction-text: #fafbfb;
-  --ct-color-light-interaction-background: #00698f;
-  --ct-color-light-interaction-hover-text: #fafbfb;
-  --ct-color-light-interaction-hover-background: #003f56;
-  --ct-color-light-interaction-focus: #8b5cd7;
-  --ct-color-light-highlight: #121313;
-  --ct-color-light-information: #007cbf;
-  --ct-color-light-warning: #c95100;
-  --ct-color-light-error: #ce3836;
-  --ct-color-light-success: #008482;
-  --ct-color-light-brand1: #00698f;
-  --ct-color-light-brand2: #e6e9eb;
-  --ct-color-light-brand3: #121313;
-  --ct-color-dark-heading: #f7fdff;
-  --ct-color-dark-body: #e7f9ff;
-  --ct-color-dark-background-light: #0d4458;
-  --ct-color-dark-background: #003a4f;
-  --ct-color-dark-background-dark: #002937;
-  --ct-color-dark-border-light: #a6bac1;
-  --ct-color-dark-border: #1a4e61;
-  --ct-color-dark-border-dark: #002937;
-  --ct-color-dark-interaction-text: #003a4f;
-  --ct-color-dark-interaction-background: #61daff;
-  --ct-color-dark-interaction-hover-text: #002937;
-  --ct-color-dark-interaction-hover-background: #a0e9ff;
-  --ct-color-dark-interaction-focus: #8b5cd7;
-  --ct-color-dark-highlight: #00698f;
-  --ct-color-dark-information: #4cc4fc;
-  --ct-color-dark-warning: #e38444;
-  --ct-color-dark-error: #e85653;
-  --ct-color-dark-success: #12b0ae;
-  --ct-color-dark-brand1: #61daff;
-  --ct-color-dark-brand2: #003a4f;
-  --ct-color-dark-brand3: #00698f;
+  /* --ct-color-light-heading: #002a39; */
+  --ct-color-light-heading: oklch(0.20 0.010 255);
+  /* --ct-color-light-body: #33444a; */
+  --ct-color-light-body: oklch(0.20 0.010 255);         /* --fg-text — body and heading share one text colour */
+  /* --ct-color-light-background-light: #fdfdfd; */
+  --ct-color-light-background-light: oklch(1.0 0 0);   /* --bg-raised — elevated surfaces (cards, popovers) */
+  /* --ct-color-light-background: #e6e9eb; */
+  --ct-color-light-background: oklch(0.985 0.002 255); /* --bg-body — default page surface */
+  /* --ct-color-light-background-dark: #b8babc; */
+  --ct-color-light-background-dark: oklch(0.945 0.005 255); /* --bg-body-alt — alternate page section */
+  /* --ct-color-light-border-light: #adafb0; */
+  --ct-color-light-border-light: oklch(0.92 0.004 255);
+  /* --ct-color-light-border: #5c5d5e; */
+  --ct-color-light-border: oklch(0.87 0.006 255);
+  /* --ct-color-light-border-dark: #171718; */
+  --ct-color-light-border-dark: oklch(0.70 0.012 255);
+  /* --ct-color-light-interaction-text: #fafbfb; */
+  --ct-color-light-interaction-text: oklch(1.0 0 0);    /* white — text on filled interactive surface */
+  /* --ct-color-light-interaction-background: #00698f; */
+  --ct-color-light-interaction-background: oklch(0.50 0.13 240); /* --accent-emphasis */
+  /* --ct-color-light-interaction-hover-text: #fafbfb; */
+  --ct-color-light-interaction-hover-text: oklch(1.0 0 0); /* white — text on hover interactive surface */
+  /* --ct-color-light-interaction-hover-background: #003f56; */
+  --ct-color-light-interaction-hover-background: oklch(0.50 0.13 240); /* --accent-emphasis — hover via opacity/filter */
+  /* --ct-color-light-interaction-focus: #8b5cd7; */
+  --ct-color-light-interaction-focus: oklch(0.50 0.22 285); /* --focus-ring */
+  /* --ct-color-light-highlight: #121313; */
+  --ct-color-light-highlight: oklch(0.45 0.14 240);     /* --selected */
+  /* --ct-color-light-information: #007cbf; */
+  --ct-color-light-information: oklch(0.45 0.12 245);
+  /* --ct-color-light-warning: #c95100; */
+  --ct-color-light-warning: oklch(0.48 0.14 85);
+  /* --ct-color-light-error: #ce3836; */
+  --ct-color-light-error: oklch(0.47 0.16 25);
+  /* --ct-color-light-success: #008482; */
+  --ct-color-light-success: oklch(0.45 0.14 155);
+  /* --ct-color-light-brand1: #00698f; */
+  --ct-color-light-brand1: oklch(0.50 0.13 240);        /* --accent-emphasis */
+  /* --ct-color-light-brand2: #e6e9eb; */
+  --ct-color-light-brand2: oklch(0.960 0.004 255);      /* --bg-shade */
+  /* --ct-color-light-brand3: #121313; */
+  --ct-color-light-brand3: oklch(0.20 0.010 255);       /* --fg-text */
+  /* --ct-color-dark-heading: #f7fdff; */
+  --ct-color-dark-heading: oklch(0.93 0.006 255);       /* --fg-text dark */
+  /* --ct-color-dark-body: #e7f9ff; */
+  --ct-color-dark-body: oklch(0.93 0.006 255);           /* --fg-text dark — body and heading share one text colour */
+  /* --ct-color-dark-background-light: #0d4458; */
+  --ct-color-dark-background-light: oklch(0.50 0.13 240); /* --accent-emphasis — was brand teal, used for emphasis */
+  /* --ct-color-dark-background: #003a4f; */
+  --ct-color-dark-background: oklch(0.50 0.13 240);      /* --accent-emphasis */
+  /* --ct-color-dark-background-dark: #002937; */
+  --ct-color-dark-background-dark: oklch(0.50 0.13 240); /* --accent-emphasis */
+  /* --ct-color-dark-border-light: #a6bac1; */
+  --ct-color-dark-border-light: oklch(0.24 0.010 255);  /* --border-muted dark */
+  /* --ct-color-dark-border: #1a4e61; */
+  --ct-color-dark-border: oklch(0.30 0.014 255);        /* --border-default dark */
+  /* --ct-color-dark-border-dark: #002937; */
+  --ct-color-dark-border-dark: oklch(0.48 0.016 255);   /* --border-emphasis dark */
+  /* --ct-color-dark-interaction-text: #003a4f; */
+  --ct-color-dark-interaction-text: oklch(0.155 0.020 255); /* dark navy — text on filled interactive surface */
+  /* --ct-color-dark-interaction-background: #61daff; */
+  --ct-color-dark-interaction-background: oklch(0.70 0.14 240); /* --accent-emphasis dark */
+  /* --ct-color-dark-interaction-hover-text: #002937; */
+  --ct-color-dark-interaction-hover-text: oklch(0.125 0.016 255); /* deeper navy — text on hover interactive surface */
+  /* --ct-color-dark-interaction-hover-background: #a0e9ff; */
+  --ct-color-dark-interaction-hover-background: oklch(0.70 0.14 240); /* --accent-emphasis dark — hover via opacity/filter */
+  /* --ct-color-dark-interaction-focus: #8b5cd7; */
+  --ct-color-dark-interaction-focus: oklch(0.72 0.20 285); /* --focus-ring dark */
+  /* --ct-color-dark-highlight: #00698f; */
+  --ct-color-dark-highlight: oklch(0.70 0.14 240);      /* --selected dark */
+  /* --ct-color-dark-information: #4cc4fc; */
+  --ct-color-dark-information: oklch(0.68 0.12 245);    /* --info-emphasis dark */
+  /* --ct-color-dark-warning: #e38444; */
+  --ct-color-dark-warning: oklch(0.75 0.14 85);         /* --warning-emphasis dark */
+  /* --ct-color-dark-error: #e85653; */
+  --ct-color-dark-error: oklch(0.68 0.16 25);           /* --danger-emphasis dark */
+  /* --ct-color-dark-success: #12b0ae; */
+  --ct-color-dark-success: oklch(0.68 0.14 155);        /* --success-emphasis dark */
+  /* --ct-color-dark-brand1: #61daff; */
+  --ct-color-dark-brand1: oklch(0.70 0.14 240);         /* --accent-emphasis dark */
+  /* --ct-color-dark-brand2: #003a4f; */
+  --ct-color-dark-brand2: oklch(0.50 0.13 240);         /* --accent-emphasis */
+  /* --ct-color-dark-brand3: #00698f; */
+  --ct-color-dark-brand3: oklch(0.70 0.14 240);         /* --selected dark */
   --ct-typography-display-font-size: 2rem;
   --ct-typography-display-line-height: 2.5rem;
-  --ct-typography-display-font-name: "Lexend", sans-serif;
+  --ct-typography-display-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-display-font-weight: 700;
   --ct-typography-display-letter-spacing: -0.03px;
   --ct-typography-heading-1-font-size: 2rem;
   --ct-typography-heading-1-line-height: 2.5rem;
-  --ct-typography-heading-1-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-1-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-1-font-weight: 700;
   --ct-typography-heading-1-letter-spacing: -0.6px;
   --ct-typography-heading-2-font-size: 1.75rem;
   --ct-typography-heading-2-line-height: 2.25rem;
-  --ct-typography-heading-2-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-2-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-2-font-weight: 700;
   --ct-typography-heading-2-letter-spacing: -0.5px;
   --ct-typography-heading-3-font-size: 1.5rem;
   --ct-typography-heading-3-line-height: 2rem;
-  --ct-typography-heading-3-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-3-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-3-font-weight: 700;
   --ct-typography-heading-3-letter-spacing: -0.35px;
   --ct-typography-heading-4-font-size: 1.25rem;
   --ct-typography-heading-4-line-height: 1.5rem;
-  --ct-typography-heading-4-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-4-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-4-font-weight: 700;
   --ct-typography-heading-4-letter-spacing: -0.25px;
   --ct-typography-heading-5-font-size: 1rem;
   --ct-typography-heading-5-line-height: 1.375rem;
-  --ct-typography-heading-5-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-5-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-5-font-weight: 700;
   --ct-typography-heading-5-letter-spacing: 0;
   --ct-typography-heading-6-font-size: 1rem;
   --ct-typography-heading-6-line-height: 1.625rem;
-  --ct-typography-heading-6-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-6-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-heading-6-font-weight: 700;
   --ct-typography-heading-6-letter-spacing: 0;
   --ct-typography-text-extra-large-font-size: 1.25rem;
   --ct-typography-text-extra-large-line-height: 1.5rem;
-  --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
+  --ct-typography-text-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-text-extra-large-font-weight: 400;
   --ct-typography-text-extra-large-letter-spacing: -0.1px;
   --ct-typography-text-large-font-size: 1.125rem;
   --ct-typography-text-large-line-height: 1.75rem;
-  --ct-typography-text-large-font-name: "Lexend", sans-serif;
+  --ct-typography-text-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-text-large-font-weight: 400;
   --ct-typography-text-large-letter-spacing: 0;
   --ct-typography-text-regular-font-size: 0.875rem;
   --ct-typography-text-regular-line-height: 1.5rem;
-  --ct-typography-text-regular-font-name: "Lexend", sans-serif;
+  --ct-typography-text-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-text-regular-font-weight: 400;
   --ct-typography-text-regular-letter-spacing: 0;
   --ct-typography-text-small-font-size: 0.75rem;
   --ct-typography-text-small-line-height: 1.25rem;
-  --ct-typography-text-small-font-name: "Lexend", sans-serif;
+  --ct-typography-text-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-text-small-font-weight: 400;
   --ct-typography-text-small-letter-spacing: 0;
   --ct-typography-label-extra-large-font-size: 1.25rem;
   --ct-typography-label-extra-large-line-height: 1.5rem;
-  --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
+  --ct-typography-label-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-label-extra-large-font-weight: 600;
   --ct-typography-label-extra-large-letter-spacing: -0.1px;
   --ct-typography-label-large-font-size: 1.125rem;
   --ct-typography-label-large-line-height: 1.5rem;
-  --ct-typography-label-large-font-name: "Lexend", sans-serif;
+  --ct-typography-label-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-label-large-font-weight: 600;
   --ct-typography-label-large-letter-spacing: -0.1px;
   --ct-typography-label-regular-font-size: 1rem;
   --ct-typography-label-regular-line-height: 1.25rem;
-  --ct-typography-label-regular-font-name: "Lexend", sans-serif;
+  --ct-typography-label-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-label-regular-font-weight: 600;
   --ct-typography-label-regular-letter-spacing: -0.1px;
   --ct-typography-label-small-font-size: 1rem;
   --ct-typography-label-small-line-height: 1.25rem;
-  --ct-typography-label-small-font-name: "Lexend", sans-serif;
+  --ct-typography-label-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-label-small-font-weight: 400;
   --ct-typography-label-small-letter-spacing: -0.1px;
   --ct-typography-label-extra-small-font-size: 0.875rem;
   --ct-typography-label-extra-small-line-height: 1.25rem;
-  --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
+  --ct-typography-label-extra-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-label-extra-small-font-weight: 400;
   --ct-typography-label-extra-small-letter-spacing: -0.1px;
   --ct-typography-quote-font-size: 1.125rem;
   --ct-typography-quote-line-height: 1.815rem;
-  --ct-typography-quote-font-name: "Lexend", sans-serif;
+  --ct-typography-quote-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ct-typography-quote-font-weight: 400;
   --ct-typography-quote-letter-spacing: -0.15px;
   --ct-font-average-character-width: 0.25;
@@ -367,35 +409,35 @@ html {
   --ct-field-description-light-color: var(--ct-color-light-body);
   --ct-field-description-dark-color: var(--ct-color-dark-body);
   --ct-field-message-border-radius: 0.25rem;
-  --ct-field-message-light-error-background-color: #f5d7d7;
+  --ct-field-message-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
   --ct-field-message-light-error-border-color: var(--ct-color-light-error);
   --ct-field-message-light-error-color: var(--ct-color-light-body);
   --ct-field-message-light-error-icon-color: var(--ct-color-light-body);
-  --ct-field-message-light-information-background-color: #cce5f2;
+  --ct-field-message-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
   --ct-field-message-light-information-border-color: var(--ct-color-light-information);
   --ct-field-message-light-information-color: var(--ct-color-light-body);
   --ct-field-message-light-information-icon-color: var(--ct-color-light-body);
   --ct-field-message-light-success-border-color: var(--ct-color-light-success);
-  --ct-field-message-light-success-background-color: #cce6e6;
+  --ct-field-message-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
   --ct-field-message-light-success-color: var(--ct-color-light-body);
   --ct-field-message-light-success-icon-color: var(--ct-color-light-body);
-  --ct-field-message-light-warning-background-color: #f4dccc;
+  --ct-field-message-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
   --ct-field-message-light-warning-border-color: var(--ct-color-light-warning);
   --ct-field-message-light-warning-color: var(--ct-color-light-body);
   --ct-field-message-light-warning-icon-color: var(--ct-color-light-body);
-  --ct-field-message-dark-error-background-color: #ba4542;
+  --ct-field-message-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
   --ct-field-message-dark-error-border-color: var(--ct-color-dark-error);
   --ct-field-message-dark-error-color: var(--ct-color-dark-body);
   --ct-field-message-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-field-message-dark-information-background-color: #2e789a;
+  --ct-field-message-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
   --ct-field-message-dark-information-border-color: var(--ct-color-dark-information);
   --ct-field-message-dark-information-color: var(--ct-color-dark-body);
   --ct-field-message-dark-information-icon-color: var(--ct-color-dark-body);
   --ct-field-message-dark-success-border-color: var(--ct-color-dark-success);
-  --ct-field-message-dark-success-background-color: #0d7b7a;
+  --ct-field-message-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
   --ct-field-message-dark-success-color: var(--ct-color-dark-body);
   --ct-field-message-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-field-message-dark-warning-background-color: #a35f31;
+  --ct-field-message-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
   --ct-field-message-dark-warning-border-color: var(--ct-color-dark-warning);
   --ct-field-message-dark-warning-color: var(--ct-color-dark-body);
   --ct-field-message-dark-warning-icon-color: var(--ct-color-dark-body);
@@ -881,29 +923,29 @@ html {
   --ct-snippet-dark-title-color: var(--ct-color-dark-heading);
   --ct-snippet-dark-title-hover-color: var(--ct-color-dark-interaction-background);
   --ct-alert-light-divider-color: var(--ct-color-light-interaction-background);
-  --ct-alert-light-error-background-color: #f5d7d7;
+  --ct-alert-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
   --ct-alert-light-error-color: var(--ct-color-light-body);
   --ct-alert-light-error-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-information-background-color: #cce5f2;
+  --ct-alert-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
   --ct-alert-light-information-color: var(--ct-color-light-body);
   --ct-alert-light-information-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-success-background-color: #cce6e6;
+  --ct-alert-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
   --ct-alert-light-success-color: var(--ct-color-light-body);
   --ct-alert-light-success-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-warning-background-color: #f4dccc;
+  --ct-alert-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
   --ct-alert-light-warning-color: var(--ct-color-light-body);
   --ct-alert-light-warning-icon-color: var(--ct-color-light-body);
   --ct-alert-dark-divider-color: var(--ct-color-dark-interaction-background);
-  --ct-alert-dark-error-background-color: #ba4542;
+  --ct-alert-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
   --ct-alert-dark-error-color: var(--ct-color-dark-body);
   --ct-alert-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-information-background-color: #2e789a;
+  --ct-alert-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
   --ct-alert-dark-information-color: var(--ct-color-dark-body);
   --ct-alert-dark-information-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-success-background-color: #0d7b7a;
+  --ct-alert-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
   --ct-alert-dark-success-color: var(--ct-color-dark-body);
   --ct-alert-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-warning-background-color: #a35f31;
+  --ct-alert-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
   --ct-alert-dark-warning-color: var(--ct-color-dark-body);
   --ct-alert-dark-warning-icon-color: var(--ct-color-dark-body);
   --ct-banner-decorative-mobile-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 1rem), 0% 100%);
@@ -944,36 +986,36 @@ html {
   --ct-list-dark-results-count-color: var(--ct-color-dark-heading);
   --ct-message-border-radius: 0.25rem;
   --ct-message-light-background-color: var(--ct-color-light-background);
-  --ct-message-light-error-background-color: #f5d7d7;
+  --ct-message-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
   --ct-message-light-error-border-color: var(--ct-color-light-error);
   --ct-message-light-error-color: var(--ct-color-light-body);
   --ct-message-light-error-icon-color: var(--ct-color-light-body);
-  --ct-message-light-information-background-color: #cce5f2;
+  --ct-message-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
   --ct-message-light-information-border-color: var(--ct-color-light-information);
   --ct-message-light-information-color: var(--ct-color-light-body);
   --ct-message-light-information-icon-color: var(--ct-color-light-body);
   --ct-message-light-success-border-color: var(--ct-color-light-success);
-  --ct-message-light-success-background-color: #cce6e6;
+  --ct-message-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
   --ct-message-light-success-color: var(--ct-color-light-body);
   --ct-message-light-success-icon-color: var(--ct-color-light-body);
-  --ct-message-light-warning-background-color: #f4dccc;
+  --ct-message-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
   --ct-message-light-warning-border-color: var(--ct-color-light-warning);
   --ct-message-light-warning-color: var(--ct-color-light-body);
   --ct-message-light-warning-icon-color: var(--ct-color-light-body);
   --ct-message-dark-background-color: var(--ct-color-dark-background);
-  --ct-message-dark-error-background-color: #ba4542;
+  --ct-message-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
   --ct-message-dark-error-border-color: var(--ct-color-dark-error);
   --ct-message-dark-error-color: var(--ct-color-dark-body);
   --ct-message-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-message-dark-information-background-color: #2e789a;
+  --ct-message-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
   --ct-message-dark-information-border-color: var(--ct-color-dark-information);
   --ct-message-dark-information-color: var(--ct-color-dark-body);
   --ct-message-dark-information-icon-color: var(--ct-color-dark-body);
   --ct-message-dark-success-border-color: var(--ct-color-dark-success);
-  --ct-message-dark-success-background-color: #0d7b7a;
+  --ct-message-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
   --ct-message-dark-success-color: var(--ct-color-dark-body);
   --ct-message-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-message-dark-warning-background-color: #a35f31;
+  --ct-message-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
   --ct-message-dark-warning-border-color: var(--ct-color-dark-warning);
   --ct-message-dark-warning-color: var(--ct-color-dark-body);
   --ct-message-dark-warning-icon-color: var(--ct-color-dark-body);
@@ -1143,82 +1185,82 @@ html {
   html {
     --ct-typography-display-font-size: 3.5rem;
     --ct-typography-display-line-height: 3.75rem;
-    --ct-typography-display-font-name: "Lexend", sans-serif;
+    --ct-typography-display-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-display-font-weight: 700;
     --ct-typography-display-letter-spacing: -1px;
     --ct-typography-heading-1-font-size: 3rem;
     --ct-typography-heading-1-line-height: 3.75rem;
-    --ct-typography-heading-1-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-1-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-heading-1-font-weight: 700;
     --ct-typography-heading-1-letter-spacing: -1px;
     --ct-typography-heading-2-font-size: 2.5rem;
     --ct-typography-heading-2-line-height: 3rem;
-    --ct-typography-heading-2-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-2-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-heading-2-font-weight: 700;
     --ct-typography-heading-2-letter-spacing: -0.8px;
     --ct-typography-heading-3-font-size: 2rem;
     --ct-typography-heading-3-line-height: 2.5rem;
-    --ct-typography-heading-3-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-3-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-heading-3-font-weight: 700;
     --ct-typography-heading-3-letter-spacing: -0.6px;
     --ct-typography-heading-4-font-size: 1.5rem;
     --ct-typography-heading-4-line-height: 2rem;
-    --ct-typography-heading-4-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-4-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-heading-4-font-weight: 700;
     --ct-typography-heading-4-letter-spacing: -0.4px;
     --ct-typography-heading-5-font-size: 1.25rem;
     --ct-typography-heading-5-line-height: 1.5rem;
-    --ct-typography-heading-5-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-5-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-heading-5-font-weight: 700;
     --ct-typography-heading-5-letter-spacing: -0.2px;
     --ct-typography-text-extra-large-font-size: 1.5rem;
     --ct-typography-text-extra-large-line-height: 1.5rem;
-    --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
+    --ct-typography-text-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-text-extra-large-font-weight: 400;
     --ct-typography-text-extra-large-letter-spacing: 0;
     --ct-typography-text-large-font-size: 1.25rem;
     --ct-typography-text-large-line-height: 2.125rem;
-    --ct-typography-text-large-font-name: "Lexend", sans-serif;
+    --ct-typography-text-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-text-large-font-weight: 400;
     --ct-typography-text-large-letter-spacing: 0;
     --ct-typography-text-regular-font-size: 1rem;
     --ct-typography-text-regular-line-height: 1.75rem;
-    --ct-typography-text-regular-font-name: "Lexend", sans-serif;
+    --ct-typography-text-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-text-regular-font-weight: 400;
     --ct-typography-text-regular-letter-spacing: 0;
     --ct-typography-text-small-font-size: 0.875rem;
     --ct-typography-text-small-line-height: 1.5rem;
-    --ct-typography-text-small-font-name: "Lexend", sans-serif;
+    --ct-typography-text-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-text-small-font-weight: 400;
     --ct-typography-text-small-letter-spacing: 0;
     --ct-typography-label-extra-large-font-size: 1.5rem;
     --ct-typography-label-extra-large-line-height: 1.5rem;
-    --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
+    --ct-typography-label-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-label-extra-large-font-weight: 600;
     --ct-typography-label-extra-large-letter-spacing: 0;
     --ct-typography-label-large-font-size: 1.125rem;
     --ct-typography-label-large-line-height: 1.5rem;
-    --ct-typography-label-large-font-name: "Lexend", sans-serif;
+    --ct-typography-label-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-label-large-font-weight: 600;
     --ct-typography-label-large-letter-spacing: 0;
     --ct-typography-label-regular-font-size: 1rem;
     --ct-typography-label-regular-line-height: 1.25rem;
-    --ct-typography-label-regular-font-name: "Lexend", sans-serif;
+    --ct-typography-label-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-label-regular-font-weight: 600;
     --ct-typography-label-regular-letter-spacing: -0.1px;
     --ct-typography-label-small-font-size: 1rem;
     --ct-typography-label-small-line-height: 1.25rem;
-    --ct-typography-label-small-font-name: "Lexend", sans-serif;
+    --ct-typography-label-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-label-small-font-weight: 400;
     --ct-typography-label-small-letter-spacing: -0.1px;
     --ct-typography-label-extra-small-font-size: 0.875rem;
     --ct-typography-label-extra-small-line-height: 1.125rem;
-    --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
+    --ct-typography-label-extra-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-label-extra-small-font-weight: 400;
     --ct-typography-label-extra-small-letter-spacing: 0;
     --ct-typography-quote-font-size: 1.5rem;
     --ct-typography-quote-line-height: 2.5rem;
-    --ct-typography-quote-font-name: "Lexend", sans-serif;
+    --ct-typography-quote-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ct-typography-quote-font-weight: 400;
     --ct-typography-quote-letter-spacing: -0.35px;
   }
