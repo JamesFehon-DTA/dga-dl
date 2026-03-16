@@ -4,7 +4,7 @@ title: 'Focus'
 description: 'A single purple focus ring token provides a consistent, high-contrast keyboard navigation indicator across all components and surfaces.'
 foundation-type: Accessibility
 url: '/'
-demo: true
+demo: false
 ---
 
 {{ page.description }}

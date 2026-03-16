@@ -38,6 +38,9 @@ collections:
     output: true
     permalink: /templates/:path/
 
+  foundations:
+    output: true
+    permalink: /foundations/:path/
 
 
 # Build settings

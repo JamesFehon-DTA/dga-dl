@@ -4,7 +4,7 @@ title: 'Elevation'
 description: 'Shadow and glow tokens communicate physical depth and attention state respectively — two distinct purposes served by separate token families.'
 foundation-type: Visual
 url: '/'
-demo: true
+demo: false
 ---
 
 {{ page.description }}
