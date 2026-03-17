@@ -1,45 +1,25 @@
 ---
 layout: content
 title: 'Typography'
-description: 'Public Sans is the system typeface — an open-source humanist sans-serif designed specifically for government digital interfaces.'
+description: 'The design system uses system fonts to decrease file size and increase page speed.'
 foundation-type: Visual
 url: '/'
 demo: false
 ---
 
 
-## Public Sans
+## Font family
 
-Public Sans is a strong, neutral typeface developed by the US Web Design System (USWDS). It is derived from Libre Franklin and optimised for the specific legibility and neutrality requirements of government digital services. It is open-source (SIL Open Font Licence 1.1) and available as a variable font.
+The design system uses system fonts to decrease file size and increase page speed.
 
-Public Sans was chosen for this system because it:
+Government services are provided for everyone, regardless of their situation or location. By choosing to use system fonts, users download less data and make fewer HTTP requests. This means that people on low-end devices or internet connections in remote areas can access government services easier.
 
-- is purpose-designed for government digital interfaces — neutral, legible, and authoritative without being bureaucratic
-- provides a full variable weight axis (100–900), allowing fine typographic control without multiple font files
-- renders cleanly at small sizes — essential for data-dense interfaces, tables, and form labels
-- is freely available, eliminating licensing constraints for agencies and vendors
+## Font family tokens
+| Token | Value | Description |
+| --- | --- | --- |
+| body | -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' | Used as the default font for all text |
+| monospace | 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace | Used for code and other monospaced text |
 
-## Font stack
-
-```css
-font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-```
-
-The system fonts after `'Public Sans'` serve as fallbacks if the web font has not yet loaded or is unavailable. The visual difference between Public Sans and San Francisco/Segoe UI is minimal at most sizes — the stack provides a stable reading experience during load.
-
-## Loading Public Sans
-
-Public Sans is available from Google Fonts. Load it in the document `<head>` before any stylesheets:
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-```
-
-The `wght@0,100..900;1,100..900` range loads the full variable font for both normal and italic axes. If only a subset of weights is needed, constrain the range (e.g. `wght@0,400..700`) to reduce payload.
-
-For production deployments where privacy or offline availability is required, self-host the variable font files and declare `@font-face` rules locally.
 
 ## Weights
 
