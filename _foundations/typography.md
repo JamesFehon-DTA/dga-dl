@@ -67,8 +67,6 @@ The monospace stack is intentionally separate from Public Sans. Use it only for 
 
 ## Do
 
-- load Public Sans via the `<link>` preconnect + stylesheet pattern to minimise render-blocking
-- use `font-display: swap` in self-hosted `@font-face` declarations to avoid invisible text during font load
 - use `rem` values for font sizes so users can override the base size in their browser settings
 - use `font-weight: 400` for body text and `font-weight: 700` for headings as the primary pairing
 - set `font-synthesis: none` to prevent browsers from artificially synthesising bold or italic when variable font axes are available
@@ -77,8 +75,8 @@ The monospace stack is intentionally separate from Public Sans. Use it only for 
 
 - set font sizes in `px` — this overrides user browser font-size preferences and fails WCAG SC 1.4.4
 - use weights below `400` in UI contexts — they reduce legibility at small sizes
-- mix Public Sans and the monospace stack within a single sentence or label
-- use `font-family` with only `'Public Sans'` and no fallbacks — the stack must include system font fallbacks
+- mix default font and the monospace stack within a single sentence or label
+- use `font-family` with no fallbacks — the stack must include system font fallbacks
 - rely on font-weight names (e.g. `bold`) in component CSS — always use numeric values so the variable font axis resolves correctly
 
 ## Related foundations
