@@ -1,5 +1,77 @@
-@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap");
+@charset "UTF-8";
+:root {
+  --ct-brand-h: 240; /* brand hue — override in sub-themes */
+  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
+}
+
+:root,
+.ct-theme-light {
+  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
+  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
+  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
+  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
+  --ct-bg-raised: oklch(1.0 0 0);
+  --ct-bg-overlay: oklch(1.0 0 0);
+  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
+  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
+  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
+  --ct-accent-on: oklch(1.0 0 0);
+  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
+  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-focus-ring: oklch(0.50 0.22 285);
+  --ct-success-emphasis: oklch(0.38 0.14 155);
+  --ct-warning-emphasis: oklch(0.40 0.14 85);
+  --ct-danger-emphasis: oklch(0.40 0.16 25);
+  --ct-info-emphasis: oklch(0.38 0.12 245);
+}
+
+.ct-theme-dark {
+  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
+  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
+  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
+  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
+  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
+}
+
+.ct-theme-light {
+  --ct-color-light-heading: var(--ct-fg-text);
+  --ct-color-light-body: var(--ct-fg-muted);
+  --ct-color-light-background-light: var(--ct-bg-body);
+  --ct-color-light-background: var(--ct-bg-shade);
+  --ct-color-light-background-dark: var(--ct-bg-body-alt);
+  --ct-color-light-border-light: var(--ct-border-muted);
+  --ct-color-light-border: var(--ct-border-default);
+  --ct-color-light-border-dark: var(--ct-border-emphasis);
+  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
+  --ct-color-light-interaction-focus: var(--ct-focus-ring);
+}
+
+.ct-theme-dark {
+  --ct-color-dark-heading: var(--ct-fg-text);
+  --ct-color-dark-body: var(--ct-fg-muted);
+  --ct-color-dark-background-light: var(--ct-bg-inset);
+  --ct-color-dark-background: var(--ct-bg-body);
+  --ct-color-dark-background-dark: var(--ct-bg-shade);
+  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
+}
+
 .ct-background {
   background-position: center;
   background-repeat: no-repeat;
@@ -3825,14 +3897,11 @@ ol ol ol {
   margin-left: 1.5rem;
 }
 .ct-button--tertiary--small {
-  font-size: var(--ct-typography-label-extra-small-font-size);
-  line-height: var(--ct-typography-label-extra-small-line-height);
-  font-family: var(--ct-typography-label-extra-small-font-name);
-  font-weight: var(--ct-typography-label-extra-small-font-weight);
-  letter-spacing: var(--ct-typography-label-extra-small-letter-spacing);
-}
-.ct-button--tertiary--small {
-  border-width: calc(var(--ct-button-border-width) / 2);
+  font-size: var(--ct-typography-label-small-font-size);
+  line-height: var(--ct-typography-label-small-line-height);
+  font-family: var(--ct-typography-label-small-font-name);
+  font-weight: var(--ct-typography-label-small-font-weight);
+  letter-spacing: var(--ct-typography-label-small-letter-spacing);
 }
 .ct-button--tertiary--small__dismiss {
   margin-left: 1rem;
@@ -3864,14 +3933,11 @@ ol ol ol {
   padding: 0;
 }
 .ct-button--small {
-  font-size: var(--ct-typography-label-extra-small-font-size);
-  line-height: var(--ct-typography-label-extra-small-line-height);
-  font-family: var(--ct-typography-label-extra-small-font-name);
-  font-weight: var(--ct-typography-label-extra-small-font-weight);
-  letter-spacing: var(--ct-typography-label-extra-small-letter-spacing);
-}
-.ct-button--small {
-  border-width: calc(var(--ct-button-border-width) / 2);
+  font-size: var(--ct-typography-label-small-font-size);
+  line-height: var(--ct-typography-label-small-line-height);
+  font-family: var(--ct-typography-label-small-font-name);
+  font-weight: var(--ct-typography-label-small-font-weight);
+  letter-spacing: var(--ct-typography-label-small-letter-spacing);
 }
 .ct-button--small {
   padding: 0.5rem 2rem;
@@ -4076,11 +4142,11 @@ ol ol ol {
 .ct-chip:focus-visible .ct-text-icon__text {
   text-decoration: none;
 }
-.ct-chip .ct-chip__dismiss {
+.ct-chip--multiple .ct-chip__dismiss {
   display: none;
 }
-.ct-chip .ct-chip__input[checked] + .ct-chip__dismiss {
-  display: inline;
+.ct-chip--multiple:has(.ct-chip__input[checked]) .ct-chip__dismiss {
+  display: initial;
 }
 .ct-chip {
   display: inline-block;
@@ -4200,14 +4266,11 @@ ol ol ol {
   margin-left: 1.5rem;
 }
 .ct-chip--small {
-  font-size: var(--ct-typography-label-extra-small-font-size);
-  line-height: var(--ct-typography-label-extra-small-line-height);
-  font-family: var(--ct-typography-label-extra-small-font-name);
-  font-weight: var(--ct-typography-label-extra-small-font-weight);
-  letter-spacing: var(--ct-typography-label-extra-small-letter-spacing);
-}
-.ct-chip--small {
-  border-width: calc(var(--ct-button-border-width) / 2);
+  font-size: var(--ct-typography-label-small-font-size);
+  line-height: var(--ct-typography-label-small-line-height);
+  font-family: var(--ct-typography-label-small-font-name);
+  font-weight: var(--ct-typography-label-small-font-weight);
+  letter-spacing: var(--ct-typography-label-small-letter-spacing);
 }
 .ct-chip--small {
   padding: 0.5rem 2rem;
@@ -7406,13 +7469,17 @@ ol ol ol {
   color: var(--ct-figure-dark-caption-color);
 }
 
-.ct-group-filter {
+.ct-group-filter__filter-controls {
   border-top: solid 0.0625rem;
   border-bottom: solid 0.0625rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+}
+@media (min-width: 768px) {
+  .ct-group-filter__filter-controls {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 .ct-group-filter .ct-group-filter__title {
   font-size: var(--ct-typography-label-regular-font-size);
@@ -7444,18 +7511,76 @@ ol ol ol {
 .ct-group-filter .ct-group-filter__submit {
   white-space: nowrap;
 }
-.ct-group-filter.ct-theme-light {
+.ct-group-filter__selected-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: column;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .ct-group-filter__selected-filter-controls {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: flex-start;
+    flex-direction: row;
+    border-bottom: solid 0.0625rem;
+  }
+}
+.ct-group-filter__selected-active-filters {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .ct-group-filter__selected-active-filters {
+    flex-direction: row;
+  }
+}
+.ct-group-filter__selected-title {
+  font-size: var(--ct-typography-label-regular-font-size);
+  line-height: var(--ct-typography-label-regular-line-height);
+  font-family: var(--ct-typography-label-regular-font-name);
+  font-weight: var(--ct-typography-label-regular-font-weight);
+  letter-spacing: var(--ct-typography-label-regular-letter-spacing);
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .ct-group-filter__selected-title {
+    padding-top: 0.5rem;
+  }
+}
+.ct-group-filter__selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.ct-group-filter.ct-theme-light .ct-group-filter__filter-controls {
   border-top-color: var(--ct-group-filter-light-border-color);
   border-bottom-color: var(--ct-group-filter-light-border-color);
 }
 .ct-group-filter.ct-theme-light .ct-group-filter__title {
   color: var(--ct-group-filter-light-title-color);
 }
-.ct-group-filter.ct-theme-dark {
+.ct-group-filter.ct-theme-light .ct-group-filter__selected-filter-controls {
+  border-bottom-color: var(--ct-group-filter-light-border-color);
+}
+.ct-group-filter.ct-theme-light .ct-group-filter__selected-title {
+  color: var(--ct-group-filter-light-title-color);
+}
+.ct-group-filter.ct-theme-dark .ct-group-filter__filter-controls {
   border-top-color: var(--ct-group-filter-dark-border-color);
   border-bottom-color: var(--ct-group-filter-dark-border-color);
 }
 .ct-group-filter.ct-theme-dark .ct-group-filter__title {
+  color: var(--ct-group-filter-dark-title-color);
+}
+.ct-group-filter.ct-theme-dark .ct-group-filter__selected-filter-controls {
+  border-bottom-color: var(--ct-group-filter-dark-border-color);
+}
+.ct-group-filter.ct-theme-dark .ct-group-filter__selected-title {
   color: var(--ct-group-filter-dark-title-color);
 }
 
@@ -8441,10 +8566,12 @@ ol ol ol {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 1.5rem;
+  flex-direction: column;
 }
 @media (min-width: 768px) {
   .ct-single-filter .ct-single-filter__actions {
     flex-grow: 0;
+    flex-direction: row;
     margin-left: 1.5rem;
     margin-top: 0;
   }
@@ -10985,6 +11112,13 @@ ol ol ol {
     text-align: left;
   }
 }
+.ct-slider .ct-slide__title {
+  font-size: var(--ct-typography-heading-2-font-size);
+  line-height: var(--ct-typography-heading-2-line-height);
+  font-family: var(--ct-typography-heading-2-font-name);
+  font-weight: var(--ct-typography-heading-2-font-weight);
+  letter-spacing: var(--ct-typography-heading-2-letter-spacing);
+}
 .ct-slider.ct-theme-light.ct-slider--with-background {
   background-color: var(--ct-slider-light-background-color);
 }
@@ -11080,134 +11214,285 @@ ol ol ol {
   background-color: var(--ct-page-dark-background-color);
 }
 
+:root {
+  --ct-brand-h: 240; /* brand hue — override in sub-themes */
+  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
+}
+
+:root,
+.ct-theme-light {
+  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
+  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
+  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
+  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
+  --ct-bg-raised: oklch(1.0 0 0);
+  --ct-bg-overlay: oklch(1.0 0 0);
+  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
+  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
+  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
+  --ct-accent-on: oklch(1.0 0 0);
+  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
+  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-focus-ring: oklch(0.50 0.22 285);
+  --ct-success-emphasis: oklch(0.38 0.14 155);
+  --ct-warning-emphasis: oklch(0.40 0.14 85);
+  --ct-danger-emphasis: oklch(0.40 0.16 25);
+  --ct-info-emphasis: oklch(0.38 0.12 245);
+}
+
+.ct-theme-dark {
+  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
+  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
+  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
+  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
+  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
+}
+
+.ct-theme-light {
+  --ct-color-light-heading: var(--ct-fg-text);
+  --ct-color-light-body: var(--ct-fg-muted);
+  --ct-color-light-background-light: var(--ct-bg-body);
+  --ct-color-light-background: var(--ct-bg-shade);
+  --ct-color-light-background-dark: var(--ct-bg-body-alt);
+  --ct-color-light-border-light: var(--ct-border-muted);
+  --ct-color-light-border: var(--ct-border-default);
+  --ct-color-light-border-dark: var(--ct-border-emphasis);
+  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
+  --ct-color-light-interaction-focus: var(--ct-focus-ring);
+}
+
+.ct-theme-dark {
+  --ct-color-dark-heading: var(--ct-fg-text);
+  --ct-color-dark-body: var(--ct-fg-muted);
+  --ct-color-dark-background-light: var(--ct-bg-inset);
+  --ct-color-dark-background: var(--ct-bg-body);
+  --ct-color-dark-background-dark: var(--ct-bg-shade);
+  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
+}
+
+:root {
+  --ct-brand-h: 240; /* brand hue — override in sub-themes */
+  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
+}
+
+:root,
+.ct-theme-light {
+  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
+  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
+  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
+  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
+  --ct-bg-raised: oklch(1.0 0 0);
+  --ct-bg-overlay: oklch(1.0 0 0);
+  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
+  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
+  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
+  --ct-accent-on: oklch(1.0 0 0);
+  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
+  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-focus-ring: oklch(0.50 0.22 285);
+  --ct-success-emphasis: oklch(0.38 0.14 155);
+  --ct-warning-emphasis: oklch(0.40 0.14 85);
+  --ct-danger-emphasis: oklch(0.40 0.16 25);
+  --ct-info-emphasis: oklch(0.38 0.12 245);
+}
+
+.ct-theme-dark {
+  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
+  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
+  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
+  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
+  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
+}
+
+.ct-theme-light {
+  --ct-color-light-heading: var(--ct-fg-text);
+  --ct-color-light-body: var(--ct-fg-muted);
+  --ct-color-light-background-light: var(--ct-bg-body);
+  --ct-color-light-background: var(--ct-bg-shade);
+  --ct-color-light-background-dark: var(--ct-bg-body-alt);
+  --ct-color-light-border-light: var(--ct-border-muted);
+  --ct-color-light-border: var(--ct-border-default);
+  --ct-color-light-border-dark: var(--ct-border-emphasis);
+  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
+  --ct-color-light-interaction-focus: var(--ct-focus-ring);
+}
+
+.ct-theme-dark {
+  --ct-color-dark-heading: var(--ct-fg-text);
+  --ct-color-dark-body: var(--ct-fg-muted);
+  --ct-color-dark-background-light: var(--ct-bg-inset);
+  --ct-color-dark-background: var(--ct-bg-body);
+  --ct-color-dark-background-dark: var(--ct-bg-shade);
+  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
+}
+
 html {
-  --ct-color-light-heading: #0e271c;
-  --ct-color-light-body: #39433e;
-  --ct-color-light-background-light: #fdfdfd;
-  --ct-color-light-background: #e6e9eb;
-  --ct-color-light-background-dark: #b8babc;
-  --ct-color-light-border-light: #adafb0;
-  --ct-color-light-border: #5c5d5e;
-  --ct-color-light-border-dark: #171718;
-  --ct-color-light-interaction-text: #fafbfb;
-  --ct-color-light-interaction-background: #226247;
-  --ct-color-light-interaction-hover-text: #fafbfb;
-  --ct-color-light-interaction-hover-background: #143b2b;
+  --ct-color-light-heading: #002a42;
+  --ct-color-light-body: #33444d;
+  --ct-color-light-background-light: #fefefe;
+  --ct-color-light-background: #f0f2f4;
+  --ct-color-light-background-dark: #c0c2c3;
+  --ct-color-light-border-light: #b4b6b7;
+  --ct-color-light-border: #606162;
+  --ct-color-light-border-dark: #181818;
+  --ct-color-light-interaction-text: #fcfcfd;
+  --ct-color-light-interaction-background: #006aa5;
+  --ct-color-light-interaction-hover-text: #fcfcfd;
+  --ct-color-light-interaction-hover-background: #004063;
   --ct-color-light-interaction-focus: #8b5cd7;
-  --ct-color-light-highlight: #121313;
+  --ct-color-light-highlight: #005b9a;
   --ct-color-light-information: #007cbf;
   --ct-color-light-warning: #c95100;
   --ct-color-light-error: #ce3836;
   --ct-color-light-success: #008482;
-  --ct-color-light-brand1: #226247;
-  --ct-color-light-brand2: #e6e9eb;
-  --ct-color-light-brand3: #121313;
-  --ct-color-dark-heading: #f7fdff;
-  --ct-color-dark-body: #e7f9ff;
-  --ct-color-dark-background-light: #0d4458;
-  --ct-color-dark-background: #003a4f;
-  --ct-color-dark-background-dark: #002937;
-  --ct-color-dark-border-light: #a6bac1;
-  --ct-color-dark-border: #1a4e61;
-  --ct-color-dark-border-dark: #002937;
-  --ct-color-dark-interaction-text: #003a4f;
-  --ct-color-dark-interaction-background: #61daff;
-  --ct-color-dark-interaction-hover-text: #002937;
-  --ct-color-dark-interaction-hover-background: #a0e9ff;
+  --ct-color-light-custom1: brown;
+  --ct-color-light-brand1: #006aa5;
+  --ct-color-light-brand2: #f0f2f4;
+  --ct-color-light-brand3: #13161b;
+  --ct-color-dark-heading: #f2fafe;
+  --ct-color-dark-body: #d9f1fc;
+  --ct-color-dark-background-light: #2d353d;
+  --ct-color-dark-background: #222a33;
+  --ct-color-dark-background-dark: #181d24;
+  --ct-color-dark-border-light: #b2b4b8;
+  --ct-color-dark-border: #383f47;
+  --ct-color-dark-border-dark: #181d24;
+  --ct-color-dark-interaction-text: #222a33;
+  --ct-color-dark-interaction-background: #00a4eb;
+  --ct-color-dark-interaction-hover-text: #181d24;
+  --ct-color-dark-interaction-hover-background: #66c8f3;
   --ct-color-dark-interaction-focus: #8b5cd7;
-  --ct-color-dark-highlight: #00698f;
+  --ct-color-dark-highlight: #ecf0f1;
   --ct-color-dark-information: #4cc4fc;
   --ct-color-dark-warning: #e38444;
   --ct-color-dark-error: #e85653;
   --ct-color-dark-success: #12b0ae;
-  --ct-color-dark-brand1: #61daff;
-  --ct-color-dark-brand2: #003a4f;
-  --ct-color-dark-brand3: #00698f;
+  --ct-color-dark-custom1: red;
+  --ct-color-dark-custom2: orange;
+  --ct-color-dark-custom3: blue;
+  --ct-color-dark-brand1: #00a4eb;
+  --ct-color-dark-brand2: #222a33;
+  --ct-color-dark-brand3: #ecf0f1;
   --ct-typography-display-font-size: 2rem;
   --ct-typography-display-line-height: 2.5rem;
-  --ct-typography-display-font-name: "Lexend", sans-serif;
+  --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-display-font-weight: 700;
   --ct-typography-display-letter-spacing: -0.03px;
   --ct-typography-heading-1-font-size: 2rem;
   --ct-typography-heading-1-line-height: 2.5rem;
-  --ct-typography-heading-1-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-1-font-weight: 700;
   --ct-typography-heading-1-letter-spacing: -0.6px;
   --ct-typography-heading-2-font-size: 1.75rem;
   --ct-typography-heading-2-line-height: 2.25rem;
-  --ct-typography-heading-2-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-2-font-weight: 700;
   --ct-typography-heading-2-letter-spacing: -0.5px;
   --ct-typography-heading-3-font-size: 1.5rem;
   --ct-typography-heading-3-line-height: 2rem;
-  --ct-typography-heading-3-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-3-font-weight: 700;
   --ct-typography-heading-3-letter-spacing: -0.35px;
   --ct-typography-heading-4-font-size: 1.25rem;
   --ct-typography-heading-4-line-height: 1.5rem;
-  --ct-typography-heading-4-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-4-font-weight: 700;
   --ct-typography-heading-4-letter-spacing: -0.25px;
   --ct-typography-heading-5-font-size: 1rem;
   --ct-typography-heading-5-line-height: 1.375rem;
-  --ct-typography-heading-5-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-5-font-weight: 700;
   --ct-typography-heading-5-letter-spacing: 0;
   --ct-typography-heading-6-font-size: 1rem;
   --ct-typography-heading-6-line-height: 1.625rem;
-  --ct-typography-heading-6-font-name: "Lexend", sans-serif;
+  --ct-typography-heading-6-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-6-font-weight: 700;
   --ct-typography-heading-6-letter-spacing: 0;
   --ct-typography-text-extra-large-font-size: 1.25rem;
   --ct-typography-text-extra-large-line-height: 1.5rem;
-  --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
+  --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-extra-large-font-weight: 400;
   --ct-typography-text-extra-large-letter-spacing: -0.1px;
   --ct-typography-text-large-font-size: 1.125rem;
   --ct-typography-text-large-line-height: 1.75rem;
-  --ct-typography-text-large-font-name: "Lexend", sans-serif;
+  --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-large-font-weight: 400;
   --ct-typography-text-large-letter-spacing: 0;
   --ct-typography-text-regular-font-size: 0.875rem;
   --ct-typography-text-regular-line-height: 1.5rem;
-  --ct-typography-text-regular-font-name: "Lexend", sans-serif;
+  --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-regular-font-weight: 400;
   --ct-typography-text-regular-letter-spacing: 0;
   --ct-typography-text-small-font-size: 0.75rem;
   --ct-typography-text-small-line-height: 1.25rem;
-  --ct-typography-text-small-font-name: "Lexend", sans-serif;
+  --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-small-font-weight: 400;
   --ct-typography-text-small-letter-spacing: 0;
   --ct-typography-label-extra-large-font-size: 1.25rem;
   --ct-typography-label-extra-large-line-height: 1.5rem;
-  --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
+  --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-extra-large-font-weight: 600;
   --ct-typography-label-extra-large-letter-spacing: -0.1px;
   --ct-typography-label-large-font-size: 1.125rem;
   --ct-typography-label-large-line-height: 1.5rem;
-  --ct-typography-label-large-font-name: "Lexend", sans-serif;
+  --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-large-font-weight: 600;
   --ct-typography-label-large-letter-spacing: -0.1px;
   --ct-typography-label-regular-font-size: 1rem;
   --ct-typography-label-regular-line-height: 1.25rem;
-  --ct-typography-label-regular-font-name: "Lexend", sans-serif;
+  --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-regular-font-weight: 600;
   --ct-typography-label-regular-letter-spacing: -0.1px;
   --ct-typography-label-small-font-size: 1rem;
   --ct-typography-label-small-line-height: 1.25rem;
-  --ct-typography-label-small-font-name: "Lexend", sans-serif;
+  --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-small-font-weight: 400;
   --ct-typography-label-small-letter-spacing: -0.1px;
   --ct-typography-label-extra-small-font-size: 0.875rem;
   --ct-typography-label-extra-small-line-height: 1.25rem;
-  --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
+  --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-extra-small-font-weight: 400;
   --ct-typography-label-extra-small-letter-spacing: -0.1px;
   --ct-typography-quote-font-size: 1.125rem;
   --ct-typography-quote-line-height: 1.815rem;
-  --ct-typography-quote-font-name: "Lexend", sans-serif;
+  --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-quote-font-weight: 400;
   --ct-typography-quote-letter-spacing: -0.15px;
+  --ct-icons-directory: ./assets/icons/;
   --ct-font-average-character-width: 0.25;
   --ct-flyout-duration: 0.5s;
   --ct-flyout-zindex: 1000;
@@ -12148,82 +12433,82 @@ html {
   html {
     --ct-typography-display-font-size: 3.5rem;
     --ct-typography-display-line-height: 3.75rem;
-    --ct-typography-display-font-name: "Lexend", sans-serif;
+    --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-display-font-weight: 700;
     --ct-typography-display-letter-spacing: -1px;
     --ct-typography-heading-1-font-size: 3rem;
     --ct-typography-heading-1-line-height: 3.75rem;
-    --ct-typography-heading-1-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-1-font-weight: 700;
     --ct-typography-heading-1-letter-spacing: -1px;
     --ct-typography-heading-2-font-size: 2.5rem;
     --ct-typography-heading-2-line-height: 3rem;
-    --ct-typography-heading-2-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-2-font-weight: 700;
     --ct-typography-heading-2-letter-spacing: -0.8px;
     --ct-typography-heading-3-font-size: 2rem;
     --ct-typography-heading-3-line-height: 2.5rem;
-    --ct-typography-heading-3-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-3-font-weight: 700;
     --ct-typography-heading-3-letter-spacing: -0.6px;
     --ct-typography-heading-4-font-size: 1.5rem;
     --ct-typography-heading-4-line-height: 2rem;
-    --ct-typography-heading-4-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-4-font-weight: 700;
     --ct-typography-heading-4-letter-spacing: -0.4px;
     --ct-typography-heading-5-font-size: 1.25rem;
     --ct-typography-heading-5-line-height: 1.5rem;
-    --ct-typography-heading-5-font-name: "Lexend", sans-serif;
+    --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-5-font-weight: 700;
     --ct-typography-heading-5-letter-spacing: -0.2px;
     --ct-typography-text-extra-large-font-size: 1.5rem;
     --ct-typography-text-extra-large-line-height: 1.5rem;
-    --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
+    --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-extra-large-font-weight: 400;
     --ct-typography-text-extra-large-letter-spacing: 0;
     --ct-typography-text-large-font-size: 1.25rem;
     --ct-typography-text-large-line-height: 2.125rem;
-    --ct-typography-text-large-font-name: "Lexend", sans-serif;
+    --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-large-font-weight: 400;
     --ct-typography-text-large-letter-spacing: 0;
     --ct-typography-text-regular-font-size: 1rem;
     --ct-typography-text-regular-line-height: 1.75rem;
-    --ct-typography-text-regular-font-name: "Lexend", sans-serif;
+    --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-regular-font-weight: 400;
     --ct-typography-text-regular-letter-spacing: 0;
     --ct-typography-text-small-font-size: 0.875rem;
     --ct-typography-text-small-line-height: 1.5rem;
-    --ct-typography-text-small-font-name: "Lexend", sans-serif;
+    --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-small-font-weight: 400;
     --ct-typography-text-small-letter-spacing: 0;
     --ct-typography-label-extra-large-font-size: 1.5rem;
     --ct-typography-label-extra-large-line-height: 1.5rem;
-    --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
+    --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-extra-large-font-weight: 600;
     --ct-typography-label-extra-large-letter-spacing: 0;
     --ct-typography-label-large-font-size: 1.125rem;
     --ct-typography-label-large-line-height: 1.5rem;
-    --ct-typography-label-large-font-name: "Lexend", sans-serif;
+    --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-large-font-weight: 600;
     --ct-typography-label-large-letter-spacing: 0;
     --ct-typography-label-regular-font-size: 1rem;
     --ct-typography-label-regular-line-height: 1.25rem;
-    --ct-typography-label-regular-font-name: "Lexend", sans-serif;
+    --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-regular-font-weight: 600;
     --ct-typography-label-regular-letter-spacing: -0.1px;
     --ct-typography-label-small-font-size: 1rem;
     --ct-typography-label-small-line-height: 1.25rem;
-    --ct-typography-label-small-font-name: "Lexend", sans-serif;
+    --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-small-font-weight: 400;
     --ct-typography-label-small-letter-spacing: -0.1px;
     --ct-typography-label-extra-small-font-size: 0.875rem;
     --ct-typography-label-extra-small-line-height: 1.125rem;
-    --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
+    --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-extra-small-font-weight: 400;
     --ct-typography-label-extra-small-letter-spacing: 0;
     --ct-typography-quote-font-size: 1.5rem;
     --ct-typography-quote-line-height: 2.5rem;
-    --ct-typography-quote-font-name: "Lexend", sans-serif;
+    --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-quote-font-weight: 400;
     --ct-typography-quote-letter-spacing: -0.35px;
   }
