@@ -1,186 +1,291 @@
+@charset "UTF-8";
+:root {
+  --ct-brand-h: 240; /* brand hue — override in sub-themes */
+  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
+}
+
+:root,
+.ct-theme-light {
+  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
+  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
+  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
+  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
+  --ct-bg-raised: oklch(1.0 0 0);
+  --ct-bg-overlay: oklch(1.0 0 0);
+  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
+  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
+  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
+  --ct-accent-on: oklch(1.0 0 0);
+  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
+  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-focus-ring: oklch(0.50 0.22 285);
+  --ct-success-emphasis: oklch(0.38 0.14 155);
+  --ct-warning-emphasis: oklch(0.40 0.14 85);
+  --ct-danger-emphasis: oklch(0.40 0.16 25);
+  --ct-info-emphasis: oklch(0.38 0.12 245);
+}
+
+.ct-theme-dark {
+  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
+  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
+  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
+  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
+  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
+}
+
+.ct-theme-light {
+  --ct-color-light-heading: var(--ct-fg-text);
+  --ct-color-light-body: var(--ct-fg-muted);
+  --ct-color-light-background-light: var(--ct-bg-body);
+  --ct-color-light-background: var(--ct-bg-shade);
+  --ct-color-light-background-dark: var(--ct-bg-body-alt);
+  --ct-color-light-border-light: var(--ct-border-muted);
+  --ct-color-light-border: var(--ct-border-default);
+  --ct-color-light-border-dark: var(--ct-border-emphasis);
+  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
+  --ct-color-light-interaction-focus: var(--ct-focus-ring);
+}
+
+.ct-theme-dark {
+  --ct-color-dark-heading: var(--ct-fg-text);
+  --ct-color-dark-body: var(--ct-fg-muted);
+  --ct-color-dark-background-light: var(--ct-bg-inset);
+  --ct-color-dark-background: var(--ct-bg-body);
+  --ct-color-dark-background-dark: var(--ct-bg-shade);
+  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
+}
+
+:root {
+  --ct-brand-h: 240; /* brand hue — override in sub-themes */
+  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
+}
+
+:root,
+.ct-theme-light {
+  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
+  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
+  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
+  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
+  --ct-bg-raised: oklch(1.0 0 0);
+  --ct-bg-overlay: oklch(1.0 0 0);
+  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
+  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
+  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
+  --ct-accent-on: oklch(1.0 0 0);
+  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
+  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
+  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
+  --ct-focus-ring: oklch(0.50 0.22 285);
+  --ct-success-emphasis: oklch(0.38 0.14 155);
+  --ct-warning-emphasis: oklch(0.40 0.14 85);
+  --ct-danger-emphasis: oklch(0.40 0.16 25);
+  --ct-info-emphasis: oklch(0.38 0.12 245);
+}
+
+.ct-theme-dark {
+  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
+  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
+  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
+  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
+  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
+  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
+  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
+  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
+  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
+  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
+  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
+}
+
+.ct-theme-light {
+  --ct-color-light-heading: var(--ct-fg-text);
+  --ct-color-light-body: var(--ct-fg-muted);
+  --ct-color-light-background-light: var(--ct-bg-body);
+  --ct-color-light-background: var(--ct-bg-shade);
+  --ct-color-light-background-dark: var(--ct-bg-body-alt);
+  --ct-color-light-border-light: var(--ct-border-muted);
+  --ct-color-light-border: var(--ct-border-default);
+  --ct-color-light-border-dark: var(--ct-border-emphasis);
+  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
+  --ct-color-light-interaction-focus: var(--ct-focus-ring);
+}
+
+.ct-theme-dark {
+  --ct-color-dark-heading: var(--ct-fg-text);
+  --ct-color-dark-body: var(--ct-fg-muted);
+  --ct-color-dark-background-light: var(--ct-bg-inset);
+  --ct-color-dark-background: var(--ct-bg-body);
+  --ct-color-dark-background-dark: var(--ct-bg-shade);
+  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
+  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
+}
+
 html {
-  /* --ct-color-light-heading: #002a39; */
-  --ct-color-light-heading: oklch(0.20 0.010 255);
-  /* --ct-color-light-body: #33444a; */
-  --ct-color-light-body: oklch(0.20 0.010 255);         /* --fg-text — body and heading share one text colour */
-  /* --ct-color-light-background-light: #fdfdfd; */
-  --ct-color-light-background-light: oklch(1.0 0 0);   /* --bg-raised — elevated surfaces (cards, popovers) */
-  /* --ct-color-light-background: #e6e9eb; */
-  --ct-color-light-background: oklch(0.985 0.002 255); /* --bg-body — default page surface */
-  /* --ct-color-light-background-dark: #b8babc; */
-  --ct-color-light-background-dark: oklch(0.945 0.005 255); /* --bg-body-alt — alternate page section */
-  /* --ct-color-light-border-light: #adafb0; */
-  --ct-color-light-border-light: oklch(0.92 0.004 255);
-  /* --ct-color-light-border: #5c5d5e; */
-  --ct-color-light-border: oklch(0.87 0.006 255);
-  /* --ct-color-light-border-dark: #171718; */
-  --ct-color-light-border-dark: oklch(0.70 0.012 255);
-  /* --ct-color-light-interaction-text: #fafbfb; */
-  --ct-color-light-interaction-text: oklch(1.0 0 0);    /* white — text on filled interactive surface */
-  /* --ct-color-light-interaction-background: #00698f; */
-  --ct-color-light-interaction-background: oklch(0.50 0.13 240); /* --accent-emphasis */
-  /* --ct-color-light-interaction-hover-text: #fafbfb; */
-  --ct-color-light-interaction-hover-text: oklch(1.0 0 0); /* white — text on hover interactive surface */
-  /* --ct-color-light-interaction-hover-background: #003f56; */
-  --ct-color-light-interaction-hover-background: oklch(0.50 0.13 240); /* --accent-emphasis — hover via opacity/filter */
-  /* --ct-color-light-interaction-focus: #8b5cd7; */
-  --ct-color-light-interaction-focus: oklch(0.50 0.22 285); /* --focus-ring */
-  /* --ct-color-light-highlight: #121313; */
-  --ct-color-light-highlight: oklch(0.45 0.14 240);     /* --selected */
-  /* --ct-color-light-information: #007cbf; */
-  --ct-color-light-information: oklch(0.45 0.12 245);
-  /* --ct-color-light-warning: #c95100; */
-  --ct-color-light-warning: oklch(0.48 0.14 85);
-  /* --ct-color-light-error: #ce3836; */
-  --ct-color-light-error: oklch(0.47 0.16 25);
-  /* --ct-color-light-success: #008482; */
-  --ct-color-light-success: oklch(0.45 0.14 155);
-  /* --ct-color-light-brand1: #00698f; */
-  --ct-color-light-brand1: oklch(0.50 0.13 240);        /* --accent-emphasis */
-  /* --ct-color-light-brand2: #e6e9eb; */
-  --ct-color-light-brand2: oklch(0.960 0.004 255);      /* --bg-shade */
-  /* --ct-color-light-brand3: #121313; */
-  --ct-color-light-brand3: oklch(0.20 0.010 255);       /* --fg-text */
-  /* --ct-color-dark-heading: #f7fdff; */
-  --ct-color-dark-heading: oklch(0.93 0.006 255);       /* --fg-text dark */
-  /* --ct-color-dark-body: #e7f9ff; */
-  --ct-color-dark-body: oklch(0.93 0.006 255);           /* --fg-text dark — body and heading share one text colour */
-  /* --ct-color-dark-background-light: #0d4458; */
-  --ct-color-dark-background-light: oklch(0.50 0.13 240); /* --accent-emphasis — was brand teal, used for emphasis */
-  /* --ct-color-dark-background: #003a4f; */
-  --ct-color-dark-background: oklch(0.50 0.13 240);      /* --accent-emphasis */
-  /* --ct-color-dark-background-dark: #002937; */
-  --ct-color-dark-background-dark: oklch(0.50 0.13 240); /* --accent-emphasis */
-  /* --ct-color-dark-border-light: #a6bac1; */
-  --ct-color-dark-border-light: oklch(0.24 0.010 255);  /* --border-muted dark */
-  /* --ct-color-dark-border: #1a4e61; */
-  --ct-color-dark-border: oklch(0.30 0.014 255);        /* --border-default dark */
-  /* --ct-color-dark-border-dark: #002937; */
-  --ct-color-dark-border-dark: oklch(0.48 0.016 255);   /* --border-emphasis dark */
-  /* --ct-color-dark-interaction-text: #003a4f; */
-  --ct-color-dark-interaction-text: oklch(0.155 0.020 255); /* dark navy — text on filled interactive surface */
-  /* --ct-color-dark-interaction-background: #61daff; */
-  --ct-color-dark-interaction-background: oklch(0.70 0.14 240); /* --accent-emphasis dark */
-  /* --ct-color-dark-interaction-hover-text: #002937; */
-  --ct-color-dark-interaction-hover-text: oklch(0.125 0.016 255); /* deeper navy — text on hover interactive surface */
-  /* --ct-color-dark-interaction-hover-background: #a0e9ff; */
-  --ct-color-dark-interaction-hover-background: oklch(0.70 0.14 240); /* --accent-emphasis dark — hover via opacity/filter */
-  /* --ct-color-dark-interaction-focus: #8b5cd7; */
-  --ct-color-dark-interaction-focus: oklch(0.72 0.20 285); /* --focus-ring dark */
-  /* --ct-color-dark-highlight: #00698f; */
-  --ct-color-dark-highlight: oklch(0.70 0.14 240);      /* --selected dark */
-  /* --ct-color-dark-information: #4cc4fc; */
-  --ct-color-dark-information: oklch(0.68 0.12 245);    /* --info-emphasis dark */
-  /* --ct-color-dark-warning: #e38444; */
-  --ct-color-dark-warning: oklch(0.75 0.14 85);         /* --warning-emphasis dark */
-  /* --ct-color-dark-error: #e85653; */
-  --ct-color-dark-error: oklch(0.68 0.16 25);           /* --danger-emphasis dark */
-  /* --ct-color-dark-success: #12b0ae; */
-  --ct-color-dark-success: oklch(0.68 0.14 155);        /* --success-emphasis dark */
-  /* --ct-color-dark-brand1: #61daff; */
-  --ct-color-dark-brand1: oklch(0.70 0.14 240);         /* --accent-emphasis dark */
-  /* --ct-color-dark-brand2: #003a4f; */
-  --ct-color-dark-brand2: oklch(0.50 0.13 240);         /* --accent-emphasis */
-  /* --ct-color-dark-brand3: #00698f; */
-  --ct-color-dark-brand3: oklch(0.70 0.14 240);         /* --selected dark */
+  --ct-color-light-heading: #002a42;
+  --ct-color-light-body: #33444d;
+  --ct-color-light-background-light: #fefefe;
+  --ct-color-light-background: #f0f2f4;
+  --ct-color-light-background-dark: #c0c2c3;
+  --ct-color-light-border-light: #b4b6b7;
+  --ct-color-light-border: #606162;
+  --ct-color-light-border-dark: #181818;
+  --ct-color-light-interaction-text: #fcfcfd;
+  --ct-color-light-interaction-background: #006aa5;
+  --ct-color-light-interaction-hover-text: #fcfcfd;
+  --ct-color-light-interaction-hover-background: #004063;
+  --ct-color-light-interaction-focus: #8b5cd7;
+  --ct-color-light-highlight: #005b9a;
+  --ct-color-light-information: #007cbf;
+  --ct-color-light-warning: #c95100;
+  --ct-color-light-error: #ce3836;
+  --ct-color-light-success: #008482;
+  --ct-color-light-custom1: brown;
+  --ct-color-light-brand1: #006aa5;
+  --ct-color-light-brand2: #f0f2f4;
+  --ct-color-light-brand3: #13161b;
+  --ct-color-dark-heading: #f2fafe;
+  --ct-color-dark-body: #d9f1fc;
+  --ct-color-dark-background-light: #2d353d;
+  --ct-color-dark-background: #222a33;
+  --ct-color-dark-background-dark: #181d24;
+  --ct-color-dark-border-light: #b2b4b8;
+  --ct-color-dark-border: #383f47;
+  --ct-color-dark-border-dark: #181d24;
+  --ct-color-dark-interaction-text: #222a33;
+  --ct-color-dark-interaction-background: #00a4eb;
+  --ct-color-dark-interaction-hover-text: #181d24;
+  --ct-color-dark-interaction-hover-background: #66c8f3;
+  --ct-color-dark-interaction-focus: #8b5cd7;
+  --ct-color-dark-highlight: #ecf0f1;
+  --ct-color-dark-information: #4cc4fc;
+  --ct-color-dark-warning: #e38444;
+  --ct-color-dark-error: #e85653;
+  --ct-color-dark-success: #12b0ae;
+  --ct-color-dark-custom1: red;
+  --ct-color-dark-custom2: orange;
+  --ct-color-dark-custom3: blue;
+  --ct-color-dark-brand1: #00a4eb;
+  --ct-color-dark-brand2: #222a33;
+  --ct-color-dark-brand3: #ecf0f1;
   --ct-typography-display-font-size: 2rem;
   --ct-typography-display-line-height: 2.5rem;
-  --ct-typography-display-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-display-font-weight: 700;
   --ct-typography-display-letter-spacing: -0.03px;
   --ct-typography-heading-1-font-size: 2rem;
   --ct-typography-heading-1-line-height: 2.5rem;
-  --ct-typography-heading-1-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-1-font-weight: 700;
   --ct-typography-heading-1-letter-spacing: -0.6px;
   --ct-typography-heading-2-font-size: 1.75rem;
   --ct-typography-heading-2-line-height: 2.25rem;
-  --ct-typography-heading-2-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-2-font-weight: 700;
   --ct-typography-heading-2-letter-spacing: -0.5px;
   --ct-typography-heading-3-font-size: 1.5rem;
   --ct-typography-heading-3-line-height: 2rem;
-  --ct-typography-heading-3-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-3-font-weight: 700;
   --ct-typography-heading-3-letter-spacing: -0.35px;
   --ct-typography-heading-4-font-size: 1.25rem;
   --ct-typography-heading-4-line-height: 1.5rem;
-  --ct-typography-heading-4-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-4-font-weight: 700;
   --ct-typography-heading-4-letter-spacing: -0.25px;
   --ct-typography-heading-5-font-size: 1rem;
   --ct-typography-heading-5-line-height: 1.375rem;
-  --ct-typography-heading-5-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-5-font-weight: 700;
   --ct-typography-heading-5-letter-spacing: 0;
   --ct-typography-heading-6-font-size: 1rem;
   --ct-typography-heading-6-line-height: 1.625rem;
-  --ct-typography-heading-6-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-heading-6-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-heading-6-font-weight: 700;
   --ct-typography-heading-6-letter-spacing: 0;
   --ct-typography-text-extra-large-font-size: 1.25rem;
   --ct-typography-text-extra-large-line-height: 1.5rem;
-  --ct-typography-text-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-extra-large-font-weight: 400;
   --ct-typography-text-extra-large-letter-spacing: -0.1px;
   --ct-typography-text-large-font-size: 1.125rem;
   --ct-typography-text-large-line-height: 1.75rem;
-  --ct-typography-text-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-large-font-weight: 400;
   --ct-typography-text-large-letter-spacing: 0;
   --ct-typography-text-regular-font-size: 0.875rem;
   --ct-typography-text-regular-line-height: 1.5rem;
-  --ct-typography-text-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-regular-font-weight: 400;
   --ct-typography-text-regular-letter-spacing: 0;
   --ct-typography-text-small-font-size: 0.75rem;
   --ct-typography-text-small-line-height: 1.25rem;
-  --ct-typography-text-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-text-small-font-weight: 400;
   --ct-typography-text-small-letter-spacing: 0;
   --ct-typography-label-extra-large-font-size: 1.25rem;
   --ct-typography-label-extra-large-line-height: 1.5rem;
-  --ct-typography-label-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-extra-large-font-weight: 600;
   --ct-typography-label-extra-large-letter-spacing: -0.1px;
   --ct-typography-label-large-font-size: 1.125rem;
   --ct-typography-label-large-line-height: 1.5rem;
-  --ct-typography-label-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-large-font-weight: 600;
   --ct-typography-label-large-letter-spacing: -0.1px;
   --ct-typography-label-regular-font-size: 1rem;
   --ct-typography-label-regular-line-height: 1.25rem;
-  --ct-typography-label-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-regular-font-weight: 600;
   --ct-typography-label-regular-letter-spacing: -0.1px;
   --ct-typography-label-small-font-size: 1rem;
   --ct-typography-label-small-line-height: 1.25rem;
-  --ct-typography-label-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-small-font-weight: 400;
   --ct-typography-label-small-letter-spacing: -0.1px;
   --ct-typography-label-extra-small-font-size: 0.875rem;
   --ct-typography-label-extra-small-line-height: 1.25rem;
-  --ct-typography-label-extra-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-label-extra-small-font-weight: 400;
   --ct-typography-label-extra-small-letter-spacing: -0.1px;
   --ct-typography-quote-font-size: 1.125rem;
   --ct-typography-quote-line-height: 1.815rem;
-  --ct-typography-quote-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
   --ct-typography-quote-font-weight: 400;
   --ct-typography-quote-letter-spacing: -0.15px;
+  --ct-icons-directory: ./assets/icons/;
   --ct-font-average-character-width: 0.25;
   --ct-flyout-duration: 0.5s;
   --ct-flyout-zindex: 1000;
   --ct-border-radius: 0.25rem;
   --ct-stripe-size: 0.375rem;
-  --ct-animation-duration: 0.25s;
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
-  --ct-collapsible-light-color: var(--ct-color-light-body);
-  --ct-collapsible-light-icon-color: var(--ct-color-light-body);
-  --ct-collapsible-dark-color: var(--ct-color-dark-body);
-  --ct-collapsible-dark-icon-color: var(--ct-color-dark-body);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;
@@ -297,9 +402,6 @@ html {
   --ct-button-light-primary-hover-background-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-primary-hover-border-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-primary-hover-color: var(--ct-color-light-interaction-hover-text);
-  --ct-button-light-primary-visited-background-color: var(--ct-color-light-interaction-background);
-  --ct-button-light-primary-visited-border-color: var(--ct-color-light-interaction-background);
-  --ct-button-light-primary-visited-color: var(--ct-color-light-interaction-text);
   --ct-button-light-primary-active-background-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-primary-active-border-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-primary-active-color: var(--ct-color-light-interaction-hover-text);
@@ -310,9 +412,6 @@ html {
   --ct-button-dark-primary-hover-background-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-primary-hover-border-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-primary-hover-color: var(--ct-color-dark-interaction-hover-text);
-  --ct-button-dark-primary-visited-background-color: var(--ct-color-dark-interaction-background);
-  --ct-button-dark-primary-visited-border-color: var(--ct-color-dark-interaction-background);
-  --ct-button-dark-primary-visited-color: var(--ct-color-dark-interaction-text);
   --ct-button-dark-primary-active-background-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-primary-active-border-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-primary-active-color: var(--ct-color-dark-interaction-hover-text);
@@ -323,9 +422,6 @@ html {
   --ct-button-light-secondary-hover-background-color: transparent;
   --ct-button-light-secondary-hover-border-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-secondary-hover-color: var(--ct-color-light-interaction-hover-background);
-  --ct-button-light-secondary-visited-background-color: transparent;
-  --ct-button-light-secondary-visited-border-color: var(--ct-color-light-interaction-background);
-  --ct-button-light-secondary-visited-color: var(--ct-color-light-interaction-background);
   --ct-button-light-secondary-active-background-color: transparent;
   --ct-button-light-secondary-active-border-color: var(--ct-color-light-interaction-hover-background);
   --ct-button-light-secondary-active-color: var(--ct-color-light-interaction-hover-background);
@@ -336,9 +432,6 @@ html {
   --ct-button-dark-secondary-hover-background-color: transparent;
   --ct-button-dark-secondary-hover-border-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-secondary-hover-color: var(--ct-color-dark-interaction-hover-background);
-  --ct-button-dark-secondary-visited-background-color: transparent;
-  --ct-button-dark-secondary-visited-border-color: var(--ct-color-dark-interaction-background);
-  --ct-button-dark-secondary-visited-color: var(--ct-color-dark-interaction-background);
   --ct-button-dark-secondary-active-background-color: transparent;
   --ct-button-dark-secondary-active-border-color: var(--ct-color-dark-interaction-hover-background);
   --ct-button-dark-secondary-active-color: var(--ct-color-dark-interaction-hover-background);
@@ -349,9 +442,6 @@ html {
   --ct-button-light-tertiary-hover-background-color: transparent;
   --ct-button-light-tertiary-hover-border-color: transparent;
   --ct-button-light-tertiary-hover-color: var(--ct-color-light-interaction-hover-background);
-  --ct-button-light-tertiary-visited-background-color: transparent;
-  --ct-button-light-tertiary-visited-border-color: transparent;
-  --ct-button-light-tertiary-visited-color: var(--ct-color-light-interaction-background);
   --ct-button-light-tertiary-active-background-color: transparent;
   --ct-button-light-tertiary-active-border-color: transparent;
   --ct-button-light-tertiary-active-color: var(--ct-color-light-interaction-hover-background);
@@ -362,9 +452,6 @@ html {
   --ct-button-dark-tertiary-hover-background-color: transparent;
   --ct-button-dark-tertiary-hover-border-color: transparent;
   --ct-button-dark-tertiary-hover-color: var(--ct-color-dark-interaction-hover-background);
-  --ct-button-dark-tertiary-visited-background-color: transparent;
-  --ct-button-dark-tertiary-visited-border-color: transparent;
-  --ct-button-dark-tertiary-visited-color: var(--ct-color-dark-interaction-background);
   --ct-button-dark-tertiary-active-background-color: transparent;
   --ct-button-dark-tertiary-active-border-color: transparent;
   --ct-button-dark-tertiary-active-color: var(--ct-color-dark-interaction-hover-background);
@@ -409,42 +496,41 @@ html {
   --ct-field-description-light-color: var(--ct-color-light-body);
   --ct-field-description-dark-color: var(--ct-color-dark-body);
   --ct-field-message-border-radius: 0.25rem;
-  --ct-field-message-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
+  --ct-field-message-light-error-background-color: #f5d7d7;
   --ct-field-message-light-error-border-color: var(--ct-color-light-error);
   --ct-field-message-light-error-color: var(--ct-color-light-body);
   --ct-field-message-light-error-icon-color: var(--ct-color-light-body);
-  --ct-field-message-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
+  --ct-field-message-light-information-background-color: #cce5f2;
   --ct-field-message-light-information-border-color: var(--ct-color-light-information);
   --ct-field-message-light-information-color: var(--ct-color-light-body);
   --ct-field-message-light-information-icon-color: var(--ct-color-light-body);
   --ct-field-message-light-success-border-color: var(--ct-color-light-success);
-  --ct-field-message-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
+  --ct-field-message-light-success-background-color: #cce6e6;
   --ct-field-message-light-success-color: var(--ct-color-light-body);
   --ct-field-message-light-success-icon-color: var(--ct-color-light-body);
-  --ct-field-message-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
+  --ct-field-message-light-warning-background-color: #f4dccc;
   --ct-field-message-light-warning-border-color: var(--ct-color-light-warning);
   --ct-field-message-light-warning-color: var(--ct-color-light-body);
   --ct-field-message-light-warning-icon-color: var(--ct-color-light-body);
-  --ct-field-message-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
+  --ct-field-message-dark-error-background-color: #ba4542;
   --ct-field-message-dark-error-border-color: var(--ct-color-dark-error);
   --ct-field-message-dark-error-color: var(--ct-color-dark-body);
   --ct-field-message-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-field-message-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
+  --ct-field-message-dark-information-background-color: #2e789a;
   --ct-field-message-dark-information-border-color: var(--ct-color-dark-information);
   --ct-field-message-dark-information-color: var(--ct-color-dark-body);
   --ct-field-message-dark-information-icon-color: var(--ct-color-dark-body);
   --ct-field-message-dark-success-border-color: var(--ct-color-dark-success);
-  --ct-field-message-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
+  --ct-field-message-dark-success-background-color: #0d7b7a;
   --ct-field-message-dark-success-color: var(--ct-color-dark-body);
   --ct-field-message-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-field-message-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
+  --ct-field-message-dark-warning-background-color: #a35f31;
   --ct-field-message-dark-warning-border-color: var(--ct-color-dark-warning);
   --ct-field-message-dark-warning-color: var(--ct-color-dark-body);
   --ct-field-message-dark-warning-icon-color: var(--ct-color-dark-body);
-  --ct-fieldset-stripe-width: 0.375rem;
-  --ct-fieldset-light-required-color: var(--ct-color-light-error);
+  --ct-fieldset-stripe-width: var(--ct-stripe-size);
   --ct-fieldset-light-stripe-border-color: var(--ct-color-light-highlight);
-  --ct-fieldset-dark-required-color: var(--ct-color-dark-error);
+  --ct-fieldset-dark-stripe-border-color: var(--ct-color-dark-highlight);
   --ct-input-border-radius: 0.25rem;
   --ct-input-outline-width: 2px;
   --ct-input-outline-offset: 2px;
@@ -614,8 +700,9 @@ html {
   --ct-accordion-button-border-radius: 0.25rem;
   --ct-accordion-header-border-radius: 0.25rem;
   --ct-accordion-item-border-radius: 0.25rem;
-  --ct-accordion-stripe-width: 0.375rem;
-  --ct-accordion-space-horizontal: 3.5rem;
+  --ct-accordion-stripe-width: var(--ct-stripe-size);
+  --ct-accordion-space-horizontal: 1.5rem;
+  --ct-accordion-space-horizontal-desktop: 3.5rem;
   --ct-accordion-light-background-color: var(--ct-color-light-background-light);
   --ct-accordion-light-border-color: var(--ct-color-light-border-light);
   --ct-accordion-light-color: var(--ct-color-light-body);
@@ -657,7 +744,6 @@ html {
   --ct-basic-content-light-blockquote-stripe-background-color: var(--ct-color-light-highlight);
   --ct-basic-content-light-blockquote-color: var(--ct-color-light-body);
   --ct-basic-content-light-blockquote-background-color: var(--ct-color-light-background-light);
-  --ct-basic-content-light-blockquote-author-color: var(--ct-color-light-heading);
   --ct-basic-content-light-heading-1-color: var(--ct-color-light-heading);
   --ct-basic-content-light-heading-2-color: var(--ct-color-light-heading);
   --ct-basic-content-light-heading-3-color: var(--ct-color-light-heading);
@@ -673,7 +759,6 @@ html {
   --ct-basic-content-dark-blockquote-stripe-background-color: var(--ct-color-dark-highlight);
   --ct-basic-content-dark-blockquote-color: var(--ct-color-dark-body);
   --ct-basic-content-dark-blockquote-background-color: var(--ct-color-dark-background-light);
-  --ct-basic-content-dark-blockquote-author-color: var(--ct-color-dark-heading);
   --ct-basic-content-dark-heading-1-color: var(--ct-color-dark-heading);
   --ct-basic-content-dark-heading-2-color: var(--ct-color-dark-heading);
   --ct-basic-content-dark-heading-3-color: var(--ct-color-dark-heading);
@@ -690,7 +775,7 @@ html {
   --ct-breadcrumb-dark-color: var(--ct-color-dark-body);
   --ct-breadcrumb-dark-active-color: var(--ct-color-dark-body);
   --ct-callout-border-radius: 0.25rem;
-  --ct-callout-stripe-width: 0.375rem;
+  --ct-callout-stripe-width: var(--ct-stripe-size);
   --ct-callout-light-background-color: var(--ct-color-light-background);
   --ct-callout-light-stripe-background-color: var(--ct-color-light-highlight);
   --ct-callout-dark-background-color: var(--ct-color-dark-background);
@@ -709,7 +794,7 @@ html {
   --ct-map-light-wrapper-background-color: var(--ct-color-light-background);
   --ct-map-dark-wrapper-background-color: var(--ct-color-dark-background);
   --ct-next-step-border-radius: 0.25rem;
-  --ct-next-step-stripe-width: 0.375rem;
+  --ct-next-step-stripe-width: var(--ct-stripe-size);
   --ct-next-step-light-background-color: var(--ct-color-light-background-light);
   --ct-next-step-light-border-color: var(--ct-color-light-border-light);
   --ct-next-step-light-stripe-background-color: var(--ct-color-light-highlight);
@@ -736,14 +821,12 @@ html {
   --ct-table-of-contents-dark-link-hover-stripe-background-color: var(--ct-color-dark-highlight);
   --ct-table-of-contents-dark-title-color: var(--ct-color-dark-heading);
   --ct-tabs-link-border-radius: 0.5rem;
-  --ct-tabs-light-links-stripe-background-color: var(--ct-color-light-border-light);
   --ct-tabs-light-links-background-color: var(--ct-color-light-background);
   --ct-tabs-light-links-border-color: var(--ct-color-light-border-light);
   --ct-tabs-light-links-active-background-color: var(--ct-color-light-background-light);
   --ct-tabs-light-links-active-border-color: var(--ct-color-light-border-light);
   --ct-tabs-light-panel-background-color: var(--ct-color-light-background);
   --ct-tabs-light-panel-border-color: var(--ct-color-light-border);
-  --ct-tabs-dark-links-stripe-background-color: var(--ct-color-dark-border-light);
   --ct-tabs-dark-links-background-color: var(--ct-color-dark-background);
   --ct-tabs-dark-links-border-color: var(--ct-color-dark-border-light);
   --ct-tabs-dark-links-active-background-color: var(--ct-color-dark-background-light);
@@ -766,33 +849,9 @@ html {
   --ct-single-filter-light-title-color: var(--ct-color-light-heading);
   --ct-single-filter-dark-border-color: var(--ct-color-dark-border);
   --ct-single-filter-dark-title-color: var(--ct-color-dark-heading);
-  --ct-group-filter-light-background-color: var(--ct-color-light-background);
   --ct-group-filter-light-border-color: var(--ct-color-light-border-light);
-  --ct-group-filter-light-dropdown-filter-border-color: var(--ct-color-light-border);
-  --ct-group-filter-light-filters-legend-color: var(--ct-color-light-body);
-  --ct-group-filter-light-mobile-filter-title-color: var(--ct-color-light-background);
-  --ct-group-filter-light-mobile-overlay-background-color: var(--ct-color-light-background);
-  --ct-group-filter-light-mobile-toggle-background-color: var(--ct-color-light-background);
-  --ct-group-filter-light-mobile-toggle-border-color: var(--ct-color-light-border);
-  --ct-group-filter-light-mobile-toggle-color: var(--ct-color-light-interaction-background);
-  --ct-group-filter-light-mobile-toggle-display-border-color: var(--ct-color-light-border);
-  --ct-group-filter-light-mobile-toggle-display-color: var(--ct-color-light-background);
-  --ct-group-filter-light-selected-filters-border-color: var(--ct-color-light-border-light);
-  --ct-group-filter-light-selected-filters-title-color: var(--ct-color-light-body);
   --ct-group-filter-light-title-color: var(--ct-color-light-heading);
-  --ct-group-filter-dark-background-color: var(--ct-color-dark-background);
   --ct-group-filter-dark-border-color: var(--ct-color-dark-border);
-  --ct-group-filter-dark-dropdown-filter-border-color: var(--ct-color-dark-interaction-background);
-  --ct-group-filter-dark-filters-legend-color: var(--ct-color-dark-body);
-  --ct-group-filter-dark-mobile-filter-title-color: var(--ct-color-dark-body);
-  --ct-group-filter-dark-mobile-overlay-background-color: var(--ct-color-dark-background);
-  --ct-group-filter-dark-mobile-toggle-background-color: var(--ct-color-dark-background);
-  --ct-group-filter-dark-mobile-toggle-border-color: var(--ct-color-dark-interaction-background);
-  --ct-group-filter-dark-mobile-toggle-color: var(--ct-color-dark-background);
-  --ct-group-filter-dark-mobile-toggle-display-border-color: var(--ct-color-dark-interaction-background);
-  --ct-group-filter-dark-mobile-toggle-display-color: var(--ct-color-dark-background);
-  --ct-group-filter-dark-selected-filters-border-color: var(--ct-color-dark-border-light);
-  --ct-group-filter-dark-selected-filters-title-color: var(--ct-color-dark-background);
   --ct-group-filter-dark-title-color: var(--ct-color-dark-heading);
   --ct-inline-filter-light-title-color: var(--ct-color-light-heading);
   --ct-inline-filter-dark-title-color: var(--ct-color-dark-heading);
@@ -801,12 +860,9 @@ html {
   --ct-pagination-dark-color: var(--ct-color-dark-interaction-background);
   --ct-pagination-dark-border-color: var(--ct-color-dark-border);
   --ct-event-card-border-radius: 0.25rem;
-  --ct-event-card-image-height-desktop: 15rem;
-  --ct-event-card-image-height-mobile: 12.5rem;
-  --ct-event-card-image-width-desktop: auto;
-  --ct-event-card-image-width-mobile: auto;
+  --ct-event-card-image-aspect-ratio: 5/3;
   --ct-event-card-link-graphic-hover-opacity: 0.1;
-  --ct-event-card-stripe-height: 0.375rem;
+  --ct-event-card-stripe-height: var(--ct-stripe-size);
   --ct-event-card-light-background-color: var(--ct-color-light-background-light);
   --ct-event-card-light-hover-outline-color: var(--ct-color-light-border);
   --ct-event-card-light-title-color: var(--ct-color-light-heading);
@@ -827,7 +883,6 @@ html {
   --ct-navigation-card-image-min-height-desktop: 16rem;
   --ct-navigation-card-image-min-width-desktop: 18rem;
   --ct-navigation-card-image-max-width-desktop: 30%;
-  --ct-navigation-card-orientation-threshold: 36rem;
   --ct-navigation-card-link-graphic-hover-opacity: 0.1;
   --ct-navigation-card-light-background-color: var(--ct-color-light-background-light);
   --ct-navigation-card-light-hover-outline-color: var(--ct-color-light-border);
@@ -844,12 +899,9 @@ html {
   --ct-navigation-card-dark-link-graphic-hover-background-color: var(--ct-color-dark-interaction-background);
   --ct-navigation-card-dark-icon-color: var(--ct-color-dark-interaction-background);
   --ct-promo-card-border-radius: 0.25rem;
-  --ct-promo-card-image-height-desktop: 15rem;
-  --ct-promo-card-image-height-mobile: 12.5rem;
-  --ct-promo-card-image-width-desktop: auto;
-  --ct-promo-card-image-width-mobile: auto;
+  --ct-promo-card-image-aspect-ratio: 5/3;
   --ct-promo-card-link-graphic-hover-opacity: 0.1;
-  --ct-promo-card-stripe-height: 0.375rem;
+  --ct-promo-card-stripe-height: var(--ct-stripe-size);
   --ct-promo-card-light-background-color: var(--ct-color-light-background-light);
   --ct-promo-card-light-hover-outline-color: var(--ct-color-light-border);
   --ct-promo-card-light-title-color: var(--ct-color-light-heading);
@@ -882,7 +934,7 @@ html {
   --ct-publication-card-dark-title-icon-color: var(--ct-color-dark-heading);
   --ct-publication-card-dark-filename-color: var(--ct-color-dark-interaction-background);
   --ct-service-card-border-radius: 0.25rem;
-  --ct-service-card-stripe-height: 0.375rem;
+  --ct-service-card-stripe-height: var(--ct-stripe-size);
   --ct-service-card-light-background-color: var(--ct-color-light-background-light);
   --ct-service-card-light-stripe-background-color: var(--ct-color-light-highlight);
   --ct-service-card-dark-background-color: var(--ct-color-dark-background);
@@ -903,7 +955,7 @@ html {
   --ct-subject-card-dark-title-hover-color: var(--ct-color-dark-interaction-background);
   --ct-subject-card-dark-image-opacity: 20%;
   --ct-fast-fact-card-border-radius: 0.25rem;
-  --ct-fast-fact-card-stripe-height: 0.375rem;
+  --ct-fast-fact-card-stripe-height: var(--ct-stripe-size);
   --ct-fast-fact-card-max-width: 3.125rem;
   --ct-fast-fact-card-max-height: 6.25rem;
   --ct-fast-fact-card-light-background-color: var(--ct-color-light-background-light);
@@ -922,30 +974,28 @@ html {
   --ct-snippet-dark-background-color: transparent;
   --ct-snippet-dark-title-color: var(--ct-color-dark-heading);
   --ct-snippet-dark-title-hover-color: var(--ct-color-dark-interaction-background);
-  --ct-alert-light-divider-color: var(--ct-color-light-interaction-background);
-  --ct-alert-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
+  --ct-alert-light-error-background-color: #f5d7d7;
   --ct-alert-light-error-color: var(--ct-color-light-body);
   --ct-alert-light-error-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
+  --ct-alert-light-information-background-color: #cce5f2;
   --ct-alert-light-information-color: var(--ct-color-light-body);
   --ct-alert-light-information-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
+  --ct-alert-light-success-background-color: #cce6e6;
   --ct-alert-light-success-color: var(--ct-color-light-body);
   --ct-alert-light-success-icon-color: var(--ct-color-light-body);
-  --ct-alert-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
+  --ct-alert-light-warning-background-color: #f4dccc;
   --ct-alert-light-warning-color: var(--ct-color-light-body);
   --ct-alert-light-warning-icon-color: var(--ct-color-light-body);
-  --ct-alert-dark-divider-color: var(--ct-color-dark-interaction-background);
-  --ct-alert-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
+  --ct-alert-dark-error-background-color: #ba4542;
   --ct-alert-dark-error-color: var(--ct-color-dark-body);
   --ct-alert-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
+  --ct-alert-dark-information-background-color: #2e789a;
   --ct-alert-dark-information-color: var(--ct-color-dark-body);
   --ct-alert-dark-information-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
+  --ct-alert-dark-success-background-color: #0d7b7a;
   --ct-alert-dark-success-color: var(--ct-color-dark-body);
   --ct-alert-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-alert-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
+  --ct-alert-dark-warning-background-color: #a35f31;
   --ct-alert-dark-warning-color: var(--ct-color-dark-body);
   --ct-alert-dark-warning-icon-color: var(--ct-color-dark-body);
   --ct-banner-decorative-mobile-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 1rem), 0% 100%);
@@ -986,40 +1036,39 @@ html {
   --ct-list-dark-results-count-color: var(--ct-color-dark-heading);
   --ct-message-border-radius: 0.25rem;
   --ct-message-light-background-color: var(--ct-color-light-background);
-  --ct-message-light-error-background-color: oklch(0.94 0.04 25) /* was: #f5d7d7 */;
+  --ct-message-light-error-background-color: #f5d7d7;
   --ct-message-light-error-border-color: var(--ct-color-light-error);
   --ct-message-light-error-color: var(--ct-color-light-body);
   --ct-message-light-error-icon-color: var(--ct-color-light-body);
-  --ct-message-light-information-background-color: oklch(0.94 0.04 245) /* was: #cce5f2 */;
+  --ct-message-light-information-background-color: #cce5f2;
   --ct-message-light-information-border-color: var(--ct-color-light-information);
   --ct-message-light-information-color: var(--ct-color-light-body);
   --ct-message-light-information-icon-color: var(--ct-color-light-body);
   --ct-message-light-success-border-color: var(--ct-color-light-success);
-  --ct-message-light-success-background-color: oklch(0.94 0.04 155) /* was: #cce6e6 */;
+  --ct-message-light-success-background-color: #cce6e6;
   --ct-message-light-success-color: var(--ct-color-light-body);
   --ct-message-light-success-icon-color: var(--ct-color-light-body);
-  --ct-message-light-warning-background-color: oklch(0.94 0.05 85) /* was: #f4dccc */;
+  --ct-message-light-warning-background-color: #f4dccc;
   --ct-message-light-warning-border-color: var(--ct-color-light-warning);
   --ct-message-light-warning-color: var(--ct-color-light-body);
   --ct-message-light-warning-icon-color: var(--ct-color-light-body);
   --ct-message-dark-background-color: var(--ct-color-dark-background);
-  --ct-message-dark-error-background-color: oklch(0.22 0.03 25) /* was: #ba4542 */;
+  --ct-message-dark-error-background-color: #ba4542;
   --ct-message-dark-error-border-color: var(--ct-color-dark-error);
   --ct-message-dark-error-color: var(--ct-color-dark-body);
   --ct-message-dark-error-icon-color: var(--ct-color-dark-body);
-  --ct-message-dark-information-background-color: oklch(0.22 0.03 245) /* was: #2e789a */;
+  --ct-message-dark-information-background-color: #2e789a;
   --ct-message-dark-information-border-color: var(--ct-color-dark-information);
   --ct-message-dark-information-color: var(--ct-color-dark-body);
   --ct-message-dark-information-icon-color: var(--ct-color-dark-body);
   --ct-message-dark-success-border-color: var(--ct-color-dark-success);
-  --ct-message-dark-success-background-color: oklch(0.22 0.03 155) /* was: #0d7b7a */;
+  --ct-message-dark-success-background-color: #0d7b7a;
   --ct-message-dark-success-color: var(--ct-color-dark-body);
   --ct-message-dark-success-icon-color: var(--ct-color-dark-body);
-  --ct-message-dark-warning-background-color: oklch(0.22 0.04 85) /* was: #a35f31 */;
+  --ct-message-dark-warning-background-color: #a35f31;
   --ct-message-dark-warning-border-color: var(--ct-color-dark-warning);
   --ct-message-dark-warning-color: var(--ct-color-dark-body);
   --ct-message-dark-warning-icon-color: var(--ct-color-dark-body);
-  --ct-navigation-inline-column-gutter: 1rem;
   --ct-navigation-inline-row-gutter: 1rem;
   --ct-navigation-dropdown-zindex: 11;
   --ct-navigation-dropdown-border-radius: 0.25rem;
@@ -1029,19 +1078,13 @@ html {
   --ct-navigation-drawer-zindex: 10;
   --ct-navigation-drawer-cols: 4;
   --ct-navigation-drawer-top-offset: 1rem;
-  --ct-navigation-drawer-column-gutter: 2rem;
   --ct-navigation-light-menu-border-color: var(--ct-color-light-interaction-background);
   --ct-navigation-light-menu-color: var(--ct-color-light-interaction-background);
   --ct-navigation-light-menu-hover-color: var(--ct-color-light-interaction-hover-background);
   --ct-navigation-light-menu-active-color: var(--ct-color-light-interaction-hover-background);
-  --ct-navigation-light-menu-item-background-color: transparent;
   --ct-navigation-light-menu-item-border-color: transparent;
-  --ct-navigation-light-menu-item-hover-background-color: transparent;
   --ct-navigation-light-menu-item-hover-border-color: var(--ct-color-light-interaction-hover-background);
-  --ct-navigation-light-menu-item-active-background-color: transparent;
   --ct-navigation-light-menu-item-active-border-color: var(--ct-color-light-highlight);
-  --ct-navigation-light-menu-item-active-trail-background-color: var(--ct-color-light-interaction-background);
-  --ct-navigation-light-menu-item-active-trail-color: var(--ct-color-light-background);
   --ct-navigation-light-drawer-menu-item-background-color: transparent;
   --ct-navigation-light-drawer-menu-item-hover-background-color: transparent;
   --ct-navigation-light-drawer-menu-item-active-background-color: transparent;
@@ -1060,18 +1103,9 @@ html {
   --ct-navigation-dark-menu-color: var(--ct-color-dark-interaction-background);
   --ct-navigation-dark-menu-hover-color: var(--ct-color-dark-interaction-hover-background);
   --ct-navigation-dark-menu-active-color: var(--ct-color-dark-interaction-hover-background);
-  --ct-navigation-dark-menu-item-background-color: transparent;
   --ct-navigation-dark-menu-item-border-color: transparent;
-  --ct-navigation-dark-menu-item-hover-background-color: transparent;
   --ct-navigation-dark-menu-item-hover-border-color: var(--ct-color-dark-interaction-hover-background);
-  --ct-navigation-dark-menu-item-active-background-color: transparent;
   --ct-navigation-dark-menu-item-active-border-color: var(--ct-color-dark-highlight);
-  --ct-navigation-dark-menu-item-active-trail-background-color: var(--ct-color-dark-interaction-background);
-  --ct-navigation-dark-menu-item-active-trail-color: var(--ct-color-dark-background);
-  --ct-navigation-dark-drawer-border-color: var(--ct-color-dark-interaction-background);
-  --ct-navigation-dark-drawer-color: var(--ct-color-dark-interaction-background);
-  --ct-navigation-dark-drawer-hover-color: var(--ct-color-dark-interaction-hover-background);
-  --ct-navigation-dark-drawer-active-color: var(--ct-color-dark-interaction-hover-background);
   --ct-navigation-dark-drawer-menu-item-background-color: transparent;
   --ct-navigation-dark-drawer-menu-item-hover-background-color: transparent;
   --ct-navigation-dark-drawer-menu-item-active-background-color: transparent;
@@ -1175,7 +1209,6 @@ html {
   --ct-slider-light-slide-background-color: var(--ct-color-light-background);
   --ct-slider-dark-background-color: var(--ct-color-dark-background);
   --ct-slider-dark-slide-background-color: var(--ct-color-dark-background-dark);
-  --ct-webform-space-horizontal: 3.5rem;
   --ct-webform-light-background-color: var(--ct-color-light-background);
   --ct-webform-dark-background-color: var(--ct-color-dark-background);
   --ct-page-light-background-color: var(--ct-color-light-background-light);
@@ -1185,82 +1218,82 @@ html {
   html {
     --ct-typography-display-font-size: 3.5rem;
     --ct-typography-display-line-height: 3.75rem;
-    --ct-typography-display-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-display-font-weight: 700;
     --ct-typography-display-letter-spacing: -1px;
     --ct-typography-heading-1-font-size: 3rem;
     --ct-typography-heading-1-line-height: 3.75rem;
-    --ct-typography-heading-1-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-1-font-weight: 700;
     --ct-typography-heading-1-letter-spacing: -1px;
     --ct-typography-heading-2-font-size: 2.5rem;
     --ct-typography-heading-2-line-height: 3rem;
-    --ct-typography-heading-2-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-2-font-weight: 700;
     --ct-typography-heading-2-letter-spacing: -0.8px;
     --ct-typography-heading-3-font-size: 2rem;
     --ct-typography-heading-3-line-height: 2.5rem;
-    --ct-typography-heading-3-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-3-font-weight: 700;
     --ct-typography-heading-3-letter-spacing: -0.6px;
     --ct-typography-heading-4-font-size: 1.5rem;
     --ct-typography-heading-4-line-height: 2rem;
-    --ct-typography-heading-4-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-4-font-weight: 700;
     --ct-typography-heading-4-letter-spacing: -0.4px;
     --ct-typography-heading-5-font-size: 1.25rem;
     --ct-typography-heading-5-line-height: 1.5rem;
-    --ct-typography-heading-5-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-heading-5-font-weight: 700;
     --ct-typography-heading-5-letter-spacing: -0.2px;
     --ct-typography-text-extra-large-font-size: 1.5rem;
     --ct-typography-text-extra-large-line-height: 1.5rem;
-    --ct-typography-text-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-extra-large-font-weight: 400;
     --ct-typography-text-extra-large-letter-spacing: 0;
     --ct-typography-text-large-font-size: 1.25rem;
     --ct-typography-text-large-line-height: 2.125rem;
-    --ct-typography-text-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-large-font-weight: 400;
     --ct-typography-text-large-letter-spacing: 0;
     --ct-typography-text-regular-font-size: 1rem;
     --ct-typography-text-regular-line-height: 1.75rem;
-    --ct-typography-text-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-regular-font-weight: 400;
     --ct-typography-text-regular-letter-spacing: 0;
     --ct-typography-text-small-font-size: 0.875rem;
     --ct-typography-text-small-line-height: 1.5rem;
-    --ct-typography-text-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-text-small-font-weight: 400;
     --ct-typography-text-small-letter-spacing: 0;
     --ct-typography-label-extra-large-font-size: 1.5rem;
     --ct-typography-label-extra-large-line-height: 1.5rem;
-    --ct-typography-label-extra-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-extra-large-font-weight: 600;
     --ct-typography-label-extra-large-letter-spacing: 0;
     --ct-typography-label-large-font-size: 1.125rem;
     --ct-typography-label-large-line-height: 1.5rem;
-    --ct-typography-label-large-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-large-font-weight: 600;
     --ct-typography-label-large-letter-spacing: 0;
     --ct-typography-label-regular-font-size: 1rem;
     --ct-typography-label-regular-line-height: 1.25rem;
-    --ct-typography-label-regular-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-regular-font-weight: 600;
     --ct-typography-label-regular-letter-spacing: -0.1px;
     --ct-typography-label-small-font-size: 1rem;
     --ct-typography-label-small-line-height: 1.25rem;
-    --ct-typography-label-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-small-font-weight: 400;
     --ct-typography-label-small-letter-spacing: -0.1px;
     --ct-typography-label-extra-small-font-size: 0.875rem;
     --ct-typography-label-extra-small-line-height: 1.125rem;
-    --ct-typography-label-extra-small-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-label-extra-small-font-weight: 400;
     --ct-typography-label-extra-small-letter-spacing: 0;
     --ct-typography-quote-font-size: 1.5rem;
     --ct-typography-quote-line-height: 2.5rem;
-    --ct-typography-quote-font-name: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
     --ct-typography-quote-font-weight: 400;
     --ct-typography-quote-letter-spacing: -0.35px;
   }
