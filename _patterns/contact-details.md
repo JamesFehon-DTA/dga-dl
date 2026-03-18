@@ -8,7 +8,9 @@ url: '/'
 Use this pattern whenever you need to help users contact a team or an agency.
 
 
-Make sure any phone number is accessible and linked `(tel:+61-2-XXXX-XXXX)`. 
+Make sure any phone number is accessible and linked `(tel:+61-2-XXXX-XXXX)`. Use the format establied for [Telephone numbers in the Style Manual
+](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/numbers-and-measurements/telephone-numbers).
+
 Don’t use bullet points or a colon after ‘Call’ or ‘Email’. 
 Don’t use a full stop after the email address. 
 
