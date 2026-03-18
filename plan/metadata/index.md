@@ -5,10 +5,6 @@ lead: It's important to manage your metadata well so that people can easily find
 main-container-style: 'ct-basic-content'
 ---
 
-Managing metadata
-=================
-
-It's important to manage your metadata well so that people can easily find, understand, use and share your information assets.
 
 Improving how your agency manages metadata will also help it achieve [Action 10](https://www.naa.gov.au/node/2696/#action-10) and [Action 11](https://www.naa.gov.au/node/2696/#action-11) of the [*Building trust in the public record*](https://www.naa.gov.au/information-management/information-management-policies/building-trust-public-record) policy.
 
