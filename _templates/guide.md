@@ -40,6 +40,93 @@ A well-structured guide follows this pattern:
 Keep each section focused. If a section runs beyond three or four paragraphs, consider whether it warrants its own page or a subpage structure.
 
 Guides should not include the full text of the policy they support. Link to the policy instead, and use the guide to provide interpretation, worked examples, and procedural steps.
+<div markdown="0">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org">
+  <!-- Background -->
+  <rect width="800" height="450" fill="#f8f9fa" />
+  
+  <!-- Shared Styles -->
+  <style>
+    .title { font: bold 16px sans-serif; fill: #333; }
+    .label { font: 12px sans-serif; fill: #555; }
+    .tag-text { font: italic 10px monospace; fill: #666; }
+    .border { stroke-width: 1; fill: #fff; stroke: #ccc; }
+    .header { fill: #e3f2fd; stroke: #2196f3; }
+    .nav { fill: #fff3e0; stroke: #ff9800; }
+    .main { fill: #f1f8e9; stroke: #4caf50; }
+    .footer { fill: #eeeeee; stroke: #9e9e9e; }
+    .section { fill: #fff; stroke: #4caf50; stroke-dasharray: 4; }
+  </style>
+
+  <!-- 1. LONG GUIDE -->
+  <g transform="translate(30, 50)">
+    <text x="110" y="-15" text-anchor="middle" class="title">Long Guide (>2k words)</text>
+    <rect width="220" height="340" class="border" rx="4" />
+    
+    <!-- Header -->
+    <rect x="10" y="10" width="200" height="30" class="header" />
+    <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
+    
+    <!-- Nav (Sidebar) -->
+    <rect x="10" y="50" width="50" height="240" class="nav" />
+    <text x="35" y="170" text-anchor="middle" class="tag-text" transform="rotate(-90 35 170)">&lt;nav&gt;</text>
+    
+    <!-- Main Content -->
+    <rect x="70" y="50" width="140" height="240" class="main" />
+    <text x="140" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
+    
+    <!-- Sections -->
+    <rect x="80" y="80" width="120" height="25" class="section" />
+    <text x="140" y="96" text-anchor="middle" class="label">Intro</text>
+    <rect x="80" y="115" width="120" height="25" class="section" />
+    <text x="140" y="131" text-anchor="middle" class="label">Context</text>
+    <rect x="80" y="150" width="120" height="50" class="section" />
+    <text x="140" y="180" text-anchor="middle" class="label">H2 Sections</text>
+    
+    <!-- Footer -->
+    <rect x="10" y="300" width="200" height="30" class="footer" />
+    <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
+  </g>
+
+  <!-- 2. MEDIUM GUIDE -->
+  <g transform="translate(290, 50)">
+    <text x="110" y="-15" text-anchor="middle" class="title">Medium (800-2k)</text>
+    <rect width="220" height="340" class="border" rx="4" />
+    
+    <rect x="10" y="10" width="200" height="30" class="header" />
+    <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
+    
+    <rect x="10" y="50" width="200" height="240" class="main" />
+    <text x="110" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
+    
+    <rect x="20" y="80" width="180" height="30" class="section" />
+    <text x="110" y="100" text-anchor="middle" class="label">Introduction</text>
+    <rect x="20" y="120" width="180" height="100" class="section" />
+    <text x="110" y="175" text-anchor="middle" class="label">Step-by-Step (H2)</text>
+    
+    <rect x="10" y="300" width="200" height="30" class="footer" />
+    <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
+  </g>
+
+  <!-- 3. SHORT GUIDE -->
+  <g transform="translate(550, 50)">
+    <text x="110" y="-15" text-anchor="middle" class="title">Short (&lt;800 words)</text>
+    <rect width="220" height="340" class="border" rx="4" />
+    
+    <rect x="10" y="10" width="200" height="30" class="header" />
+    <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
+    
+    <rect x="10" y="50" width="200" height="240" class="main" />
+    <text x="110" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
+    
+    <rect x="20" y="80" width="180" height="60" class="section" />
+    <text x="110" y="115" text-anchor="middle" class="label">Single Task</text>
+    
+    <rect x="10" y="300" width="200" height="30" class="footer" />
+    <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
+  </g>
+</svg>
+</div>
 
 ## Writing conventions
 
