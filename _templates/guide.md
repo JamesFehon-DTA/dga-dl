@@ -40,7 +40,8 @@ A well-structured guide follows this pattern:
 Keep each section focused. If a section runs beyond three or four paragraphs, consider whether it warrants its own page or a subpage structure.
 
 Guides should not include the full text of the policy they support. Link to the policy instead, and use the guide to provide interpretation, worked examples, and procedural steps.
-<div markdown="0">
+
+{% raw %}
 <svg viewBox="0 0 800 450" xmlns="http://www.w3.org">
   <!-- Background -->
   <rect width="800" height="450" fill="#f8f9fa" />
@@ -126,7 +127,8 @@ Guides should not include the full text of the policy they support. Link to the 
     <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
   </g>
 </svg>
-</div>
+
+{% endraw %}
 
 ## Writing conventions
 
