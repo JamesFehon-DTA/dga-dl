@@ -7386,6 +7386,127 @@ ol ol ol {
   color: var(--ct-fast-fact-card-dark-title-color);
 }
 
+.ct-feature-link-list {
+  width: 100%;
+}
+.ct-feature-link-list--with-background {
+  padding: 1.5rem;
+}
+.ct-feature-link-list .ct-feature-link-list__title {
+  margin-bottom: 1rem;
+}
+.ct-feature-link-list .ct-feature-link-list__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ct-feature-link-list .ct-feature-link-list__item {
+  border-top: 1px solid transparent;
+}
+.ct-feature-link-list .ct-feature-link-list__item:last-child {
+  border-bottom: 1px solid transparent;
+}
+.ct-feature-link-list .ct-feature-link-list__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  text-decoration: none;
+}
+.ct-feature-link-list .ct-feature-link-list__link:focus-visible {
+  outline-offset: var(--ct-outline-offset);
+  outline-width: var(--ct-outline-width);
+  outline-style: solid;
+  outline-color: var(--ct-outline-light);
+  border-radius: var(--ct-outline-border-radius);
+}
+.ct-feature-link-list .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
+  text-decoration: underline;
+}
+.ct-feature-link-list .ct-feature-link-list__link:hover .ct-feature-link-list__icon {
+  transform: translateX(0.25rem);
+}
+.ct-feature-link-list .ct-feature-link-list__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+.ct-feature-link-list .ct-feature-link-list__link-title {
+  font-size: var(--ct-typography-text-small-font-size);
+  line-height: var(--ct-typography-text-small-line-height);
+  font-family: var(--ct-typography-text-small-font-name);
+  font-weight: var(--ct-typography-text-small-font-weight);
+  letter-spacing: var(--ct-typography-text-small-letter-spacing);
+  font-weight: bold;
+}
+.ct-feature-link-list .ct-feature-link-list__description {
+  font-size: var(--ct-typography-text-small-font-size);
+  line-height: var(--ct-typography-text-small-line-height);
+  font-family: var(--ct-typography-text-small-font-name);
+  font-weight: var(--ct-typography-text-small-font-weight);
+  letter-spacing: var(--ct-typography-text-small-letter-spacing);
+}
+.ct-feature-link-list .ct-feature-link-list__icon {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+.ct-feature-link-list.ct-theme-light {
+  color: var(--ct-feature-link-list-light-color);
+}
+.ct-feature-link-list.ct-theme-light.ct-feature-link-list--with-background {
+  background-color: var(--ct-feature-link-list-light-background-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__item {
+  border-color: var(--ct-feature-link-list-light-item-border-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__item:last-child {
+  border-color: var(--ct-feature-link-list-light-item-border-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link {
+  color: var(--ct-feature-link-list-light-link-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link:hover {
+  background-color: var(--ct-feature-link-list-light-link-hover-background-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
+  color: var(--ct-feature-link-list-light-link-hover-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__description {
+  color: var(--ct-feature-link-list-light-description-color);
+}
+.ct-feature-link-list.ct-theme-light .ct-feature-link-list__icon {
+  color: var(--ct-feature-link-list-light-icon-color);
+}
+.ct-feature-link-list.ct-theme-dark {
+  color: var(--ct-feature-link-list-dark-color);
+}
+.ct-feature-link-list.ct-theme-dark.ct-feature-link-list--with-background {
+  background-color: var(--ct-feature-link-list-dark-background-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__item {
+  border-color: var(--ct-feature-link-list-dark-item-border-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__item:last-child {
+  border-color: var(--ct-feature-link-list-dark-item-border-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link {
+  color: var(--ct-feature-link-list-dark-link-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link:hover {
+  background-color: var(--ct-feature-link-list-dark-link-hover-background-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
+  color: var(--ct-feature-link-list-dark-link-hover-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__description {
+  color: var(--ct-feature-link-list-dark-description-color);
+}
+.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__icon {
+  color: var(--ct-feature-link-list-dark-icon-color);
+}
+
 .ct-field {
   width: 100%;
 }
@@ -11501,6 +11622,24 @@ html {
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
+  --ct-feature-link-list-light-color: var(--ct-fg-text);
+  --ct-feature-link-list-light-title-color: var(--ct-fg-text);
+  --ct-feature-link-list-light-item-border-color: var(--ct-border-muted);
+  --ct-feature-link-list-light-link-color: var(--ct-fg-action);
+  --ct-feature-link-list-light-link-hover-color: var(--ct-fg-text);
+  --ct-feature-link-list-light-link-hover-background-color: var(--ct-bg-shade);
+  --ct-feature-link-list-light-description-color: var(--ct-fg-muted);
+  --ct-feature-link-list-light-icon-color: var(--ct-fg-action);
+  --ct-feature-link-list-light-background-color: var(--ct-bg-body);
+  --ct-feature-link-list-dark-color: var(--ct-fg-text);
+  --ct-feature-link-list-dark-title-color: var(--ct-fg-text);
+  --ct-feature-link-list-dark-item-border-color: var(--ct-border-default);
+  --ct-feature-link-list-dark-link-color: var(--ct-fg-action);
+  --ct-feature-link-list-dark-link-hover-color: var(--ct-fg-text);
+  --ct-feature-link-list-dark-link-hover-background-color: var(--ct-bg-shade);
+  --ct-feature-link-list-dark-description-color: var(--ct-fg-muted);
+  --ct-feature-link-list-dark-icon-color: var(--ct-fg-action);
+  --ct-feature-link-list-dark-background-color: var(--ct-bg-body);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;
