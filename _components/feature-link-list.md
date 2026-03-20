@@ -21,12 +21,11 @@ Always accompany a feature link list with a clear heading. Without a heading, th
 
 ## When not to use this component
 
-- outside the main content region — use a [Manual list]({% link _components/manual-list.md %}) in sidebars or footer areas instead
-- for primary navigation — use the site header or section landing page instead
+- outside the main content region
+- for primary navigation
 - when links do not share a common theme — a plain rich text list is sufficient
 - when you have more than eight items — consider a table, a card grid, or a section landing page
-- to feature editorial or promotional content — use a [Promo]({% link _components/promo.md %}) or card instead
-- to link to sections on the current page — use [Inpage nav]({% link _components/next-step.md %}) instead
+- to link to sections on the current page.
 
 ## Writing link text and descriptions
 
