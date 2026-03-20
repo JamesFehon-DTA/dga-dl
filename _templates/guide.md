@@ -161,13 +161,13 @@ Use the following UI components when building guide pages in the CMS.
 **Tags** — Apply content tags to support site-wide filtering (for example, 'investment', 'policy', 'assurance'). Tags should come from the approved taxonomy — do not create new tags without approval.
 
 ## Examples [to be reviewed]
-- Long
-  - [Guidance for agencies and independent assurers: Assessing delivery confidence of digital projects](https://www.digital.gov.au/initiatives/digital-project-research-series/assessing-delivery-confidence-of-digital-projects)
-  - [Guidance for Senior Responsible Officials: Digital Project Governance Boards](https://www.digital.gov.au/initiatives/digital-project-research-series/digital-project-governance-boards-steering-success)
-  - [Digital Investment Plan (DIP) Policy](https://www.digital.gov.au/investment/strategic-planning/digital-investment-plans-dips/digital-investment-plan-policy)
-  - [Compliance, reporting and exemption guide](https://www.digital.gov.au/policy/digital-experience/compliance-reporting-and-exemption-guide)
-- Medium
-  - [Digital Investment Plan (DIP) Guidebook](https://www.digital.gov.au/investment/strategic-planning/digital-investment-plans-dips/digital-investment-plan-dip-guidebook)
-- Short
-  - [Benefits Management Policy Guidance](https://www.digital.gov.au/policy/benefits-management-policy/guidance)
-  - [Digital Experience Policy checklists](https://www.digital.gov.au/policy/digital-experience/toolkit/DXPolicychecklists)
+### Long
+- [Guidance for agencies and independent assurers: Assessing delivery confidence of digital projects](https://www.digital.gov.au/initiatives/digital-project-research-series/assessing-delivery-confidence-of-digital-projects)
+- [Guidance for Senior Responsible Officials: Digital Project Governance Boards](https://www.digital.gov.au/initiatives/digital-project-research-series/digital-project-governance-boards-steering-success)
+- [Digital Investment Plan (DIP) Policy](https://www.digital.gov.au/investment/strategic-planning/digital-investment-plans-dips/digital-investment-plan-policy)
+- [Compliance, reporting and exemption guide](https://www.digital.gov.au/policy/digital-experience/compliance-reporting-and-exemption-guide)
+### Medium
+- [Digital Investment Plan (DIP) Guidebook](https://www.digital.gov.au/investment/strategic-planning/digital-investment-plans-dips/digital-investment-plan-dip-guidebook)
+### Short
+- [Benefits Management Policy Guidance](https://www.digital.gov.au/policy/benefits-management-policy/guidance)
+- [Digital Experience Policy checklists](https://www.digital.gov.au/policy/digital-experience/toolkit/DXPolicychecklists)
