@@ -1,5 +1,9 @@
-Extending and modifying components in production
-================================================
+---
+layout: main
+title: Extending and modifying components in production
+lead: What to do when you want to extend or modify a component in production.
+main-container-style: 'ct-basic-content'
+---
 
 You might need to extend or modify components in the Design System from time to time. For example to:
 
@@ -27,8 +31,7 @@ You can help reduce potential risk to your code by:
 
 The Design System team uses these techniques to make sure code does not unintentionally break other implementations.
 
-Start with override classes
----------------------------
+## Start with override classes
 
 Check the [styles section] to see if there's a CSS class you can use before adding CSS to your service.
 
@@ -38,8 +41,8 @@ For example, you can make changes to:
 -   font size with [font override classes]
 -   width with [width override classes]
 
-Avoid overwriting Design System code
--------------------------------------------
+## Avoid overwriting Design System code
+
 
 If you make a modification involving CSS you might decide to write a selector that targets a Design System class and change its CSS properties.
 
@@ -64,8 +67,7 @@ For example, if you want to override the button component you could do the follo
 
 This would work in the short term, but if the Design System changes how the button component works it could break when you update your service. For examples like this, consider using [small modifications to components].
 
-Use a unique prefix for component names
----------------------------------------
+## Use a unique prefix for component names
 
 The GOV.UK Design System team uses prefixes, sometimes called [namespacing](https://techterms.com/definition/namespace), to make sure the code in the GOV.UK Design System does not unintentionally break your application code.
 
@@ -83,8 +85,8 @@ Apply this principle anywhere you name components, such as to:
 
 If you repurpose a component from another source to the Design System, change the component's prefix accordingly.
 
-Custom override classes
------------------------
+## Custom override classes
+
 
 If you need to specify some custom override classes which do not belong to a particular component, you can define these using your [prefix] and the `-!-` convention from the GOV.UK Design System.
 
@@ -102,8 +104,8 @@ For example, to define a custom width for a specific reference number in your se
 </span>
 ```
 
-Small modifications to components
----------------------------------
+## Small modifications to components
+
 
 The Design System uses a naming convention called [Block Element Modifier (BEM)](https://getbem.com/) which makes it easier to ensure styling is isolated to individual components. You can use this convention to make modifications to components.
 
@@ -132,8 +134,7 @@ You should not use modifiers when:
 -   the component does not meet the original user need
 -   you need to make large changes to the HTML markup
 
-Large modifications to components
----------------------------------
+## Large modifications to components
 
 If you need to make a large modification to a component you should fork it entirely by copying and pasting the source code to create a new component.
 
@@ -143,7 +144,7 @@ Doing this removes the possibility of any updates breaking your service. However
 
 For example, Gov.UK's [Step by step navigation pattern](https://design-system.service.gov.uk/patterns/step-by-step-navigation/) was a large modification of an existing component, which began as a small modification to the [Accordion component](https://design-system.service.gov.uk/components/accordion/). The step by step navigation had so many changes it was eventually forked into a separate component.
 
-Check for accessibility
------------------------
+## Check for accessibility
+
 
 Make sure any modified components meet accessibility standards. This is to ensure your service is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA standard](https://www.w3.org/TR/WCAG22/) and meets accessibility regulations.
