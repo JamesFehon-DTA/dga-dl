@@ -95,4 +95,12 @@ Appendices
   - [Australian Government AI Assurance Framework: Pilot Report Summary](https://www.digital.gov.au/policy/ai/ai-assurance-framework-pilot-report/context-data-rationale)
   - [Observatory news and updates](https://www.digital.gov.au/initiatives/observatory/observatory-news)
 
+## Sub-page variants
+
+Reports with broad scope or a large volume of supporting material may include sub-pages beyond the main body. Use sub-page variants to maintain a clear separation between primary content and supplementary material.
+
+**Glossary** — a sub-page listing defined terms; required for long-form reports, optional for short-form. Position as the first appendix or as a named sub-page before appendices. Do not duplicate a glossary that exists on a parent section landing page.
+
+**Appendix** — one or more sub-pages containing supporting data, methodology, stakeholder lists, or reference material that would interrupt the report body. Each appendix must be numbered and titled. Link to all appendices from the report landing page.
+
 
