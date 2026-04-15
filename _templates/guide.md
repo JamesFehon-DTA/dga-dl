@@ -173,3 +173,11 @@ Use the following UI components when building guide pages in the CMS.
 ### Short
 - [Benefits Management Policy Guidance](https://www.digital.gov.au/policy/benefits-management-policy/guidance)
 - [Digital Experience Policy checklists](https://www.digital.gov.au/policy/digital-experience/toolkit/DXPolicychecklists)
+
+## Sub-page variants
+
+Some guides warrant one or more sub-pages beyond the main guide body. Use sub-page variants only when the content genuinely cannot be accommodated within the guide structure without disrupting flow or readability.
+
+**Glossary** — a sub-page listing defined terms used across the guide; only warranted when the guide introduces 5 or more terms that cannot be defined inline. Link to it from the guide introduction. Do not duplicate definitions that exist in a related policy or report glossary.
+
+**FAQ** — a sub-page for frequently asked questions; use only when questions cannot be addressed within the guide body without disrupting flow. Limit to 7 items. Position as the last sub-page in the guide structure.

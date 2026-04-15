@@ -67,3 +67,9 @@ Use the following UI components when building resource pages in the CMS.
 - [Inclusive digital design tips - do's and don'ts](https://www.digital.gov.au/policy/digital-experience/digital-inclusion-standard/inclusive-digital-design-tips)
 - [Digital Experience Policy Timeline](https://www.digital.gov.au/policy/digital-experience/digital-experience-policy-timeline)
 - [Policy template](https://www.digital.gov.au/policy-toolkit/resources/policy-template)
+
+## Sub-page variants
+
+Some resources warrant a sub-page to address questions that cannot be handled within the main resource page.
+
+**FAQ** — a sub-page for frequently asked questions about the resource; appropriate when the resource has multiple user types or use cases that generate distinct questions. Limit to 7 items.
