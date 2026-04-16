@@ -7,12 +7,9 @@ url: '/'
 
 In-page navigation helps users understand the structure of a page or section and move directly to the content they need. It is distinct from site navigation (the primary menu) and section navigation (Sub-nav): those help users move between pages; in-page navigation helps users move within a single page.
 
-Two components implement in-page navigation on digital.gov.au:
+One component implements in-page navigation on digital.gov.au:
 
 - **[Table of contents]({% link _components/table-of-contents.md %})** — an anchor-linked list generated from the H2 headings on the current page
-- **[Sub-nav]({% link _components/sub-nav.md %})** — a persistent sidebar list of links to sibling pages within a section
-
-Use one or the other. Do not use both on the same page.
 
 ## Choosing the right approach
 
