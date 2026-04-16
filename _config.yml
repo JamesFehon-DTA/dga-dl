@@ -42,6 +42,13 @@ collections:
     output: true
     permalink: /foundations/:path/
 
+  components-advanced:
+    output: true
+    permalink: /components-advanced/:path/
+
+
+exclude:
+  - .claude/
 
 # Build settings
 # theme: minima
