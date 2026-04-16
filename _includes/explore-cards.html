@@ -1,4 +1,14 @@
 
+{% comment %} Collect unique component-types to decide whether to show filter UI {% endcomment %}
+{% assign component_types = '' | split: '' %}
+{% for card in cards %}
+  {% if card['component-type'] %}
+    {% unless component_types contains card['component-type'] %}
+      {% assign component_types = component_types | push: card['component-type'] %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+{% assign component_types = component_types | sort %}
 
 <div class="ct-list ct-theme-light ct-vertical-spacing-inset--top">
   <div class="ct-list__inner">
@@ -18,38 +28,52 @@
       </div>
     </div>
 {% endif %}
-<!-- 
-    <div class="container ct-list__rows-above">
-      <div class="row">
-        <div class="col-xxs-12">
-          <div class="ct-paragraph ct-theme-light ct-paragraph--regular">
-            <h2 class="ct-heading ct-theme-light">
-              {{ domain.domain }}
-            </h2>
+
+{% if component_types.size > 0 %}
+    <div class="ct-list__filters">
+      <div class="ct-single-filter ct-theme-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-xxs-12">
+              <div class="ct-single-filter__title">Filter by type:</div>
+              <div class="ct-single-filter__wrapper">
+                <div class="ct-single-filter__items">
+                  <ul class="ct-item-list ct-item-list--horizontal ct-item-list--small ct-single-filter__list">
+                    <li class="ct-item-list__item">
+                      <label class="ct-chip ct-theme-light ct-chip--small active component-filter-label">
+                        <input class="ct-chip__input" name="component-type-filter" type="radio" value="all" checked>
+                        <span class="ct-text-icon__text">All</span>
+                      </label>
+                    </li>
+                    {% for type in component_types %}
+                    <li class="ct-item-list__item">
+                      <label class="ct-chip ct-theme-light ct-chip--small component-filter-label">
+                        <input class="ct-chip__input" name="component-type-filter" type="radio" value="{{ type }}">
+                        <span class="ct-text-icon__text">{{ type }}</span>
+                      </label>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              <p class="ct-paragraph ct-theme-light ct-paragraph--regular" aria-live="polite" id="component-filter-count" style="margin-top:0.5rem;margin-bottom:0"></p>
+            </div>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
+{% endif %}
 
- 	
+
     <div class="ct-list__rows ct-vertical-spacing-inset--bottom">
       <div class="container" aria-live="polite">
 
-      <div class="row row--equal-heights-content row--vertically-spaced" >
-          <!-- <div class="col-xxs-12">
-            <h2 class="ct-heading ct-theme-light">
-              {{ domain.domain }}
-            </h2>
-        </div> -->
+      <div class="row row--equal-heights-content row--vertically-spaced">
 
-      
+
       {% for card in cards %}
 
-
-          <div class="col-xxs-12 col-m-4">
-            
-
-
+          <div class="col-xxs-12 col-m-4"{% if card['component-type'] %} data-component-type="{{ card['component-type'] }}"{% endif %}>
 
             <div
               class="ct-navigation-card ct-theme-light ct-navigation-card--with-link ct-navigation-card--card-clickable"
@@ -70,7 +94,10 @@
 
                 </div>
 
-                <div class="ct-navigation-card__tags">
+                <div class="ct-navigation-card__tags" style="display:flex;align-items:center;gap:0.5rem">
+                  {% if card['component-type'] %}
+                  <span class="ct-tag ct-theme-light ct-tag--secondary">{{ card['component-type'] }}</span>
+                  {% endif %}
                   <div class="ct-navigation-card__link-graphic">
                     <svg
                       class="ct-icon ct-icon--size-regular"
@@ -90,17 +117,58 @@
               </div>
             </div>
 
-
-
       </div>
 
     {% endfor %}
 
     </div>
-          
+
+    <div class="container" id="component-filter-empty" style="display:none" aria-live="polite">
+      <div class="row">
+        <div class="col-xxs-12">
+          <p class="ct-paragraph ct-theme-light ct-paragraph--regular">No components match this filter.</p>
+        </div>
+      </div>
+    </div>
+
 
 
 </div></div>
 
 
 </div></div>
+
+{% if component_types.size > 0 %}
+<script>
+(function () {
+  var radios = document.querySelectorAll('input[name="component-type-filter"]');
+  var cards = document.querySelectorAll('[data-component-type]');
+  var countEl = document.getElementById('component-filter-count');
+  var emptyEl = document.getElementById('component-filter-empty');
+  var total = cards.length;
+
+  function applyFilter(filter) {
+    var visible = 0;
+    cards.forEach(function (col) {
+      if (filter === 'all' || col.dataset.componentType === filter) {
+        col.style.display = '';
+        visible++;
+      } else {
+        col.style.display = 'none';
+      }
+    });
+    emptyEl.style.display = visible === 0 ? '' : 'none';
+    countEl.textContent = filter === 'all' ? '' : 'Showing ' + visible + ' of ' + total + ' components';
+  }
+
+  radios.forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      document.querySelectorAll('.component-filter-label').forEach(function (label) {
+        label.classList.toggle('active', label.querySelector('input').value === radio.value);
+      });
+      applyFilter(radio.value);
+    });
+  });
+})();
+</script>
+{% endif %}
