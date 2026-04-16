@@ -1,79 +1,53 @@
 ---
 layout: content
 title: 'Focus mode'
-description: "Used to help reduce distractions so that users can focus on completing a specific task."
+description: 'A reduced-chrome layout for multi-step forms that minimises distractions while users complete a task.'
 url: '/'
 ---
 
+Focus mode is a layout pattern for multi-step form flows. It hides the main site navigation and simplifies the header to reduce distractions and reduce the risk of users accidentally leaving the form before completing it.
 
-On this page
-------------
--   [Focus mode in informational websites](https://design-system.agriculture.gov.au/patterns/focus-mode#focus-mode-in-informational-websites)
--   [Focus mode in App layout](https://design-system.agriculture.gov.au/patterns/focus-mode#focus-mode-in-app-layout)
--   [Modal dialog](https://design-system.agriculture.gov.au/patterns/focus-mode#modal-dialog)
+Do not use focus mode on informational content pages. Users reading guides, reports, or reference content need access to the site navigation.
 
+## When to use
 
-Focus mode refers to temporarily hiding the main navigation of a website or application to reduce distractions and cognitive load.
+Use focus mode for:
 
-**Do**
+- multi-step forms where users enter information across several screens
+- wizard flows where each step depends on the previous one
+- onboarding tasks where the user needs to complete a defined sequence without interruption
 
--   use focus mode on multi-page forms
--   trigger a [Modal](https://design-system.agriculture.gov.au/components/modal) dialog if users navigate away from the form flow to help prevent them from losing data
--   always ensure the user can escape focus mode and return to standard navigation patterns via a 'back', 'save and exit' or 'cancel' button.
+## Layout
 
-**Don't**
+In focus mode:
 
--   allow users to control whether focus mode is on or off, it should be controlled by the system
--   use focus mode on information website content pages where a user needs to access navigation.
+- use the minimal header variant — the site logo is visible but the main site navigation is hidden
+- do not include breadcrumbs, section navigation, or any persistent navigational sidebar
+- include a 'Back' link so users can return to the previous step without losing data
+- include a 'Save and exit' control at the top of the page so users can leave intentionally and return later
 
-Focus mode in informational websites
-------------------------------------
+## Progress indicator
 
-On informational websites, focus mode hides the main navigation and changes the header component to the small variant to save vertical space.
+Use the [Progress indicator]({% link _components/progress-indicator.md %}) component to show users how far through the form they are. Place it near the top of the content area, directly below the minimal header.
 
-To do this, please refer the code example in the [example site](https://github.com/agriculturegovau/agds-next/blob/main/example-site/components/SiteHeader.tsx).
+Do not use a progress indicator outside of focus mode. It is designed for form flows, not informational content or chapter navigation sequences.
 
-**Do**
+## Preventing data loss
 
-Remove the [App layout sidebar](https://design-system.agriculture.gov.au/components/app-layout#app-layout-sidebar) to simplify the screen, reduce distractions and the risk of users accidently navigating away from the form flow.
+Even in focus mode, users can navigate away using the browser back button or by closing the tab. To help prevent data loss:
 
-![Example usage of the Header and Main nav components with an arrow pointing down to another example of these components in focus mode](https://design-system.agriculture.gov.au/img/patterns/focus-mode-informational-website.png)
+- trigger a modal dialog if the user attempts to leave the flow before completing or saving it
+- prompt users with something like: 'Are you sure you want to leave? You will lose any changes made since your last save.'
+- offer both 'Leave page' and 'Stay on page' options in the modal
 
+Do not allow users to turn focus mode on or off. The system controls the layout based on where the user is in the form flow.
 
-Focus mode in App layout
-------------------------
+## Related components
 
-The [App layout sidebar](https://design-system.agriculture.gov.au/components/app-layout#app-layout-sidebar) should be hidden while users are completing multi-page forms to reduce distractions and cognitive load. This can be achieved by setting the `focusMode` prop to `true` on the `AppLayout` component.
+- [Progress indicator]({% link _components/progress-indicator.md %}) — step progress for focus mode forms.
+- [Next step]({% link _components/next-step.md %}) — forward and back controls for navigating between form steps.
 
-**Don't**
+## Related patterns
 
-Display the [App layout sidebar](https://design-system.agriculture.gov.au/components/app-layout#app-layout-sidebar) with the [Progress indicator](https://design-system.agriculture.gov.au/components/progress-indicator), as they're both navigational items that compete for attention. Displaying both on the screen also limits space for the main content.
-
-![Screenshot of App layout components with an outlined box highlighting the App layout sidebar component](https://design-system.agriculture.gov.au/img/patterns/focus-mode-app-layout-wrong.png)
-
-**Do**
-
-Remove the [Main nav](https://design-system.agriculture.gov.au/components/main-nav) on informational website multi-page forms to simplify the screen, reduce distractions and the risk of users accidently navigating away from the form flow.
-
-**Don't**
-
-Use focus mode on informational website content pages where a user needs to access navigation.
-
-![Screenshot of App layout components in focus mode, with an outlined box highlighting where the App layout sidebar would usually be placed](https://design-system.agriculture.gov.au/img/patterns/focus-mode-app-layout.png)
-
-Modal dialog
-------------
-
-Even though focus mode hides the main navigation, users could still navigate away from the form via the links in the header, footer, or even the browser back button. To help prevent users from losing data they've already entered into a form, trigger a [Modal](https://design-system.agriculture.gov.au/components/modal) dialog in case they mistakenly navigated away from the form.
-
-[View storybook preview](https://design-system.agriculture.gov.au/storybook/index.html?path=/story/content-modal--leaving-form-page)
-
-![Screenshot of an open Modal dialog with the title 'Are you sure you want to leave this page?' and description 'You will lose all changes made since your last save.'](https://design-system.agriculture.gov.au/img/patterns/focus-mode-modal.png)
-
-Related components
-------------------
-
--   [App layout](https://design-system.agriculture.gov.au/components/app-layout) -- The app layout provides a consistent way for users to navigate around a web application and access their account settings.
--   [Header](https://design-system.agriculture.gov.au/components/header) -- The Header is the masthead of our applications. It incorporates the Department of Agriculture, Fisheries and Forestry Coat of Arms logo and provides a user context on where they are.
--   [Main nav](https://design-system.agriculture.gov.au/components/main-nav) -- The main nav is the primary way users navigate the user interface. It is consistently visible throughout the service.
--   [Modal](https://design-system.agriculture.gov.au/components/modal) -- A modal is a dialog box that appears above the parent page and provides advance notice of a destructive action and consequence. They tell users a decision is needed.
+- [Chapter navigation]({% link _patterns/chapter-navigation.md %}) — for sequential content pages where focus mode is not needed.
+- [Page header]({% link _patterns/page-header.md %}) — includes the minimal header variant used in focus mode.
