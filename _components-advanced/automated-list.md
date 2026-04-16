@@ -1,52 +1,28 @@
 ---
 layout: content
 title: 'Automated list'
-description: 'A callout draws attention to important or interesting information.'
+description: 'A listing component that populates automatically from published content.'
 component-type: Content
 url: '/'
 ---
 
-<p class="ct-text-large">{{ page.description }}</p>
+Use an automated list to display content items — news, events, resources, or other content types — that are drawn automatically from the CMS based on configured criteria such as content type, tags, or date range. The list updates as new content is published without editors needing to manually curate it.
 
-<div style="box-sizing: border-box;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-color: var(--ct-color-light-border-light);
-    border-style: solid;
-    border-radius: 4px;">
-{% include demos/callout.html%}
-</div>
+The automated list is an advanced component because it requires CMS view configuration to define what content appears and how it is ordered.
 
+## When to use
 
-Use callout to draw a user’s attention to important snippets of static information.
+- you need a listing that stays current as new content is published
+- the items share a content type or tagging structure that can be queried reliably
+- the listing volume is too large to manage manually
 
-## Do
+## When not to use
 
-- use sparingly as they are intrusive
-- use to help users quickly scan to find essential information in a long text page
-- use to reiterate important content
-- use to format content not included in the main text such as support and contact details, checklists, definitions and ‘Did you know?’ content.
-
-## Don’t
-- use for primary content, as it may be missed
-- use for quotes in long-form content - use a [Quote]({% link _components/quote.md%}) instead
-- make them the focus of content; they are a supporting tool
-- use for errors and alerts – use an alert or message instead
-- embed form inputs in Callouts
-- use in conditionally revealed checkbox or radio groups
-- mix colour palettes.
+- when you need to handpick and order specific items — use [Manual list]({% link _components/manual-list.md %}) instead
+- when the content does not have consistent metadata — an automated list relies on structured tagging to display correctly
+- for featured or promotional content — use [Promo]({% link _components/promo.md %}) or [Feature link list]({% link _components/feature-link-list.md %}) instead
 
 ## Related components
-- Global alert – Global alerts display prominent service or system wide messages at the top of the screen.
-- Message – A message is a colour-coded, non-disruptive notification that provides Success, Error, Warning or Information messages within a page at relevant times during the user journey. They should not be confused with Callouts.
 
-## Related patterns
-- Messaging – Messaging conveys contextual information to the user, provides information in relation to a service or interaction, and provides feedback in response to their actions or the current system status.
-
-
+- [Manual list]({% link _components/manual-list.md %}) — use when items should be handpicked and ordered by the editor.
+- [Feature link list]({% link _components/feature-link-list.md %}) — use when each link benefits from a description and hover icon.

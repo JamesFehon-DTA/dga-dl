@@ -1,52 +1,26 @@
 ---
 layout: content
 title: 'Content'
-description: 'A callout draws attention to important or interesting information.'
+description: 'The rich text body component for free-form page content.'
 component-type: Content
 url: '/'
 ---
 
-<p class="ct-text-large">{{ page.description }}</p>
+Content is the primary paragraph type for body text on a page. It supports all standard rich text formatting: headings, paragraphs, lists, links, images, and tables. Most page types include at least one Content paragraph.
 
-<div style="box-sizing: border-box;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-color: var(--ct-color-light-border-light);
-    border-style: solid;
-    border-radius: 4px;">
-{% include demos/callout.html%}
-</div>
+## When to use
 
+- as the default paragraph type for body text on any page
+- for content that does not fit a more specific component — explanatory text, instructions, summaries
+- when editors need flexibility to use multiple formatting elements on a single page
 
-Use callout to draw a user’s attention to important snippets of static information.
+## When not to use
 
-## Do
-
-- use sparingly as they are intrusive
-- use to help users quickly scan to find essential information in a long text page
-- use to reiterate important content
-- use to format content not included in the main text such as support and contact details, checklists, definitions and ‘Did you know?’ content.
-
-## Don’t
-- use for primary content, as it may be missed
-- use for quotes in long-form content - use a [Quote]({% link _components/quote.md%}) instead
-- make them the focus of content; they are a supporting tool
-- use for errors and alerts – use an alert or message instead
-- embed form inputs in Callouts
-- use in conditionally revealed checkbox or radio groups
-- mix colour palettes.
+- when a more specific component is available — use [Callout]({% link _components/callout.md %}) for highlighted snippets, [Timeline]({% link _components/timeline.md %}) for ordered processes, or [Table]({% link _components/table.md %}) for structured data
+- to produce layout structure — use layout components rather than formatting a Content paragraph for positioning
 
 ## Related components
-- Global alert – Global alerts display prominent service or system wide messages at the top of the screen.
-- Message – A message is a colour-coded, non-disruptive notification that provides Success, Error, Warning or Information messages within a page at relevant times during the user journey. They should not be confused with Callouts.
 
-## Related patterns
-- Messaging – Messaging conveys contextual information to the user, provides information in relation to a service or interaction, and provides feedback in response to their actions or the current system status.
-
-
+- [Callout]({% link _components/callout.md %}) — use to draw attention to a short important message within or alongside body text.
+- [Table]({% link _components/table.md %}) — use when content is structured as rows and columns.
+- [Summary list]({% link _components/summary-list.md %}) — use for structured name–value pairs.

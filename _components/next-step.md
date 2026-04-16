@@ -1,52 +1,26 @@
 ---
 layout: content
 title: 'Next step'
-description: 'A callout draws attention to important or interesting information.'
+description: 'A call-to-action block that directs users to the next action after completing a page.'
 component-type: Content
 url: '/'
 ---
 
-<p class="ct-text-large">{{ page.description }}</p>
+Use a next step at the end of a page or guide section to direct users toward the logical next action. It makes the desired path explicit — whether that is moving to the next guide step, starting an application, or returning to a listing.
 
-<div style="box-sizing: border-box;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-color: var(--ct-color-light-border-light);
-    border-style: solid;
-    border-radius: 4px;">
-{% include demos/callout.html%}
-</div>
+## When to use
 
+- at the end of a guide step where users should proceed to the next step
+- at the end of an informational page where a clear primary action follows — for example, 'Apply now' or 'Register your interest'
+- when users might otherwise be unsure what to do after reading the page
 
-Use callout to draw a user’s attention to important snippets of static information.
+## When not to use
 
-## Do
-
-- use sparingly as they are intrusive
-- use to help users quickly scan to find essential information in a long text page
-- use to reiterate important content
-- use to format content not included in the main text such as support and contact details, checklists, definitions and ‘Did you know?’ content.
-
-## Don’t
-- use for primary content, as it may be missed
-- use for quotes in long-form content - use a [Quote]({% link _components/quote.md%}) instead
-- make them the focus of content; they are a supporting tool
-- use for errors and alerts – use an alert or message instead
-- embed form inputs in Callouts
-- use in conditionally revealed checkbox or radio groups
-- mix colour palettes.
+- when there is no clear next action — do not add a next step to fill space
+- when the page already ends with a form or another direct call to action
+- multiple times on a single page — one next step per page is sufficient
 
 ## Related components
-- Global alert – Global alerts display prominent service or system wide messages at the top of the screen.
-- Message – A message is a colour-coded, non-disruptive notification that provides Success, Error, Warning or Information messages within a page at relevant times during the user journey. They should not be confused with Callouts.
 
-## Related patterns
-- Messaging – Messaging conveys contextual information to the user, provides information in relation to a service or interaction, and provides feedback in response to their actions or the current system status.
-
-
+- [Callout]({% link _components/callout.md %}) — use to highlight important information rather than direct the user to an action.
+- [Campaign]({% link _components/campaign.md %}) — use for a major editorial feature with a call to action, not a page-end action prompt.
