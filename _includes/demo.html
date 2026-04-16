@@ -1,5 +1,6 @@
-<div style="border: 1px solid var(--ct-color-light-border-light); border-radius: 4px;">
-
-{% include demos/{{ include.name }}.html %}
-
+{% capture demo_content %}{% include demos/{{ include.name }}.html %}{% endcapture %}
+{% capture demo_resize_script %}<script>new ResizeObserver(function(){window.frameElement.style.height=document.body.scrollHeight+'px';}).observe(document.body);</script>{% endcapture %}
+{% capture srcdoc %}<!DOCTYPE html><html><head><link rel="stylesheet" href="{{ '/civictheme.css' | absolute_url }}"><link rel="stylesheet" href="{{ '/civictheme.variables.css' | absolute_url }}"><style>body { margin: 0; }</style></head><body class="ct-theme-light">{{ demo_content }}<script src="{{ '/civictheme.base.js' | absolute_url }}"></script>{{ demo_resize_script }}</body></html>{% endcapture %}
+<div class="ct-demo" style="border: 1px solid var(--ct-color-light-border-light); border-radius: 4px; overflow: hidden;">
+  <iframe srcdoc="{{ srcdoc | xml_escape }}" style="width: 100%; display: block; border: none;" title="Component demo" scrolling="no"></iframe>
 </div>

@@ -21,8 +21,11 @@ Show contact channels in the same order throughout your service. This helps user
 
 ## Contact information within page text
 Use a heading written for your users.
+
 > ### Contact us
+
 OR
+
 > ### Get help with your registration
 > For any questions about the program, email example@example.com
 
