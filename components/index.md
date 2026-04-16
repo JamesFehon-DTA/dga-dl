@@ -6,7 +6,7 @@ lead: Components are the building blocks of the digital.gov.au design system. Ea
 
 ---
 
-See [Foundations]({{ '/foundations/' | relative_url }}) for the colour, typography, elevation, and accessibility principles that underpin these components.
+These components are built on shared design and accessibility principles covered in [Foundations]({{ '/foundations/' | relative_url }}).
 
                       {% assign cards = site.components %} 
                       {% include explore-cards.html content=cards %}
