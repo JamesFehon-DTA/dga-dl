@@ -53,6 +53,8 @@ Use the following UI components when building report pages in the CMS.
 
 **File download** — Use the file download component (not a plain hyperlink) for the PDF version of the report. Display the file name, format, and file size.
 
+**Accordion** — Use only for supporting reference material that is not part of the main report narrative, such as methodology notes or reference lists. Never use accordions for core findings or recommendations. Never nest accordions. Limit to five to seven items.
+
 **Related content cards** — At the bottom of the landing page, link to related reports, the relevant policy area, and any program pages associated with the findings. Two to four cards.
 
 **Tags** — Apply tags from the approved taxonomy. Reports typically carry tags for the policy domain, the publication type, and the year of publication.

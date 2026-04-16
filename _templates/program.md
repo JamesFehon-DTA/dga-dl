@@ -54,7 +54,7 @@ Use the following UI components when building program pages in the CMS.
 
 **Timeline** — Use if the program has a structured intake schedule or a series of milestones participants need to be aware of. Keep it to five or fewer steps.
 
-**Accordion** — Use for frequently asked questions about eligibility, format, or prerequisites. Position at the bottom of the page, above related content.
+**Accordion** — Use for frequently asked questions about eligibility, format, or prerequisites. Position at the bottom of the page, above related content. Never nest accordions. Limit to five to seven items.
 
 **Related content cards** — Link to supporting policy, published outputs from previous cohorts, and related programs. Two to four cards.
 
