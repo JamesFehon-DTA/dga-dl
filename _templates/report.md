@@ -1,14 +1,12 @@
 ---
 layout: content
 title: 'Report'
-description: 'Reports have conventions relating to their structure and formatting'
+description: 'A report presents the findings, analysis, or evaluation of a specific inquiry, project, program, or policy area.'
 url: '/'
 ---
 
 {::options parse_block_html="true" /}
 
-
-## Purpose
 
 A report presents the findings, analysis, or evaluation of a specific inquiry, project, program, or policy area. Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
 

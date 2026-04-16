@@ -1,11 +1,9 @@
 ---
 layout: content
-title: 'Program page'
-description: 'Program pages'
+title: 'Program'
+description: 'A program page describes a coordinated, ongoing initiative — typically a training program, capability-building activity, or cross-agency collaboration managed or facilitated by the DTA.'
 url: '/'
 ---
-
-## Purpose
 
 A program page describes a coordinated, ongoing initiative — typically a training program, capability-building activity, or cross-agency collaboration managed or facilitated by the DTA. Program pages help agency staff understand what a program offers, who it is for, and how to participate.
 

@@ -8,8 +8,6 @@ url: '/'
 {::options parse_block_html="true" /}
 
 
-## Purpose
-
 A communique is a formal, dated record of decisions and discussions from a named committee or body. It is not a news article or summary — it is an official published account of what was discussed and decided at a specific meeting. Audiences include agencies, ministers, and the public.
 
 Communiques on digital.gov.au are published by committees such as the Secretaries Digital and Data Committee. They provide transparency around governance decisions and are referenced as formal records over time.

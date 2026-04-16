@@ -1,14 +1,12 @@
 ---
 layout: content
-title: 'Resource page'
-description: 'Resource pages'
+title: 'Resource'
+description: 'A resource page hosts a discrete, reusable reference item that users access to complete a specific task.'
 url: '/'
 ---
 
 {::options parse_block_html="true" /}
 
-
-## Purpose
 
 A resource page hosts a discrete, reusable reference item that users access to complete a specific task. Resources are practical by nature — factsheets, tools, templates, checklists, timelines, and downloadable documents that support compliance with policy, capability uplift, or day-to-day operations.
 
