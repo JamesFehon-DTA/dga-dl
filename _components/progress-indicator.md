@@ -1,7 +1,7 @@
 ---
 layout: content
 title: 'Progress indicator'
-description: 'Displays a user\'s position within a multi-step form.'
+description: 'Displays a user''s position within a multi-step form.'
 component-type: Forms
 url: '/'
 demo: false
