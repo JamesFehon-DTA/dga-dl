@@ -17,12 +17,12 @@ Use a progress indicator in multi-step forms to show users how many steps exist,
 
 ## When not to use
 
-- for forms with fewer than three steps — the overhead of a progress indicator outweighs its benefit
+- for forms with fewer than three steps – the overhead of a progress indicator outweighs its benefit
 - on single-page forms
-- when steps can be completed in any order — a progress indicator implies linear sequence
+- when steps can be completed in any order – a progress indicator implies linear sequence
 
 ## Related components
 
 ## Related patterns
 
-- Focus mode — use a progress indicator within a focus mode layout that removes site navigation and keeps users on task.
+- Focus mode – use a progress indicator within a focus mode layout that removes site navigation and keeps users on task.

@@ -15,17 +15,17 @@ The component renders as a styled `<dl>` element with `<dt>` (term) and `<dd>` (
 
 - data has a clear label and a corresponding value for each item
 - summarising information a user has entered before they submit a form
-- presenting metadata about a record, file, or entity — such as dates, statuses, or identifiers
+- presenting metadata about a record, file, or entity – such as dates, statuses, or identifiers
 - showing read-only field data on a profile or detail page
 
 ## When not to use
 
-- for content that needs running prose — use a rich text body instead
-- when the data is tabular with multiple columns of comparable items — use a [Table]({% link _components/table.md %}) instead
-- for navigational lists — use [Manual list]({% link _components/manual-list.md %}) or [Feature link list]({% link _components/feature-link-list.md %}) instead
-- when there are only one or two pairs — a simple paragraph is sufficient
+- for content that needs running prose – use a rich text body instead
+- when the data is tabular with multiple columns of comparable items – use a [Table]({% link _components/table.md %}) instead
+- for navigational lists – use [Manual list]({% link _components/manual-list.md %}) or [Feature link list]({% link _components/feature-link-list.md %}) instead
+- when there are only one or two pairs – a simple paragraph is sufficient
 
 ## Related components
 
-- [Table]({% link _components/table.md %}) — use when data has multiple comparable rows and columns.
-- [Content]({% link _components/content.md %}) — use for free-form body text and formatted content.
+- [Table]({% link _components/table.md %}) – use when data has multiple comparable rows and columns.
+- [Content]({% link _components/content.md %}) – use for free-form body text and formatted content.

@@ -7,7 +7,7 @@ url: '/'
 demo: false
 ---
 
-Use a table of contents to help users scan the structure of a long page and jump directly to a section. It generates automatically from the H2 headings on the page — authors enable it per page, not by building the list manually. It renders as an anchored list at the top of the content area, before the first H2.
+Use a table of contents to help users scan the structure of a long page and jump directly to a section. It generates automatically from the H2 headings on the page. Authors enable it per page, not by building the list manually. It renders as an anchored list at the top of the content area, before the first H2.
 
 ## When to use
 
@@ -17,11 +17,11 @@ Use a table of contents to help users scan the structure of a long page and jump
 
 ## When not to use
 
-- the page has fewer than four H2 headings — a short page does not need navigation
+- the page has fewer than four H2 headings – a short page does not need navigation
 - the page is a step-by-step wizard flow where users must progress linearly
-- the page structure is already communicated through a [Sub-nav]({% link _components/sub-nav.md %}) at the section level
+- the section already has page-level navigation provided by [Sub-nav]({% link _components/sub-nav.md %})
 
 ## Related components
 
-- [Sub-nav]({% link _components/sub-nav.md %}) — use for navigation between pages in a section, not within a single page.
-- [Accordion]({% link _components/accordion.md %}) — use when optional content should be hidden by default rather than navigated to.
+- [Sub-nav]({% link _components/sub-nav.md %}) – use for navigation between pages in a section, not within a single page.
+- [Accordion]({% link _components/accordion.md %}) – use when optional content should be hidden by default rather than navigated to.

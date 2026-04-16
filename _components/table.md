@@ -17,9 +17,9 @@ Use tables to present data that users need to scan, compare, or look up. Tables 
 
 ## When not to use
 
-- for layout purposes — tables are for data, not for arranging page elements
-- when the data has only one column — a list is more appropriate
-- when all rows contain the same value in most columns — reconsider the data structure
+- for layout purposes – tables are for data, not for arranging page elements
+- when the data has only one column – a list is more appropriate
+- when all rows contain the same value in most columns – reconsider the data structure
 
 ## Variants
 
@@ -49,10 +49,10 @@ Cells can span multiple columns (`colSpan`) or rows (`rowSpan`) to represent dat
 
 ## Related components
 
-- [Filter sidebar]({% link _components/filter-sidebar.md %}) — use when filters should be persistently visible in a sidebar alongside the table.
-- [Summary list]({% link _components/summary-list.md %}) — use for structured name–value pairs rather than rows-and-columns data.
+- [Filter sidebar]({% link _components/filter-sidebar.md %}) – use when filters should be persistently visible in a sidebar alongside the table.
+- [Summary list]({% link _components/summary-list.md %}) – use for structured name–value pairs rather than rows-and-columns data.
 
 ## Related patterns
 
-- Search filters — use to connect filter controls to a filterable table.
-- Pagination — use to limit the number of rows displayed at once in large datasets.
+- Search filters – use to connect filter controls to a filterable table.
+- Pagination – use to limit the number of rows displayed at once in large datasets.
