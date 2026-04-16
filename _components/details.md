@@ -1,0 +1,31 @@
+---
+layout: content
+title: 'Details'
+description: 'A disclosure element that reveals supplementary content when a user opens it.'
+component-type: Content
+url: '/'
+demo: true
+---
+
+Use Details to offer a single piece of supplementary content — a definition, short clarification, or contextual help — that not all users will need. When the user opens the element, the content is revealed in place. When closed, it takes up minimal space on the page.
+
+Details renders the native HTML `<details>` and `<summary>` elements with styling applied. An `iconBefore` variant displays an information icon before the label.
+
+## When to use
+
+- you have one piece of supplementary content that some users will find helpful but most will not need to read
+- the content supports a task — for example, a short clarification positioned before a form
+- you want to offer a definition or contextual help without interrupting the page flow
+
+## When not to use
+
+- for content all users need to see — leave it visible
+- when multiple sections need to expand and collapse — use [Accordion]({% link _components/accordion.md %}) instead
+- between form controls — position Details before the form, not inline with individual fields
+- to hide critical instructions, warnings, or error guidance
+- to nest other components inside it
+
+## Related components
+
+- [Accordion]({% link _components/accordion.md %}) — use when multiple sections need to expand and collapse independently.
+- Tabs — use when content is divided into distinct categories that users switch between.
