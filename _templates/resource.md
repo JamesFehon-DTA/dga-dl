@@ -38,7 +38,9 @@ Follow the [Australian Government Style Manual](https://www.stylemanual.gov.au) 
 
 - Use imperative verbs in instructions: 'download the template', 'complete section 3', 'submit your checklist'
 - File names for downloadable resources should be descriptive and consistent with the page title; avoid generic names like 'template_v2_FINAL.docx'
+- Downloadable files that include a date, version number, or policy reference in the file name or contents will appear outdated when the policy changes. Plan for how you will update or replace them, and use the version date field to signal currency to readers.
 - If the resource has a version number or review date, display it clearly — ideally adjacent to the download link
+- If the resource is a checklist, limit it to yes/no confirmations of critical requirements only. Do not add explanatory prose to checklist items. Guidance belongs on the supporting guide page. If an item requires context to answer, it belongs in the guide, not the checklist.
 - Do not use scanned PDFs as the primary resource if accessible alternatives exist; all downloadable content must meet WCAG 2.1 AA accessibility requirements
 
 ## Web UI components
