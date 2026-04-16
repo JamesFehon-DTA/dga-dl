@@ -2,7 +2,7 @@
 layout: content
 title: 'Next step'
 description: 'A call-to-action block that directs users to the next action after completing a page.'
-component-type: Content
+component-type: Navigation
 url: '/'
 ---
 

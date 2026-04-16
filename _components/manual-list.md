@@ -2,7 +2,7 @@
 layout: content
 title: 'Manual list'
 description: 'A curated list of links added and ordered by the editor.'
-component-type: Content
+component-type: Navigation
 url: '/'
 ---
 
