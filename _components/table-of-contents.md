@@ -4,7 +4,6 @@ title: 'Table of contents'
 description: 'In-page navigation generated from the H2 headings on a page.'
 component-type: Navigation
 url: '/'
-demo: false
 ---
 
 Use a table of contents to help users scan the structure of a long page and jump directly to a section. It generates automatically from the H2 headings on the page. Authors enable it per page, not by building the list manually. It renders as an anchored list at the top of the content area, before the first H2.

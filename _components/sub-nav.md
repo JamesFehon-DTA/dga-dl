@@ -4,7 +4,6 @@ title: 'Sub-nav'
 description: 'Secondary navigation for moving between pages within a section.'
 component-type: Navigation
 url: '/'
-demo: false
 ---
 
 Use a sub-nav to help users move between the pages within a section without returning to the top-level navigation. It appears as a persistent list of links alongside the page content.

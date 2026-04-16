@@ -4,8 +4,9 @@ title: 'Callout'
 description: 'A callout draws attention to important or interesting information.'
 component-type: Content
 url: '/'
-demo: true
 ---
+
+{% include demo.html name="callout" %}
 
 Use callout to draw a user’s attention to important snippets of static information.
 

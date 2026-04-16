@@ -4,9 +4,9 @@ title: 'Accordion'
 description: 'An accordion lets users show and hide sections of related content.'
 component-type: Layout
 url: '/'
-demo: true
 ---
 
+{% include demo.html name="accordion" %}
 
 ## When to use this component
 Only use an accordion if there’s evidence it’s helpful for the user to:

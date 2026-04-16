@@ -4,7 +4,6 @@ title: 'Focus management'
 description: 'The focus indicator shows which element has focus. Good focus management helps all users track their position, but it is essential for people with low vision.'
 foundation-type: Accessibility
 url: '/'
-demo: false
 ---
 
 

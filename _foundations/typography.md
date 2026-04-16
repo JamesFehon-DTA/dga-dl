@@ -4,7 +4,6 @@ title: 'Typography'
 description: 'The design system uses system fonts to decrease file size and increase page speed.'
 foundation-type: Visual
 url: '/'
-demo: false
 ---
 
 

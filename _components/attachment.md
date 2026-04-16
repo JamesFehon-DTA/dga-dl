@@ -4,8 +4,9 @@ title: 'Attachment'
 description: 'An attachment block draws attention to files which can be downloaded.'
 component-type: Content
 url: '/'
-demo: true
 ---
+
+{% include demo.html name="attachment" %}
 
 Use callout to draw a user’s attention to important snippets of static information.
 

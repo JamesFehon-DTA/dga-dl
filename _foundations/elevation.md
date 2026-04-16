@@ -4,7 +4,6 @@ title: 'Elevation'
 description: 'A set of predefined tokens that establish a sense of depth and layering — through shadows, glow, and z-index — to communicate hierarchy and interaction state.'
 foundation-type: Visual
 url: '/'
-demo: false
 ---
 
 

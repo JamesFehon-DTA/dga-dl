@@ -4,8 +4,9 @@ title: 'Feature link list'
 description: 'A compact list of navigational links with optional descriptions and directional icons.'
 component-type: Navigation
 url: '/'
-demo: true
 ---
+
+{% include demo.html name="feature-link-list" %}
 
 Use a feature link list to present a group of related navigational links in a sidebar or in-page panel. Each item consists of a link title, an optional short description, and a directional icon that animates on hover. The component is designed to sit alongside primary content, not to replace it.
 

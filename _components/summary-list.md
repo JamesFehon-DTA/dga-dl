@@ -4,8 +4,9 @@ title: 'Summary list'
 description: 'A structured list of name–value pairs for displaying record summaries and metadata.'
 component-type: Content
 url: '/'
-demo: true
 ---
+
+{% include demo.html name="summary-list" %}
 
 Use a summary list to display structured information as labelled name–value pairs. Typical uses include review and confirm screens before form submission, metadata panels on record or profile pages, and read-only summaries of collected data.
 

@@ -4,7 +4,6 @@ title: 'Filter sidebar'
 description: 'A persistent sidebar filter panel for search result and catalogue pages.'
 component-type: Navigation
 url: '/'
-demo: false
 ---
 
 Use a filter sidebar on search result and catalogue pages where users need to narrow a large set of results by multiple criteria. Filters are always visible in the sidebar. No trigger button is needed. Because they are always visible, applied filter tags are not required alongside them.

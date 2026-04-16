@@ -4,7 +4,6 @@ title: 'Progress indicator'
 description: 'Displays a user''s position within a multi-step form.'
 component-type: Forms
 url: '/'
-demo: false
 ---
 
 Use a progress indicator in multi-step forms to show users how many steps exist, which step they are on, and which steps they have already completed. It gives users a sense of how much effort the form requires and reduces abandonment by making progress visible.

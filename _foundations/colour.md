@@ -4,7 +4,6 @@ title: 'Colour tokens'
 description: 'How to use colour to design consistent, purposeful, and accessible products.'
 foundation-type: Visual
 url: '/'
-demo: false
 ---
 
 

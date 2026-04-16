@@ -4,7 +4,6 @@ title: 'Table'
 description: 'A structured display of data in rows and columns.'
 component-type: Data
 url: '/'
-demo: false
 ---
 
 Use tables to present data that users need to scan, compare, or look up. Tables work well when information has a clear row-and-column structure and relationships between cells matter.

@@ -4,8 +4,9 @@ title: 'Details'
 description: 'A disclosure element that reveals supplementary content when a user opens it.'
 component-type: Content
 url: '/'
-demo: true
 ---
+
+{% include demo.html name="details" %}
 
 Use Details to offer a single piece of supplementary content that not all users will need: a definition, short clarification, or contextual help. When the user opens the element, the content is revealed in place. When closed, it takes up minimal space on the page.
 

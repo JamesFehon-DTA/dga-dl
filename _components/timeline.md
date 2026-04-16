@@ -4,7 +4,6 @@ title: 'Timeline'
 description: 'A timeline walks users through a process by presenting each stage as a distinct, visually connected step.'
 component-type: Content
 url: '/'
-demo: false
 ---
 
 Use a timeline to explain how a process works, such as how an agency submits a digital investment plan, how a program cohort moves from application to completion, or how a policy is assessed for compliance. The component presents each stage as a named step with supporting content, connected by a visual path that helps users understand where a step sits in the overall process.
