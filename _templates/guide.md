@@ -45,6 +45,8 @@ Keep each section focused. If a section covers more than one topic, consider whe
 
 Guides should not include the full text of the policy they support. Link to the policy instead, and use the guide to provide interpretation, worked examples, and procedural steps.
 
+When publishing standards or criteria as a set of pages, do not organise the navigation as a linear sequence (Criterion 1 → Criterion 2 → Criterion 3). This is a page layout decision, not a reflection of the standard's logical structure. Readers often need to access one specific criterion without working through the full set. Use a link list or card grid so they can navigate directly to what they need.
+
 {% raw %}
 <svg viewBox="0 0 800 450" xmlns="http://www.w3.org">
   <!-- Background -->
@@ -154,7 +156,9 @@ Use the following UI components when building guide pages in the CMS.
 
 **In-page navigation** — Used on long and medium guides. This component generates an anchor-linked table of contents from the H2 headings on the page. Position it directly below the page header, before the first H2. Use with short guides where it helps the user - for example if your short guide has 4 or 5 H2s.
 
-**Text body** — The main content area. Use the full range of formatting options: headings, lists, tables and inline links. Use sub-headings and basic formatting to provide users with important information to reduce friction and keep flow for the reader. Users can miss important inforamtion when it is presented in UI block elements. 
+**Text body** — The main content area. Use the full range of formatting options: headings, lists, tables and inline links. Use sub-headings and basic formatting to provide users with important information to reduce friction and keep flow for the reader. Users can miss important information when it is presented in UI block elements.
+
+**Accordion** — Accordions hide content by default. Use them only for optional detail that readers can choose to skip, not for core guidance, standards criteria, or content readers need to cross-reference. Never nest accordions. If a page contains more than three accordions, restructure using H2/H3 headings instead, or split into sub-pages. Limit to five to seven items.
 
 **Related content cards** — Add two to four cards at the bottom of the page linking to the relevant policy, related guides, and any associated forms or templates.
 

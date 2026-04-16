@@ -18,6 +18,8 @@ Use a section landing page when:
 
 Do not add detailed policy, procedural, or guidance text to a section landing page. That content belongs on the appropriate guide, report, or resource page within the section.
 
+Always include a section overview. A missing or vague intro reduces search visibility and makes it harder for AI-assisted tools to route users to the right content. Two to three clear sentences are sufficient.
+
 ## Structure
 
 Section landing pages follow a consistent pattern across the site:
@@ -26,6 +28,10 @@ Section landing pages follow a consistent pattern across the site:
 2. **Primary navigation cards** — a card grid linking to the main sub-sections or content areas; each card has a title, a one-sentence description, and a link
 3. **Featured content** — one to three highlighted items (a recent report, a new guide, or a key program); surfaced editorially and updated as content changes
 4. **News or updates** — optional; a short list of recent changes or announcements relevant to the section
+
+Do not rely on the secondary navigation as the only path to key sub-pages. Each major sub-section must be reachable from a card or an explicit in-text link on the landing page.
+
+Every page in a section should be reachable from at least one navigation point within that section, whether that is a card, a side nav link, or an in-text reference. If a page can only be found through site search or a direct URL, it has no intentional place in the user journey. Link to it in context or retire it.
 
 Keep the section overview free of jargon. If a reader has no prior knowledge of the section's domain, the overview should still make sense to them.
 
@@ -45,6 +51,10 @@ Use the following UI components when building section landing pages in the CMS.
 **Page header (hero)** — Use the full-width hero with the section title and a two-to-three sentence description. An optional background image or colour treatment may be applied, consistent with the site's design system and approved brand guidelines.
 
 **Card grid** — The primary navigation component. Use three- or four-column card layouts. Each card must have a title, a short description, and a destination link. If there are more than eight cards, break them into sub-groups using an H2 heading — do not use a single oversized grid.
+
+Chapter navigation is appropriate when readers are expected to move through content in order and each step builds on the previous. Use it for step-by-step compliance processes, onboarding guides, or numbered frameworks where sequence carries meaning.
+
+For content where readers know what they need and want to navigate directly to it, use card grids or link lists instead. Chapter buttons signal that there is a right order to follow. When there is not, they create unnecessary friction.
 
 **Featured card (hero card)** — Use for the single most important item in the section — typically the most recent major report, a newly published policy, or an active program with an upcoming deadline. One per page.
 
