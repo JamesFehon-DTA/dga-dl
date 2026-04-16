@@ -1,43 +1,46 @@
 ---
 layout: content
 title: 'Contact details'
-description: "Give users contact information within your service."
+description: 'Presenting contact information so users can reach the right team through the right channel.'
 url: '/'
 ---
 
-Use this pattern whenever you need to help users contact a team or an agency.
+Use this pattern whenever you need to help users contact a team or agency. Choose the right format based on how prominent the contact information needs to be relative to the surrounding content.
 
+## Choosing a format
 
-Make sure any phone number is accessible and linked `(tel:+61-2-XXXX-XXXX)`. Use the format establied for [Telephone numbers in the Style Manual
-](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/numbers-and-measurements/telephone-numbers).
+**Inline body text** — the default. Use when contact information is a natural part of the page flow and does not need visual separation. Write the channel and detail in a sentence.
 
-Don’t use bullet points or a colon after ‘Call’ or ‘Email’. 
-Don’t use a full stop after the email address. 
+**Callout** — use when contact information needs to stand out from surrounding content — for example, at the end of a page or within a form. Use the contact information variant of the [Callout]({% link _components/callout.md %}) component.
 
-Order contact channels based on what research shows your users need, and what your service or department can best support.
+**Details component** — use when contact information is less important than the main content and should be hidden by default. Wrap it in the [Details]({% link _components/details.md %}) component only when there are three or more lines of contact detail. Do not use it to hide a single phone number or email address.
 
-Show contact channels in the same order throughout your service. This helps users to find what they need more easily.
+## Channel ordering
 
+Order contact channels based on what your users most commonly need and what your service can best support. Show channels in the same order throughout your service — consistency helps users find what they need.
 
-## Contact information within page text
-Use a heading written for your users.
+A common order is:
 
-> ### Contact us
+1. Online (form, portal, or chat)
+2. Email
+3. Phone
+4. Postal address
 
-OR
+Do not include a channel just because it exists. Only list channels that are actively monitored and where users will receive a timely response.
 
-> ### Get help with your registration
-> For any questions about the program, email example@example.com
+## Formatting rules
 
-Say ‘Get help with your registration’ as the heading. > Not, ‘Need help?’ or ‘For more help’.
+Make every phone number accessible using a `tel:` URI so it is tappable on mobile devices. Follow the format established in the [Style Manual for telephone numbers](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/numbers-and-measurements/telephone-numbers).
 
-## Contact information callout
+For example, write the link as: `<a href="tel:+61299999999">02 9999 9999</a>`
 
-Use the Contact information callout component to display contact information when you want to differentiate it from the content that surrounds it.
+Do not use bullet points or a colon after 'Call' or 'Email'.
 
-## Expanding contact information
-If contact information is less important than other content on a page, you can enclose contact information inside the Details component to avoid distracting users.
+Do not use a full stop after an email address.
 
-For example, if you need to provide contact information at the bottom of a form page for users who need help completing the form.
+Use a heading written for your users, not an internal label. If the contact section relates to a specific task, write 'Get help with your registration' not 'Contact us'.
 
-Only do this when there’s a lot of contact information to display. When there are only 1 or 2 lines, include the contact information within the body of the page.
+## Related components
+
+- [Callout]({% link _components/callout.md %}) — use the contact information variant for visually distinguished contact blocks.
+- [Details]({% link _components/details.md %}) — use to hide secondary contact information that most users do not need.
