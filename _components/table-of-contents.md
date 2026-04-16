@@ -24,3 +24,7 @@ Use a table of contents to help users scan the structure of a long page and jump
 
 - [Sub-nav]({% link _components/sub-nav.md %}) – use for navigation between pages in a section, not within a single page.
 - [Accordion]({% link _components/accordion.md %}) – use when optional content should be hidden by default rather than navigated to.
+
+## Related patterns
+
+- [In-page navigation]({% link _patterns/in-page-navigation.md %}) – guidance on when and how to use in-page navigation across different page types.

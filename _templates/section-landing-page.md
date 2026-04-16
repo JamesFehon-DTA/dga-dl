@@ -50,6 +50,8 @@ Use the following UI components when building section landing pages in the CMS.
 
 **Card grid** — The primary navigation component. Use three- or four-column card layouts. Each card must have a title, a short description, and a destination link. If there are more than eight cards, break them into sub-groups using an H2 heading — do not use a single oversized grid.
 
+**Section navigation** — Add a sub-nav strip or side navigation if this section contains multiple pages that users will navigate between. See the [section navigation pattern]({% link _patterns/section-navigation.md %}) to choose between a sub-nav strip (for flat sections with five or fewer pages) and side navigation (for deeper hierarchies).
+
 Chapter navigation is appropriate when readers are expected to move through content in order and each step builds on the previous. Use it for step-by-step compliance processes, onboarding guides, or numbered frameworks where sequence carries meaning.
 
 For content where readers know what they need and want to navigate directly to it, use card grids or link lists instead. Chapter buttons signal that there is a right order to follow. When there is not, they create unnecessary friction.

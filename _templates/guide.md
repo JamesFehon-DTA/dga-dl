@@ -154,7 +154,7 @@ Use the following UI components when building guide pages in the CMS.
 
 **Page header (hero)** — Use a simple title-and-description header without an image. The title should match the H1 and the navigation label. Keep the description under 25 words.
 
-**In-page navigation** — Used on long and medium guides. This component generates an anchor-linked table of contents from the H2 headings on the page. Position it directly below the page header, before the first H2. Use with short guides where it helps the user - for example if your short guide has 4 or 5 H2s.
+**In-page navigation** — Used on long and medium guides. This component generates an anchor-linked table of contents from the H2 headings on the page. Position it directly below the page header, before the first H2. Use with short guides where it helps the user - for example if your short guide has 4 or 5 H2s. See the [in-page navigation pattern]({% link _patterns/in-page-navigation.md %}) for full guidance.
 
 **Text body** — The main content area. Use the full range of formatting options: headings, lists, tables and inline links. Use sub-headings and basic formatting to provide users with important information to reduce friction and keep flow for the reader. Users can miss important information when it is presented in UI block elements.
 

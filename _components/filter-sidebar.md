@@ -29,4 +29,4 @@ The correct HTML order on a page is: hero banner → filter sidebar (left) → c
 
 ## Related patterns
 
-- Search filters – use this pattern when filters should be toggled visible rather than always shown.
+- [Search filters]({% link _patterns/search-filters.md %}) – use this pattern when filters should be toggled visible rather than always shown.
