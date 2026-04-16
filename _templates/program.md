@@ -1,13 +1,13 @@
 ---
 layout: content
 title: 'Program'
-description: 'A program page describes a coordinated, ongoing initiative — typically a training program, capability-building activity, or cross-agency collaboration managed or facilitated by the DTA.'
+description: 'A program page describes a coordinated, ongoing initiative managed or facilitated by the DTA, such as a training program, capability-building activity, or cross-agency collaboration.'
 url: '/'
 ---
 
-A program page describes a coordinated, ongoing initiative — typically a training program, capability-building activity, or cross-agency collaboration managed or facilitated by the DTA. Program pages help agency staff understand what a program offers, who it is for, and how to participate.
+A program page describes a coordinated, ongoing initiative managed or facilitated by the DTA, such as a training program, capability-building activity, or cross-agency collaboration. Program pages help agency staff understand what a program offers, who it is for, and how to participate.
 
-Program pages are distinct from initiative or report pages in that they have a recurring or enrolment-based structure. They speak directly to a prospective participant rather than a general audience, and they are action-oriented: the reader should leave knowing what to do next.
+Unlike initiative or report pages, program pages have a recurring or enrolment-based structure. They speak directly to a prospective participant rather than a general audience and are action-oriented: the reader should leave knowing what to do next.
 
 Use a program page when:
 - the initiative has structured participation (enrolment, nomination, cohort intake, or scheduled delivery)

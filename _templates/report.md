@@ -10,7 +10,7 @@ url: '/'
 
 A report presents the findings, analysis, or evaluation of a specific inquiry, project, program, or policy area. Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
 
-Reports differ from guides in that they describe what was found, not what to do. They are evidence-first documents, and their authority derives from the rigour of their methodology and the credibility of their source data.
+Unlike guides, reports describe what was found rather than what to do. They are evidence-first documents whose authority comes from the rigour of their methodology and the quality of their source data.
 
 Use a report when:
 - the content presents the results of an evaluation, review, trial, or research process

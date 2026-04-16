@@ -8,9 +8,9 @@ url: '/'
 {::options parse_block_html="true" /}
 
 
-A resource page hosts a discrete, reusable reference item that users access to complete a specific task. Resources are practical by nature — factsheets, tools, templates, checklists, timelines, and downloadable documents that support compliance with policy, capability uplift, or day-to-day operations.
+A resource page hosts a discrete, reusable item that users access to complete a specific task. Resources take practical forms: factsheets, tools, templates, checklists, timelines, and downloadable documents that support policy compliance, capability uplift, or day-to-day operations.
 
-Resource pages are the most varied content type on digital.gov.au. They range from a single downloadable file to an interactive web-based tool. What they have in common is that they are task-driven: the user arrives knowing what they need, and the page should deliver it with minimal friction.
+Resource pages are the most varied content type on digital.gov.au, ranging from a single downloadable file to an interactive web-based tool. All are task-driven: the user arrives knowing what they need, and the page should deliver it with minimal friction.
 
 Use a resource page when:
 - the content is a discrete, self-contained item rather than a narrative explanation
