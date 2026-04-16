@@ -1,7 +1,7 @@
 ---
 layout: main
 title: Foundations
-lead: Foundations are elements and utilities used across the design system to ensure consistency.
+lead: Foundations are the core design and accessibility elements applied consistently across the digital.gov.au design system.
 
 
 

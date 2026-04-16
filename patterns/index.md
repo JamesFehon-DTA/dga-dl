@@ -1,7 +1,7 @@
 ---
 layout: main
 title: Patterns
-lead: Patterns are reusable compositions of components that solve design problems and help ensure consistency across the service.
+lead: Patterns are reusable combinations of components that address common design problems and promote consistency across digital.gov.au.
 
 
 

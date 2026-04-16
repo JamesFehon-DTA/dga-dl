@@ -1,7 +1,7 @@
 ---
 layout: main
 title: Components
-lead: Discover all the digital.gov.au Design System components here including visual examples.
+lead: Components are the building blocks of the digital.gov.au design system. Each entry covers when and how to use the component, with visual examples.
 # sidebar-top-left: ''
 
 ---

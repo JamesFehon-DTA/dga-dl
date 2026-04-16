@@ -1,7 +1,7 @@
 ---
 layout: main
 title: Plan
-lead: Browse or search for topics and resources relevant to your digital solution.
+lead: Site-wide content authoring standards for digital.gov.au, covering page naming, structure, and content conventions.
 main-container-style: 'ct-basic-content'
 ---
 
