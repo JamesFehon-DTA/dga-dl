@@ -36,6 +36,23 @@ Always accompany a feature link list with a clear heading. Without a heading, th
 - keep descriptions to three lines of copy or fewer; longer text undermines the component's purpose as a quick-scan navigation aid
 - if most links have descriptions, add one to all – a mix of described and bare links looks unfinished and is harder to scan
 
+
+## Without descriptions
+
+Omit descriptions when links are self-explanatory and supporting text would add no new information. 
+
+{% include demo.html name="feature-link-list--no-description" %}
+
+If most links have descriptions, add one to all – a mix of described and bare links looks unfinished and is harder to scan.
+
+## Icon-leading variant
+
+The icon-leading variant places a decorative icon at the start of each item and removes the trailing arrow. Use this variant when items represent actions the user initiates (such as suggested prompts) rather than destinations they navigate to.
+
+{% include demo.html name="feature-link-list--icon-leading" %}
+
+Descriptions are not typically used in this variant; the link text should be self-explanatory. Items in this variant do not open in a new tab and do not use the external-link icon.
+
 ## Accessibility
 
 Each link must have clear, concise, and descriptive link text. Links that share the same label (for example, multiple 'Read more' links) are inaccessible to screen reader users who navigate by link text. Each link should be distinguishable from the others without relying on surrounding context.
