@@ -1,20 +1,25 @@
 ---
 layout: content
 title: 'Program'
-description: 'A program page describes a coordinated, ongoing initiative managed or facilitated by the DTA, such as a training program, capability-building activity, or cross-agency collaboration.'
+description: 'A program page describes an ongoing or recurring initiative managed or facilitated by the DTA, such as a training program, capability-building activity, or cross-agency collaboration.'
 url: '/'
 ---
 
-A program page describes a coordinated, ongoing initiative managed or facilitated by the DTA, such as a training program, capability-building activity, or cross-agency collaboration. Program pages help agency staff understand what a program offers, who it is for, and how to participate.
+A program page describes ongoing or recurring digital government programs, initiatives, frameworks or capability‑building offerings. They describe things that exist over time and typically act as an entry point to supporting guides, resources and reports.
 
-Unlike initiative or report pages, program pages have a recurring or enrolment-based structure. They speak directly to a prospective participant rather than a general audience and are action-oriented: the reader should leave knowing what to do next.
+Program pages can be used to help people understand what a program offers, who it is for, and how to engage with it. They are written for people who will actively use, adopt or participate in the program, and are action‑oriented: the reader should leave knowing what to do next.
+
+Program pages can be used for different types of programs:
+- delivery programs with structured participation (such as enrolment, cohorts or scheduled delivery)
+- capability, platform or framework programs that are used or adopted across government.
 
 Use a program page when:
-- the initiative has structured participation (enrolment, nomination, cohort intake, or scheduled delivery)
-- there is a defined audience who can actively join or apply
-- the program runs over time, with multiple deliveries or an ongoing offer
+- the initiative is ongoing or recurring, rather than a one‑off publication or event
+- there is a defined audience who will actively use, adopt, engage with or participate in the program
+- the program has supporting guidance, resources or reports beneath it.
 
-Do not use a program page for one-off events, published reports, or policy content. A training module within a broader program may sit as a sub-page rather than a separate program page.
+Do not use a program page for one‑off events, published reports, or policy content. Training or learning modules within a broader program should usually be published as sub‑pages rather than as standalone program pages.
+
 
 ## Structure
 

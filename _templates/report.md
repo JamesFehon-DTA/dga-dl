@@ -8,7 +8,9 @@ url: '/'
 {::options parse_block_html="true" /}
 
 
-A report presents the findings, analysis, or evaluation of a specific inquiry, project, program, or policy area. Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
+Reports are formal, structured documents which present findings, evaluation, analysis, oversight or whole‑of‑government performance. Reports may be published as full or summary versions. They sometimes take the form of a plan or strategy document.
+
+Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
 
 Unlike guides, reports describe what was found rather than what to do. They are evidence-first documents whose authority comes from the rigour of their methodology and the quality of their source data.
 
