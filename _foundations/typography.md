@@ -15,7 +15,7 @@ Government services are provided for everyone, regardless of their situation or 
 
 ## Font family tokens
 | Token | Value | Description |
-| --- | --- | --- |
+|---|---|---|
 | body | -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' | Used as the default font for all text |
 | monospace | 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace | Used for code and other monospaced text |
 
