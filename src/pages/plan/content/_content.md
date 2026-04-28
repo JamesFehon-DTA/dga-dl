@@ -1,8 +1,6 @@
 ---
-layout: main
 title: Content standards
 lead: Site-wide authoring standards for URLs, folder structure, and information architecture on digital.gov.au.
-main-container-style: 'ct-basic-content'
 ---
 
 These standards apply across all content types on digital.gov.au. They cover the structural and governance decisions that sit above any individual page: how content is named, where it lives, and how users find it.

@@ -1,11 +1,9 @@
 ---
-layout: main
 title: Plan
 lead: Site-wide content authoring standards for digital.gov.au, covering page naming, structure, and content conventions.
-main-container-style: 'ct-basic-content'
 ---
 
-Before building pages, review the core design and accessibility principles that underpin the design system in [Foundations]({{ '/foundations/' | relative_url }}).
+Before building pages, review the core design and accessibility principles that underpin the design system in [Foundations](/foundations/).
 
 Naming pages
 
