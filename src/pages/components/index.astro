@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '../../layouts/Main.astro';
+import ExploreCards from '../../components/ExploreCards.astro';
+
+const entries = await getCollection('components');
+const cards = entries.map((entry) => ({
+  url: `/components/${entry.id}/`,
+  title: entry.data.title,
+  description: entry.data.description,
+  'component-type': entry.data['component-type'],
+}));
+---
+
+<Main
+  title="Components"
+  lead="Components are the building blocks of the digital.gov.au design system. Each entry covers when and how to use the component, with visual examples."
+>
+  <p>
+    These components are built on shared design and accessibility principles covered in
+    <a href="/foundations/">Foundations</a>.
+  </p>
+  <ExploreCards cards={cards} />
+</Main>

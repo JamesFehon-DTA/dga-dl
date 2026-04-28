@@ -1,0 +1,21 @@
+{
+  "name": "dga-dl",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "npm run build && surge ./dist publisher-digital-govau.surge.sh"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.4",
+    "astro": "^6.0.0"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
+  }
+}

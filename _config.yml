@@ -49,6 +49,16 @@ collections:
 
 exclude:
   - .claude/
+  # Astro files (ignored by Jekyll on the astro-migration branch)
+  - src/
+  - public/
+  - dist/
+  - node_modules/
+  - .astro/
+  - astro.config.mjs
+  - tsconfig.json
+  - package.json
+  - package-lock.json
 
 # Build settings
 # theme: minima

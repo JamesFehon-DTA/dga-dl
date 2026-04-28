@@ -1,0 +1,42 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Content from '../layouts/Content.astro';
+import Demo from '../components/Demo.astro';
+
+type AnyEntry =
+  | CollectionEntry<'foundations'>
+  | CollectionEntry<'components'>
+  | CollectionEntry<'components-advanced'>
+  | CollectionEntry<'patterns'>
+  | CollectionEntry<'templates'>;
+
+export async function getStaticPaths() {
+  const collections = [
+    'foundations',
+    'components',
+    'components-advanced',
+    'patterns',
+    'templates',
+  ] as const;
+
+  const entries = (
+    await Promise.all(collections.map((c) => getCollection(c)))
+  ).flat();
+
+  return entries.map((entry) => ({
+    params: { slug: `${entry.collection}/${entry.id}` },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: AnyEntry;
+}
+
+const { entry } = Astro.props;
+const { Content: EntryContent } = await render(entry);
+---
+
+<Content title={entry.data.title} description={entry.data.description}>
+  <EntryContent components={{ Demo }} />
+</Content>

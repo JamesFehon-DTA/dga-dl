@@ -8,3 +8,13 @@ vendor/
 .DS_Store
 Gemfile
 Gemfile.lock
+CLAUDE.md
+CNAME
+.claude/launch.json
+
+# Astro
+node_modules/
+dist/
+.astro/
+.env
+.env.production

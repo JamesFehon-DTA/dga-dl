@@ -1,0 +1,33 @@
+---
+// Dev-only feature: this page is intentionally not linked from the public UI.
+// Pagefind's binary chunks (.pf_index, .pf_meta, .pf_fragment, .wasm.pagefind)
+// return 410 on Surge due to its file-extension allowlist, so search only works
+// locally via `npm run build && npm run preview`.
+//
+// When the site moves to GitHub Pages (or another host that serves the binary
+// extensions), wire a "Search" link into MainNav.astro and this page starts
+// working in production with no other changes.
+import Main from '../layouts/Main.astro';
+---
+
+<Main title="Search" lead="Search the digital.gov.au design library.">
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" slot="head" />
+  <div id="search" class="ct-pagefind"></div>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline define:vars={{}}>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof PagefindUI === 'undefined') return;
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+      });
+    });
+  </script>
+  <style is:inline>
+    .ct-pagefind {
+      max-width: 720px;
+      margin-top: 1.5rem;
+    }
+  </style>
+</Main>
