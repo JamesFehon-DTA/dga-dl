@@ -1,0 +1,42 @@
+---
+const demos = import.meta.glob('../assets/demos/*.html', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const path = `../assets/demos/${name}.html`;
+const demoContent = demos[path];
+
+if (!demoContent) {
+  throw new Error(
+    `Demo "${name}" not found. Expected file at src/assets/demos/${name}.html. ` +
+      `Available demos: ${Object.keys(demos)
+        .map((k) => k.replace('../assets/demos/', '').replace('.html', ''))
+        .join(', ')}`,
+  );
+}
+
+const resizeScript =
+  '<script>new ResizeObserver(function(){window.frameElement.style.height=document.body.scrollHeight+\'px\';}).observe(document.body);</script>';
+
+const srcdoc =
+  '<!DOCTYPE html><html><head>' +
+  '<link rel="stylesheet" href="/civictheme.css">' +
+  '<link rel="stylesheet" href="/civictheme.variables.css">' +
+  '<style>body { margin: 0; }</style>' +
+  '</head><body class="ct-theme-light">' +
+  demoContent +
+  '<script src="/civictheme.base.js"></script>' +
+  resizeScript +
+  '</body></html>';
+---
+
+<div class="ct-demo" style="border: 1px solid var(--ct-color-light-border-light); border-radius: 4px; overflow: hidden;">
+  <iframe srcdoc={srcdoc} style="width: 100%; display: block; border: none;" title={`${name} demo`} scrolling="no"></iframe>
+</div>

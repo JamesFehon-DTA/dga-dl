@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '../../layouts/Main.astro';
+import ExploreCards from '../../components/ExploreCards.astro';
+
+const entries = await getCollection('patterns');
+const cards = entries.map((entry) => ({
+  url: `/patterns/${entry.id}/`,
+  title: entry.data.title,
+  description: entry.data.description,
+}));
+---
+
+<Main
+  title="Patterns"
+  lead="Patterns are reusable combinations of components that address common design problems and promote consistency across digital.gov.au."
+>
+  <ExploreCards cards={cards} />
+</Main>

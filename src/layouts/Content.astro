@@ -1,0 +1,59 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lead?: string;
+}
+
+const { title, description, lead } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <Fragment slot="head">
+    <style>
+      .ct-demo {
+        margin-bottom: 1.5rem;
+      }
+      @media (min-width: 992px) {
+        .ct-demo {
+          margin-bottom: 3rem;
+        }
+      }
+    </style>
+  </Fragment>
+
+  <main
+    class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-right ct-vertical-spacing--top"
+    role="main"
+  >
+    <div class="ct-layout__inner container" data-masonry="true">
+      <section class="ct-layout__main">
+        <h1>{title}</h1>
+        {lead && <p class="ct-text-large">{lead}</p>}
+        {description && <p class="ct-text-large">{description}</p>}
+        <div class="ct-theme-light ct-basic-content ct-vertical-spacing--top">
+          <div class="container">
+            <div class="row">
+              <div class="col-xxs-12">
+                <slot />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="ct-layout__sidebar_top_left">
+        <slot name="sidebar-top-left" />
+      </aside>
+
+      <aside class="ct-layout__sidebar_bottom_left">
+        <slot name="sidebar-bottom-left" />
+      </aside>
+    </div>
+  </main>
+  <script>
+    import '../scripts/colour-swatches';
+  </script>
+</BaseLayout>

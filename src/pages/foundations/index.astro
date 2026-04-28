@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '../../layouts/Main.astro';
+import ExploreCards from '../../components/ExploreCards.astro';
+
+const entries = await getCollection('foundations');
+const cards = entries.map((entry) => ({
+  url: `/foundations/${entry.id}/`,
+  title: entry.data.title,
+  description: entry.data.description,
+}));
+---
+
+<Main
+  title="Foundations"
+  lead="Foundations are the core design and accessibility elements applied consistently across the digital.gov.au design system."
+>
+  <ExploreCards cards={cards} />
+</Main>

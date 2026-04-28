@@ -1,0 +1,24 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <main
+    class="ct-layout ct-layout--no-top-left ct-layout--no-top-right ct-layout--no-bottom-left ct-layout--no-bottom-right"
+    role="main"
+  >
+    <div class="ct-layout__inner container-fluid" data-masonry="true">
+      <section class="ct-layout__main">
+        <div>
+          <slot />
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
