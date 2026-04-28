@@ -1,5 +1,8 @@
 ---
 import { mainnav } from '../data/navs';
+
+const baseTrim = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (url: string) => (url.startsWith('/') ? `${baseTrim}${url}` : url);
 ---
 
 <div class="ct-basic-content ct-theme-light">
@@ -24,7 +27,7 @@ import { mainnav } from '../data/navs';
                 <div class="ct-navigation-card__content">
                   <div class="ct-navigation-card__title">
                     <h2 class="ct-navigation-card__title">
-                      <a class="ct-navigation-card__title-link" href={section.url}>
+                      <a class="ct-navigation-card__title-link" href={withBase(section.url)}>
                         {section.title}
                       </a>
                     </h2>

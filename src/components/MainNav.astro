@@ -1,5 +1,8 @@
 ---
 import { mainnav, crosssitenav } from '../data/navs';
+
+const baseTrim = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (url: string) => (url.startsWith('/') ? `${baseTrim}${url}` : url);
 ---
 
 <button
@@ -38,7 +41,7 @@ import { mainnav, crosssitenav } from '../data/navs';
       <ul class="ct-menu ct-menu--level-0 ct-theme-light ct-mobile-navigation__top-menu" data-component-name="ct-menu">
         {mainnav.filter((item) => !item.nav_hidden).map((item) => (
           <li class="ct-menu__item ct-menu__item--level-0">
-            <a class="ct-link ct-theme-light ct-menu__item__link" href={item.url} title={item.title}>
+            <a class="ct-link ct-theme-light ct-menu__item__link" href={withBase(item.url)} title={item.title}>
               {item.title}
             </a>
           </li>
@@ -51,7 +54,7 @@ import { mainnav, crosssitenav } from '../data/navs';
         <ul class="ct-menu ct-menu--level-0 ct-theme-light ct-mobile-navigation__bottom-menu" data-component-name="ct-menu">
           {crosssitenav.map((site) => (
             <li class="ct-menu__item ct-menu__item--level-0">
-              <a class="ct-link ct-theme-light ct-menu__item__link" href={site.url} title={site.title}>
+              <a class="ct-link ct-theme-light ct-menu__item__link" href={withBase(site.url)} title={site.title}>
                 {site.title}
               </a>
             </li>
@@ -67,7 +70,7 @@ import { mainnav, crosssitenav } from '../data/navs';
     <ul class="ct-menu ct-menu--level-0 ct-theme-light ct-navigation__menu" data-component-name="ct-menu">
       {mainnav.filter((item) => !item.nav_hidden).map((item) => (
         <li class="ct-menu__item ct-menu__item--level-0">
-          <a class="ct-link ct-theme-light ct-menu__item__link" href={item.url} title={item.title}>
+          <a class="ct-link ct-theme-light ct-menu__item__link" href={withBase(item.url)} title={item.title}>
             <span class="ct-text-icon__text">{item.title}</span>
           </a>
         </li>

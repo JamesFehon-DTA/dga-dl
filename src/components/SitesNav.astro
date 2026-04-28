@@ -1,5 +1,8 @@
 ---
 import { crosssitenav } from '../data/navs';
+
+const baseTrim = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (url: string) => (url.startsWith('/') ? `${baseTrim}${url}` : url);
 ---
 
 {crosssitenav.length > 0 && (
@@ -14,7 +17,7 @@ import { crosssitenav } from '../data/navs';
                   'ct-link ct-theme-light ct-menu__item__link',
                   item.external && 'ct-link--external',
                 ]}
-                href={item.url}
+                href={withBase(item.url)}
                 title={item.title}
                 target={item.external ? '_blank' : undefined}
                 aria-label={item.external ? 'Opens in a new tab' : undefined}

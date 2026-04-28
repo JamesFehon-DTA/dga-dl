@@ -9,24 +9,25 @@ interface Props {
 
 const { title } = Astro.props;
 const showHeaderTop = crosssitenav.length > 0;
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortlink" href="/" />
-    <link rel="canonical" href="/" />
+    <link rel="shortlink" href={base} />
+    <link rel="canonical" href={base} />
     <meta name="MobileOptimized" content="width" />
     <meta name="HandheldFriendly" content="true" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href={`${base}assets/favicon-96x96.png`} sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href={`${base}assets/favicon.svg`} />
+    <link rel="shortcut icon" href={`${base}assets/favicon.ico`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}assets/apple-touch-icon.png`} />
     <title>{title}</title>
-    <link rel="stylesheet" media="all" href="/civictheme.css" />
-    <link rel="stylesheet" media="all" href="/civictheme.variables.css" />
+    <link rel="stylesheet" media="all" href={`${base}civictheme.css`} />
+    <link rel="stylesheet" media="all" href={`${base}civictheme.variables.css`} />
     <slot name="head" />
   </head>
   <body class="path-frontpage page-node-type-civictheme-page">
@@ -84,7 +85,7 @@ const showHeaderTop = crosssitenav.length > 0;
                       data-drupal-settingstray="editable"
                       class="block block-system block-system-branding-block"
                     >
-                      <a class="ct-logo ct-theme-light ct-logo--inline settings-tray-editable" href="/">
+                      <a class="ct-logo ct-theme-light ct-logo--inline settings-tray-editable" href={base}>
                         <img
                           class="ct-image ct-theme-light ct-logo__image ct-logo__image--desktop hide-xxs show-l"
                           src="https://www.digital.gov.au/sites/default/files/Australian-Government-Coat-of-Arms_1.png"
@@ -100,7 +101,7 @@ const showHeaderTop = crosssitenav.length > 0;
                         <span class="ct-logo__stripe hide-xxs show-l"></span>
                         <img
                           class="ct-image ct-theme-light ct-logo__image ct-logo__image--desktop hide-xxs show-l"
-                          src="/assets/digital.gov.au-docs.svg"
+                          src={`${base}assets/digital.gov.au-docs.svg`}
                           alt="digital.gov.au logo - Home"
                           data-once="imageAltCheck"
                         />
@@ -161,7 +162,7 @@ const showHeaderTop = crosssitenav.length > 0;
       </div>
     </div>
 
-    <script src="/civictheme.base.js" is:inline></script>
+    <script src={`${base}civictheme.base.js`} is:inline></script>
     <slot name="body-end" />
   </body>
 </html>

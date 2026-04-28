@@ -18,3 +18,5 @@ dist/
 .astro/
 .env
 .env.production
+CNAME
+.claude/launch.json

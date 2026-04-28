@@ -8,12 +8,14 @@
 // extensions), wire a "Search" link into MainNav.astro and this page starts
 // working in production with no other changes.
 import Main from '../layouts/Main.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Main title="Search" lead="Search the digital.gov.au design library.">
-  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" slot="head" />
+  <link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} slot="head" />
   <div id="search" class="ct-pagefind"></div>
-  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline src={`${base}pagefind/pagefind-ui.js`}></script>
   <script is:inline define:vars={{}}>
     window.addEventListener('DOMContentLoaded', () => {
       if (typeof PagefindUI === 'undefined') return;

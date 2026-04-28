@@ -5,7 +5,7 @@ import ExploreCards from '../../components/ExploreCards.astro';
 
 const entries = await getCollection('foundations');
 const cards = entries.map((entry) => ({
-  url: `/foundations/${entry.id}/`,
+  url: `${import.meta.env.BASE_URL}foundations/${entry.id}/`,
   title: entry.data.title,
   description: entry.data.description,
 }));
