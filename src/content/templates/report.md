@@ -5,10 +5,7 @@ description: 'A report presents the findings, analysis, or evaluation of a speci
 url: '/'
 ---
 
-{::options parse_block_html="true" /}
-
-
-Reports are formal, structured documents which present findings, evaluation, analysis, oversight or whole‑of‑government performance. Reports may be published as full or summary versions. They sometimes take the form of a plan or strategy document.
+Reports are formal, structured documents which present findings, evaluation, analysis, oversight or whole-of-government performance. Reports may be published as full or summary versions. They sometimes take the form of a plan or strategy document.
 
 Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
 
@@ -23,9 +20,21 @@ Reports may exist as a single page (summary) or as a multi-page publication with
 
 ## Sizing your report
 
-**Long-form reports** are comprehensive publications — typically structured as multi-page sites with a foreword, methodology, findings sections, and appendices. They require a dedicated landing page that introduces the report and links to each chapter. Navigation between sections should be explicit and persistent.
+**Long-form reports** are comprehensive publications – typically structured as multi-page sites with a foreword, methodology, findings sections, and appendices. They require a dedicated landing page that introduces the report and links to each chapter. Navigation between sections should be explicit and persistent.
 
-**Short-form reports and summaries** present key findings in a condensed format — typically a single page or two to three short sections. They are designed for readers who need the headline findings without the full detail. A short-form report should always link to the full report where one exists.
+**Short-form reports and summaries** present key findings in a condensed format – typically a single page or two to three short sections. They are designed for readers who need the headline findings without the full detail. A short-form report should always link to the full report where one exists.
+
+## Front-matter chapters and body chapters
+
+Long-form reports have two kinds of chapter, and they need different treatment.
+
+**Front-matter chapters** are the entry sleeve to the report: foreword, executive summary, 'at a glance', introduction. Readers usually arrive at these from the report landing page and read them linearly. Treat front-matter chapters as gateway pages – include a [publication card](/components/promo/) at the top of the body that re-establishes the parent report (cover, full title, date, PDF), then the chapter prose, then [pagination](/patterns/pagination/) to the next chapter.
+
+**Body chapters** are where the findings live. Readers often arrive directly from a search result, so each body chapter must restate context and let readers locate findings quickly. Add an in-page [table of contents](/components/table-of-contents/) generated from the chapter's H2s, present figures and tables inline (never collapsed), and use one [callout](/components/callout/) for the chapter's headline finding.
+
+The structural difference matters for cross-linking: front-matter chapters use [pagination](/patterns/pagination/) only – they are read in order. Body chapters use pagination *and* may carry a [next step](/components/next-step/) into a related surface (the policy area, the next report in the series).
+
+Do not split a single body chapter across tabs by year or portfolio. Where a report publishes per-year or per-portfolio appendices, those are separate URLs in their own right – turning them into a tab strip breaks the URL contract and the report's `hasPart` relationship in JSON-LD.
 
 ## Writing conventions
 
@@ -35,29 +44,29 @@ Follow the [Australian Government Style Manual](https://www.stylemanual.gov.au) 
 - Present recommendations in the active voice: 'agencies should adopt', not 'it is recommended that agencies consider adopting'
 - Use numbered headings for multi-chapter reports to make cross-referencing straightforward
 - Tables and figures must have a title and a source citation
-- Avoid editorialising findings — present evidence clearly and let recommendations carry the judgment
+- Avoid editorialising findings – present evidence clearly and let recommendations carry the judgment
 
 ## Web UI components
 
 Use the following UI components when building report pages in the CMS.
 
-**Page header (hero)** — For the landing page, use the full-width hero with the report title, a one-sentence description, and the publication date. Include a download link to the PDF version if one exists.
+**Page header (hero)** – For the landing page, use the full-width hero with the report title, a one-sentence description, and the publication date. Include a download link to the PDF version if one exists.
 
-**In-page navigation** — Essential for long-form reports. Enables readers to jump between sections without scrolling. Enable on all body pages, not just the landing page.
+**In-page navigation** – Essential for long-form reports. Enables readers to jump between sections without scrolling. Enable on all body pages, not just the landing page.
 
-**Rich text body** — The main content area. Use blockquotes for key findings or important direct quotations. Use tables for structured comparative data.
+**Rich text body** – The main content area. Use blockquotes for key findings or important direct quotations. Use tables for structured comparative data.
 
-**Data visualisation** — Charts and graphs should be inserted as images with appropriate alt text. Where interactive data is available, use an embedded iframe or the relevant integration component.
+**Data visualisation** – Charts and graphs should be inserted as images with appropriate alt text. Where interactive data is available, use an embedded iframe or the relevant integration component.
 
-**Pull quote** — Use for a single high-impact finding or a key quotation from the report. Position mid-page to break up long sections of text. Limit to one per section.
+**Pull quote** – Use for a single high-impact finding or a key quotation from the report. Position mid-page to break up long sections of text. Limit to one per section.
 
-**File download** — Use the file download component (not a plain hyperlink) for the PDF version of the report. Display the file name, format, and file size.
+**File download** – Use the file download component (not a plain hyperlink) for the PDF version of the report. Display the file name, format, and file size.
 
-**Accordion** — Use only for supporting reference material that is not part of the main report narrative, such as methodology notes or reference lists. Never use accordions for core findings or recommendations. Never nest accordions. Limit to five to seven items.
+**Accordion** – Use only for supporting reference material that is not part of the main report narrative, such as methodology notes or reference lists. Never use accordions for core findings or recommendations. Never nest accordions. Limit to five to seven items.
 
-**Related content cards** — At the bottom of the landing page, link to related reports, the relevant policy area, and any program pages associated with the findings. Two to four cards.
+**Related content cards** – At the bottom of the landing page, link to related reports, the relevant policy area, and any program pages associated with the findings. Two to four cards.
 
-**Tags** — Apply tags from the approved taxonomy. Reports typically carry tags for the policy domain, the publication type, and the year of publication.
+**Tags** – Apply tags from the approved taxonomy. Reports typically carry tags for the policy domain, the publication type, and the year of publication.
 
 ## Style Manual guidance
 
@@ -67,7 +76,7 @@ Use the following UI components when building report pages in the CMS.
 [Reports \| Australian Government Style Manual](https://www.stylemanual.gov.au/content-types/reports) 
 </cite>
 
-# Structure
+## Structure
 ```
 Introduction
 Section A
@@ -101,8 +110,8 @@ Appendices
 
 Reports with broad scope or a large volume of supporting material may include sub-pages beyond the main body. Use sub-page variants to maintain a clear separation between primary content and supplementary material.
 
-**Glossary** — a sub-page listing defined terms; required for long-form reports, optional for short-form. Position as the first appendix or as a named sub-page before appendices. Do not duplicate a glossary that exists on a parent section landing page.
+**Glossary** – a sub-page listing defined terms; required for long-form reports, optional for short-form. Position as the first appendix or as a named sub-page before appendices. Do not duplicate a glossary that exists on a parent section landing page.
 
-**Appendix** — one or more sub-pages containing supporting data, methodology, stakeholder lists, or reference material that would interrupt the report body. Each appendix must be numbered and titled. Link to all appendices from the report landing page.
+**Appendix** – one or more sub-pages containing supporting data, methodology, stakeholder lists, or reference material that would interrupt the report body. Each appendix must be numbered and titled. Link to all appendices from the report landing page.
 
 

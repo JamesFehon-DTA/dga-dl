@@ -40,3 +40,23 @@ Do not put accordions within accordions, as it will make content difficult to fi
 
 Do not use the accordion component if the amount of content inside will make the page slow to load.
 
+## Canonical anti-patterns
+
+These are the recurring misuses of the accordion on digital.gov.au. Each one destroys something the page was trying to do.
+
+**Standards or criteria collapsed into accordion panels.** Each criterion has its own URL, its own deep-link target, and is referenced individually from compliance reviews, search results, and JSON-LD `hasPart` relationships. Hiding criteria inside accordion panels destroys those references. Use a card grid of [navigation cards](/patterns/card-selection/) instead, with each criterion linking to its own [rule page](/templates/rule/).
+
+**Glossary terms collapsed into accordion panels.** Glossaries are skimmed, not browsed. An accordion forces a click per lookup, and the [DefinedTermSet](https://schema.org/DefinedTermSet) JSON-LD shape is lost when the term and definition are not co-located in the rendered DOM. Use semantic `<dl>`/`<dt>`/`<dd>` markup instead. See the [reference template](/templates/reference/).
+
+**Checklist items collapsed into accordion panels.** Checklists must be readable end-to-end and printable. An accordion breaks both. Use a real ordered or unordered list.
+
+**Inputs and outputs of a framework step collapsed into accordion panels.** A reader on step 7 of a framework often needs to cross-check step 4's outputs. Hiding step structure behind accordions makes the framework harder to use, not easier.
+
+**'FAQ-style' accordion on an explainer page.** If the questions are real and the answers are useful, write them as `<h3>` body sections – they then appear in search results and an in-page table of contents. Accordion-FAQ on an explainer hides the answers from readers who skim.
+
+## Canonical right uses
+
+The right place for an accordion is a [reference FAQ](/templates/reference/) – each question is independently a lookup key, the page is long, and the user usually wants only one answer.
+
+Even there, apply [callout discipline](/patterns/callout-discipline/): if a single question accounts for the bulk of reader traffic, lift its answer into a callout above the accordion. The accordion handles the long tail.
+
