@@ -183,3 +183,15 @@ Some guides warrant one or more sub-pages beyond the main guide body. Use sub-pa
 **Glossary** – a sub-page listing defined terms used across the guide; only warranted when the guide introduces 5 or more terms that cannot be defined inline. Link to it from the guide introduction. Do not duplicate definitions that exist in a related policy or report glossary.
 
 **FAQ** – a sub-page for frequently asked questions; use only when questions cannot be addressed within the guide body without disrupting flow. Limit to 7 items. Position as the last sub-page in the guide structure.
+
+## Step in a framework variant
+
+Use this variant when a guide page is one step of a numbered procedural framework – for example, step 4 of an 11-step assurance framework. The reader is mid-task and arrives expecting to act on this step, then move to the next.
+
+Structure the body of the page with three predictable H2 blocks: **Inputs**, **What to do**, and **Outputs**. The same three headings on every step let a reader who has done step 3 land quickly on what is the same and what is new.
+
+Place a single [callout](/components/callout/) at the bottom of the body, immediately above the pagination control. The callout carries the gate condition – the requirement that must be met before the reader proceeds. See [callout discipline](/patterns/callout-discipline/).
+
+Use [pagination](/patterns/pagination/) for sequential traversal, not [next step](/components/next-step/). Pagination is the most important component on a step page – the reader has to advance without finding the side navigation. See [chapter navigation](/patterns/chapter-navigation/).
+
+The framework's full step list belongs in side navigation with the active state on the current step. The reader needs to know how far through the framework they are on every step.
