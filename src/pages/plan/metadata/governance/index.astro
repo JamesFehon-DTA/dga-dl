@@ -1,0 +1,8 @@
+---
+import Main from '../../../../layouts/Main.astro';
+import { Content, frontmatter } from './_content.md';
+---
+
+<Main title={frontmatter.title} lead={frontmatter.lead}>
+  <Content />
+</Main>

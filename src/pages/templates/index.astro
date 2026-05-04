@@ -1,19 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import Main from '../../layouts/Main.astro';
-import ExploreCards from '../../components/ExploreCards.astro';
+import { getEntry, render } from 'astro:content';
+import Content from '../../layouts/Content.astro';
 
-const entries = await getCollection('templates');
-const cards = entries.map((entry) => ({
-  url: `${import.meta.env.BASE_URL}templates/${entry.id}/`,
-  title: entry.data.title,
-  description: entry.data.description,
-}));
+const entry = await getEntry('templates', 'index');
+const { Content: EntryContent } = await render(entry!);
 ---
 
-<Main
-  title="Templates"
-  lead="Each template sets out the purpose, structure, and writing conventions for a content type published on digital.gov.au. Use them when planning a new page or reviewing existing content against site-wide standards."
->
-  <ExploreCards cards={cards} />
-</Main>
+<Content title={entry!.data.title} description={entry!.data.description}>
+  <EntryContent />
+</Content>

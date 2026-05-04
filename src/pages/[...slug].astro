@@ -23,10 +23,12 @@ export async function getStaticPaths() {
     await Promise.all(collections.map((c) => getCollection(c)))
   ).flat();
 
-  return entries.map((entry) => ({
-    params: { slug: `${entry.collection}/${entry.id}` },
-    props: { entry },
-  }));
+  return entries
+    .filter((entry) => entry.id !== 'index')
+    .map((entry) => ({
+      params: { slug: `${entry.collection}/${entry.id}` },
+      props: { entry },
+    }));
 }
 
 interface Props {
