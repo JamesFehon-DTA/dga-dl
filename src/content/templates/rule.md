@@ -5,6 +5,9 @@ description: 'A rule page sets out a normative requirement that agencies must ap
 url: '/'
 ---
 
+Type
+: [Rule](/templates/) – a normative requirement that agencies must apply.
+
 A rule page sets out a normative requirement that agencies must apply. Standards, criteria, and numbered statements are all rule pages. The reader's job is to find the requirement, understand who it applies to, and know what to do next. The page's job is to make the normative text unmissable, then layer the explanation around it.
 
 Rule pages are evidence-bearing in a way most other content is not – they are the surface that gets quoted in compliance reviews, audits, and tabled responses. Every editorial decision on a rule page should protect the integrity of that quotation.

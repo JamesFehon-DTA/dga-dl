@@ -5,6 +5,9 @@ description: 'A resource page hosts a discrete, reusable reference item that use
 url: '/'
 ---
 
+Type
+: Standalone deliverable – discrete reusable items (templates, tools, factsheets, checklists).
+
 A resource page hosts a discrete, reusable item that users access to complete a specific task. Resources take practical forms: factsheets, tools, templates, checklists, timelines, and downloadable documents that support policy compliance, capability uplift, or day-to-day operations.
 
 Resource pages are the most varied content type on digital.gov.au, ranging from a single downloadable file to an interactive web-based tool. All are task-driven: the user arrives knowing what they need, and the page should deliver it with minimal friction.

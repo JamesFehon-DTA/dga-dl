@@ -5,6 +5,12 @@ description: 'A report presents the findings, analysis, or evaluation of a speci
 url: '/'
 ---
 
+Type
+: [Evidence](/templates/) – long-form findings, analysis, or evaluation.
+
+Related
+: [Communique](/templates/communique/) for short, dated Evidence pages.
+
 Reports are formal, structured documents which present findings, evaluation, analysis, oversight or whole-of-government performance. Reports may be published as full or summary versions. They sometimes take the form of a plan or strategy document.
 
 Reports on digital.gov.au are typically authored or commissioned by the DTA and represent a formal record of evidence and recommendations for government decision-makers, agencies, and the public.
@@ -33,6 +39,8 @@ Long-form reports have two kinds of chapter, and they need different treatment.
 **Body chapters** are where the findings live. Readers often arrive directly from a search result, so each body chapter must restate context and let readers locate findings quickly. Add an in-page [table of contents](/components/table-of-contents/) generated from the chapter's H2s, present figures and tables inline (never collapsed), and use one [callout](/components/callout/) for the chapter's headline finding.
 
 The structural difference matters for cross-linking: front-matter chapters use [pagination](/patterns/pagination/) only – they are read in order. Body chapters use pagination *and* may carry a [next step](/components/next-step/) into a related surface (the policy area, the next report in the series).
+
+Reports may also publish case studies as body chapters – for example, named-project pages inside a major reporting cycle. Treat these as Evidence body chapters, not as the narrative case study variant of guide – they exist to present the project's findings, not to teach a method.
 
 Do not split a single body chapter across tabs by year or portfolio. Where a report publishes per-year or per-portfolio appendices, those are separate URLs in their own right – turning them into a tab strip breaks the URL contract and the report's `hasPart` relationship in JSON-LD.
 

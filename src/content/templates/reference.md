@@ -5,6 +5,9 @@ description: 'Reference content – glossaries, FAQs, and checklists – is publ
 url: '/'
 ---
 
+Type
+: [Reference](/templates/) – glossaries, FAQs, and checklists. Always a sub-page of the template it serves.
+
 Reference content – glossaries, FAQs, and checklists – is the surface readers use to look something up. It is not published as its own top-level template on digital.gov.au. Each reference type is a sub-page variant of the parent it serves.
 
 This page is a stub. The substantive guidance for each reference type lives on the parent template that owns it.

@@ -5,6 +5,9 @@ description: 'A section landing page is the front door to a major content domain
 url: '/'
 ---
 
+Type
+: [Navigation](/templates/) – front-door pages that route readers to deeper content.
+
 A section landing page is the front door to a major content domain on digital.gov.au. It orients users arriving at a top-level section such as Investment, Policy, or Initiatives and helps them navigate to the specific content they need.
 
 Section landing pages do not contain detailed content. They present a clear overview of what the section contains, surface the most important or frequently accessed content, and give users enough context to make a confident navigation choice.

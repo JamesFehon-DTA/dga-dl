@@ -4,6 +4,10 @@ title: 'Guide'
 description: 'A guide provides instructional content that helps readers understand a framework, complete a process, or meet a policy requirement.'
 url: '/'
 ---
+
+Type
+: [Guidance](/templates/) – how to act on a rule, framework, or process.
+
 ## On this page
 - When to use a guide
 - Sizing your guide
@@ -47,11 +51,8 @@ Guides should not include the full text of the policy they support. Link to the 
 
 Standards and criteria published as a set of pages need their own navigation pattern – see the [rule template](/templates/rule/). In short: use a card grid or link list for the rule index, because readers usually arrive looking for one specific criterion rather than working through the full set.
 
-<svg viewBox="0 0 800 450" xmlns="http://www.w3.org">
-  <!-- Background -->
+<svg viewBox="0 0 800 450" width="100%" xmlns="http://www.w3.org/2000/svg">
   <rect width="800" height="450" fill="#f8f9fa" />
-  
-  <!-- Shared Styles -->
   <style>
     .title { font: bold 16px sans-serif; fill: #333; }
     .label { font: 12px sans-serif; fill: #555; }
@@ -63,76 +64,63 @@ Standards and criteria published as a set of pages need their own navigation pat
     .footer { fill: #eeeeee; stroke: #9e9e9e; }
     .section { fill: #fff; stroke: #4caf50; stroke-dasharray: 4; }
   </style>
-
-  <!-- 1. LONG GUIDE -->
   <g transform="translate(30, 50)">
     <text x="110" y="-15" text-anchor="middle" class="title">Long Guide (>2k words)</text>
     <rect width="220" height="340" class="border" rx="4" />
-    
-    <!-- Header -->
     <rect x="10" y="10" width="200" height="30" class="header" />
     <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
-    
-    <!-- Nav (Sidebar) -->
     <rect x="10" y="50" width="50" height="240" class="nav" />
     <text x="35" y="170" text-anchor="middle" class="tag-text" transform="rotate(-90 35 170)">&lt;nav&gt;</text>
-    
-    <!-- Main Content -->
     <rect x="70" y="50" width="140" height="240" class="main" />
     <text x="140" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
-    
-    <!-- Sections -->
     <rect x="80" y="80" width="120" height="25" class="section" />
     <text x="140" y="96" text-anchor="middle" class="label">Intro</text>
     <rect x="80" y="115" width="120" height="25" class="section" />
     <text x="140" y="131" text-anchor="middle" class="label">Context</text>
     <rect x="80" y="150" width="120" height="50" class="section" />
     <text x="140" y="180" text-anchor="middle" class="label">H2 Sections</text>
-    
-    <!-- Footer -->
     <rect x="10" y="300" width="200" height="30" class="footer" />
     <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
   </g>
-
-  <!-- 2. MEDIUM GUIDE -->
   <g transform="translate(290, 50)">
     <text x="110" y="-15" text-anchor="middle" class="title">Medium (800-2k)</text>
     <rect width="220" height="340" class="border" rx="4" />
-    
     <rect x="10" y="10" width="200" height="30" class="header" />
     <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
-    
     <rect x="10" y="50" width="200" height="240" class="main" />
     <text x="110" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
-    
     <rect x="20" y="80" width="180" height="30" class="section" />
     <text x="110" y="100" text-anchor="middle" class="label">Introduction</text>
     <rect x="20" y="120" width="180" height="100" class="section" />
     <text x="110" y="175" text-anchor="middle" class="label">Step-by-Step (H2)</text>
-    
     <rect x="10" y="300" width="200" height="30" class="footer" />
     <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
   </g>
-
-  <!-- 3. SHORT GUIDE -->
   <g transform="translate(550, 50)">
     <text x="110" y="-15" text-anchor="middle" class="title">Short (&lt;800 words)</text>
     <rect width="220" height="340" class="border" rx="4" />
-    
     <rect x="10" y="10" width="200" height="30" class="header" />
     <text x="110" y="28" text-anchor="middle" class="tag-text">&lt;header&gt;</text>
-    
     <rect x="10" y="50" width="200" height="240" class="main" />
     <text x="110" y="65" text-anchor="middle" class="tag-text">&lt;main&gt;</text>
-    
     <rect x="20" y="80" width="180" height="60" class="section" />
     <text x="110" y="115" text-anchor="middle" class="label">Single Task</text>
-    
     <rect x="10" y="300" width="200" height="30" class="footer" />
     <text x="110" y="318" text-anchor="middle" class="tag-text">&lt;footer&gt;</text>
   </g>
 </svg>
 
+## Case study variant
+
+Use this variant when a guide page is a narrative example rather than a how-to – for example, one of a set of scenarios showing how agencies have applied a framework. Case studies are scanned for fit before they are read for content.
+
+Place a single [callout](/components/callout/) at the top of the body, before the narrative begins. The callout carries the 'best for' statement – the conditions under which this case study applies. A reader who is not a fit should be able to tell from the callout and skip on to the next case study.
+
+Structure the body as situation, action, outcome – plain prose with H2 sub-headings. Do not use accordions; case studies are read end to end.
+
+Where the case study has an architecture or process diagram, use [figure](/components/figure/) rather than a bare image. The caption and alt-text structure is built in.
+
+Cross-link to sibling case studies at the bottom of the page using a card grid. Case studies are a *set* – the reader who is not a fit for this one needs to find their fit in one click.
 
 ## Writing conventions
 

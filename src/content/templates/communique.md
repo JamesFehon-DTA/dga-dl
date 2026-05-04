@@ -5,6 +5,12 @@ description: 'A communique is a formal, dated record of decisions and discussion
 url: '/'
 ---
 
+Type
+: [Evidence](/templates/) – short, dated record of a committee's decisions.
+
+Related
+: [Report](/templates/report/) for long-form Evidence publications.
+
 A communique is a formal, dated record of a committee's decisions and discussions. Unlike a news article or summary, it is an official published account of what was discussed and decided at a specific meeting, intended for agencies, ministers, and the public.
 
 Communiques on digital.gov.au are published by bodies such as the Secretaries Digital and Data Committee. They provide transparency around governance decisions and are referenced as formal records over time.

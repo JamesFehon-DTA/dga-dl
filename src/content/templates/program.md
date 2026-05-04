@@ -5,6 +5,9 @@ description: 'A program page describes an ongoing or recurring initiative manage
 url: '/'
 ---
 
+Type
+: [Overview](/templates/) – gateway page for an ongoing program or initiative.
+
 A program page describes ongoing or recurring digital government programs, initiatives, frameworks or capability-building offerings. They describe things that exist over time and typically act as an entry point to supporting guides, resources and reports.
 
 Program pages can be used to help people understand what a program offers, who it is for, and how to engage with it. They are written for people who will actively use, adopt or participate in the program, and are action-oriented: the reader should leave knowing what to do next.
