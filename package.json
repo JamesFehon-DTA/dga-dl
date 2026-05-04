@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
     "astro": "^6.0.0",
+    "remark-deflist": "^1.0.0",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {

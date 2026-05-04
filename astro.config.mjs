@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
+import remarkDeflist from 'remark-deflist';
 
 import { remarkPrefixAbsoluteLinks } from './src/remark/prefix-absolute-links.mjs';
 
@@ -21,7 +22,7 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [[remarkPrefixAbsoluteLinks, { base }]],
+    remarkPlugins: [[remarkPrefixAbsoluteLinks, { base }], remarkDeflist],
   },
 
   integrations: [mdx()],
