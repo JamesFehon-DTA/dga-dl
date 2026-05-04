@@ -55,7 +55,7 @@ A page that holds one criterion or one statement from a standard.
 
 **Never collapse rules into accordions.** Each rule has its own URL, its own deep-link target, and is referenced individually from other pages. Hiding rules inside accordion panels destroys those references and makes the rule set unsearchable. See [accordion](/components/accordion/).
 
-**Do not organise the rule set as a linear chapter sequence.** Numbered rules use [pagination](/patterns/pagination/) for sibling traversal, but the rule index on the parent must be a card grid – readers usually need one specific rule, not the whole set in order. This is a page layout decision, not a reflection of the standard's logical structure.
+**Do not organise the rule set as a linear chapter sequence.** Numbered rules use [pagination](/patterns/pagination/) for sibling traversal, but the rule index on the parent must be a card grid – readers usually need one specific rule, not the whole set in order. The card grid is a page-layout choice; it does not imply that the rules themselves are unordered.
 
 **Make the cross-axis visible.** Every rule has at least two axes – its number, and its place in some other taxonomy (lifecycle stage, policy domain, audience). Surface the second axis as a tag on the banner and as a card in the body, so readers can pivot from rule to surrounding context in one click.
 
