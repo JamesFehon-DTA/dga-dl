@@ -9,7 +9,7 @@ In-page navigation helps users understand the structure of a page or section and
 
 One component implements in-page navigation on digital.gov.au:
 
-- **[Table of contents](/components/table-of-contents/)** — an anchor-linked list generated from the H2 headings on the current page
+- **[Table of contents](/components/table-of-contents/)** – an anchor-linked list generated from the H2 headings on the current page
 
 ## Choosing the right approach
 
@@ -35,10 +35,10 @@ Use a Table of contents when:
 
 Do not use a Table of contents when:
 
-- the page has fewer than four H2 headings — a short page does not need navigation
-- the page already uses Sub-nav — do not show both
-- the page is a section landing page — landing pages use card grids for navigation, not anchor links
-- the page is a step-by-step wizard or focus-mode form — sequential flows should not offer navigation shortcuts
+- the page has fewer than four H2 headings – a short page does not need navigation
+- the page already uses Sub-nav – do not show both
+- the page is a section landing page – landing pages use card grids for navigation, not anchor links
+- the page is a step-by-step wizard or focus-mode form – sequential flows should not offer navigation shortcuts
 
 Position the Table of contents directly below the page introduction, before the first H2. Authors enable it per page in the CMS; it generates automatically from H2 headings and does not require manual maintenance.
 
@@ -52,15 +52,15 @@ Use Sub-nav when:
 
 Do not use Sub-nav when:
 
-- the section contains only one or two pages — the overhead outweighs the benefit
-- the section changes frequently — an unstable list of links erodes trust
+- the section contains only one or two pages – the overhead outweighs the benefit
+- the section changes frequently – an unstable list of links erodes trust
 - the page is standalone and does not belong to a defined section
 
 Sub-nav appears as a persistent sidebar alongside the main content. It shows all pages in the section, with the current page indicated. It is configured at the section level, not per page.
 
 ## Anchor links in body text
 
-For short pages or pages where only one or two sections benefit from direct linking, inline anchor links within body text are sufficient. This is not a component — it is standard HTML linking practice. Use it when:
+For short pages or pages where only one or two sections benefit from direct linking, inline anchor links within body text are sufficient. This is not a component – it is standard HTML linking practice. Use it when:
 
 - a related page or resource needs to point to a specific section of a long guide
 - a single section is frequently referenced externally and benefits from a stable URL
@@ -69,6 +69,6 @@ Do not substitute inline anchor links for a Table of contents on pages that warr
 
 ## Related components
 
-- [Table of contents](/components/table-of-contents/) — in-page anchor navigation generated from H2 headings
-- [Sub-nav](/components/sub-nav/) — section-level navigation between sibling pages
-- [Filter sidebar](/components/filter-sidebar/) — filtering for search and catalogue pages; not a navigation component
+- [Table of contents](/components/table-of-contents/) – in-page anchor navigation generated from H2 headings
+- [Sub-nav](/components/sub-nav/) – section-level navigation between sibling pages
+- [Filter sidebar](/components/filter-sidebar/) – filtering for search and catalogue pages; not a navigation component

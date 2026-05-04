@@ -21,7 +21,7 @@ Use focus mode for:
 
 In focus mode:
 
-- use the minimal header variant — the site logo is visible but the main site navigation is hidden
+- use the minimal header variant – the site logo is visible but the main site navigation is hidden
 - do not include breadcrumbs, section navigation, or any persistent navigational sidebar
 - include a 'Back' link so users can return to the previous step without losing data
 - include a 'Save and exit' control at the top of the page so users can leave intentionally and return later
@@ -44,10 +44,10 @@ Do not allow users to turn focus mode on or off. The system controls the layout 
 
 ## Related components
 
-- [Progress indicator](/components/progress-indicator/) — step progress for focus mode forms.
-- [Next step](/components/next-step/) — forward and back controls for navigating between form steps.
+- [Progress indicator](/components/progress-indicator/) – step progress for focus mode forms.
+- [Next step](/components/next-step/) – forward and back controls for navigating between form steps.
 
 ## Related patterns
 
-- [Chapter navigation](/patterns/chapter-navigation/) — for sequential content pages where focus mode is not needed.
-- [Page header](/patterns/page-header/) — includes the minimal header variant used in focus mode.
+- [Chapter navigation](/patterns/chapter-navigation/) – for sequential content pages where focus mode is not needed.
+- [Page header](/patterns/page-header/) – includes the minimal header variant used in focus mode.

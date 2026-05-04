@@ -16,7 +16,7 @@ Do not stack multiple notification types on the same page. Choose the one that b
 | Scope | Specific sentence or paragraph | Section or topic area | Page-level, near H1 | Entire site or service |
 | Urgency | Informational | Informational, non-urgent | Contextual | High urgency |
 | Triggered by | Author | Author | User action or system event | Administrator |
-| Persists independently | Yes | Yes | No — responds to state | Yes (until removed) |
+| Persists independently | Yes | Yes | No – responds to state | Yes (until removed) |
 
 ## Inline body text
 
@@ -30,17 +30,17 @@ Use a [Callout](/components/callout/) for static, non-urgent information that ne
 
 - the information is important but not urgent
 - the content needs to stand out from surrounding text
-- the message is fixed — it does not change based on what the user does
+- the message is fixed – it does not change based on what the user does
 
 **Do not use a callout for:**
 
-- error messages or validation feedback — use a Message instead
-- service-wide alerts — use a Global alert instead
+- error messages or validation feedback – use a Message instead
+- service-wide alerts – use a Global alert instead
 - information that should only appear in response to a user action
 
 ## Message
 
-Use a Message for system feedback that follows a user action — for example, confirming a submission, flagging a validation error, or warning that a session is expiring. Position it near the page H1.
+Use a Message for system feedback that follows a user action – for example, confirming a submission, flagging a validation error, or warning that a session is expiring. Position it near the page H1.
 
 **Use a message when:**
 
@@ -50,24 +50,24 @@ Use a Message for system feedback that follows a user action — for example, co
 
 **Do not use a message for:**
 
-- general informational content — use body text or a callout instead
-- site-wide communications — use a Global alert instead
+- general informational content – use body text or a callout instead
+- site-wide communications – use a Global alert instead
 
 ## Global alert
 
-Use a Global alert for the highest-urgency, site-wide information — for example, a service outage, a critical policy update with an imminent deadline, or a mandatory change affecting all users. It appears above the site header on every page.
+Use a Global alert for the highest-urgency, site-wide information – for example, a service outage, a critical policy update with an imminent deadline, or a mandatory change affecting all users. It appears above the site header on every page.
 
 **Use a global alert when:**
 
 - the message is relevant to all or most users across the entire site
 - the urgency is high enough to interrupt the normal reading experience
-- the message has a defined start and end — remove it promptly once it is no longer current
+- the message has a defined start and end – remove it promptly once it is no longer current
 
 **Do not use a global alert for:**
 
-- page-specific information — use a callout or message instead
+- page-specific information – use a callout or message instead
 - content that is informational rather than urgent
 
 ## Related components
 
-- [Callout](/components/callout/) — static, authored callout for non-urgent informational content.
+- [Callout](/components/callout/) – static, authored callout for non-urgent informational content.

@@ -9,15 +9,15 @@ Use this pattern whenever you need to help users contact a team or agency. Choos
 
 ## Choosing a format
 
-**Inline body text** — the default. Use when contact information is a natural part of the page flow and does not need visual separation. Write the channel and detail in a sentence.
+**Inline body text** – the default. Use when contact information is a natural part of the page flow and does not need visual separation. Write the channel and detail in a sentence.
 
-**Callout** — use when contact information needs to stand out from surrounding content — for example, at the end of a page or within a form. Use the contact information variant of the [Callout](/components/callout/) component.
+**Callout** – use when contact information needs to stand out from surrounding content – for example, at the end of a page or within a form. Use the contact information variant of the [Callout](/components/callout/) component.
 
-**Details component** — use when contact information is less important than the main content and should be hidden by default. Wrap it in the [Details](/components/details/) component only when there are three or more lines of contact detail. Do not use it to hide a single phone number or email address.
+**Details component** – use when contact information is less important than the main content and should be hidden by default. Wrap it in the [Details](/components/details/) component only when there are three or more lines of contact detail. Do not use it to hide a single phone number or email address.
 
 ## Channel ordering
 
-Order contact channels based on what your users most commonly need and what your service can best support. Show channels in the same order throughout your service — consistency helps users find what they need.
+Order contact channels based on what your users most commonly need and what your service can best support. Show channels in the same order throughout your service – consistency helps users find what they need.
 
 A common order is:
 
@@ -42,5 +42,5 @@ Use a heading written for your users, not an internal label. If the contact sect
 
 ## Related components
 
-- [Callout](/components/callout/) — use the contact information variant for visually distinguished contact blocks.
-- [Details](/components/details/) — use to hide secondary contact information that most users do not need.
+- [Callout](/components/callout/) – use the contact information variant for visually distinguished contact blocks.
+- [Details](/components/details/) – use to hide secondary contact information that most users do not need.

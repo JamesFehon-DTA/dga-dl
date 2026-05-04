@@ -12,16 +12,16 @@ Use pagination to split a large dataset into discrete, numbered pages. This give
 Paginate when:
 
 - the dataset contains more than 25 items
-- users are likely to need to return to a specific position — for example, after following a result link and pressing back
+- users are likely to need to return to a specific position – for example, after following a result link and pressing back
 - the total number of results is known and finite
 
 ## When not to paginate
 
 Do not paginate when:
 
-- the dataset is 25 items or fewer — show all results on one page
-- a filter or search query returns fewer than two pages of results — show all results rather than a single paginated page
-- the content is a continuous feed where item position is not meaningful — consider a 'Load more' button instead
+- the dataset is 25 items or fewer – show all results on one page
+- a filter or search query returns fewer than two pages of results – show all results rather than a single paginated page
+- the content is a continuous feed where item position is not meaningful – consider a 'Load more' button instead
 
 ## Load more vs pagination
 
@@ -42,10 +42,10 @@ Place pagination below the listing, above the footer. Do not place it above the 
 
 ## Related components
 
-- [Table](/components/table/) — filterable and sortable table; use pagination alongside when dataset exceeds 25 rows.
-- [Manual list](/components/manual-list/) — manually curated content list.
+- [Table](/components/table/) – filterable and sortable table; use pagination alongside when dataset exceeds 25 rows.
+- [Manual list](/components/manual-list/) – manually curated content list.
 
 ## Related patterns
 
-- [Search filters](/patterns/search-filters/) — combine with pagination on filtered result pages.
-- [Empty state](/patterns/empty-state/) — what to show when filters reduce results to zero.
+- [Search filters](/patterns/search-filters/) – combine with pagination on filtered result pages.
+- [Empty state](/patterns/empty-state/) – what to show when filters reduce results to zero.

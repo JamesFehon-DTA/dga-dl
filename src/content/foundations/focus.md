@@ -9,7 +9,7 @@ url: '/'
 
 ## Focus management in this system
 
-Focus management is considered throughout the design system — in every component and pattern. A clear, consistent focus indicator is provided without requiring per-component customisation.
+Focus management is considered throughout the design system – in every component and pattern. A clear, consistent focus indicator is provided without requiring per-component customisation.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ Focus management is considered throughout the design system — in every compone
 - Focus indicators meet a minimum contrast ratio of 3:1 against adjacent colours and backgrounds (WCAG SC 1.4.11).
 - Keyboard focus is always visible.
 - Focus indicators are not removed unless an equivalent visual indicator is provided.
-- When a focused object is deleted — for example, closing a section alert — focus moves to the next appropriate element.
+- When a focused object is deleted – for example, closing a section alert – focus moves to the next appropriate element.
 
 ## Benefits
 
@@ -25,13 +25,13 @@ Focus management is considered throughout the design system — in every compone
 - Ensures users can track their position when navigating via keyboard.
 - Reduces accidental interactions by clearly defining interactive areas.
 - Assists users with limitations in executive function, attention, or short-term memory to find the focus location on the page.
-- Restores focus after an action has taken place — for example, closing a drawer.
+- Restores focus after an action has taken place – for example, closing a drawer.
 
 ---
 
 ## Approach
 
-The system uses a single `--focus-ring` token — a purple (`hue: 285°`) applied uniformly as an `outline` on all focusable elements. This approach:
+The system uses a single `--focus-ring` token – a purple (`hue: 285°`) applied uniformly as an `outline` on all focusable elements. This approach:
 
 - avoids hue collision with all four status colours (success `155°`, warning `85°`, danger `25°`, info `245°`)
 - avoids hue collision with the brand accent (`~240°`) and the cool-neutral surface hue (`255°`)
@@ -48,7 +48,7 @@ Lightness shifts between modes (`0.50` → `0.72`) to maintain sufficient contra
 
 ## Implementation
 
-All focusable elements use `:focus-visible` (not `:focus`) to show the ring only for keyboard and sequential navigation — not on mouse click.
+All focusable elements use `:focus-visible` (not `:focus`) to show the ring only for keyboard and sequential navigation – not on mouse click.
 
 ```css
 :focus-visible {
@@ -83,18 +83,18 @@ WCAG SC 1.4.11 (Non-text Contrast) requires a minimum **3:1** ratio between the 
 ## Do
 
 - apply `--focus-ring` to every interactive element via `:focus-visible`
-- use `outline` rather than `box-shadow` for the focus ring — `outline` is not clipped by `overflow: hidden` and is respected by Windows High Contrast Mode
+- use `outline` rather than `box-shadow` for the focus ring – `outline` is not clipped by `overflow: hidden` and is respected by Windows High Contrast Mode
 - increase `outline-offset` on filled surfaces (buttons, chips) to visually separate the ring from the element
 - test focus visibility against both light and dark mode surfaces
-- manage focus explicitly when content changes — move focus to the next logical element after a section alert closes, a drawer dismisses, or a modal confirms
+- manage focus explicitly when content changes – move focus to the next logical element after a section alert closes, a drawer dismisses, or a modal confirms
 
 ## Don't
 
-- use `:focus` instead of `:focus-visible` — this shows the ring on mouse clicks, which is unexpected for sighted pointer users
+- use `:focus` instead of `:focus-visible` – this shows the ring on mouse clicks, which is unexpected for sighted pointer users
 - suppress the focus ring with `outline: none` or `outline: 0` without providing an equivalent replacement
-- use `box-shadow` as the sole focus indicator — it is clipped by parent `overflow: hidden` and invisible in Windows High Contrast Mode
-- change the focus colour per component — a single consistent ring aids recognition
-- confuse the focus ring with `--glow` — glow is a pointer-hover signal, not a keyboard navigation signal
+- use `box-shadow` as the sole focus indicator – it is clipped by parent `overflow: hidden` and invisible in Windows High Contrast Mode
+- change the focus colour per component – a single consistent ring aids recognition
+- confuse the focus ring with `--glow` – glow is a pointer-hover signal, not a keyboard navigation signal
 
 ## WCAG references
 
@@ -103,5 +103,5 @@ WCAG SC 1.4.11 (Non-text Contrast) requires a minimum **3:1** ratio between the 
 
 ## Related foundations
 
-- [Colour](/dga-dl/foundations/colour) — Token system and mode-switching
-- [Elevation](/dga-dl/foundations/elevation) — Glow token, distinct from focus ring
+- [Colour](/dga-dl/foundations/colour) – Token system and mode-switching
+- [Elevation](/dga-dl/foundations/elevation) – Glow token, distinct from focus ring

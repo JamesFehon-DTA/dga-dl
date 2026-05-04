@@ -22,11 +22,11 @@ url: '/'
 
 ## Colour palettes
 
-There are 2 colour palettes: **light** and **dark**. Each palette is divided into foreground, background, border, system, and miscellaneous colour groups — all with a specific purpose.
+There are 2 colour palettes: **light** and **dark**. Each palette is divided into foreground, background, border, system, and miscellaneous colour groups – all with a specific purpose.
 
 All colour values are authored in [OKLCH](https://oklch.com/), a perceptually uniform colour space. Unlike HSL or HEX, OKLCH guarantees that two colours at the same Lightness value appear equally bright to the human eye, making it reliable for building accessible contrast ratios programmatically.
 
-The system uses a **fixed cool-neutral hue of 255°** with micro-chroma. This keeps surfaces visually calm while avoiding the flat appearance of pure grey. Dark mode uses slightly elevated chroma (`0.020`) — the Commonwealth navy approach — to maintain a cool quality consistent with the Australian Government digital identity.
+The system uses a **fixed cool-neutral hue of 255°** with micro-chroma. This keeps surfaces visually calm while avoiding the flat appearance of pure grey. Dark mode uses slightly elevated chroma (`0.020`) – the Commonwealth navy approach – to maintain a cool quality consistent with the Australian Government digital identity.
 
 ---
 
@@ -38,10 +38,10 @@ Designed to sit on top of background colours to ensure contrast ratios meet WCAG
 
 | Name | Value | Description |
 |---|---|---|
-| `--fg-text` | `oklch(0.20 0.010 255)` | Very dark cool grey. Used for primary text — body copy, headings, and labels — to ensure legibility. |
-| `--fg-muted` | `oklch(0.45 0.010 255)` | Medium-dark cool grey. Used for supporting text — captions, metadata, and secondary labels — to reduce visual prominence. |
+| `--fg-text` | `oklch(0.20 0.010 255)` | Very dark cool grey. Used for primary text – body copy, headings, and labels – to ensure legibility. |
+| `--fg-muted` | `oklch(0.45 0.010 255)` | Medium-dark cool grey. Used for supporting text – captions, metadata, and secondary labels – to reduce visual prominence. |
 | `--fg-subtle` | `oklch(0.58 0.008 255)` | Mid cool grey. Used for placeholder text in inputs. Do not use for meaningful text as it does not meet WCAG contrast for body copy. |
-| `--fg-action` | `oklch(0.45 0.14 240)` | Medium blue. Used to indicate interactive elements — links and button labels. Do not use on non-interactive elements; always supplement with an additional visual cue (underline, icon). |
+| `--fg-action` | `oklch(0.45 0.14 240)` | Medium blue. Used to indicate interactive elements – links and button labels. Do not use on non-interactive elements; always supplement with an additional visual cue (underline, icon). |
 
 ### Dark palette
 
@@ -63,11 +63,11 @@ Each palette has two main background colours: the default (`body`) and a darker 
 | Name | Value | Description |
 |---|---|---|
 | `--bg-body` | `oklch(0.985 0.002 255)` | Near-white with a subtle cool cast. The primary page and content background. |
-| `--bg-shade` | `oklch(0.960 0.004 255)` | Light cool grey. Used to highlight components on `body` — table row zebra-striping, pill toggle tracks, sidebar panels. |
+| `--bg-shade` | `oklch(0.960 0.004 255)` | Light cool grey. Used to highlight components on `body` – table row zebra-striping, pill toggle tracks, sidebar panels. |
 | `--bg-body-alt` | `oklch(0.945 0.005 255)` | Slightly cooler light grey. The alternate-track primary surface, used for full-width alternating page sections. |
 | `--bg-shade-alt` | `oklch(0.920 0.007 255)` | Noticeably cool light grey. Used to highlight components on `body-alt`. |
-| `--bg-inset` | `oklch(0.935 0.006 255)` | Recessed cool grey. Used for inset surfaces — code blocks, input field fills, and read-only wells. |
-| `--bg-raised` | `oklch(1.0 0 0)` | Pure white. Used for elevated surfaces that require shadow separation — cards, dropdowns, tooltips. |
+| `--bg-inset` | `oklch(0.935 0.006 255)` | Recessed cool grey. Used for inset surfaces – code blocks, input field fills, and read-only wells. |
+| `--bg-raised` | `oklch(1.0 0 0)` | Pure white. Used for elevated surfaces that require shadow separation – cards, dropdowns, tooltips. |
 
 ### Dark palette
 
@@ -78,7 +78,7 @@ Each palette has two main background colours: the default (`body`) and a darker 
 | `--bg-body-alt` | `oklch(0.200 0.024 255)` | Medium-dark navy-grey. Alternate-track primary surface for dark full-width sections. |
 | `--bg-shade-alt` | `oklch(0.220 0.026 255)` | Lighter navy-grey. Used to highlight components on the dark `body-alt` surface. |
 | `--bg-inset` | `oklch(0.125 0.016 255)` | Very dark navy. Recessed surface for code blocks and input fills on dark backgrounds. |
-| `--bg-raised` | `oklch(0.220 0.024 255)` | Elevated navy panel. Used for floating surfaces — cards, dropdowns, tooltips on dark backgrounds. |
+| `--bg-raised` | `oklch(0.220 0.024 255)` | Elevated navy panel. Used for floating surfaces – cards, dropdowns, tooltips on dark backgrounds. |
 
 
 
@@ -114,7 +114,7 @@ Status hues are fixed and not brand-derived: success `155°`, warning `85°`, da
 
 | Name | Value | Description |
 |---|---|---|
-| `--success-subtle` | `oklch(0.94 0.04 155)` | Pale green. Background fill for success-toned components — section alerts, banners. |
+| `--success-subtle` | `oklch(0.94 0.04 155)` | Pale green. Background fill for success-toned components – section alerts, banners. |
 | `--success-emphasis` | `oklch(0.45 0.14 155)` | Dark green. Used for success icons, left-border accents, and status text. |
 | `--warning-subtle` | `oklch(0.94 0.05 85)` | Pale amber. Background fill for warning-toned components. |
 | `--warning-emphasis` | `oklch(0.48 0.14 85)` | Dark amber-orange. Used for warning icons, borders, and status text. |
@@ -145,11 +145,11 @@ Colours that do not belong to the above groups: interactive selected states, the
 
 | Name | Value | Description |
 |---|---|---|
-| `--selected` | `oklch(0.45 0.14 240)` | Medium blue. Used to indicate a selected or active item — active nav items, selected tabs, checked inputs. |
+| `--selected` | `oklch(0.45 0.14 240)` | Medium blue. Used to indicate a selected or active item – active nav items, selected tabs, checked inputs. |
 | `--selected-muted` | `oklch(0.955 0.020 240)` | Pale blue tint. Background for selected input components. Not intended for active navigation items. |
-| `--accent-subtle` | `oklch(0.955 0.020 240)` | Pale blue. Feature surface background — highlighted cards, callout fills. |
+| `--accent-subtle` | `oklch(0.955 0.020 240)` | Pale blue. Feature surface background – highlighted cards, callout fills. |
 | `--accent-muted` | `oklch(0.925 0.045 240)` | Light blue. Chip and tag fills. |
-| `--accent-emphasis` | `oklch(0.50 0.13 240)` | Medium blue. Primary interactive fill — buttons, badge backgrounds. |
+| `--accent-emphasis` | `oklch(0.50 0.13 240)` | Medium blue. Primary interactive fill – buttons, badge backgrounds. |
 | `--focus-ring` | `oklch(0.50 0.22 285)` | Purple (hue 285°). Used to highlight interactive components for keyboard navigation. Unique hue chosen to avoid collision with status and brand colours. |
 | `--overlay-dim` | `oklch(0.20 0.01 255 / 0.45)` | Semi-transparent dark scrim. Used as an overlay behind modals and drawers. The content beneath is considered disabled and non-interactive. |
 
@@ -186,18 +186,18 @@ Always pair foreground tokens with background tokens from the same palette:
 
 ### Don't rely on colour alone to convey meaning
 
-Use additional visual cues alongside colour — icons for status messages, underlines for links, shapes for status indicators. Colour should reinforce meaning, not be the sole carrier of it.
+Use additional visual cues alongside colour – icons for status messages, underlines for links, shapes for status indicators. Colour should reinforce meaning, not be the sole carrier of it.
 
 ### Always use semantic tokens in components
 
 - **Do** reference semantic tokens (`--bg-body`, `--fg-text`, `--border-default`) in all component CSS
-- **Don't** hardcode OKLCH, hex, or RGB values in component styles — always reference a token
-- **Don't** use `--overlay-dim` for decorative purposes — it is reserved for modal and drawer scrims
-- **Don't** use `--fg-subtle` for any text that carries meaning — it does not meet WCAG contrast for body text
+- **Don't** hardcode OKLCH, hex, or RGB values in component styles – always reference a token
+- **Don't** use `--overlay-dim` for decorative purposes – it is reserved for modal and drawer scrims
+- **Don't** use `--fg-subtle` for any text that carries meaning – it does not meet WCAG contrast for body text
 
 ---
 
 ## Related foundations
 
-- [Focus](/dga-dl/foundations/focus) — Focus ring token, contrast requirements, and keyboard navigation
-- [Elevation](/dga-dl/foundations/elevation) — Shadow and glow token usage and layering model
+- [Focus](/dga-dl/foundations/focus) – Focus ring token, contrast requirements, and keyboard navigation
+- [Elevation](/dga-dl/foundations/elevation) – Shadow and glow token usage and layering model

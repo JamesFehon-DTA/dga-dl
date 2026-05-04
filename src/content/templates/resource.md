@@ -5,9 +5,6 @@ description: 'A resource page hosts a discrete, reusable reference item that use
 url: '/'
 ---
 
-{::options parse_block_html="true" /}
-
-
 A resource page hosts a discrete, reusable item that users access to complete a specific task. Resources take practical forms: factsheets, tools, templates, checklists, timelines, and downloadable documents that support policy compliance, capability uplift, or day-to-day operations.
 
 Resource pages are the most varied content type on digital.gov.au, ranging from a single downloadable file to an interactive web-based tool. All are task-driven: the user arrives knowing what they need, and the page should deliver it with minimal friction.
@@ -23,12 +20,12 @@ Do not publish long explanatory text as a resource page. If context or instructi
 
 Resource pages should be concise and front-loaded. Follow this pattern:
 
-1. **Introduction** — one or two sentences explaining what the resource is and who it is for
-2. **The resource itself** — the downloadable file, interactive tool, checklist, or visual content; positioned as high on the page as possible
-3. **How to use this resource** — brief instructions if needed; use a numbered list for step-by-step instructions
-4. **Related resources** — links to the policy the resource supports, and to related tools or templates
+1. **Introduction** – one or two sentences explaining what the resource is and who it is for
+2. **The resource itself** – the downloadable file, interactive tool, checklist, or visual content; positioned as high on the page as possible
+3. **How to use this resource** – brief instructions if needed; use a numbered list for step-by-step instructions
+4. **Related resources** – links to the policy the resource supports, and to related tools or templates
 
-Avoid padding resource pages with background context that belongs on a policy or guide page. If a reader needs to understand the policy before using the resource, link to it — do not replicate it.
+Avoid padding resource pages with background context that belongs on a policy or guide page. If a reader needs to understand the policy before using the resource, link to it – do not replicate it.
 
 ## Writing conventions
 
@@ -37,7 +34,7 @@ Follow the [Australian Government Style Manual](https://www.stylemanual.gov.au) 
 - Use imperative verbs in instructions: 'download the template', 'complete section 3', 'submit your checklist'
 - File names for downloadable resources should be descriptive and consistent with the page title; avoid generic names like 'template_v2_FINAL.docx'
 - Downloadable files that include a date, version number, or policy reference in the file name or contents will appear outdated when the policy changes. Plan for how you will update or replace them, and use the version date field to signal currency to readers.
-- If the resource has a version number or review date, display it clearly — ideally adjacent to the download link
+- If the resource has a version number or review date, display it clearly – ideally adjacent to the download link
 - If the resource is a checklist, limit it to yes/no confirmations of critical requirements only. Do not add explanatory prose to checklist items. Guidance belongs on the supporting guide page. If an item requires context to answer, it belongs in the guide, not the checklist.
 - Do not use scanned PDFs as the primary resource if accessible alternatives exist; all downloadable content must meet WCAG 2.1 AA accessibility requirements
 
@@ -45,21 +42,21 @@ Follow the [Australian Government Style Manual](https://www.stylemanual.gov.au) 
 
 Use the following UI components when building resource pages in the CMS.
 
-**Page header (hero)** — Use a simple title-and-description header. The description should name the format (for example, 'A downloadable Word template for…') so users can assess the resource before downloading.
+**Page header (hero)** – Use a simple title-and-description header. The description should name the format (for example, 'A downloadable Word template for…') so users can assess the resource before downloading.
 
-**File download** — The primary component for resources that are documents, spreadsheets, or presentations. Display the file name, format, and file size. Position it at the top of the content area, before any instructions.
+**File download** – The primary component for resources that are documents, spreadsheets, or presentations. Display the file name, format, and file size. Position it at the top of the content area, before any instructions.
 
-**Rich text body** — Use for brief introductory context and how-to instructions. Keep it short. If the instructions exceed 200 words, consider whether a guide page is more appropriate.
+**Rich text body** – Use for brief introductory context and how-to instructions. Keep it short. If the instructions exceed 200 words, consider whether a guide page is more appropriate.
 
-**Callout** — Use to highlight important prerequisites, version notes, or usage restrictions (for example, 'this template is for non-corporate Commonwealth entities only').
+**Callout** – Use to highlight important prerequisites, version notes, or usage restrictions (for example, 'this template is for non-corporate Commonwealth entities only').
 
-**Timeline** — Use for visual roadmap resources that present a sequence of dates or milestones. Appropriate for policy implementation timelines and program schedules.
+**Timeline** – Use for visual roadmap resources that present a sequence of dates or milestones. Appropriate for policy implementation timelines and program schedules.
 
-**Accordion** — Use for frequently asked questions about the resource, particularly for tools with multiple use cases or user types. Limit to five to seven items.
+**Accordion** – Use for frequently asked questions about the resource, particularly for tools with multiple use cases or user types. Limit to five to seven items.
 
-**Related content cards** — Link to the policy the resource supports and to any guide pages that explain how to use it. Two to three cards.
+**Related content cards** – Link to the policy the resource supports and to any guide pages that explain how to use it. Two to three cards.
 
-**Tags** — Apply tags from the approved taxonomy. Resource pages typically carry tags for the policy domain, the resource format (for example, 'template', 'checklist', 'tool'), and the target audience.
+**Tags** – Apply tags from the approved taxonomy. Resource pages typically carry tags for the policy domain, the resource format (for example, 'template', 'checklist', 'tool'), and the target audience.
 
 ## Examples
 - [Assurance on Digital & ICT Investments Factsheet](https://www.digital.gov.au/investment/assurance/assurance-framework-digital-ict-investments/assurance-digital-investments-factsheet)
@@ -72,4 +69,4 @@ Use the following UI components when building resource pages in the CMS.
 
 Some resources warrant a sub-page to address questions that cannot be handled within the main resource page.
 
-**FAQ** — a sub-page for frequently asked questions about the resource; appropriate when the resource has multiple user types or use cases that generate distinct questions. Limit to 7 items.
+**FAQ** – a sub-page for frequently asked questions about the resource; appropriate when the resource has multiple user types or use cases that generate distinct questions. Limit to 7 items.

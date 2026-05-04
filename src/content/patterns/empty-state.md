@@ -13,9 +13,9 @@ This pattern covers the no-results state only. Loading states and error states a
 
 An empty state must include all three of the following:
 
-1. **A clear heading** — state plainly that no results were found. Do not use vague or apologetic language such as 'Hmm' or 'Nothing here'.
-2. **An explanation** — tell users why there are no results. For example: 'No results match your current filters' or 'No publications found for this search term'.
-3. **An actionable recovery** — give users a clear next step. At minimum, offer a 'Clear filters' or 'Clear search' action. For narrow searches, also suggest broadening the search term.
+1. **A clear heading** – state plainly that no results were found. Do not use vague or apologetic language such as 'Hmm' or 'Nothing here'.
+2. **An explanation** – tell users why there are no results. For example: 'No results match your current filters' or 'No publications found for this search term'.
+3. **An actionable recovery** – give users a clear next step. At minimum, offer a 'Clear filters' or 'Clear search' action. For narrow searches, also suggest broadening the search term.
 
 ## Rules
 
@@ -31,10 +31,10 @@ If the empty state is caused by a combination of active filters, provide both 'C
 
 ## Related components
 
-- [Table](/components/table/) — the table component requires an empty state when filters return no rows.
-- [Filter sidebar](/components/filter-sidebar/) — the filter component most likely to produce an empty state.
+- [Table](/components/table/) – the table component requires an empty state when filters return no rows.
+- [Filter sidebar](/components/filter-sidebar/) – the filter component most likely to produce an empty state.
 
 ## Related patterns
 
-- [Search filters](/patterns/search-filters/) — the broader filtering pattern that this empty state supports.
-- [Pagination](/patterns/pagination/) — appears alongside pagination; when filters reduce results to zero, pagination is replaced by the empty state.
+- [Search filters](/patterns/search-filters/) – the broader filtering pattern that this empty state supports.
+- [Pagination](/patterns/pagination/) – appears alongside pagination; when filters reduce results to zero, pagination is replaced by the empty state.

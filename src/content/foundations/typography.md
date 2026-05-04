@@ -30,7 +30,7 @@ Government services are provided for everyone, regardless of their situation or 
 | SemiBold | `600` | Sub-headings, table column headers, emphasis labels |
 | Bold | `700` | Page headings, section headings, strong callouts |
 
-Avoid Thin (100), ExtraLight (200), and Light (300) in digital interfaces — they reduce legibility at small sizes and on low-contrast displays. Avoid ExtraBold (800) and Black (900) except in display contexts such as hero headings.
+Avoid Thin (100), ExtraLight (200), and Light (300) in digital interfaces – they reduce legibility at small sizes and on low-contrast displays. Avoid ExtraBold (800) and Black (900) except in display contexts such as hero headings.
 
 ## Type scale
 
@@ -51,8 +51,8 @@ The scale uses a modular ratio. Sizes are defined as CSS custom properties and e
 
 | Token | Value | Use |
 |---|---|---|
-| `--leading-tight` | `1.25` | Headings — keeps multi-line headings compact |
-| `--leading-normal` | `1.5` | Default body copy — optimal reading rhythm |
+| `--leading-tight` | `1.25` | Headings – keeps multi-line headings compact |
+| `--leading-normal` | `1.5` | Default body copy – optimal reading rhythm |
 | `--leading-relaxed` | `1.75` | Long-form text, accessibility-critical reading contexts |
 
 ## Monospace stack
@@ -63,7 +63,7 @@ Used for code blocks, token labels, technical values, and data identifiers:
 font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
 ```
 
-The monospace stack is intentionally separate from Public Sans. Use it only for content that represents code or technical identifiers — not for UI text that happens to need alignment.
+The monospace stack is intentionally separate from Public Sans. Use it only for content that represents code or technical identifiers – not for UI text that happens to need alignment.
 
 ## Do
 
@@ -73,13 +73,13 @@ The monospace stack is intentionally separate from Public Sans. Use it only for 
 
 ## Don't
 
-- set font sizes in `px` — this overrides user browser font-size preferences and fails WCAG SC 1.4.4
-- use weights below `400` in UI contexts — they reduce legibility at small sizes
+- set font sizes in `px` – this overrides user browser font-size preferences and fails WCAG SC 1.4.4
+- use weights below `400` in UI contexts – they reduce legibility at small sizes
 - mix default font and the monospace stack within a single sentence or label
-- use `font-family` with no fallbacks — the stack must include system font fallbacks
-- rely on font-weight names (e.g. `bold`) in component CSS — always use numeric values so the variable font axis resolves correctly
+- use `font-family` with no fallbacks – the stack must include system font fallbacks
+- rely on font-weight names (e.g. `bold`) in component CSS – always use numeric values so the variable font axis resolves correctly
 
 ## Related foundations
 
-- [Colour](/dga-dl/foundations/colour) — Foreground tokens that control text colour
-- [Elevation](/dga-dl/foundations/elevation) — Layering model for surfaces that contain text
+- [Colour](/dga-dl/foundations/colour) – Foreground tokens that control text colour
+- [Elevation](/dga-dl/foundations/elevation) – Layering model for surfaces that contain text
