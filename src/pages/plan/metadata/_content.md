@@ -1,212 +1,231 @@
 ---
-title: Managing metadata
-lead: It's important to manage your metadata well so that people can easily find, understand, use and share your information assets.
+title: Page metadata
+lead: Every page on digital.gov.au carries metadata that drives its title, description, where it sits in the site, and the structured data search engines and AI systems read. Get the metadata right and the rest of the system slots into place.
 ---
 
+Metadata for a digital.gov.au page is more than the title and description shown to readers. It is also the source of the structured data (JSON-LD) embedded in every published page. Search engines, AI assistants, and downstream content tooling read that data to decide what the page is, who it is for, and how it relates to other pages on the site.
 
-Improving how your agency manages metadata will also help it achieve [Action 10](https://www.naa.gov.au/node/2696/#action-10) and [Action 11](https://www.naa.gov.au/node/2696/#action-11) of the [*Building trust in the public record*](https://www.naa.gov.au/information-management/information-management-policies/building-trust-public-record) policy.
+This page is for content owners. It sets out the metadata fields you need to provide, the canonical page-type taxonomy you choose from, and the relationships you express between your page and others.
 
-You can improve the way you manage your metadata by conducting a project to develop a metadata management framework or strategy.
-
-A metadata framework is a planned, iterative approach to improving how your agency manages its metadata. A metadata strategy identifies goals and provides a path for improvement. Alternatively, you can incorporate metadata into your existing planning documents, such as your [information governance framework](https://www.naa.gov.au/node/280) and [information management strategy](https://www.naa.gov.au/node/795).
+For the wider record-keeping and capability frame this guidance sits inside, see [Metadata governance](/plan/metadata/governance/).
 
 On this page
 ------------
 
--   [Developing a metadata framework]()
--   [Metadata management tools]()
--   [Identify other improvements]()
--   [Building metadata capability]()
+- [Pick a page type](#pick-a-page-type)
+- [Required fields](#required-fields)
+- [Relationship fields](#relationship-fields)
+- [Lifecycle fields](#lifecycle-fields)
+- [Worked examples](#worked-examples)
+- [What happens to your metadata](#what-happens-to-your-metadata)
 
-Developing a metadata framework
--------------------------------
+Pick a page type
+----------------
 
-Follow these steps to:
+Every page is one of six canonical types. The type determines what shape the JSON-LD takes and how the page is weighted by downstream systems. Pick one before you start writing.
 
--   target areas where metadata quality could be improved
--   improve metadata management across your agency.
+| Type | Use for | Examples |
+|---|---|---|
+| **Navigation** | A page whose primary job is to route readers to other pages. | Topic landing, section index. |
+| **Overview** | A page that frames a program, initiative, or topic without setting binding rules. | Program overview, plan introduction, hub page. |
+| **Rule** | A page that states a mandatory requirement, criterion, statement, or provision. | Policy statement, standard criterion, technical-standard statement. |
+| **Guidance** | A page that explains how to do something, or how to apply a framework. | How-to, framework step, case study, training material. |
+| **Evidence** | A page that reports findings, outcomes, or events. | Report chapter, evaluation finding, communique, news post. |
+| **Reference** | A page whose job is to be looked up, not read end to end. | Glossary, FAQ, factsheet, checklist, template, related links. |
 
-### 1\. Determine the scope
+When you are unsure, ask which of these the reader is doing on your page: being **routed** (Navigation), **oriented** (Overview), **told they must do something** (Rule), **shown how to do something** (Guidance), **shown what was found or what happened** (Evidence), or **looking something up** (Reference).
 
-Decide whether your project will be enterprise-wide or limited in scope.
+A standard or policy with numbered criteria is itself a Rule, and each numbered criterion is also a Rule. The accompanying "how to meet" or "how to measure" siblings are Guidance. The "services covered" or "key terms" siblings are Reference. Reports are Evidence; their chapters and appendices are Evidence too. Communiques and news posts are Evidence.
 
-There are benefits from improving metadata management at the broadest practical level. However, if the scope of your project is too ambitious, it may be unsustainable or harder to implement.
+Required fields
+---------------
 
-You may start with a broad, enterprise-wide view, but plan for incremental improvements in areas of the greatest need.
+Every page must declare these four fields.
 
-In deciding the scope of your project, ask:
+### `title`
 
--   how many users would this change benefit?
--   what resources are available?
--   how much improvement can it actually deliver?
--   is it practical?
--   is it sustainable?
--   what are the priorities for action?
+The page name. Used as the page's `<h1>`, the listing card heading on parent indexes, the browser tab title, and the JSON-LD `name` and `headline`. Write it so it reads correctly out of context, since it is what other people see when they link to your page.
 
-You could include in your project scope:
+Do not repeat the title as a heading inside the body. The layout already renders it.
 
--   the whole enterprise or agency
--   a new system or systems being acquired or developed
--   all business areas or user communities with a related line of business
--   areas of greatest business risk or value
--   areas where metadata implementation requires most improvement.
+### `description`
 
-Your project scope may target specific information assets on your agency's [information asset register](https://www.naa.gov.au/information-management/information-governance/conducting-information-review/designing-and-maintaining-information-asset-register).
+A one- or two-sentence summary of the page. Used as the page lead, the listing card summary, the `<meta name="description">` for search engines, and the JSON-LD `description`. Write it so a reader scanning a list of cards can decide whether to open the page.
 
-### 2\. Confirm support and resources
+### `page-type`
 
-Obtain senior management endorsement for your project.
+One of `Navigation`, `Overview`, `Rule`, `Guidance`, `Evidence`, or `Reference`. Determines the JSON-LD primary entity shape. See [Pick a page type](#pick-a-page-type).
 
-This will ensure you can engage stakeholders to establish contact points and support roles.
+### `focus-area`
 
-### 3\. Consult key stakeholders
+The subject area the page belongs to. Used to populate the JSON-LD `about` field and to group pages in section listings. Pull the value from your agency's controlled vocabulary; do not invent new ones. See [Metadata governance](/plan/metadata/governance/) for where this list comes from.
 
-Consult key stakeholders to better understand:
+Relationship fields
+-------------------
 
--   the current state of metadata implementation
--   any existing issues related to metadata
--   possible improvements
--   user needs.
+Use these to express how your page relates to others. Getting these right is what lets a reader, or a retrieval system, navigate from a chapter back to its report, or from a criterion back to its standard.
 
-Key stakeholders could include:
+### `parent`
 
--   staff who use information systems
--   business owners of information systems
--   information system administrators
--   information technology support staff
--   data or metadata analysts
--   data stewards or custodians
--   senior information or data management staff, for example a chief data officer or [chief information governance officer](https://www.naa.gov.au/information-management/information-governance/establishing-information-governance-framework/chief-information-governance-officer-cigo).
+The URL of the page that owns this one. A criterion's parent is its standard. A report chapter's parent is the report. A framework step's parent is the framework landing. Drives the JSON-LD `isPartOf` link.
 
-Some of these stakeholders can also help you undertake the project.
+Set `parent` only when there is one obvious owner. Pages that sit at the top of a tree have no parent.
 
-### 4\. Understand existing practices
+### `position`
 
-Work closely with your stakeholders to understand what practices and schemas are already in place and could be built upon.
+For numbered children only: the integer position within the parent. A standard's seventh criterion sets `position: 7`. A framework's fourth step sets `position: 4`. Drives the JSON-LD `position` field and lets downstream tooling order siblings correctly.
 
-You should look at informal and ad hoc practices and schemas as well as formal or official ones.
+### `mode`
 
-Look at:
+A page-type-specific qualifier that picks the right JSON-LD sub-shape. Use one of the values below.
 
--   existing system configurations
--   schemas in use or proposed for use
--   data models
--   common business language
--   controlled vocabularies.
+| Page type | `mode` values |
+|---|---|
+| Rule | `policy`, `standard`, `criterion`, `statement` |
+| Guidance | `how-to`, `framework-step`, `case-study`, `training`, `explainer` |
+| Evidence | `report`, `chapter`, `communique`, `news`, `consultation`, `evaluation` |
+| Reference | `glossary`, `faq`, `factsheet`, `checklist`, `template`, `related-links`, `terms-of-use`, `appendix`, `services-covered` |
 
-When engaging with stakeholders, you may discover issues that are beyond the scope of the project. You will need to decide whether to address these issues in the current project or note them for future action.
+Navigation and Overview pages do not need a `mode`.
 
-### 5\. Identify best-practice schemas or standards
+Named-project case studies are coded as Evidence with `mode: chapter`, since they sit as chapters inside a report. Use Guidance with `mode: case-study` only when the page teaches a method as one of a set of scenarios under a framework.
 
-#### Identify
+### `series`
 
-Identify any available schemas or standards recognised as best practice, especially those which set baseline requirements relevant to your business (for example, geospatial, medical or scientific).
+The URL of the `CreativeWorkSeries` this page belongs to. Use on the top-level instalment of a recurring series, not on its sub-pages. The 2025-26 Major Digital Projects Report sets `series: /investment/assurance/MDPR/`. A paper in a research series sets `series` to that series' landing page.
 
-Regardless of any specialised schemas or standards relevant to your agency's business, your agency must consider standards for managing its business information. The National Archives offers the [minimum metadata set](https://www.naa.gov.au/node/862) to meet minimum requirements for information management metadata, and the [Australian Government Recordkeeping Metadata Standard (AGRkMS)](https://www.naa.gov.au/node/265) to guide more comprehensive implementation. 
+Use `series` for recurring deliverables: annual reports, themed research collections, ongoing committee communiques. The series landing page is rendered as a `CreativeWorkSeries` whose `hasPart` lists every instalment.
 
-#### Compare
+`series` differs from `parent` in intent. A chapter's `parent` is its report (structural containment). A report's `series` is the recurring set it belongs to (membership in a series). Sub-pages of an instalment do not carry `series` themselves; they reach it through their `parent` chain.
 
-Compare these standards with your existing metadata implementation. Identify whether your existing implementation conforms to these schemas and standards or needs improvement.
+Lifecycle fields
+----------------
 
-#### Adapt
+These describe when the page was published, when it was last changed, and what version it is. They are used in the JSON-LD and in any "last updated" badge on the rendered page.
 
-You may need to adapt schemas and standards to meet the unique requirements of your business or work within system configuration constraints.
+### `datePublished`
 
-Remember that adapting or deviating from recognised standards can be risky. Assess whether the risk is acceptable.
+ISO 8601 date the page was first published. Set once and do not change.
 
-#### Document
+### `dateModified`
 
-Make a record of:
+ISO 8601 date the page was last meaningfully changed. Update it when the substance of the page changes, not for typo fixes.
 
--   which schemas and standards you have decided to adopt
--   how they meet the business need
--   any adaptations made.
+### `validFrom` (Rule pages)
 
-### 6\. Prepare your framework
-
-Write a framework for metadata implementation based on the user needs, schemas and standards you have identified.
-
-At a minimum, your framework should outline:
-
--   the schemas and standards to be used
--   roles and responsibilities for using and managing metadata
--   systems, processes, procedures and rules to help maintain the metadata implementation
--   evaluation and monitoring processes
--   review cycles
--   approval processes.
-
-Seek endorsement from senior management for the framework.
-
-Once endorsed, promote the framework to users within all relevant business areas.
-
-### 7\. Configure
-
-Configure metadata in agency information systems, according to the requirements of the schema wherever possible.
-
-Workarounds, such as cross-mapping across systems, may need to be incorporated to support the schema.
-
-### 8\. Communicate
-
-Help users understand their responsibilities in maintaining metadata as outlined in the framework, with reference to roles, procedures and business rules.
-
-### 9\. Respond to change
-
-It's important to ensure your metadata continues to meet the changing needs of your users over time.
-
-Revisit your metadata implementation regularly to ensure it:
-
--   effectively enables people to find, understand, use and share information
--   complies with current standards
--   meets the changing needs of your business environment and users
--   works with your business information systems
--   is automated wherever possible.
-
-Make sure you check in with your users often to ensure they:
-
--   contribute to, adopt and understand agreed metadata terms and definitions
--   are creating good quality metadata using tools available within your agency.
-
-Metadata management tools
--------------------------
-
-There are a number of tools your agency can consider to manage metadata, and continually improve its quality and usage.
-
-If you decide to use one or more metadata management tools, you should document this in the next iteration of your metadata framework.
-
-### Business glossary
-
-A business glossary lists easy to understand definitions of approved terms used by your agency to describe data. Its purpose is to eliminate ambiguity and misunderstandings across business areas.
-
-[Developing a business glossary](https://www.naa.gov.au/node/3003) can inform your local metadata schema and help you to describe and categorise metadata elements in a data dictionary or metadata registry.
-
-### Data dictionary
-
-A data dictionary lists data elements, including associated metadata, within data assets to help users understand how each element is used and how they can be understood. Typically, they provide details such as name, definition, data type, size and permissible values for each data element.
-
-Data dictionaries are often very specific to individual data assets, documenting their existing structure. However, they can sometimes also be used as a conceptual representation to guide configuration, support publication or adopt schemas identified in your metadata framework.
-
-Using data dictionaries can ensure common understanding of data assets for users, developers and other stakeholders and allow data to be re-used more easily.
-
-### Metadata registry
-
-A metadata registry is an interactive application which can be used to register and govern all aspects of metadata including business terms, data elements, classification schemes, indicators and the relationships between them.
-
-You may wish to look at standards to better understand the purpose of a metadata registry and how to coordinate the registration process. Useful standards include:
-
--   [AS ISO/IEC 11179](https://www.standards.org.au/search-results?query=AS%20ISO%2FIEC%2011179%20current) Information Technology -- Metadata Registries
--   [ISO/IEC TR 20943](https://www.iso.org/advanced-search/x/title/status/P/docNumber/20943/docPartNo/docType/0/langCode/ics/currentStage/true/searchAbstract/true/stage/stageDateStart/stageDateEnd/committee/sdg) Information Technology -- Procedures for Achieving Metadata Registry Consistency.
-
-Making a metadata registry or data dictionary compliant with these standards will ensure your data is described in a consistent way that can be understood outside your agency. An example of an ISO 11179 compliant metadata registry is [METeOR](https://meteor.aihw.gov.au/content/181162), Australia's repository for national metadata standards for health, housing and community services statistics and information.
-
-Identify other improvements
----------------------------
-
-Our [Data interoperability maturity model](https://www.naa.gov.au/node/907), in particular the 'Semantic' theme, can help your agency assess its maturity in managing metadata and identify further steps to improve its maturity.
-
-Building metadata capability
-----------------------------
-
-Investing in your capability to manage metadata can help meet the needs of your organisation over time. Some suggested resources include:
-
--   [Capabilities for information management professionals](https://www.naa.gov.au/node/2726) -- see 'Metadata'
--   [Data Management Body of Knowledge (DMBoK)](https://www.dama.org/cpages/body-of-knowledge) -- see chapter 12 'Metadata Management'
+ISO 8601 date the rule takes effect. Use on Rule pages when the date of effect differs from `datePublished`. A standard published in March that takes effect on 1 July sets `datePublished: 2026-03-15` and `validFrom: 2026-07-01`. Drives the JSON-LD `validFrom` property.
+
+### `expires` (Rule pages, optional)
+
+ISO 8601 date the rule lapses. Set when a rule has a known sunset date or fixed period of effect. Omit for rules that remain in force until superseded. Drives the JSON-LD `expires` property.
+
+### `temporalCoverage` (Evidence pages)
+
+The period the page reports on, in ISO 8601 interval notation. An annual report covering 2025-26 sets `temporalCoverage: "2025-07-01/2026-06-30"`. Distinct from `datePublished`, which is when the report was released. Drives the JSON-LD `temporalCoverage` property.
+
+### `version`
+
+For pages that are versioned releases of the same artefact (a policy, a standard, an annual report). Use a short string such as `2026` or `v1.0`.
+
+### `supersedes` and `supersededBy`
+
+When you publish a new version of a page, set `supersededBy` on the old version to the URL of the new version, and `supersedes` on the new version to the URL of the old one. This lets readers and crawlers follow the version chain.
+
+Schema.org has no `supersedes` or `supersededBy` properties on `CreativeWork`. The publishing pipeline maps `supersedes` to `isBasedOn` on the new version, pointing to the old. The inverse link is recovered by walking the graph, so the version chain stays in standard schema.org rather than a custom predicate.
+
+### `audience` (optional)
+
+Defaults to `Australian Government agencies`. Override only when the page is genuinely written for a different audience.
+
+Worked examples
+---------------
+
+### A standard criterion (Rule)
+
+```yaml
+---
+title: Criterion 7
+description: Build a digital service that is reliable, secure, and meets uptime expectations.
+page-type: Rule
+mode: criterion
+focus-area: digital-experience
+parent: /policy/digital-experience/digital-service-standard/
+position: 7
+datePublished: 2018-04-01
+dateModified: 2026-03-11
+---
+```
+
+### A framework step (Guidance)
+
+```yaml
+---
+title: 'Step 4: Fairness'
+description: How to assess fairness in an AI system before deployment.
+page-type: Guidance
+mode: framework-step
+focus-area: ai
+parent: /policy/ai/pilot-ai-assurance-framework/
+position: 4
+---
+```
+
+### A report chapter (Evidence)
+
+```yaml
+---
+title: Project performance
+description: Findings on the delivery and benefits realisation of major digital projects in 2025 to 2026.
+page-type: Evidence
+mode: chapter
+focus-area: mdpr
+parent: /investment/assurance/MDPR-2026/
+datePublished: 2026-02-09
+---
+```
+
+### An annual report (Evidence with series)
+
+```yaml
+---
+title: Major Digital Projects Report 2025-26
+description: A statement on the delivery and benefits realisation of major digital projects across the Australian Government for 2025-26.
+page-type: Evidence
+mode: report
+focus-area: mdpr
+parent: /investment/assurance/
+series: /investment/assurance/MDPR/
+temporalCoverage: '2025-07-01/2026-06-30'
+datePublished: 2026-02-09
+---
+```
+
+### A glossary (Reference)
+
+```yaml
+---
+title: MDPR glossary
+description: Definitions of the acronyms, abbreviations, and specialised terms used in the Major Digital Projects Report.
+page-type: Reference
+mode: glossary
+focus-area: mdpr
+parent: /investment/assurance/MDPR-2026/
+---
+```
+
+What happens to your metadata
+-----------------------------
+
+The fields above are read by the publishing pipeline and turned into JSON-LD embedded in every page. Each canonical page type has its own typed primary entity:
+
+- A Navigation page becomes a `CollectionPage` with an `ItemList` of children.
+- An Overview page becomes an `AboutPage` with an `Article` describing the topic.
+- A Rule page becomes a `CreativeWork` and `DigitalDocument` with a `genre` matching its `mode`.
+- A Guidance page becomes a `LearningResource`, and a framework step is also a `HowToStep` inside its parent's `HowTo`.
+- An Evidence page is a `Report` (the report itself), an `Article` and `Chapter` (a chapter or appendix), an `Article` with `genre: "communique"` (a communique), or a `NewsArticle` (a news post).
+- A Reference page is a `DefinedTermSet` (glossary), `FAQPage` (FAQ), `ItemList` (checklist), or typed `CreativeWork` (factsheet, template, related links).
+- A series landing page (a recurring set of reports or research papers) is a `CreativeWorkSeries` whose `hasPart` lists every instalment.
+
+Relationships set by `parent` and `position` become `isPartOf`, `hasPart`, and `position` links between those entities. A page with `series` set is emitted with `isPartOf` pointing to the series. Lifecycle fields (`validFrom`, `expires`, `temporalCoverage`) are emitted on the typed primary entity when present.
+
+Why this matters: search engines use the typed graph to choose richer search results, AI assistants use it to retrieve the right neighbouring pages, and the design library uses it to lint for drift. A chapter that points at a non-existent report, a criterion with no parent standard, or a superseded page that no successor links back to all become fixable lint errors once the metadata is the source of truth.
