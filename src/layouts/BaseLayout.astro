@@ -28,6 +28,37 @@ const base = import.meta.env.BASE_URL;
     <title>{title}</title>
     <link rel="stylesheet" media="all" href={`${base}civictheme.css`} />
     <link rel="stylesheet" media="all" href={`${base}civictheme.variables.css`} />
+    <style is:global>
+      .ct-demo {
+        margin-bottom: 1.5rem;
+      }
+      @media (min-width: 992px) {
+        .ct-demo {
+          margin-bottom: 3rem;
+        }
+      }
+      .ct-basic-content dl {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        column-gap: 0.5rem;
+        row-gap: 0.25rem;
+        margin: 0 0 1.5rem;
+      }
+      .ct-basic-content dl dt {
+        font-weight: bold;
+      }
+      .ct-basic-content dl dt::after {
+        content: ':';
+      }
+      .ct-basic-content dl dd {
+        margin: 0;
+      }
+      .ct-basic-content pre {
+        padding: 1rem;
+        margin: 0 0 1.5rem;
+        border-radius: 4px;
+      }
+    </style>
     <slot name="head" />
   </head>
   <body class="path-frontpage page-node-type-civictheme-page">
