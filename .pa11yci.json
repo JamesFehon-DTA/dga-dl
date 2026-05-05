@@ -1,0 +1,23 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "timeout": 30000,
+    "wait": 500,
+    "concurrency": 1,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"]
+    }
+  },
+  "urls": [
+    "http://localhost:4322/",
+    "http://localhost:4322/components/",
+    "http://localhost:4322/patterns/",
+    "http://localhost:4322/foundations/",
+    "http://localhost:4322/templates/",
+    "http://localhost:4322/plan/",
+    "http://localhost:4322/plan/content/",
+    "http://localhost:4322/plan/development/",
+    "http://localhost:4322/plan/metadata/"
+  ]
+}

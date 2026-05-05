@@ -20,3 +20,6 @@ dist/
 .env.production
 CNAME
 .claude/launch.json
+.claude/.a11y-passed
+.claude/settings.local.json
+.claude/worktrees/

@@ -9,7 +9,8 @@
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && surge ./dist publisher-digital-govau.surge.sh"
+    "a11y": "bash scripts/a11y.sh",
+    "deploy": "npm run a11y && surge ./dist publisher-digital-govau.surge.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
@@ -18,6 +19,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
+    "pa11y-ci": "^4.1.0",
     "pagefind": "^1.5.2"
   }
 }
