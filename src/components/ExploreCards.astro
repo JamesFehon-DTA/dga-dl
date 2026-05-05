@@ -16,7 +16,13 @@ const { cards, showHeader = false } = Astro.props;
 const componentTypes = [
   ...new Set(cards.map((c) => c['component-type']).filter((t): t is string => Boolean(t))),
 ].sort();
+
+const searchTitles = cards.map((c) => c.title);
+
+const base = import.meta.env.BASE_URL;
 ---
+
+<link rel="stylesheet" href={`${base}vendor/accessible-autocomplete/accessible-autocomplete.min.css`} />
 
 <div class="ct-list ct-theme-light ct-vertical-spacing-inset--top">
   <div class="ct-list__inner">
@@ -33,33 +39,54 @@ const componentTypes = [
       </div>
     )}
 
-    {componentTypes.length > 0 && (
+    {cards.length > 0 && (
       <div class="ct-list__filters">
         <div class="ct-single-filter ct-theme-light">
           <div class="container">
             <div class="row">
               <div class="col-xxs-12">
-                <div class="ct-single-filter__title">Filter by type:</div>
-                <div class="ct-single-filter__wrapper">
-                  <div class="ct-single-filter__items">
-                    <ul class="ct-item-list ct-item-list--horizontal ct-item-list--small ct-single-filter__list">
-                      <li class="ct-item-list__item">
-                        <label class="ct-chip ct-theme-light ct-chip--small active component-filter-label">
-                          <input class="ct-chip__input" name="component-type-filter" type="radio" value="all" checked />
-                          <span class="ct-text-icon__text">All</span>
-                        </label>
-                      </li>
-                      {componentTypes.map((type) => (
+                <label class="ct-label ct-theme-light ct-label--regular" for="component-search">
+                  Search components
+                </label>
+                <div class="ct-field ct-theme-light ct-field--textfield ct-field--vertical">
+                  <h2 class="ct-visually-hidden" id="component-search-suggestions-heading">
+                    Suggested components
+                  </h2>
+                  <div class="ct-field__wrapper component-search-wrapper"></div>
+                </div>
+              </div>
+            </div>
+
+            {componentTypes.length > 0 && (
+              <div class="row" style="margin-top:1rem">
+                <div class="col-xxs-12">
+                  <div class="ct-single-filter__title">Filter by type:</div>
+                  <div class="ct-single-filter__wrapper">
+                    <div class="ct-single-filter__items">
+                      <ul class="ct-item-list ct-item-list--horizontal ct-item-list--small ct-single-filter__list">
                         <li class="ct-item-list__item">
-                          <label class="ct-chip ct-theme-light ct-chip--small component-filter-label">
-                            <input class="ct-chip__input" name="component-type-filter" type="radio" value={type} />
-                            <span class="ct-text-icon__text">{type}</span>
+                          <label class="ct-chip ct-theme-light ct-chip--small active component-filter-label">
+                            <input class="ct-chip__input" name="component-type-filter" type="radio" value="all" checked />
+                            <span class="ct-text-icon__text">All</span>
                           </label>
                         </li>
-                      ))}
-                    </ul>
+                        {componentTypes.map((type) => (
+                          <li class="ct-item-list__item">
+                            <label class="ct-chip ct-theme-light ct-chip--small component-filter-label">
+                              <input class="ct-chip__input" name="component-type-filter" type="radio" value={type} />
+                              <span class="ct-text-icon__text">{type}</span>
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
+              </div>
+            )}
+
+            <div class="row">
+              <div class="col-xxs-12">
                 <p class="ct-paragraph ct-theme-light ct-paragraph--regular" aria-live="polite" id="component-filter-count" style="margin-top:0.5rem;margin-bottom:0"></p>
               </div>
             </div>
@@ -69,36 +96,45 @@ const componentTypes = [
     )}
 
     <div class="ct-list__rows ct-vertical-spacing-inset--bottom">
-      <div class="container" aria-live="polite">
+      <div class="container">
         <div class="row row--equal-heights-content row--vertically-spaced">
-          {cards.map((card) => (
-            <div class="col-xxs-12 col-m-4" data-component-type={card['component-type']}>
-              <div class="ct-navigation-card ct-theme-light ct-navigation-card--with-link ct-navigation-card--card-clickable">
-                <div class="ct-navigation-card__content">
-                  <div class="ct-navigation-card__title">
-                    <h3 class="ct-navigation-card__title">
-                      <a class="ct-navigation-card__title-link" href={card.url}>
-                        {card.title}
-                      </a>
-                    </h3>
-                  </div>
-                  <div class="ct-paragraph ct-theme-light ct-paragraph--regular ct-paragraph--no-margin ct-navigation-card__summary">
-                    {card.description}
-                  </div>
-                  <div class="ct-navigation-card__tags" style="display:flex;align-items:center;gap:0.5rem">
-                    {card['component-type'] && (
-                      <span class="ct-tag ct-theme-light ct-tag--secondary">{card['component-type']}</span>
-                    )}
-                    <div class="ct-navigation-card__link-graphic">
-                      <svg class="ct-icon ct-icon--size-regular" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.92 11.62C17.8724 11.4973 17.801 11.3851 17.71 11.29L12.71 6.29C12.6168 6.19676 12.5061 6.1228 12.3842 6.07234C12.2624 6.02188 12.1319 5.99591 12 5.99591C11.7337 5.99591 11.4783 6.1017 11.29 6.29C11.1968 6.38324 11.1228 6.49393 11.0723 6.61575C11.0219 6.73758 10.9959 6.86814 10.9959 7C10.9959 7.2663 11.1017 7.5217 11.29 7.71L14.59 11H7C6.73478 11 6.48043 11.1054 6.29289 11.2929C6.10536 11.4804 6 11.7348 6 12C6 12.2652 6.10536 12.5196 6.29289 12.7071C6.48043 12.8946 6.73478 13 7 13H14.59L11.29 16.29C11.1963 16.383 11.1219 16.4936 11.0711 16.6154C11.0203 16.7373 10.9942 16.868 10.9942 17C10.9942 17.132 11.0203 17.2627 11.0711 17.3846C11.1219 17.5064 11.1963 17.617 11.29 17.71C11.383 17.8037 11.4936 17.8781 11.6154 17.9289C11.7373 17.9797 11.868 18.0058 12 18.0058C12.132 18.0058 12.2627 17.9797 12.3846 17.9289C12.5064 17.8781 12.617 17.8037 12.71 17.71L17.71 12.71C17.801 12.6149 17.8724 12.5028 17.92 12.38C18.02 12.1365 18.02 11.8635 17.92 11.62Z"></path>
-                      </svg>
+          {cards.map((card) => {
+            const haystack = [card.title, card.description, card['component-type'] ?? '']
+              .join(' ')
+              .toLowerCase();
+            return (
+              <div
+                class="col-xxs-12 col-m-4"
+                data-component-type={card['component-type']}
+                data-search={haystack}
+              >
+                <div class="ct-navigation-card ct-theme-light ct-navigation-card--with-link ct-navigation-card--card-clickable">
+                  <div class="ct-navigation-card__content">
+                    <div class="ct-navigation-card__title">
+                      <h3 class="ct-navigation-card__title">
+                        <a class="ct-navigation-card__title-link" href={card.url}>
+                          {card.title}
+                        </a>
+                      </h3>
+                    </div>
+                    <div class="ct-paragraph ct-theme-light ct-paragraph--regular ct-paragraph--no-margin ct-navigation-card__summary">
+                      {card.description}
+                    </div>
+                    <div class="ct-navigation-card__tags" style="display:flex;align-items:center;gap:0.5rem">
+                      {card['component-type'] && (
+                        <span class="ct-tag ct-theme-light ct-tag--secondary">{card['component-type']}</span>
+                      )}
+                      <div class="ct-navigation-card__link-graphic">
+                        <svg class="ct-icon ct-icon--size-regular" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.92 11.62C17.8724 11.4973 17.801 11.3851 17.71 11.29L12.71 6.29C12.6168 6.19676 12.5061 6.1228 12.3842 6.07234C12.2624 6.02188 12.1319 5.99591 12 5.99591C11.7337 5.99591 11.4783 6.1017 11.29 6.29C11.1968 6.38324 11.1228 6.49393 11.0723 6.61575C11.0219 6.73758 10.9959 6.86814 10.9959 7C10.9959 7.2663 11.1017 7.5217 11.29 7.71L14.59 11H7C6.73478 11 6.48043 11.1054 6.29289 11.2929C6.10536 11.4804 6 11.7348 6 12C6 12.2652 6.10536 12.5196 6.29289 12.7071C6.48043 12.8946 6.73478 13 7 13H14.59L11.29 16.29C11.1963 16.383 11.1219 16.4936 11.0711 16.6154C11.0203 16.7373 10.9942 16.868 10.9942 17C10.9942 17.132 11.0203 17.2627 11.0711 17.3846C11.1219 17.5064 11.1963 17.617 11.29 17.71C11.383 17.8037 11.4936 17.8781 11.6154 17.9289C11.7373 17.9797 11.868 18.0058 12 18.0058C12.132 18.0058 12.2627 17.9797 12.3846 17.9289C12.5064 17.8781 12.617 17.8037 12.71 17.71L17.71 12.71C17.801 12.6149 17.8724 12.5028 17.92 12.38C18.02 12.1365 18.02 11.8635 17.92 11.62Z"></path>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div class="container" id="component-filter-empty" style="display:none" aria-live="polite">
@@ -113,19 +149,61 @@ const componentTypes = [
   </div>
 </div>
 
-{componentTypes.length > 0 && (
-  <script is:inline>
-    (function () {
-      var radios = document.querySelectorAll('input[name="component-type-filter"]');
-      var cards = document.querySelectorAll('[data-component-type]');
+{cards.length > 0 && (
+  <style is:global>
+    .component-search-wrapper .autocomplete__input {
+      height: 3rem;
+      padding: 1rem;
+      border-radius: var(--ct-textfield-border-radius);
+      font-size: var(--ct-typography-label-small-font-size);
+      line-height: var(--ct-typography-label-small-line-height);
+      font-family: var(--ct-typography-label-small-font-name);
+      font-weight: var(--ct-typography-label-small-font-weight);
+      letter-spacing: var(--ct-typography-label-small-letter-spacing);
+    }
+
+    .component-search-wrapper .autocomplete__hint,
+    .component-search-wrapper .autocomplete__option {
+      padding: 1rem;
+      font-size: var(--ct-typography-label-small-font-size);
+      line-height: var(--ct-typography-label-small-line-height);
+      font-family: var(--ct-typography-label-small-font-name);
+      font-weight: var(--ct-typography-label-small-font-weight);
+      letter-spacing: var(--ct-typography-label-small-letter-spacing);
+    }
+
+    .component-search-wrapper .autocomplete__option--focused,
+    .component-search-wrapper .autocomplete__option:hover {
+      background-color: var(--ct-button-light-primary-background-color);
+      border-color: var(--ct-button-light-primary-border-color);
+      color: var(--ct-button-light-primary-color);
+    }
+  </style>
+)}
+
+{cards.length > 0 && (
+  <script
+    is:inline
+    src={`${base}vendor/accessible-autocomplete/accessible-autocomplete.min.js`}
+  ></script>
+)}
+
+{cards.length > 0 && (
+  <script is:inline define:vars={{ searchTitles }}>
+    document.addEventListener('DOMContentLoaded', function () {
+      var cards = document.querySelectorAll('[data-search]');
       var countEl = document.getElementById('component-filter-count');
       var emptyEl = document.getElementById('component-filter-empty');
+      var radios = document.querySelectorAll('input[name="component-type-filter"]');
       var total = cards.length;
+      var state = { type: 'all', query: '' };
 
-      function applyFilter(filter) {
+      function applyFilter() {
         var visible = 0;
         cards.forEach(function (col) {
-          if (filter === 'all' || col.dataset.componentType === filter) {
+          var typeMatch = state.type === 'all' || col.dataset.componentType === state.type;
+          var queryMatch = state.query === '' || col.dataset.search.indexOf(state.query) !== -1;
+          if (typeMatch && queryMatch) {
             col.style.display = '';
             visible++;
           } else {
@@ -133,7 +211,11 @@ const componentTypes = [
           }
         });
         emptyEl.style.display = visible === 0 ? '' : 'none';
-        countEl.textContent = filter === 'all' ? '' : 'Showing ' + visible + ' of ' + total + ' components';
+        if (state.type === 'all' && state.query === '') {
+          countEl.textContent = '';
+        } else {
+          countEl.textContent = 'Showing ' + visible + ' of ' + total + ' components';
+        }
       }
 
       radios.forEach(function (radio) {
@@ -141,9 +223,55 @@ const componentTypes = [
           document.querySelectorAll('.component-filter-label').forEach(function (label) {
             label.classList.toggle('active', label.querySelector('input').value === radio.value);
           });
-          applyFilter(radio.value);
+          state.type = radio.value;
+          applyFilter();
         });
       });
-    })();
+
+      if (typeof accessibleAutocomplete === 'undefined') {
+        console.error('accessibleAutocomplete library not loaded');
+        return;
+      }
+
+      accessibleAutocomplete({
+        element: document.querySelector('.component-search-wrapper'),
+        id: 'component-search',
+        name: 'component-search',
+        source: function (query, populateResults) {
+          var q = query.toLowerCase();
+          var filtered = searchTitles.filter(function (title) {
+            return title.toLowerCase().indexOf(q) !== -1;
+          });
+          populateResults(filtered.slice(0, 5));
+        },
+        minLength: 2,
+        confirmOnBlur: false,
+        autoselect: true,
+        displayMenu: 'overlay',
+        showNoOptionsFound: true,
+        inputClasses: 'ct-textfield ct-theme-light ct-field__control',
+        tNoResults: function () {
+          return 'No matching components. Try fewer or different words.';
+        },
+        tStatusNoResults: function () {
+          return 'No matching components.';
+        },
+        menuAttributes: { 'aria-labelledby': 'component-search-suggestions-heading' },
+        onConfirm: function (selected) {
+          state.query = (selected || '').toLowerCase();
+          applyFilter();
+        },
+      });
+
+      setTimeout(function () {
+        var input = document.getElementById('component-search');
+        if (!input) return;
+        input.setAttribute('type', 'search');
+        input.addEventListener('input', function () {
+          state.query = input.value.toLowerCase();
+          applyFilter();
+        });
+      }, 0);
+    });
   </script>
 )}
