@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "sync:uikit": "node scripts/sync-uikit.mjs",
+    "postinstall": "node scripts/sync-uikit.mjs",
+    "prebuild": "node scripts/sync-uikit.mjs",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",

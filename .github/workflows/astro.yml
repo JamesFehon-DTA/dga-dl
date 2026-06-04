@@ -1,15 +1,20 @@
 name: Deploy Astro site to Pages
 
 on:
-  # Build and deploy on every push to main
+  # Build and deploy on every push to main.
   push:
     branches: [main]
-  # Allow manual runs from the Actions tab
+  # Manual runs from the Actions tab.
   workflow_dispatch:
+  # Fired by the UIKit release workflow (JamesFehon-DTA/civictheme-uikit) when a
+  # new @dta-au/civictheme-twig version is published. client_payload.version is
+  # the published version to pin.
+  repository_dispatch:
+    types: [uikit-released]
 
-# Permissions required by actions/deploy-pages
 permissions:
-  contents: read
+  # contents: write lets the dispatch build commit the bumped pin back to main.
+  contents: write
   pages: write
   id-token: write
 
@@ -26,13 +31,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Build with Astro
-        uses: withastro/action@v6.1.1
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
-          # Match local dev Node version. Astro 6 requires Node >= 22.12.
+          # Astro 6 requires Node >= 22.12.
           node-version: '22'
-          # Use our package script so Pagefind runs after `astro build`.
-          build-cmd: 'npm run build'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump and pin UIKit version (on UIKit release)
+        if: github.event_name == 'repository_dispatch'
+        env:
+          NEW_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          set -euo pipefail
+          npm install --save-exact "@dta-au/civictheme-twig@${NEW_VERSION}"
+          npm run sync:uikit
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json public/civictheme.css public/civictheme.variables.css public/civictheme.base.js
+          if git diff --staged --quiet; then
+            echo "Already pinned to ${NEW_VERSION}; nothing to commit."
+          else
+            # [skip ci] + GITHUB_TOKEN pushes (which don't re-trigger workflows)
+            # both prevent a push -> build -> commit loop.
+            git commit -m "Pin @dta-au/civictheme-twig to ${NEW_VERSION} [skip ci]"
+            git push
+          fi
+
+      - name: Build with Astro
+        # prebuild runs scripts/sync-uikit.mjs, so public/ always reflects the pin.
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
 
   deploy:
     name: Deploy
