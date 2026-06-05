@@ -1,77 +1,6 @@
 @charset "UTF-8";
-:root {
-  --ct-brand-h: 240; /* brand hue — override in sub-themes */
-  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
-}
-
-:root,
-.ct-theme-light {
-  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
-  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
-  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
-  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
-  --ct-bg-raised: oklch(1.0 0 0);
-  --ct-bg-overlay: oklch(1.0 0 0);
-  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
-  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
-  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
-  --ct-accent-on: oklch(1.0 0 0);
-  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
-  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-focus-ring: oklch(0.50 0.22 285);
-  --ct-success-emphasis: oklch(0.38 0.14 155);
-  --ct-warning-emphasis: oklch(0.40 0.14 85);
-  --ct-danger-emphasis: oklch(0.40 0.16 25);
-  --ct-info-emphasis: oklch(0.38 0.12 245);
-}
-
-.ct-theme-dark {
-  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
-  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
-  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
-  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
-  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
-}
-
-.ct-theme-light {
-  --ct-color-light-heading: var(--ct-fg-text);
-  --ct-color-light-body: var(--ct-fg-muted);
-  --ct-color-light-background-light: var(--ct-bg-body);
-  --ct-color-light-background: var(--ct-bg-shade);
-  --ct-color-light-background-dark: var(--ct-bg-body-alt);
-  --ct-color-light-border-light: var(--ct-border-muted);
-  --ct-color-light-border: var(--ct-border-default);
-  --ct-color-light-border-dark: var(--ct-border-emphasis);
-  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
-  --ct-color-light-interaction-focus: var(--ct-focus-ring);
-}
-
-.ct-theme-dark {
-  --ct-color-dark-heading: var(--ct-fg-text);
-  --ct-color-dark-body: var(--ct-fg-muted);
-  --ct-color-dark-background-light: var(--ct-bg-inset);
-  --ct-color-dark-background: var(--ct-bg-body);
-  --ct-color-dark-background-dark: var(--ct-bg-shade);
-  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap");
 .ct-background {
   background-position: center;
   background-repeat: no-repeat;
@@ -6802,6 +6731,14 @@ ol ol ol {
 .ct-basic-content .ct-content-link .ct-icon {
   vertical-align: middle;
 }
+.ct-basic-content .ct-table,
+.ct-basic-content .ct-video-player {
+  margin-bottom: var(--ct-basic-content-vertical-spacing);
+}
+.ct-basic-content .ct-table:last-child,
+.ct-basic-content .ct-video-player:last-child {
+  margin-bottom: 0;
+}
 .ct-basic-content.ct-theme-light {
   color: var(--ct-basic-content-light-base-color);
 }
@@ -7384,127 +7321,6 @@ ol ol ol {
 .ct-fast-fact-card.ct-theme-dark .ct-fast-fact-card__title,
 .ct-fast-fact-card.ct-theme-dark .ct-fast-fact-card__title-link {
   color: var(--ct-fast-fact-card-dark-title-color);
-}
-
-.ct-feature-link-list {
-  width: 100%;
-}
-.ct-feature-link-list--with-background {
-  padding: 1.5rem;
-}
-.ct-feature-link-list .ct-feature-link-list__title {
-  margin-bottom: 1rem;
-}
-.ct-feature-link-list .ct-feature-link-list__items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.ct-feature-link-list .ct-feature-link-list__item {
-  border-top: 1px solid transparent;
-}
-.ct-feature-link-list .ct-feature-link-list__item:last-child {
-  border-bottom: 1px solid transparent;
-}
-.ct-feature-link-list .ct-feature-link-list__link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0;
-  text-decoration: none;
-}
-.ct-feature-link-list .ct-feature-link-list__link:focus-visible {
-  outline-offset: var(--ct-outline-offset);
-  outline-width: var(--ct-outline-width);
-  outline-style: solid;
-  outline-color: var(--ct-outline-light);
-  border-radius: var(--ct-outline-border-radius);
-}
-.ct-feature-link-list .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
-  text-decoration: underline;
-}
-.ct-feature-link-list .ct-feature-link-list__link:hover .ct-feature-link-list__icon {
-  transform: translateX(0.25rem);
-}
-.ct-feature-link-list .ct-feature-link-list__content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-}
-.ct-feature-link-list .ct-feature-link-list__link-title {
-  font-size: var(--ct-typography-text-small-font-size);
-  line-height: var(--ct-typography-text-small-line-height);
-  font-family: var(--ct-typography-text-small-font-name);
-  font-weight: var(--ct-typography-text-small-font-weight);
-  letter-spacing: var(--ct-typography-text-small-letter-spacing);
-  font-weight: bold;
-}
-.ct-feature-link-list .ct-feature-link-list__description {
-  font-size: var(--ct-typography-text-small-font-size);
-  line-height: var(--ct-typography-text-small-line-height);
-  font-family: var(--ct-typography-text-small-font-name);
-  font-weight: var(--ct-typography-text-small-font-weight);
-  letter-spacing: var(--ct-typography-text-small-letter-spacing);
-}
-.ct-feature-link-list .ct-feature-link-list__icon {
-  flex-shrink: 0;
-  transition: transform 0.15s ease;
-}
-.ct-feature-link-list.ct-theme-light {
-  color: var(--ct-feature-link-list-light-color);
-}
-.ct-feature-link-list.ct-theme-light.ct-feature-link-list--with-background {
-  background-color: var(--ct-feature-link-list-light-background-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__item {
-  border-color: var(--ct-feature-link-list-light-item-border-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__item:last-child {
-  border-color: var(--ct-feature-link-list-light-item-border-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link {
-  color: var(--ct-feature-link-list-light-link-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link:hover {
-  background-color: var(--ct-feature-link-list-light-link-hover-background-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
-  color: var(--ct-feature-link-list-light-link-hover-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__description {
-  color: var(--ct-feature-link-list-light-description-color);
-}
-.ct-feature-link-list.ct-theme-light .ct-feature-link-list__icon {
-  color: var(--ct-feature-link-list-light-icon-color);
-}
-.ct-feature-link-list.ct-theme-dark {
-  color: var(--ct-feature-link-list-dark-color);
-}
-.ct-feature-link-list.ct-theme-dark.ct-feature-link-list--with-background {
-  background-color: var(--ct-feature-link-list-dark-background-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__item {
-  border-color: var(--ct-feature-link-list-dark-item-border-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__item:last-child {
-  border-color: var(--ct-feature-link-list-dark-item-border-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link {
-  color: var(--ct-feature-link-list-dark-link-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link:hover {
-  background-color: var(--ct-feature-link-list-dark-link-hover-background-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__link:hover .ct-feature-link-list__link-title {
-  color: var(--ct-feature-link-list-dark-link-hover-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__description {
-  color: var(--ct-feature-link-list-dark-description-color);
-}
-.ct-feature-link-list.ct-theme-dark .ct-feature-link-list__icon {
-  color: var(--ct-feature-link-list-dark-icon-color);
 }
 
 .ct-field {
@@ -9667,6 +9483,441 @@ ol ol ol {
   }
 }
 
+.bdga-chart {
+  --bdga-chart-c1: #6929c4;
+  --bdga-chart-c2: #1192e8;
+  --bdga-chart-c3: #005d5d;
+  --bdga-chart-c4: #9f1853;
+  --bdga-chart-c5: #fa4d56;
+  --bdga-chart-c6: #520408;
+  --bdga-chart-c7: #198038;
+  --bdga-chart-c8: #002d9c;
+  --bdga-chart-c9: #ee5396;
+  --bdga-chart-c10: #b28600;
+  --bdga-chart-c11: #009d9a;
+  --bdga-chart-c12: #012749;
+  --bdga-chart-c13: #8a3800;
+  --bdga-chart-c14: #a56eff;
+  --bdga-chart-s1: #6929c4;
+  --bdga-chart-s2: #8a3ffc;
+  --bdga-chart-s3: #a56eff;
+  --bdga-chart-s4: #be95ff;
+  --bdga-chart-s5: #d4bbff;
+  --bdga-chart-s6: #e8daff;
+}
+
+.ct-theme-dark .bdga-chart,
+.bdga-chart.ct-theme-dark {
+  --bdga-chart-c1: #8a3ffc;
+  --bdga-chart-c2: #33b1ff;
+  --bdga-chart-c3: #007d79;
+  --bdga-chart-c4: #ff7eb6;
+  --bdga-chart-c5: #fa4d56;
+  --bdga-chart-c6: #fff1f1;
+  --bdga-chart-c7: #6fdc8c;
+  --bdga-chart-c8: #4589ff;
+  --bdga-chart-c9: #d02670;
+  --bdga-chart-c10: #d2a106;
+  --bdga-chart-c11: #08bdba;
+  --bdga-chart-c12: #bae6ff;
+  --bdga-chart-c13: #ba4e00;
+  --bdga-chart-c14: #d4bbff;
+  --bdga-chart-s1: #8a3ffc;
+  --bdga-chart-s2: #a56eff;
+  --bdga-chart-s3: #be95ff;
+  --bdga-chart-s4: #d4bbff;
+  --bdga-chart-s5: #e8daff;
+  --bdga-chart-s6: #f6f2ff;
+}
+
+.bdga-chart {
+  --bdga-chart-sankey-margin-x: 16px;
+  --bdga-chart-sankey-margin-top: 44px;
+  --bdga-chart-sankey-margin-bottom: 10px;
+  --bdga-chart-sankey-label-mode: stacked;
+  container: bdga-chart/inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ct-spacing-200, 1rem);
+  margin: var(--ct-spacing-400, 2rem) 0;
+  padding: var(--ct-spacing-300, 1.5rem);
+  border: 1px solid var(--ct-color-neutral-300, #d4d4d4);
+  border-radius: var(--ct-border-radius-200, 4px);
+  background: var(--ct-color-background, #fff);
+  color: var(--ct-color-text, #1c1c1c);
+}
+.bdga-chart.ct-theme-dark {
+  background: var(--ct-color-background-dark, #1c1c1c);
+  color: var(--ct-color-text-on-dark, #fff);
+  border-color: var(--ct-color-neutral-700, #4a4a4a);
+}
+.bdga-chart__caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ct-spacing-100, 0.5rem);
+}
+.bdga-chart__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.bdga-chart__description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.bdga-chart__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--ct-spacing-100, 0.5rem);
+}
+.bdga-chart__zoom {
+  display: inline-flex;
+  gap: var(--ct-spacing-50, 0.25rem);
+  margin-inline-end: auto;
+}
+.bdga-chart__tool {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ct-spacing-50, 0.25rem);
+  min-height: 2.25rem;
+  padding: var(--ct-spacing-50, 0.25rem) var(--ct-spacing-200, 1rem);
+  border: 1px solid var(--ct-color-neutral-400, #c6c6c6);
+  border-radius: var(--ct-border-radius-100, 2px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.bdga-chart__tool:hover {
+  background: var(--ct-color-neutral-100, #f4f4f4);
+}
+.bdga-chart__tool:focus-visible {
+  outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+  outline-offset: 2px;
+}
+.bdga-chart__menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.bdga-chart__menu-button {
+  padding-inline: var(--ct-spacing-100, 0.5rem);
+  font-size: 1.25rem;
+}
+.bdga-chart__menu {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: calc(100% + var(--ct-spacing-50, 0.25rem));
+  z-index: 10;
+  min-width: 14rem;
+  margin: 0;
+  padding: var(--ct-spacing-50, 0.25rem);
+  list-style: none;
+  background: var(--ct-color-background, #fff);
+  border: 1px solid var(--ct-color-neutral-300, #d4d4d4);
+  border-radius: var(--ct-border-radius-100, 2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.bdga-chart__menu-item {
+  display: block;
+  width: 100%;
+  padding: var(--ct-spacing-100, 0.5rem) var(--ct-spacing-200, 1rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bdga-chart__menu-item:hover {
+  background: var(--ct-color-neutral-100, #f4f4f4);
+}
+.bdga-chart__menu-item:focus-visible {
+  outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+  outline-offset: -2px;
+}
+.bdga-chart.ct-theme-dark .bdga-chart__tool {
+  border-color: var(--ct-color-neutral-600, #6f6f6f);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__tool:hover {
+  background: var(--ct-color-neutral-800, #2c2c2c);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__menu {
+  background: var(--ct-color-background-dark, #1c1c1c);
+  border-color: var(--ct-color-neutral-700, #4a4a4a);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__menu-item:hover {
+  background: var(--ct-color-neutral-800, #2c2c2c);
+}
+.bdga-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ct-spacing-50, 0.25rem) var(--ct-spacing-300, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bdga-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ct-spacing-50, 0.25rem);
+  padding: var(--ct-spacing-50, 0.25rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.bdga-chart__legend-item:focus-visible {
+  outline: 2px solid var(--ct-color-interactive-focus, #0052cc);
+  outline-offset: 2px;
+}
+.bdga-chart__legend-item--hidden {
+  opacity: 0.6;
+}
+.bdga-chart__legend-item--hidden .bdga-chart__legend-label {
+  text-decoration: line-through;
+}
+.bdga-chart__legend-swatch {
+  flex: 0 0 auto;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  border-radius: var(--ct-border-radius-50, 2px);
+  background-repeat: repeat;
+}
+.bdga-chart__legend-swatch--tex0 {
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 1.3px 4px);
+}
+.bdga-chart__legend-swatch--tex1 {
+  background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 1.3px 4px);
+}
+.bdga-chart__legend-swatch--tex2 {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1.6px);
+  background-size: 4px 4px;
+}
+.bdga-chart__legend-swatch--tex3 {
+  background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 1.3px 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 1.3px 4px);
+}
+.bdga-chart__legend-swatch--tex4 {
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0 1.3px, transparent 1.3px 4px);
+}
+.bdga-chart__tooltip {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, calc(-100% - 8px));
+  max-width: 16rem;
+  padding: var(--ct-spacing-50, 0.25rem) var(--ct-spacing-100, 0.5rem);
+  border-radius: var(--ct-border-radius-100, 2px);
+  background: var(--ct-color-neutral-800, #2c2c2c);
+  color: var(--ct-color-text-on-dark, #fff);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+}
+.bdga-chart__tooltip[data-visible=true] {
+  opacity: 1;
+  visibility: visible;
+}
+.bdga-chart__canvas {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+}
+.bdga-chart__canvas svg {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  font-family: var(--ct-font-family, inherit);
+  font-size: 0.8125rem;
+}
+.bdga-chart__canvas .domain {
+  stroke: var(--ct-color-neutral-500, #8a8a8a);
+  stroke-width: 1;
+}
+.bdga-chart__canvas .tick line {
+  stroke: var(--ct-color-neutral-400, #c6c6c6);
+}
+.bdga-chart__canvas .tick text {
+  fill: var(--ct-color-text-light, #525252);
+}
+.bdga-chart__canvas .bdga-chart__axis-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  fill: var(--ct-color-text, #1c1c1c);
+}
+.bdga-chart__canvas rect,
+.bdga-chart__canvas path {
+  transition: opacity 0.15s ease-in-out;
+}
+.bdga-chart__canvas g:hover > rect,
+.bdga-chart__canvas g:hover > path {
+  opacity: 0.85;
+}
+.bdga-chart__canvas [tabindex] {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.bdga-chart__canvas [tabindex]:focus-visible {
+  outline-color: var(--ct-color-interactive-focus, #0052cc);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .domain {
+  stroke: var(--ct-color-neutral-400, #a8a8a8);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .tick line {
+  stroke: var(--ct-color-neutral-600, #6f6f6f);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .tick text {
+  fill: var(--ct-color-text-on-dark, #f4f4f4);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .bdga-chart__axis-label {
+  fill: var(--ct-color-text-on-dark, #f4f4f4);
+}
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .bdga-chart__lollipop-stem,
+.bdga-chart.ct-theme-dark .bdga-chart__canvas .bdga-chart__cleveland-connector {
+  stroke: var(--ct-color-neutral-500, #8a8a8a);
+}
+.bdga-chart__lollipop-stem {
+  stroke: var(--ct-color-neutral-500, #8a8a8a);
+  stroke-width: 2;
+}
+.bdga-chart__lollipop-median {
+  stroke: var(--ct-color-text-light, #525252);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.bdga-chart__lollipop-median-label {
+  font-size: 0.75rem;
+  fill: var(--ct-color-text-light, #525252);
+}
+.bdga-chart__cleveland-connector {
+  stroke: var(--ct-color-neutral-400, #c6c6c6);
+  stroke-width: 2;
+}
+.bdga-chart__cleveland-legend-label {
+  font-size: 0.8125rem;
+  fill: var(--ct-color-text, #1c1c1c);
+}
+.bdga-chart__line-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.bdga-chart__pie-label {
+  font-size: 0.8125rem;
+  fill: currentcolor;
+}
+.bdga-chart__pie-leader {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1;
+  opacity: 0.45;
+}
+.bdga-chart.ct-theme-dark .bdga-chart__cleveland-legend-label {
+  fill: var(--ct-color-text-on-dark, #f4f4f4);
+}
+.bdga-chart__error {
+  padding: var(--ct-spacing-200, 1rem);
+  border-left: 4px solid var(--ct-color-status-error, #d0011b);
+  background: var(--ct-color-status-error-tint, #fce8eb);
+  color: var(--ct-color-status-error-text, #4a0008);
+  font-weight: 500;
+}
+.bdga-chart__data {
+  border-top: 1px solid var(--ct-color-neutral-300, #d4d4d4);
+  padding-top: var(--ct-spacing-200, 1rem);
+}
+.bdga-chart__data-toggle {
+  cursor: pointer;
+  font-weight: 500;
+  list-style: none;
+}
+.bdga-chart__data-toggle::-webkit-details-marker {
+  display: none;
+}
+.bdga-chart__data-toggle::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 0.5em;
+  transition: transform 0.15s ease-in-out;
+}
+.bdga-chart__data[open] .bdga-chart__data-toggle::before {
+  transform: rotate(90deg);
+}
+.bdga-chart__table {
+  width: 100%;
+  margin-top: var(--ct-spacing-200, 1rem);
+  border-collapse: collapse;
+}
+.bdga-chart__table th,
+.bdga-chart__table td {
+  padding: var(--ct-spacing-100, 0.5rem) var(--ct-spacing-200, 1rem);
+  text-align: left;
+  border-bottom: 1px solid var(--ct-color-neutral-200, #e5e5e5);
+}
+.bdga-chart__table thead th {
+  font-weight: 600;
+  background: var(--ct-color-neutral-100, #f4f4f4);
+}
+.bdga-chart__noscript {
+  padding: var(--ct-spacing-200, 1rem);
+  background: var(--ct-color-neutral-100, #f4f4f4);
+  border-radius: var(--ct-border-radius-100, 2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bdga-chart__data-toggle::before {
+    transition: none;
+  }
+}
+@media (forced-colors: active) {
+  .bdga-chart {
+    border-color: CanvasText;
+  }
+  .bdga-chart__error {
+    border-color: LinkText;
+  }
+  .bdga-chart__tool, .bdga-chart__menu {
+    border-color: CanvasText;
+  }
+  .bdga-chart__tool:focus-visible, .bdga-chart__menu-item:focus-visible, .bdga-chart__legend-item:focus-visible {
+    outline-color: Highlight;
+  }
+  .bdga-chart__legend-swatch {
+    border: 1px solid CanvasText;
+  }
+}
+
+@container bdga-chart (min-width: 576px) {
+  .bdga-chart__canvas {
+    --bdga-chart-sankey-margin-x: 104px;
+    --bdga-chart-sankey-margin-top: 52px;
+    --bdga-chart-sankey-label-mode: outside;
+  }
+}
+@container bdga-chart (min-width: 768px) {
+  .bdga-chart__canvas {
+    --bdga-chart-sankey-margin-x: 140px;
+    --bdga-chart-sankey-margin-top: 60px;
+  }
+}
+.bdga-chart .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media print {
   .ct-footer {
     display: none !important;
@@ -9809,6 +10060,7 @@ ol ol ol {
 .ct-header__content-middle3 {
   height: 100%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 .ct-header__content-bottom1 {
@@ -10416,6 +10668,9 @@ ol ol ol {
   margin-top: -0.125rem;
   top: 1rem;
 }
+.ct-navigation.ct-navigation--primary .ct-navigation__items .ct-navigation__menu .ct-menu__item--level-0 > .ct-menu__item__link .ct-icon {
+  vertical-align: top;
+}
 .ct-navigation.ct-navigation--primary .ct-navigation__items .ct-navigation__menu .ct-menu__item--level-0.ct-menu__item--active-trail > .ct-menu__item__link::after {
   transform: scaleX(1);
 }
@@ -10542,15 +10797,14 @@ ol ol ol {
 .ct-navigation.ct-navigation--drawer .ct-navigation__items .ct-navigation__has-dropdown .ct-menu__sub-menu__wrapper--level-1 .ct-menu__sub-menu.ct-menu--level-1 {
   margin-left: auto;
   margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(var(--ct-navigation-drawer-cols), 1fr);
   gap: 2rem;
   padding: 0;
   margin-bottom: 2rem;
 }
 .ct-navigation.ct-navigation--drawer .ct-navigation__items .ct-navigation__has-dropdown .ct-menu__sub-menu__wrapper--level-1 .ct-menu__item--level-1 {
   margin-top: 2rem;
-  flex-basis: calc(100% / var(--ct-navigation-drawer-cols));
 }
 .ct-navigation.ct-navigation--drawer .ct-navigation__items .ct-navigation__has-dropdown .ct-menu__sub-menu__wrapper--level-1 .ct-menu__item--level-1 > .ct-menu__item__link {
   font-size: var(--ct-typography-heading-5-font-size);
@@ -11335,285 +11589,134 @@ ol ol ol {
   background-color: var(--ct-page-dark-background-color);
 }
 
-:root {
-  --ct-brand-h: 240; /* brand hue — override in sub-themes */
-  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
-}
-
-:root,
-.ct-theme-light {
-  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
-  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
-  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
-  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
-  --ct-bg-raised: oklch(1.0 0 0);
-  --ct-bg-overlay: oklch(1.0 0 0);
-  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
-  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
-  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
-  --ct-accent-on: oklch(1.0 0 0);
-  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
-  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-focus-ring: oklch(0.50 0.22 285);
-  --ct-success-emphasis: oklch(0.38 0.14 155);
-  --ct-warning-emphasis: oklch(0.40 0.14 85);
-  --ct-danger-emphasis: oklch(0.40 0.16 25);
-  --ct-info-emphasis: oklch(0.38 0.12 245);
-}
-
-.ct-theme-dark {
-  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
-  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
-  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
-  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
-  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
-}
-
-.ct-theme-light {
-  --ct-color-light-heading: var(--ct-fg-text);
-  --ct-color-light-body: var(--ct-fg-muted);
-  --ct-color-light-background-light: var(--ct-bg-body);
-  --ct-color-light-background: var(--ct-bg-shade);
-  --ct-color-light-background-dark: var(--ct-bg-body-alt);
-  --ct-color-light-border-light: var(--ct-border-muted);
-  --ct-color-light-border: var(--ct-border-default);
-  --ct-color-light-border-dark: var(--ct-border-emphasis);
-  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
-  --ct-color-light-interaction-focus: var(--ct-focus-ring);
-}
-
-.ct-theme-dark {
-  --ct-color-dark-heading: var(--ct-fg-text);
-  --ct-color-dark-body: var(--ct-fg-muted);
-  --ct-color-dark-background-light: var(--ct-bg-inset);
-  --ct-color-dark-background: var(--ct-bg-body);
-  --ct-color-dark-background-dark: var(--ct-bg-shade);
-  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
-}
-
-:root {
-  --ct-brand-h: 240; /* brand hue — override in sub-themes */
-  --ct-neutral-h: 255; /* cool blue-grey neutral — fixed */
-}
-
-:root,
-.ct-theme-light {
-  --ct-fg-text: oklch(0.20 0.010 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.45 0.010 var(--ct-neutral-h));
-  --ct-fg-subtle: oklch(0.58 0.008 var(--ct-neutral-h));
-  --ct-fg-action: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-bg-body: oklch(0.985 0.002 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.960 0.004 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.945 0.005 var(--ct-neutral-h));
-  --ct-bg-shade-alt: oklch(0.920 0.007 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.935 0.006 var(--ct-neutral-h));
-  --ct-bg-raised: oklch(1.0 0 0);
-  --ct-bg-overlay: oklch(1.0 0 0);
-  --ct-border-muted: oklch(0.92 0.004 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.87 0.006 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.70 0.012 var(--ct-neutral-h));
-  --ct-accent-subtle: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-accent-muted: oklch(0.925 0.045 var(--ct-brand-h));
-  --ct-accent-emphasis: oklch(0.50 0.13 var(--ct-brand-h));
-  --ct-accent-on: oklch(1.0 0 0);
-  --ct-accent-border: oklch(0.58 0.12 var(--ct-brand-h));
-  --ct-selected: oklch(0.45 0.14 var(--ct-brand-h));
-  --ct-selected-muted: oklch(0.955 0.020 var(--ct-brand-h));
-  --ct-focus-ring: oklch(0.50 0.22 285);
-  --ct-success-emphasis: oklch(0.38 0.14 155);
-  --ct-warning-emphasis: oklch(0.40 0.14 85);
-  --ct-danger-emphasis: oklch(0.40 0.16 25);
-  --ct-info-emphasis: oklch(0.38 0.12 245);
-}
-
-.ct-theme-dark {
-  --ct-fg-text: oklch(0.93 0.006 var(--ct-neutral-h));
-  --ct-fg-muted: oklch(0.65 0.010 var(--ct-neutral-h));
-  --ct-bg-body: oklch(0.155 0.020 var(--ct-neutral-h));
-  --ct-bg-shade: oklch(0.175 0.022 var(--ct-neutral-h));
-  --ct-bg-body-alt: oklch(0.200 0.024 var(--ct-neutral-h));
-  --ct-bg-inset: oklch(0.125 0.016 var(--ct-neutral-h));
-  --ct-border-muted: oklch(0.24 0.010 var(--ct-neutral-h));
-  --ct-border-default: oklch(0.30 0.014 var(--ct-neutral-h));
-  --ct-border-emphasis: oklch(0.48 0.016 var(--ct-neutral-h));
-  --ct-accent-emphasis: oklch(0.60 0.13 var(--ct-brand-h));
-  --ct-accent-border: oklch(0.55 0.10 var(--ct-brand-h));
-}
-
-.ct-theme-light {
-  --ct-color-light-heading: var(--ct-fg-text);
-  --ct-color-light-body: var(--ct-fg-muted);
-  --ct-color-light-background-light: var(--ct-bg-body);
-  --ct-color-light-background: var(--ct-bg-shade);
-  --ct-color-light-background-dark: var(--ct-bg-body-alt);
-  --ct-color-light-border-light: var(--ct-border-muted);
-  --ct-color-light-border: var(--ct-border-default);
-  --ct-color-light-border-dark: var(--ct-border-emphasis);
-  --ct-color-light-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-light-interaction-hover-background: var(--ct-accent-border);
-  --ct-color-light-interaction-focus: var(--ct-focus-ring);
-}
-
-.ct-theme-dark {
-  --ct-color-dark-heading: var(--ct-fg-text);
-  --ct-color-dark-body: var(--ct-fg-muted);
-  --ct-color-dark-background-light: var(--ct-bg-inset);
-  --ct-color-dark-background: var(--ct-bg-body);
-  --ct-color-dark-background-dark: var(--ct-bg-shade);
-  --ct-color-dark-interaction-background: var(--ct-accent-emphasis);
-  --ct-color-dark-interaction-focus: var(--ct-focus-ring);
-}
-
 html {
-  --ct-color-light-heading: #002a42;
-  --ct-color-light-body: #33444d;
-  --ct-color-light-background-light: #fefefe;
-  --ct-color-light-background: #f0f2f4;
-  --ct-color-light-background-dark: #c0c2c3;
-  --ct-color-light-border-light: #b4b6b7;
-  --ct-color-light-border: #606162;
-  --ct-color-light-border-dark: #181818;
-  --ct-color-light-interaction-text: #fcfcfd;
-  --ct-color-light-interaction-background: #006aa5;
-  --ct-color-light-interaction-hover-text: #fcfcfd;
-  --ct-color-light-interaction-hover-background: #004063;
+  --ct-color-light-heading: #002a39;
+  --ct-color-light-body: #33444a;
+  --ct-color-light-background-light: #fdfdfd;
+  --ct-color-light-background: #e6e9eb;
+  --ct-color-light-background-dark: #b8babc;
+  --ct-color-light-border-light: #adafb0;
+  --ct-color-light-border: #5c5d5e;
+  --ct-color-light-border-dark: #171718;
+  --ct-color-light-interaction-text: #fafbfb;
+  --ct-color-light-interaction-background: #00698f;
+  --ct-color-light-interaction-hover-text: #fafbfb;
+  --ct-color-light-interaction-hover-background: #003f56;
   --ct-color-light-interaction-focus: #8b5cd7;
-  --ct-color-light-highlight: #005b9a;
+  --ct-color-light-highlight: #121313;
   --ct-color-light-information: #007cbf;
   --ct-color-light-warning: #c95100;
   --ct-color-light-error: #ce3836;
   --ct-color-light-success: #008482;
-  --ct-color-light-custom1: brown;
-  --ct-color-light-brand1: #006aa5;
-  --ct-color-light-brand2: #f0f2f4;
-  --ct-color-light-brand3: #13161b;
-  --ct-color-dark-heading: #f2fafe;
-  --ct-color-dark-body: #d9f1fc;
-  --ct-color-dark-background-light: #2d353d;
-  --ct-color-dark-background: #222a33;
-  --ct-color-dark-background-dark: #181d24;
-  --ct-color-dark-border-light: #b2b4b8;
-  --ct-color-dark-border: #383f47;
-  --ct-color-dark-border-dark: #181d24;
-  --ct-color-dark-interaction-text: #222a33;
-  --ct-color-dark-interaction-background: #00a4eb;
-  --ct-color-dark-interaction-hover-text: #181d24;
-  --ct-color-dark-interaction-hover-background: #66c8f3;
+  --ct-color-light-brand1: #00698f;
+  --ct-color-light-brand2: #e6e9eb;
+  --ct-color-light-brand3: #121313;
+  --ct-color-dark-heading: #f7fdff;
+  --ct-color-dark-body: #e7f9ff;
+  --ct-color-dark-background-light: #0d4458;
+  --ct-color-dark-background: #003a4f;
+  --ct-color-dark-background-dark: #002937;
+  --ct-color-dark-border-light: #a6bac1;
+  --ct-color-dark-border: #1a4e61;
+  --ct-color-dark-border-dark: #002937;
+  --ct-color-dark-interaction-text: #003a4f;
+  --ct-color-dark-interaction-background: #61daff;
+  --ct-color-dark-interaction-hover-text: #002937;
+  --ct-color-dark-interaction-hover-background: #a0e9ff;
   --ct-color-dark-interaction-focus: #8b5cd7;
-  --ct-color-dark-highlight: #ecf0f1;
+  --ct-color-dark-highlight: #00698f;
   --ct-color-dark-information: #4cc4fc;
   --ct-color-dark-warning: #e38444;
   --ct-color-dark-error: #e85653;
   --ct-color-dark-success: #12b0ae;
-  --ct-color-dark-custom1: red;
-  --ct-color-dark-custom2: orange;
-  --ct-color-dark-custom3: blue;
-  --ct-color-dark-brand1: #00a4eb;
-  --ct-color-dark-brand2: #222a33;
-  --ct-color-dark-brand3: #ecf0f1;
+  --ct-color-dark-brand1: #61daff;
+  --ct-color-dark-brand2: #003a4f;
+  --ct-color-dark-brand3: #00698f;
   --ct-typography-display-font-size: 2rem;
   --ct-typography-display-line-height: 2.5rem;
-  --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-display-font-name: "Lexend", sans-serif;
   --ct-typography-display-font-weight: 700;
   --ct-typography-display-letter-spacing: -0.03px;
   --ct-typography-heading-1-font-size: 2rem;
   --ct-typography-heading-1-line-height: 2.5rem;
-  --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-1-font-name: "Lexend", sans-serif;
   --ct-typography-heading-1-font-weight: 700;
   --ct-typography-heading-1-letter-spacing: -0.6px;
   --ct-typography-heading-2-font-size: 1.75rem;
   --ct-typography-heading-2-line-height: 2.25rem;
-  --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-2-font-name: "Lexend", sans-serif;
   --ct-typography-heading-2-font-weight: 700;
   --ct-typography-heading-2-letter-spacing: -0.5px;
   --ct-typography-heading-3-font-size: 1.5rem;
   --ct-typography-heading-3-line-height: 2rem;
-  --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-3-font-name: "Lexend", sans-serif;
   --ct-typography-heading-3-font-weight: 700;
   --ct-typography-heading-3-letter-spacing: -0.35px;
   --ct-typography-heading-4-font-size: 1.25rem;
   --ct-typography-heading-4-line-height: 1.5rem;
-  --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-4-font-name: "Lexend", sans-serif;
   --ct-typography-heading-4-font-weight: 700;
   --ct-typography-heading-4-letter-spacing: -0.25px;
   --ct-typography-heading-5-font-size: 1rem;
   --ct-typography-heading-5-line-height: 1.375rem;
-  --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-5-font-name: "Lexend", sans-serif;
   --ct-typography-heading-5-font-weight: 700;
   --ct-typography-heading-5-letter-spacing: 0;
   --ct-typography-heading-6-font-size: 1rem;
   --ct-typography-heading-6-line-height: 1.625rem;
-  --ct-typography-heading-6-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-heading-6-font-name: "Lexend", sans-serif;
   --ct-typography-heading-6-font-weight: 700;
   --ct-typography-heading-6-letter-spacing: 0;
   --ct-typography-text-extra-large-font-size: 1.25rem;
   --ct-typography-text-extra-large-line-height: 1.5rem;
-  --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
   --ct-typography-text-extra-large-font-weight: 400;
   --ct-typography-text-extra-large-letter-spacing: -0.1px;
   --ct-typography-text-large-font-size: 1.125rem;
   --ct-typography-text-large-line-height: 1.75rem;
-  --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-text-large-font-name: "Lexend", sans-serif;
   --ct-typography-text-large-font-weight: 400;
   --ct-typography-text-large-letter-spacing: 0;
   --ct-typography-text-regular-font-size: 0.875rem;
   --ct-typography-text-regular-line-height: 1.5rem;
-  --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-text-regular-font-name: "Lexend", sans-serif;
   --ct-typography-text-regular-font-weight: 400;
   --ct-typography-text-regular-letter-spacing: 0;
   --ct-typography-text-small-font-size: 0.75rem;
   --ct-typography-text-small-line-height: 1.25rem;
-  --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-text-small-font-name: "Lexend", sans-serif;
   --ct-typography-text-small-font-weight: 400;
   --ct-typography-text-small-letter-spacing: 0;
   --ct-typography-label-extra-large-font-size: 1.25rem;
   --ct-typography-label-extra-large-line-height: 1.5rem;
-  --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
   --ct-typography-label-extra-large-font-weight: 600;
   --ct-typography-label-extra-large-letter-spacing: -0.1px;
   --ct-typography-label-large-font-size: 1.125rem;
   --ct-typography-label-large-line-height: 1.5rem;
-  --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-label-large-font-name: "Lexend", sans-serif;
   --ct-typography-label-large-font-weight: 600;
   --ct-typography-label-large-letter-spacing: -0.1px;
   --ct-typography-label-regular-font-size: 1rem;
   --ct-typography-label-regular-line-height: 1.25rem;
-  --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-label-regular-font-name: "Lexend", sans-serif;
   --ct-typography-label-regular-font-weight: 600;
   --ct-typography-label-regular-letter-spacing: -0.1px;
   --ct-typography-label-small-font-size: 1rem;
   --ct-typography-label-small-line-height: 1.25rem;
-  --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-label-small-font-name: "Lexend", sans-serif;
   --ct-typography-label-small-font-weight: 400;
   --ct-typography-label-small-letter-spacing: -0.1px;
   --ct-typography-label-extra-small-font-size: 0.875rem;
   --ct-typography-label-extra-small-line-height: 1.25rem;
-  --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
   --ct-typography-label-extra-small-font-weight: 400;
   --ct-typography-label-extra-small-letter-spacing: -0.1px;
   --ct-typography-quote-font-size: 1.125rem;
   --ct-typography-quote-line-height: 1.815rem;
-  --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
+  --ct-typography-quote-font-name: "Lexend", sans-serif;
   --ct-typography-quote-font-weight: 400;
   --ct-typography-quote-letter-spacing: -0.15px;
-  --ct-icons-directory: ./assets/icons/;
   --ct-font-average-character-width: 0.25;
   --ct-flyout-duration: 0.5s;
   --ct-flyout-zindex: 1000;
@@ -11622,24 +11725,6 @@ html {
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
-  --ct-feature-link-list-light-color: var(--ct-fg-text);
-  --ct-feature-link-list-light-title-color: var(--ct-fg-text);
-  --ct-feature-link-list-light-item-border-color: var(--ct-border-muted);
-  --ct-feature-link-list-light-link-color: var(--ct-fg-action);
-  --ct-feature-link-list-light-link-hover-color: var(--ct-fg-text);
-  --ct-feature-link-list-light-link-hover-background-color: var(--ct-bg-shade);
-  --ct-feature-link-list-light-description-color: var(--ct-fg-muted);
-  --ct-feature-link-list-light-icon-color: var(--ct-fg-action);
-  --ct-feature-link-list-light-background-color: var(--ct-bg-body);
-  --ct-feature-link-list-dark-color: var(--ct-fg-text);
-  --ct-feature-link-list-dark-title-color: var(--ct-fg-text);
-  --ct-feature-link-list-dark-item-border-color: var(--ct-border-default);
-  --ct-feature-link-list-dark-link-color: var(--ct-fg-action);
-  --ct-feature-link-list-dark-link-hover-color: var(--ct-fg-text);
-  --ct-feature-link-list-dark-link-hover-background-color: var(--ct-bg-shade);
-  --ct-feature-link-list-dark-description-color: var(--ct-fg-muted);
-  --ct-feature-link-list-dark-icon-color: var(--ct-fg-action);
-  --ct-feature-link-list-dark-background-color: var(--ct-bg-body);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;
@@ -12572,82 +12657,82 @@ html {
   html {
     --ct-typography-display-font-size: 3.5rem;
     --ct-typography-display-line-height: 3.75rem;
-    --ct-typography-display-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-display-font-name: "Lexend", sans-serif;
     --ct-typography-display-font-weight: 700;
     --ct-typography-display-letter-spacing: -1px;
     --ct-typography-heading-1-font-size: 3rem;
     --ct-typography-heading-1-line-height: 3.75rem;
-    --ct-typography-heading-1-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-heading-1-font-name: "Lexend", sans-serif;
     --ct-typography-heading-1-font-weight: 700;
     --ct-typography-heading-1-letter-spacing: -1px;
     --ct-typography-heading-2-font-size: 2.5rem;
     --ct-typography-heading-2-line-height: 3rem;
-    --ct-typography-heading-2-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-heading-2-font-name: "Lexend", sans-serif;
     --ct-typography-heading-2-font-weight: 700;
     --ct-typography-heading-2-letter-spacing: -0.8px;
     --ct-typography-heading-3-font-size: 2rem;
     --ct-typography-heading-3-line-height: 2.5rem;
-    --ct-typography-heading-3-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-heading-3-font-name: "Lexend", sans-serif;
     --ct-typography-heading-3-font-weight: 700;
     --ct-typography-heading-3-letter-spacing: -0.6px;
     --ct-typography-heading-4-font-size: 1.5rem;
     --ct-typography-heading-4-line-height: 2rem;
-    --ct-typography-heading-4-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-heading-4-font-name: "Lexend", sans-serif;
     --ct-typography-heading-4-font-weight: 700;
     --ct-typography-heading-4-letter-spacing: -0.4px;
     --ct-typography-heading-5-font-size: 1.25rem;
     --ct-typography-heading-5-line-height: 1.5rem;
-    --ct-typography-heading-5-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-heading-5-font-name: "Lexend", sans-serif;
     --ct-typography-heading-5-font-weight: 700;
     --ct-typography-heading-5-letter-spacing: -0.2px;
     --ct-typography-text-extra-large-font-size: 1.5rem;
     --ct-typography-text-extra-large-line-height: 1.5rem;
-    --ct-typography-text-extra-large-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-text-extra-large-font-name: "Lexend", sans-serif;
     --ct-typography-text-extra-large-font-weight: 400;
     --ct-typography-text-extra-large-letter-spacing: 0;
     --ct-typography-text-large-font-size: 1.25rem;
     --ct-typography-text-large-line-height: 2.125rem;
-    --ct-typography-text-large-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-text-large-font-name: "Lexend", sans-serif;
     --ct-typography-text-large-font-weight: 400;
     --ct-typography-text-large-letter-spacing: 0;
     --ct-typography-text-regular-font-size: 1rem;
     --ct-typography-text-regular-line-height: 1.75rem;
-    --ct-typography-text-regular-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-text-regular-font-name: "Lexend", sans-serif;
     --ct-typography-text-regular-font-weight: 400;
     --ct-typography-text-regular-letter-spacing: 0;
     --ct-typography-text-small-font-size: 0.875rem;
     --ct-typography-text-small-line-height: 1.5rem;
-    --ct-typography-text-small-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-text-small-font-name: "Lexend", sans-serif;
     --ct-typography-text-small-font-weight: 400;
     --ct-typography-text-small-letter-spacing: 0;
     --ct-typography-label-extra-large-font-size: 1.5rem;
     --ct-typography-label-extra-large-line-height: 1.5rem;
-    --ct-typography-label-extra-large-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-label-extra-large-font-name: "Lexend", sans-serif;
     --ct-typography-label-extra-large-font-weight: 600;
     --ct-typography-label-extra-large-letter-spacing: 0;
     --ct-typography-label-large-font-size: 1.125rem;
     --ct-typography-label-large-line-height: 1.5rem;
-    --ct-typography-label-large-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-label-large-font-name: "Lexend", sans-serif;
     --ct-typography-label-large-font-weight: 600;
     --ct-typography-label-large-letter-spacing: 0;
     --ct-typography-label-regular-font-size: 1rem;
     --ct-typography-label-regular-line-height: 1.25rem;
-    --ct-typography-label-regular-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-label-regular-font-name: "Lexend", sans-serif;
     --ct-typography-label-regular-font-weight: 600;
     --ct-typography-label-regular-letter-spacing: -0.1px;
     --ct-typography-label-small-font-size: 1rem;
     --ct-typography-label-small-line-height: 1.25rem;
-    --ct-typography-label-small-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-label-small-font-name: "Lexend", sans-serif;
     --ct-typography-label-small-font-weight: 400;
     --ct-typography-label-small-letter-spacing: -0.1px;
     --ct-typography-label-extra-small-font-size: 0.875rem;
     --ct-typography-label-extra-small-line-height: 1.125rem;
-    --ct-typography-label-extra-small-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-label-extra-small-font-name: "Lexend", sans-serif;
     --ct-typography-label-extra-small-font-weight: 400;
     --ct-typography-label-extra-small-letter-spacing: 0;
     --ct-typography-quote-font-size: 1.5rem;
     --ct-typography-quote-line-height: 2.5rem;
-    --ct-typography-quote-font-name: system-ui, -apple-system, sans-serif;
+    --ct-typography-quote-font-name: "Lexend", sans-serif;
     --ct-typography-quote-font-weight: 400;
     --ct-typography-quote-letter-spacing: -0.35px;
   }
