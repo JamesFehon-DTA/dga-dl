@@ -134,6 +134,15 @@ html {
   --ct-outline-offset: 0;
   --ct-outline-width: 0.1875rem;
   --ct-outline-border-radius: 0.25rem;
+  --ct-link-list-card-border-radius: 0.25rem;
+  --ct-link-list-card-light-background-color: var(--ct-color-light-background);
+  --ct-link-list-card-light-link-color: var(--ct-color-light-body);
+  --ct-link-list-card-light-link-hover-color: var(--ct-color-light-interaction-background);
+  --ct-link-list-card-light-deactivated-link-color: var(--ct-color-light-body);
+  --ct-link-list-card-dark-background-color: var(--ct-color-dark-background-dark);
+  --ct-link-list-card-dark-link-color: var(--ct-color-dark-body);
+  --ct-link-list-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
+  --ct-link-list-card-dark-deactivated-link-color: var(--ct-color-dark-body);
   --ct-outline-light: var(--ct-color-light-interaction-focus);
   --ct-outline-dark: var(--ct-color-dark-interaction-focus);
   --ct-chip-border-width: 0.0625rem;
