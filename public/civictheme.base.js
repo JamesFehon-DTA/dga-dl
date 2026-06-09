@@ -1827,6 +1827,39 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 /**
+ * CivicTheme Search Results Page Template component.
+ */
+
+function CivicThemeSearchResults(el) {
+  if (el.getAttribute('data-search-results') === 'true') {
+    return;
+  }
+
+  this.el = el;
+  this.toggle = el.querySelector('[data-search-results-filter-toggle]');
+  this.groups = el.querySelector('[data-search-results-filter-groups]');
+
+  if (this.toggle && this.groups) {
+    this.toggle.addEventListener('click', this.onToggleClick.bind(this));
+  }
+
+  el.setAttribute('data-search-results', 'true');
+}
+
+CivicThemeSearchResults.prototype.onToggleClick = function () {
+  const isExpanded = this.toggle.getAttribute('aria-expanded') === 'true';
+  const next = !isExpanded;
+  this.toggle.setAttribute('aria-expanded', String(next));
+  this.groups.setAttribute('data-search-results-filter-groups-visible', String(next));
+};
+
+document.querySelectorAll('[data-search-results]').forEach((el) => {
+  new CivicThemeSearchResults(el);
+});
+
+});
+document.addEventListener('DOMContentLoaded', () => {
+/**
  * CivicTheme Webform component.
  */
 
@@ -1861,6 +1894,90 @@ function CivicThemeWebform(el) {
 document.querySelectorAll('.ct-webform').forEach((webform) => {
    
   new CivicThemeWebform(webform);
+});
+
+});
+document.addEventListener('DOMContentLoaded', () => {
+/**
+ * CivicTheme Step by Step Nav component.
+ */
+
+function CivicThemeStepByStepNav(el) {
+  if (el.getAttribute('data-step-by-step-nav') === 'true' || this.el) {
+    return;
+  }
+
+  this.el = el;
+  this.steps = Array.from(el.querySelectorAll('[data-collapsible]'));
+  this.toggleButton = null;
+
+  if (!this.steps.length) {
+    return;
+  }
+
+  this.injectToggle();
+  this.updateToggle();
+
+  const observer = new MutationObserver(this.updateToggle.bind(this));
+  this.steps.forEach(function (step) {
+    observer.observe(step, { attributes: true, attributeFilter: ['data-collapsible-collapsed'] });
+  });
+
+  el.setAttribute('data-step-by-step-nav', 'true');
+}
+
+CivicThemeStepByStepNav.prototype.injectToggle = function () {
+  const stepsEl = this.el.querySelector('.ct-step-by-step-nav__steps');
+
+  if (!stepsEl) {
+    return;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'ct-step-by-step-nav__toggle';
+
+  const btn = document.createElement('button');
+  btn.className = 'ct-step-by-step-nav__toggle__button';
+  btn.setAttribute('type', 'button');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.textContent = 'Show all steps';
+  btn.addEventListener('click', this.onToggleAll.bind(this));
+
+  wrapper.appendChild(btn);
+  stepsEl.before(wrapper);
+  this.toggleButton = btn;
+};
+
+CivicThemeStepByStepNav.prototype.allExpanded = function () {
+  return this.steps.every(function (step) {
+    return !step.hasAttribute('data-collapsible-collapsed');
+  });
+};
+
+CivicThemeStepByStepNav.prototype.updateToggle = function () {
+  if (!this.toggleButton) {
+    return;
+  }
+
+  const expanded = this.allExpanded();
+  this.toggleButton.textContent = expanded ? 'Hide all steps' : 'Show all steps';
+  this.toggleButton.setAttribute('aria-expanded', String(expanded));
+};
+
+CivicThemeStepByStepNav.prototype.onToggleAll = function () {
+  const expand = !this.allExpanded();
+  const eventName = expand ? 'ct.collapsible.expand' : 'ct.collapsible.collapse';
+
+  this.steps.forEach(function (step) {
+    step.dispatchEvent(new CustomEvent(eventName, {
+      bubbles: true,
+      detail: { animate: true },
+    }));
+  });
+};
+
+document.querySelectorAll('[data-step-by-step-nav]').forEach(function (el) {
+  new CivicThemeStepByStepNav(el);
 });
 
 });
@@ -2024,6 +2141,182 @@ CivicThemeSlider.prototype.updateProgress = function () {
 document.querySelectorAll('[data-slider]').forEach((slider) => {
   new CivicThemeSlider(slider);
 });
+
+});
+document.addEventListener('DOMContentLoaded', () => {
+/**
+ * CivicTheme Filterable Table component.
+ */
+
+/* global Drupal */
+
+(function () {
+  'use strict';
+
+  // ---------------------------------------------------------------------------
+  // Core enhancement — no Drupal dependency.
+  // ---------------------------------------------------------------------------
+
+  function initWrapper(wrapper) {
+    // Idempotency guard — replaces once().
+    if (wrapper.dataset.filterableTableInit) return;
+    wrapper.dataset.filterableTableInit = 'true';
+
+    const tableId = wrapper.getAttribute('data-table-id');
+    if (!tableId) return;
+
+    // Prefer a sibling table within the story canvas; fall back to
+    // document-wide lookup for non-Storybook use.
+    const table = wrapper.parentElement?.querySelector(`#${CSS.escape(tableId)}`)
+      ?? document.getElementById(tableId);
+    if (!table) return;
+
+    // Propagate theme class to the table so ct-table dark-mode CSS applies.
+    const themeClass = Array.from(wrapper.classList).find((c) => /^ct-theme-/.test(c));
+    if (themeClass) {
+      Array.from(table.classList)
+        .filter((c) => /^ct-theme-/.test(c))
+        .forEach((c) => table.classList.remove(c));
+      table.classList.add(themeClass);
+    }
+
+    const tbody = table.querySelector('tbody');
+    const allRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
+
+    const filterInputs = Array.from(wrapper.querySelectorAll('[data-filter-type]'));
+    const clearBtn = wrapper.querySelector('.ct-filterable-table__clear-btn');
+    const resultsEl = wrapper.querySelector('.ct-filterable-table__results');
+
+    // -------------------------------------------------------------------------
+    // Internal: apply all active filters to the table rows.
+    // -------------------------------------------------------------------------
+    function applyFilters() {
+      const activeFilters = filterInputs
+        .map((input) => ({
+          colIndex: parseInt(input.getAttribute('data-column-index'), 10),
+          type: input.getAttribute('data-filter-type'),
+          value: input.value.trim().toLowerCase(),
+        }))
+        .filter((f) => f.value !== '');
+
+      let visibleCount = 0;
+
+      allRows.forEach((row) => {
+        const visible = activeFilters.every((filter) => {
+          const cell = row.querySelectorAll('td')[filter.colIndex];
+          if (!cell) return true;
+          const cellText = cell.textContent.trim().toLowerCase();
+          if (filter.type === 'text') return cellText.indexOf(filter.value) !== -1;
+          if (filter.type === 'select') return cellText === filter.value;
+          return true;
+        });
+
+        row.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      });
+
+      if (resultsEl) {
+        resultsEl.textContent = activeFilters.length === 0
+          ? ''
+          : `Showing ${visibleCount} of ${allRows.length} rows`;
+      }
+
+      if (clearBtn) {
+        if (activeFilters.length > 0) {
+          clearBtn.removeAttribute('hidden');
+        } else {
+          clearBtn.setAttribute('hidden', '');
+        }
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 1. Populate <select> options from table column data.
+    // -------------------------------------------------------------------------
+    filterInputs.forEach((input) => {
+      if (input.getAttribute('data-filter-type') !== 'select') return;
+
+      const colIndex = parseInt(input.getAttribute('data-column-index'), 10);
+      const seen = new Set();
+      const values = [];
+
+      allRows.forEach((row) => {
+        const cell = row.querySelectorAll('td')[colIndex];
+        if (cell) {
+          const text = cell.textContent.trim();
+          if (text && !seen.has(text)) {
+            seen.add(text);
+            values.push(text);
+          }
+        }
+      });
+
+      values.sort();
+      values.forEach((val) => {
+        const opt = document.createElement('option');
+        opt.value = val;
+        opt.textContent = val;
+        input.appendChild(opt);
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // 2. Filter events.
+    // -------------------------------------------------------------------------
+    filterInputs.forEach((input) => {
+      input.addEventListener('input', applyFilters);
+      input.addEventListener('change', applyFilters);
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        filterInputs.forEach((input) => {
+          if (input.tagName === 'SELECT') {
+            input.selectedIndex = 0;
+          } else {
+            input.value = '';
+          }
+        });
+        applyFilters();
+      });
+    }
+
+    // Initial state.
+    applyFilters();
+  }
+
+  /**
+   * Initialise all filterable table wrappers within a given context element.
+   *
+   * @param {Element|Document} [context=document]
+   */
+  function initAll(context) {
+    (context || document).querySelectorAll('[data-dga-filterable-table]').forEach(initWrapper);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Integration.
+  // ---------------------------------------------------------------------------
+
+  // Expose globally for Storybook play() and static pages.
+  window.DgaFilterableTable = { initAll };
+
+  // Drupal: register as a behavior for AJAX-safe re-attachment.
+  if (typeof Drupal !== 'undefined') {
+    Drupal.behaviors.dgaFilterableTable = {
+      attach(context) {
+        initAll(context);
+      },
+    };
+  } else {
+    // Non-Drupal: init elements in the DOM now, then watch for future
+    // insertions via MutationObserver (covers static pages and Storybook).
+    initAll();
+    new MutationObserver(() => initAll())
+      .observe(document.body || document.documentElement, { childList: true, subtree: true });
+  }
+
+})();
 
 });
 document.addEventListener('DOMContentLoaded', () => {
@@ -2273,6 +2566,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .split(',')
         .map((s) => s.trim())
         .filter((s) => s === 'csv' || s === 'json');
+      // Optional human-readable source page for url mode. When present, the
+      // "View source" link targets this instead of the raw data endpoint
+      // (this.url). Read from the data-* attribute for Storybook/Drupal parity.
+      this.sourcePage = root.dataset.bdgaChartSourcePage || null;
       this.menuOpen = false;
       this.menuItems = [];
 
@@ -2559,11 +2856,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!menu) return;
       const items = [];
 
-      if (this.mode === 'url' && this.url) {
+      if (this.mode === 'url' && (this.sourcePage || this.url)) {
         const a = document.createElement('a');
         a.className = 'bdga-chart__menu-item';
         a.setAttribute('role', 'menuitem');
-        a.href = this.url;
+        // Prefer the human-readable landing page when one was provided;
+        // otherwise fall back to the raw data endpoint.
+        a.href = this.sourcePage || this.url;
         a.target = '_blank';
         a.rel = 'noopener nofollow';
         a.textContent = Drupal.t('View source data (opens in new tab)');
@@ -5474,6 +5773,208 @@ CivicThemeGroupFilterComponent.prototype.update = function (el) {
 document.querySelectorAll('[data-group-filter-filters]').forEach((el) => {
   new CivicThemeGroupFilterComponent(el);
 });
+
+});
+document.addEventListener('DOMContentLoaded', () => {
+/**
+ * @file
+ * Table Sort — framework-agnostic progressive enhancement.
+ *
+ * Finds all tables with the class `ct-table--sortable` and progressively
+ * enhances them with MOJ-style sortable column header buttons.
+ *
+ * Usage: apply the class `ct-table--sortable` to any <table> element. The
+ * behavior attaches automatically via DOMContentLoaded (static/Storybook) or
+ * Drupal.behaviors (Drupal). Stories call window.DgaTableSort.initAll().
+ *
+ * Pre-sorted columns: add aria-sort="ascending|descending" directly to the
+ * <th>, or add the class `ct-sort--asc` / `ct-sort--desc`.
+ *
+ * Custom sort values: add data-sort-value="..." to any <td> to override what
+ * value is used for sorting (e.g. a numeric timestamp for a date cell).
+ */
+
+/* global Drupal */
+
+(function () {
+  'use strict';
+
+  // SVG arrow icons — MOJ Design System pattern.
+  // focusable="false" + aria-hidden="true" hides icons from assistive tech.
+  // fill="currentColor" ensures visibility in Windows High Contrast Mode.
+  const SVG_UP = '<svg width="22" height="22" focusable="false" aria-hidden="true" role="img" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5625 15.5L11 6.63125L15.4375 15.5H6.5625Z" fill="currentColor"/></svg>';
+  const SVG_DOWN = '<svg width="22" height="22" focusable="false" aria-hidden="true" role="img" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4375 7L11 15.8687L6.5625 7L15.4375 7Z" fill="currentColor"/></svg>';
+  const SVG_UPDOWN = '<svg width="22" height="22" focusable="false" aria-hidden="true" role="img" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.1875 9.5L10.9609 3.95703L13.7344 9.5H8.1875Z" fill="currentColor"/><path d="M13.7344 12.0781L10.9609 17.6211L8.1875 12.0781H13.7344Z" fill="currentColor"/></svg>';
+
+  // ---------------------------------------------------------------------------
+  // Helpers.
+  // ---------------------------------------------------------------------------
+
+  function getCellValue(cell) {
+    if (!cell) return '';
+    const raw = cell.getAttribute('data-sort-value') || cell.textContent.trim();
+    const num = Number(raw);
+    return Number.isFinite(num) ? num : raw;
+  }
+
+  function updateIcons(headings) {
+    headings.forEach((th) => {
+      const btn = th.querySelector('.ct-sort-btn');
+      if (!btn) return;
+
+      const existing = btn.querySelector('svg');
+      if (existing) existing.remove();
+
+      const dir = th.getAttribute('aria-sort');
+      btn.insertAdjacentHTML('beforeend',
+        dir === 'ascending' ? SVG_UP :
+        dir === 'descending' ? SVG_DOWN :
+        SVG_UPDOWN
+      );
+    });
+  }
+
+  function sortRows(tbody, colIndex, direction) {
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const ascending = direction === 'ascending';
+
+    rows.sort((a, b) => {
+      const aCell = a.querySelectorAll('td, th')[colIndex];
+      const bCell = b.querySelectorAll('td, th')[colIndex];
+      const aVal = getCellValue(aCell);
+      const bVal = getCellValue(bCell);
+
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return ascending ? aVal - bVal : bVal - aVal;
+      }
+      return ascending
+        ? String(aVal).localeCompare(String(bVal))
+        : String(bVal).localeCompare(String(aVal));
+    });
+
+    rows.forEach((row) => tbody.appendChild(row));
+  }
+
+  function initialiseSortedColumn(headings, tbody) {
+    headings.forEach((th) => {
+      const dir = th.getAttribute('aria-sort');
+      if (dir !== 'ascending' && dir !== 'descending') return;
+      const btn = th.querySelector('.ct-sort-btn');
+      if (!btn) return;
+      sortRows(tbody, parseInt(btn.getAttribute('data-index'), 10), dir);
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Core enhancement — no Drupal dependency.
+  // ---------------------------------------------------------------------------
+
+  function initTable(table) {
+    // Idempotency guard — replaces once().
+    if (table.dataset.tableSortInit) return;
+    table.dataset.tableSortInit = 'true';
+
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+
+    if (!thead || !tbody) return;
+
+    const headings = Array.from(thead.querySelectorAll('th'));
+
+    // Resolve initial aria-sort state for every heading.
+    // Priority: existing aria-sort attribute > ct-sort--* class > 'none'.
+    headings.forEach((th) => {
+      const preset = th.getAttribute('aria-sort')
+        || (th.classList.contains('ct-sort--asc') ? 'ascending'
+        : th.classList.contains('ct-sort--desc') ? 'descending'
+        : 'none');
+      th.setAttribute('aria-sort', preset);
+    });
+
+    // Inject a sort button into every heading.
+    headings.forEach((th, index) => {
+      if (th.querySelector('.ct-sort-btn')) return;
+
+      const label = th.textContent.trim();
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ct-sort-btn';
+      btn.setAttribute('data-index', String(index));
+      btn.textContent = label;
+
+      th.textContent = '';
+      th.appendChild(btn);
+    });
+
+    updateIcons(headings);
+    initialiseSortedColumn(headings, tbody);
+
+    // aria-live region so screen readers announce sort changes.
+    const status = document.createElement('div');
+    status.setAttribute('aria-atomic', 'true');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('role', 'status');
+    status.className = 'ct-visually-hidden';
+    table.insertAdjacentElement('afterend', status);
+
+    // Abort any previous listener — prevents accumulation when the idempotency
+    // guard is cleared on HMR reuse.
+    if (table.sortAbort) table.sortAbort.abort();
+    const controller = new AbortController();
+    table.sortAbort = controller;
+
+    // Single delegated listener on thead — avoids per-button listeners.
+    thead.addEventListener('click', (event) => {
+      const btn = event.target.closest('.ct-sort-btn');
+      if (!btn) return;
+
+      const th = btn.parentElement;
+      const current = th.getAttribute('aria-sort');
+      const newDir = (current === 'none' || current === 'descending') ? 'ascending' : 'descending';
+      const colIndex = parseInt(btn.getAttribute('data-index'), 10);
+
+      headings.forEach((h) => h.setAttribute('aria-sort', 'none'));
+      th.setAttribute('aria-sort', newDir);
+
+      updateIcons(headings);
+      sortRows(tbody, colIndex, newDir);
+
+      status.textContent = `Sort by ${btn.textContent.trim()} (${newDir})`;
+    }, { signal: controller.signal });
+  }
+
+  /**
+   * Initialise all sortable tables within a given context element.
+   *
+   * @param {Element|Document} [context=document]
+   */
+  function initAll(context) {
+    (context || document).querySelectorAll('.ct-table--sortable').forEach(initTable);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Integration.
+  // ---------------------------------------------------------------------------
+
+  // Expose globally for Storybook play() and static pages.
+  window.DgaTableSort = { initAll };
+
+  // Drupal: register as a behavior for AJAX-safe re-attachment.
+  if (typeof Drupal !== 'undefined') {
+    Drupal.behaviors.dgaTableSort = {
+      attach(context) {
+        initAll(context);
+      },
+    };
+  } else {
+    // Non-Drupal: init elements in the DOM now, then watch for future
+    // insertions via MutationObserver (covers static pages and Storybook).
+    initAll();
+    new MutationObserver(() => initAll())
+      .observe(document.body || document.documentElement, { childList: true, subtree: true });
+  }
+
+})();
 
 });
 document.addEventListener('DOMContentLoaded', () => {
