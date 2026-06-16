@@ -1827,39 +1827,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 /**
- * CivicTheme Search Results Page Template component.
- */
-
-function CivicThemeSearchResults(el) {
-  if (el.getAttribute('data-search-results') === 'true') {
-    return;
-  }
-
-  this.el = el;
-  this.toggle = el.querySelector('[data-search-results-filter-toggle]');
-  this.groups = el.querySelector('[data-search-results-filter-groups]');
-
-  if (this.toggle && this.groups) {
-    this.toggle.addEventListener('click', this.onToggleClick.bind(this));
-  }
-
-  el.setAttribute('data-search-results', 'true');
-}
-
-CivicThemeSearchResults.prototype.onToggleClick = function () {
-  const isExpanded = this.toggle.getAttribute('aria-expanded') === 'true';
-  const next = !isExpanded;
-  this.toggle.setAttribute('aria-expanded', String(next));
-  this.groups.setAttribute('data-search-results-filter-groups-visible', String(next));
-};
-
-document.querySelectorAll('[data-search-results]').forEach((el) => {
-  new CivicThemeSearchResults(el);
-});
-
-});
-document.addEventListener('DOMContentLoaded', () => {
-/**
  * CivicTheme Webform component.
  */
 
@@ -2860,12 +2827,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const a = document.createElement('a');
         a.className = 'bdga-chart__menu-item';
         a.setAttribute('role', 'menuitem');
-        // Prefer the human-readable landing page when one was provided;
-        // otherwise fall back to the raw data endpoint.
+        // Landing page when resolved, else the raw data endpoint.
         a.href = this.sourcePage || this.url;
-        a.target = '_blank';
-        a.rel = 'noopener nofollow';
-        a.textContent = Drupal.t('View source data (opens in new tab)');
+        // Same-tab by design - don't force a new tab (WCAG 3.2.5).
+        a.textContent = Drupal.t('View source data');
         a.addEventListener('click', () => this.closeMenu(false));
         items.push(a);
       }
