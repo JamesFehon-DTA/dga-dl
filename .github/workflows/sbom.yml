@@ -1,0 +1,101 @@
+name: SBOM
+
+# Generates CycloneDX SBOMs from package-lock.json and gates on a Grype scan.
+# Reusable via workflow_call - astro.yml runs it alongside each Pages deploy so
+# the SBOMs land as artifacts of the deploy run. See docs/sbom.md.
+#
+# anchore/* actions are pinned by commit SHA, not tag: scanners run with CI
+# credentials and are themselves supply-chain targets. actions/* stay
+# tag-pinned per repo convention.
+
+on:
+  workflow_call:
+    inputs:
+      fail-severity:
+        description: 'Grype severity cutoff that fails the build'
+        type: string
+        default: 'high'
+      ref:
+        description: 'Git ref to generate from (empty = the triggering commit)'
+        type: string
+        default: ''
+  pull_request:
+    paths:
+      - package-lock.json
+      - package.json
+      - .grype.yaml
+      - .github/workflows/sbom.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # npm ci validates that the lockfile matches package.json. npm sbom reads
+      # the lockfile only, so lifecycle scripts (sync-uikit) are skipped.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Generate SBOMs
+        run: |
+          set -euo pipefail
+          mkdir -p sbom
+          npm sbom --sbom-format cyclonedx --package-lock-only > sbom/dga-dl-dev.cdx.json
+          npm sbom --sbom-format cyclonedx --package-lock-only --omit dev > sbom/dga-dl-prod.cdx.json
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sboms
+          path: sbom/
+          if-no-files-found: error
+
+  syft-crosscheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
+        with:
+          path: .
+          format: cyclonedx-json
+          artifact-name: sbom-syft.cdx.json
+          upload-artifact: true
+
+  scan:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout brings .grype.yaml (suppressions) into the working directory.
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - uses: actions/download-artifact@v6
+        with:
+          name: sboms
+          path: sbom
+
+      # Scans the dev SBOM - the superset. only-fixed keeps the gate
+      # actionable; Renovate/Dependabot alerts remain the channel for
+      # fixless CVEs.
+      - uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
+        with:
+          sbom: sbom/dga-dl-dev.cdx.json
+          fail-build: true
+          only-fixed: true
+          severity-cutoff: ${{ inputs.fail-severity || 'high' }}
+          output-format: table

@@ -70,6 +70,20 @@ jobs:
         with:
           path: dist
 
+  # Runs after build (not gating deploy) so the SBOMs land as artifacts of
+  # every deploy run. needs: build + ref: main means a dispatch-triggered pin
+  # bump is already on main before the SBOM checkout, so the SBOM reflects the
+  # deployed lockfile. A scan failure marks the run failed without blocking
+  # the deploy.
+  sbom:
+    name: SBOM
+    needs: build
+    permissions:
+      contents: read
+    uses: ./.github/workflows/sbom.yml
+    with:
+      ref: main
+
   deploy:
     name: Deploy
     needs: build

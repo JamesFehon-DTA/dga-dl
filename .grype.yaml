@@ -1,0 +1,5 @@
+# Vulnerability suppressions for the SBOM scan (.github/workflows/sbom.yml).
+# Every entry must carry a comment stating: why it is a false positive or an
+# accepted risk, who assessed it, and a revisit date.
+# Entry format: https://github.com/anchore/grype#specifying-matches-to-ignore
+ignore: []
