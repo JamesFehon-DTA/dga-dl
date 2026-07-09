@@ -8441,6 +8441,7 @@ ol ol ol {
 }
 .progress-nav__sub-list {
   margin-left: 28px;
+  margin-top: -11px;
 }
 .progress-nav__header {
   display: flex;
@@ -11824,12 +11825,12 @@ ol ol ol {
 }
 
 .ct-link-list .ct-link-list__title {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
 }
 .ct-link-list .ct-link-list__items {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .ct-list.ct-list--with-background {
