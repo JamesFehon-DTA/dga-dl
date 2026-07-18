@@ -6162,18 +6162,18 @@ document.addEventListener('DOMContentLoaded', () => {
  * Keep both sides green when editing these three.
  */
 
-export const ALLOWED_HOSTS = ['data.gov.au', 'www.data.gov.au'];
-export const MAX_ROWS = 5000;
-export const MAX_CELL_CHARS = 500;
-export const MAX_PAYLOAD_BYTES = 256 * 1024;
-export const FETCH_TIMEOUT_MS = 10000;
+const ALLOWED_HOSTS = ['data.gov.au', 'www.data.gov.au'];
+const MAX_ROWS = 5000;
+const MAX_CELL_CHARS = 500;
+const MAX_PAYLOAD_BYTES = 256 * 1024;
+const FETCH_TIMEOUT_MS = 10000;
 
 // Port of PHP 8 is_numeric(). PHP 8 accepts leading AND trailing whitespace;
 // rejects thousands separators, hex/binary/underscore literals, and the bare
 // strings "INF"/"NAN". JSON numbers arrive as real numbers, hence the Number
 // branch.
 const PHP8_NUMERIC = /^[ \t\n\r\v\f]*[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?[ \t\n\r\v\f]*$/;
-export function isNumeric(value) {
+function isNumeric(value) {
   if (typeof value === 'number') return Number.isFinite(value);
   if (typeof value !== 'string') return false;
   return PHP8_NUMERIC.test(value);
@@ -6194,7 +6194,7 @@ const isTemporal = (header) => TEMPORAL_KEYS.has(String(header).trim().toLowerCa
  * numeric non-temporal headers, falling back to numeric temporal headers,
  * then to every non-X header.
  */
-export function autodetectKeys(records) {
+function autodetectKeys(records) {
   const sample = (records && records[0]) || {};
   const headers = Object.keys(sample);
   let xKey = null;
@@ -6224,7 +6224,7 @@ export function autodetectKeys(records) {
  * save-blocker. `keys` is the autodetectKeys shape ({ x_key, y_keys }).
  * Returns [] when clean.
  */
-export function validate(records, keys = {}) {
+function validate(records, keys = {}) {
   const columns = new Set(Object.keys((records && records[0]) || {}));
   const list = [...columns].join(', ');
   const errors = [];
@@ -6242,7 +6242,7 @@ export function validate(records, keys = {}) {
  * (_bdga_chart_validate_url): https only, host on the allowlist, length cap,
  * no embedded credentials. Returns { ok, host, error }; never throws.
  */
-export function validateSourceUrl(raw) {
+function validateSourceUrl(raw) {
   const value = String(raw ?? '').trim();
   if (value === '') return { ok: false, host: '', error: 'Empty URL' };
   if (value.length > 2048) return { ok: false, host: '', error: 'URL exceeds 2048 chars' };
@@ -6299,7 +6299,7 @@ function deriveFields(ckanFields, records) {
  * any failure so callers can surface the message. Network, so not covered by
  * the parity fixtures. `fetchImpl` is injectable for tests.
  */
-export async function fetchRecords(url, { fetchImpl, timeoutMs = FETCH_TIMEOUT_MS } = {}) {
+async function fetchRecords(url, { fetchImpl, timeoutMs = FETCH_TIMEOUT_MS } = {}) {
   const check = validateSourceUrl(url);
   if (!check.ok) throw new Error(check.error);
   const doFetch = fetchImpl || (typeof fetch !== 'undefined' ? fetch : null);
@@ -6401,7 +6401,7 @@ function parseJsonToRecords(text) {
  * autodetectKeys; this only produces records + the column list. Throws
  * Error(message) on malformed input.
  */
-export function parse(text, mode) {
+function parse(text, mode) {
   const input = String(text ?? '');
   if (input.length > MAX_PAYLOAD_BYTES) throw new Error('Payload exceeds size cap');
   let result;
@@ -6422,7 +6422,7 @@ const isUuid = (s) => typeof s === 'string' && UUID_RE.test(s);
  * lower-cased UUID, or null when none is found. Mirrors the removed PHP
  * _bdga_chart_extract_resource_id.
  */
-export function extractResourceId(url) {
+function extractResourceId(url) {
   let parsed;
   try {
     parsed = new URL(String(url ?? '').trim());
@@ -6449,7 +6449,7 @@ export function extractResourceId(url) {
  * Mirrors the removed PHP _bdga_chart_resolve_source_page. `fetchImpl` is
  * injectable for tests.
  */
-export async function resolveSourcePage(url, { fetchImpl, timeoutMs = FETCH_TIMEOUT_MS } = {}) {
+async function resolveSourcePage(url, { fetchImpl, timeoutMs = FETCH_TIMEOUT_MS } = {}) {
   if (!validateSourceUrl(url).ok) return null;
   const resourceId = extractResourceId(url);
   if (!resourceId) return null;
