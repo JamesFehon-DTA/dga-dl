@@ -145,6 +145,8 @@ html {
   --ct-link-card-dark-link-color: var(--ct-color-dark-body);
   --ct-link-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
   --ct-link-card-dark-deactivated-link-color: var(--ct-color-dark-body);
+  --ct-navigation-card-light-divider-border-color: var(--ct-color-light-border);
+  --ct-navigation-card-dark-divider-border-color: var(--ct-color-dark-border);
   --ct-link-list-connected-border-radius: 0.25rem;
   --ct-link-list-light-connected-border-color: var(--ct-color-light-border);
   --ct-link-list-dark-connected-border-color: var(--ct-color-dark-border);

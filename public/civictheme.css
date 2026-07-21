@@ -8123,6 +8123,10 @@ ol ol ol {
   left: 0;
   right: 0;
 }
+.ct-navigation-card--index .ct-navigation-card__title {
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid;
+}
 @container (min-width: 36rem) {
   .ct-navigation-card {
     flex-direction: row;
@@ -8238,6 +8242,9 @@ ol ol ol {
 .ct-navigation-card.ct-theme-light:not(.ct-navigation-card--card-clickable) .ct-navigation-card__title-link:hover {
   color: var(--ct-navigation-card-light-title-hover-color);
 }
+.ct-navigation-card.ct-theme-light.ct-navigation-card--index .ct-navigation-card__title {
+  border-color: var(--ct-navigation-card-light-divider-border-color);
+}
 .ct-navigation-card.ct-theme-light .ct-navigation-card__title,
 .ct-navigation-card.ct-theme-light .ct-navigation-card__title-link {
   color: var(--ct-navigation-card-light-title-color);
@@ -8260,6 +8267,9 @@ ol ol ol {
 }
 .ct-navigation-card.ct-theme-dark:not(.ct-navigation-card--card-clickable) .ct-navigation-card__title-link:hover {
   color: var(--ct-navigation-card-dark-title-hover-color);
+}
+.ct-navigation-card.ct-theme-dark.ct-navigation-card--index .ct-navigation-card__title {
+  border-color: var(--ct-navigation-card-dark-divider-border-color);
 }
 .ct-navigation-card.ct-theme-dark .ct-navigation-card__title,
 .ct-navigation-card.ct-theme-dark .ct-navigation-card__title-link {
@@ -14191,6 +14201,8 @@ html {
   --ct-link-card-dark-link-color: var(--ct-color-dark-body);
   --ct-link-card-dark-link-hover-color: var(--ct-color-dark-interaction-background);
   --ct-link-card-dark-deactivated-link-color: var(--ct-color-dark-body);
+  --ct-navigation-card-light-divider-border-color: var(--ct-color-light-border);
+  --ct-navigation-card-dark-divider-border-color: var(--ct-color-dark-border);
   --ct-link-list-connected-border-radius: 0.25rem;
   --ct-link-list-light-connected-border-color: var(--ct-color-light-border);
   --ct-link-list-dark-connected-border-color: var(--ct-color-dark-border);
