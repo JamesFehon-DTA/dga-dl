@@ -1,6 +1,10 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+// foundations, patterns and templates are synced from the civictheme-uikit
+// docs-live ref by scripts/sync-guidance.mjs (gitignored, not authored here).
+// components and components-advanced remain local.
+
 const baseFields = {
   title: z.string(),
   description: z.string(),

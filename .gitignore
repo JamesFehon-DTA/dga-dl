@@ -23,3 +23,8 @@ CNAME
 .claude/.a11y-passed
 .claude/settings.local.json
 .claude/worktrees/
+
+# Synced from civictheme-uikit docs-live by scripts/sync-guidance.mjs
+src/content/patterns/
+src/content/templates/
+src/content/foundations/
