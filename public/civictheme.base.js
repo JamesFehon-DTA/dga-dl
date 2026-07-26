@@ -2129,33 +2129,70 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wrapper.dataset.filterableTableInit) return;
     wrapper.dataset.filterableTableInit = 'true';
 
-    const tableId = wrapper.getAttribute('data-table-id');
-    if (!tableId) return;
+    const targetId = wrapper.getAttribute('data-table-id');
+    if (!targetId) return;
 
-    // Prefer a sibling table within the story canvas; fall back to
+    // Prefer a sibling target within the story canvas; fall back to
     // document-wide lookup for non-Storybook use.
-    const table = wrapper.parentElement?.querySelector(`#${CSS.escape(tableId)}`)
-      ?? document.getElementById(tableId);
-    if (!table) return;
+    const target = wrapper.parentElement?.querySelector(`#${CSS.escape(targetId)}`)
+      ?? document.getElementById(targetId);
+    if (!target) return;
 
-    // Propagate theme class to the table so ct-table dark-mode CSS applies.
+    // Target type: an explicit data-target-type wins; otherwise infer from the
+    // element's tag (<dl> => list, anything else => table). Keeps existing
+    // table markup working with no attribute and lets a <dl> opt in by tag.
+    const targetType = wrapper.getAttribute('data-target-type')
+      || (target.tagName === 'DL' ? 'list' : 'table');
+
+    // Propagate theme class to the target so ct-table / ct-summary-list
+    // dark-mode CSS applies.
     const themeClass = Array.from(wrapper.classList).find((c) => /^ct-theme-/.test(c));
     if (themeClass) {
-      Array.from(table.classList)
+      Array.from(target.classList)
         .filter((c) => /^ct-theme-/.test(c))
-        .forEach((c) => table.classList.remove(c));
-      table.classList.add(themeClass);
+        .forEach((c) => target.classList.remove(c));
+      target.classList.add(themeClass);
     }
 
-    const tbody = table.querySelector('tbody');
-    const allRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
+    // Row collection, per-column value access and visibility toggling branch by
+    // target type — everything below (select population, text/=== matching,
+    // result count) is shared:
+    //   table: <tbody> rows; value = cell text at the column index.
+    //   list:  [data-filter-row] items; value = data-filter-col-N attribute,
+    //          which decouples the filterable value from the displayed text.
+    let allRows;
+    let getColValue;
+    if (targetType === 'list') {
+      allRows = Array.from(target.querySelectorAll('[data-filter-row]'));
+      getColValue = (row, colIndex) => (row.getAttribute(`data-filter-col-${colIndex}`) || '').trim();
+    } else {
+      const tbody = target.querySelector('tbody');
+      allRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
+      getColValue = (row, colIndex) => {
+        const cell = row.querySelectorAll('td')[colIndex];
+        return cell ? cell.textContent.trim() : '';
+      };
+    }
+
+    // List rows hide via [hidden] (removed from the a11y tree, keeps <dl>
+    // semantics); table rows keep their established style.display toggle.
+    const setRowVisible = (row, visible) => {
+      if (targetType === 'list') {
+        if (visible) row.removeAttribute('hidden');
+        else row.setAttribute('hidden', '');
+      } else {
+        row.style.display = visible ? '' : 'none';
+      }
+    };
+
+    const rowNoun = targetType === 'list' ? 'items' : 'rows';
 
     const filterInputs = Array.from(wrapper.querySelectorAll('[data-filter-type]'));
     const clearBtn = wrapper.querySelector('.ct-filterable-table__clear-btn');
     const resultsEl = wrapper.querySelector('.ct-filterable-table__results');
 
     // -------------------------------------------------------------------------
-    // Internal: apply all active filters to the table rows.
+    // Internal: apply all active filters to the rows.
     // -------------------------------------------------------------------------
     function applyFilters() {
       const activeFilters = filterInputs
@@ -2170,22 +2207,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       allRows.forEach((row) => {
         const visible = activeFilters.every((filter) => {
-          const cell = row.querySelectorAll('td')[filter.colIndex];
-          if (!cell) return true;
-          const cellText = cell.textContent.trim().toLowerCase();
+          const cellText = getColValue(row, filter.colIndex).toLowerCase();
           if (filter.type === 'text') return cellText.indexOf(filter.value) !== -1;
           if (filter.type === 'select') return cellText === filter.value;
           return true;
         });
 
-        row.style.display = visible ? '' : 'none';
+        setRowVisible(row, visible);
         if (visible) visibleCount++;
       });
 
       if (resultsEl) {
         resultsEl.textContent = activeFilters.length === 0
           ? ''
-          : `Showing ${visibleCount} of ${allRows.length} rows`;
+          : `Showing ${visibleCount} of ${allRows.length} ${rowNoun}`;
       }
 
       if (clearBtn) {
@@ -2198,7 +2233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------------------
-    // 1. Populate <select> options from table column data.
+    // 1. Populate <select> options from the target's column values.
     // -------------------------------------------------------------------------
     filterInputs.forEach((input) => {
       if (input.getAttribute('data-filter-type') !== 'select') return;
@@ -2208,13 +2243,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const values = [];
 
       allRows.forEach((row) => {
-        const cell = row.querySelectorAll('td')[colIndex];
-        if (cell) {
-          const text = cell.textContent.trim();
-          if (text && !seen.has(text)) {
-            seen.add(text);
-            values.push(text);
-          }
+        const text = getColValue(row, colIndex);
+        if (text && !seen.has(text)) {
+          seen.add(text);
+          values.push(text);
         }
       });
 
@@ -2288,6 +2320,563 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
 /**
+ * CivicTheme Decision tool component.
+ */
+
+// Storybook / static-page bootstrap (mirrors chart.js): minimal Drupal + once
+// shims so the behaviour runs outside Drupal. The typeof guards keep the shims
+// inert on real Drupal pages, where these are already globals.
+(function () {
+  'use strict';
+  if (typeof window.Drupal === 'undefined') {
+    window.Drupal = {
+      behaviors: {},
+      t: (str, args) => {
+        if (!args) return str;
+        return String(str).replace(/[@!%][\w-]+/g, (m) => (m in args ? String(args[m]) : m));
+      },
+    };
+  }
+  if (typeof window.once === 'undefined') {
+    const marks = new WeakMap();
+    window.once = function (id, selector, context) {
+      const root = context || document;
+      const out = [];
+      root.querySelectorAll(selector).forEach((el) => {
+        const keys = marks.get(el) || new Set();
+        if (keys.has(id)) return;
+        keys.add(id);
+        marks.set(el, keys);
+        out.push(el);
+      });
+      return out;
+    };
+  }
+})();
+
+(function (Drupal, once) {
+  'use strict';
+
+  // Crockford base32 alphabet (no I, L, O, U to cut transcription errors) for
+  // the data characters; the 37-symbol superset adds the Crockford check
+  // symbols for the trailing check character.
+  const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+  const CHECK_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ*~$=U';
+  const CODE_LENGTH = 8;
+
+  function splitList(value) {
+    return (value || '').split(',').map((s) => s.trim()).filter(Boolean);
+  }
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function svgNode(tag, attrs) {
+    const el = document.createElementNS(SVG_NS, tag);
+    Object.keys(attrs).forEach((k) => el.setAttribute(k, attrs[k]));
+    return el;
+  }
+
+  // progress-tracker completed-marker check. The marker circle is CSS; only the
+  // check is an SVG, matching progress-tracker.twig.
+  function trackerCheck() {
+    const svg = svgNode('svg', { class: 'progress-marker__icon', viewBox: '0 0 24 24', focusable: 'false' });
+    svg.appendChild(svgNode('polyline', { points: '5 12.5 10 17.5 19 7' }));
+    return svg;
+  }
+
+  Drupal.behaviors.dgaDecisionTool = {
+    attach(context) {
+      once('dga-decision-tool', '[data-dga-decision-tool]', context).forEach((el) => {
+        // eslint-disable-next-line no-use-before-define
+        new DecisionTool(el).init();
+      });
+    },
+  };
+
+  class DecisionTool {
+    constructor(root) {
+      this.root = root;
+      this.id = root.dataset.dgaDecisionToolId || null;
+      this.storageKey = root.dataset.dgaDecisionToolStorageKey || null;
+
+      this.steps = Array.from(root.querySelectorAll('[data-dga-decision-tool-step]'));
+      this.outcomes = Array.from(root.querySelectorAll('[data-dga-decision-tool-outcome]'));
+      this.stepsWrap = root.querySelector('[data-dga-decision-tool-steps]');
+      this.nav = root.querySelector('[data-dga-decision-tool-nav]');
+      this.resultWrap = root.querySelector('[data-dga-decision-tool-result]');
+      this.statusEl = root.querySelector('[data-dga-decision-tool-status]');
+      this.progressEl = root.querySelector('[data-dga-decision-tool-progress]');
+
+      this.backWrap = root.querySelector('[data-dga-decision-tool-back]');
+      this.nextWrap = root.querySelector('[data-dga-decision-tool-advance-next]');
+      this.submitWrap = root.querySelector('[data-dga-decision-tool-advance-submit]');
+      this.restartWrap = root.querySelector('[data-dga-decision-tool-restart]');
+      this.backBtn = this.backWrap ? this.backWrap.querySelector('.ct-button') : null;
+      this.nextBtn = this.nextWrap ? this.nextWrap.querySelector('.ct-button') : null;
+      this.submitBtn = this.submitWrap ? this.submitWrap.querySelector('.ct-button') : null;
+      this.restartBtn = this.restartWrap ? this.restartWrap.querySelector('.ct-button') : null;
+
+      this.summaryEl = root.querySelector('[data-dga-decision-tool-summary]');
+      this.summaryList = this.summaryEl ? this.summaryEl.querySelector('[data-dga-decision-tool-summary-list]') : null;
+
+      this.history = [];
+    }
+
+    init() {
+      if (!this.steps.length || !this.stepsWrap || !this.nav || !this.resultWrap) return;
+      this.root.setAttribute('data-enhanced', 'true');
+      this.bind();
+      this.history = [this.steps[0]];
+      this.showCurrent(false);
+    }
+
+    bind() {
+      this.stepsWrap.addEventListener('change', () => this.onChange());
+      if (this.backBtn) this.backBtn.addEventListener('click', (e) => { e.preventDefault(); this.back(); });
+      if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => { e.preventDefault(); this.advance(); });
+      if (this.submitBtn) this.submitBtn.addEventListener('click', (e) => { e.preventDefault(); this.advance(); });
+      if (this.restartBtn) this.restartBtn.addEventListener('click', (e) => { e.preventDefault(); this.restart(); });
+    }
+
+    current() {
+      return this.history[this.history.length - 1];
+    }
+
+    stepById(id) {
+      return this.steps.find((s) => s.dataset.stepId === id) || null;
+    }
+
+    hasSelection(step) {
+      return !!step.querySelector('[data-dga-decision-tool-option]:checked');
+    }
+
+    /** Resolve where the current step leads, given the live selection. */
+    resolveNext(step) {
+      if (!this.hasSelection(step)) return null;
+      if (step.dataset.stepType !== 'multiple') {
+        const checked = step.querySelector('[data-dga-decision-tool-option]:checked');
+        if (checked && checked.dataset.next) return checked.dataset.next;
+      }
+      if (step.dataset.defaultNext) return step.dataset.defaultNext;
+      const idx = this.steps.indexOf(step);
+      if (idx > -1 && idx < this.steps.length - 1) return this.steps[idx + 1].dataset.stepId;
+      return 'result';
+    }
+
+    showCurrent(focus) {
+      const step = this.current();
+      this.resultWrap.hidden = true;
+      this.steps.forEach((s) => {
+        const active = s === step;
+        s.hidden = !active;
+        s.classList.toggle('dga-decision-tool__step--active', active);
+      });
+      this.outcomes.forEach((o) => { o.hidden = true; });
+      this.nav.hidden = false;
+      this.renderProgress();
+      this.updateNav();
+      this.renderSummary(false);
+      if (focus) {
+        const heading = step.querySelector('[data-dga-decision-tool-step-heading]');
+        if (heading) heading.focus();
+        this.announce(Drupal.t('Step @n.', { '@n': this.history.length }));
+      }
+    }
+
+    renderProgress(isComplete) {
+      if (!this.progressEl) return;
+      this.progressEl.hidden = false;
+      if (this.progressEl.dataset.progressStyle === 'bar') {
+        this.renderProgressBar(isComplete);
+      } else {
+        this.renderProgressTracker(isComplete);
+      }
+    }
+
+    /**
+     * Horizontal progress-tracker over ALL defined steps (the page count): each
+     * marker is complete (visited, shown with a check), active (current), or
+     * to-do (not yet visited). When a branch skips steps the active marker just
+     * lands further along - the skipped markers stay to-do.
+     */
+    renderProgressTracker(isComplete) {
+      let tracker = this.progressEl.querySelector('.progress-tracker');
+      if (!tracker) {
+        tracker = document.createElement('ol');
+        tracker.className = 'progress-tracker';
+        this.progressEl.appendChild(tracker);
+      }
+      const current = this.current();
+      const visited = new Set(this.history);
+      const frag = document.createDocumentFragment();
+      this.steps.forEach((step, i) => {
+        const isCurrent = !isComplete && step === current;
+        const done = isComplete || (visited.has(step) && !isCurrent);
+        const item = document.createElement('li');
+        item.className = 'progress-step';
+        if (done) item.classList.add('is-complete');
+        if (isCurrent) {
+          item.classList.add('is-active');
+          item.setAttribute('aria-current', 'step');
+        }
+
+        const marker = document.createElement('span');
+        marker.className = 'progress-marker';
+        marker.setAttribute('aria-hidden', 'true');
+        if (done) marker.appendChild(trackerCheck());
+        else marker.textContent = String(i + 1);
+
+        const status = document.createElement('span');
+        status.className = 'ct-visually-hidden';
+        if (done) status.textContent = Drupal.t('Step @n, completed', { '@n': i + 1 });
+        else if (isCurrent) status.textContent = Drupal.t('Step @n, current', { '@n': i + 1 });
+        else status.textContent = Drupal.t('Step @n, not started', { '@n': i + 1 });
+
+        item.append(marker, status);
+        frag.appendChild(item);
+      });
+      tracker.replaceChildren(frag);
+    }
+
+    /** Simple filled progress bar with a "Step N of T" / "Complete" label. */
+    renderProgressBar(isComplete) {
+      let label = this.progressEl.querySelector('[data-dga-decision-tool-bar-label]');
+      let fill = this.progressEl.querySelector('[data-dga-decision-tool-bar-fill]');
+      if (!label) {
+        const wrap = document.createElement('div');
+        wrap.className = 'dga-decision-tool__bar';
+        label = document.createElement('p');
+        label.className = 'dga-decision-tool__bar-label';
+        label.setAttribute('data-dga-decision-tool-bar-label', '');
+        const track = document.createElement('div');
+        track.className = 'dga-decision-tool__bar-track';
+        track.setAttribute('aria-hidden', 'true');
+        fill = document.createElement('span');
+        fill.className = 'dga-decision-tool__bar-fill';
+        fill.setAttribute('data-dga-decision-tool-bar-fill', '');
+        track.appendChild(fill);
+        wrap.append(label, track);
+        this.progressEl.appendChild(wrap);
+      }
+      const total = this.steps.length || 1;
+      const idx = this.steps.indexOf(this.current());
+      const stepNum = idx > -1 ? idx + 1 : this.history.length;
+      const pct = isComplete ? 100 : Math.round((stepNum / total) * 100);
+      label.textContent = isComplete
+        ? Drupal.t('Complete')
+        : Drupal.t('Step @n of @t', { '@n': stepNum, '@t': total });
+      fill.style.width = `${pct}%`;
+    }
+
+    updateNav() {
+      const step = this.current();
+      const isLinkCard = step.dataset.stepOptionStyle === 'link-card';
+      if (this.backWrap) this.backWrap.hidden = this.history.length <= 1;
+      if (isLinkCard) {
+        // Link-card steps advance on selection, so they carry no Next/Submit.
+        if (this.nextWrap) this.nextWrap.hidden = true;
+        if (this.submitWrap) this.submitWrap.hidden = true;
+        return;
+      }
+      const toResult = this.resolveNext(step) === 'result';
+      if (this.nextWrap) this.nextWrap.hidden = toResult;
+      if (this.submitWrap) this.submitWrap.hidden = !toResult;
+    }
+
+    onChange() {
+      this.updateNav();
+      const step = this.current();
+      // Link-card single-choice steps advance as soon as an option is chosen.
+      if (step && step.dataset.stepOptionStyle === 'link-card' && this.hasSelection(step)) {
+        this.advance();
+      }
+    }
+
+    /** The chosen option label(s) for a step, for the answer summary. */
+    answerText(step) {
+      const labels = [];
+      step.querySelectorAll('[data-dga-decision-tool-option]:checked').forEach((input) => {
+        const option = input.closest('.dga-decision-tool__option');
+        const label = option ? option.querySelector('.dga-decision-tool__option-label') : null;
+        if (label) labels.push(label.textContent.trim());
+      });
+      return labels.join(', ');
+    }
+
+    /**
+     * Fill the "what you have answered" review. During the flow it lists the
+     * answered steps before the current one; on the result it lists them all.
+     * Each row has a Change link that jumps back to that step.
+     */
+    renderSummary(onResult) {
+      if (!this.summaryList || !this.summaryEl) return;
+      const candidates = onResult ? this.history : this.history.slice(0, -1);
+      const answered = candidates.filter((step) => this.hasSelection(step));
+      if (!answered.length) {
+        this.summaryEl.hidden = true;
+        return;
+      }
+      this.summaryEl.hidden = false;
+      const changeLabel = this.summaryEl.dataset.changeLabel || Drupal.t('Change');
+      const frag = document.createDocumentFragment();
+      answered.forEach((step, i) => {
+        const item = document.createElement('li');
+        item.className = 'dga-decision-tool__summary-item';
+
+        const number = document.createElement('span');
+        number.className = 'dga-decision-tool__summary-number';
+        number.setAttribute('aria-hidden', 'true');
+        number.textContent = String(i + 1);
+
+        const heading = step.querySelector('[data-dga-decision-tool-step-heading]');
+        const question = heading ? heading.textContent.trim() : '';
+
+        const body = document.createElement('span');
+        body.className = 'dga-decision-tool__summary-body';
+        const q = document.createElement('span');
+        q.className = 'dga-decision-tool__summary-question';
+        q.textContent = question;
+        const a = document.createElement('span');
+        a.className = 'dga-decision-tool__summary-answer';
+        a.textContent = this.answerText(step);
+        body.append(q, a);
+
+        const change = document.createElement('button');
+        change.type = 'button';
+        change.className = 'dga-decision-tool__summary-change';
+        change.textContent = changeLabel;
+        const hidden = document.createElement('span');
+        hidden.className = 'ct-visually-hidden';
+        hidden.textContent = `: ${question}`;
+        change.appendChild(hidden);
+        change.addEventListener('click', (e) => { e.preventDefault(); this.changeStep(step); });
+
+        item.append(number, body, change);
+        frag.appendChild(item);
+      });
+      this.summaryList.replaceChildren(frag);
+    }
+
+    /** Jump back to a step to change its answer; later answers are dropped. */
+    changeStep(step) {
+      const idx = this.history.indexOf(step);
+      if (idx === -1) return;
+      this.history = this.history.slice(0, idx + 1);
+      this.outcomes.forEach((o) => { o.hidden = true; o.removeAttribute('tabindex'); });
+      this.showCurrent(true);
+    }
+
+    advance() {
+      const step = this.current();
+      if (!this.hasSelection(step)) {
+        this.announce(Drupal.t('Select an answer to continue.'));
+        const first = step.querySelector('[data-dga-decision-tool-option]');
+        if (first) first.focus();
+        return;
+      }
+      const target = this.resolveNext(step);
+      const next = target === 'result' ? null : this.stepById(target);
+      if (!next) {
+        this.complete();
+        return;
+      }
+      this.history.push(next);
+      this.showCurrent(true);
+    }
+
+    back() {
+      if (this.history.length <= 1) return;
+      this.history.pop();
+      this.showCurrent(true);
+    }
+
+    restart() {
+      this.steps.forEach((s) => {
+        s.querySelectorAll('[data-dga-decision-tool-option]:checked').forEach((input) => {
+          input.checked = false;
+        });
+      });
+      this.outcomes.forEach((o) => {
+        o.hidden = true;
+        o.removeAttribute('tabindex');
+      });
+      this.history = [this.steps[0]];
+      this.showCurrent(true);
+    }
+
+    /** Union of flags from every selected option along the visited path. */
+    collectFlags() {
+      const flags = [];
+      const seen = new Set();
+      this.history.forEach((step) => {
+        step.querySelectorAll('[data-dga-decision-tool-option]:checked').forEach((input) => {
+          splitList(input.dataset.flags).forEach((flag) => {
+            if (!seen.has(flag)) {
+              seen.add(flag);
+              flags.push(flag);
+            }
+          });
+        });
+      });
+      return flags;
+    }
+
+    /** First outcome whose when-condition holds; last is the fallback. */
+    matchOutcome(flags) {
+      const set = new Set(flags);
+      for (let i = 0; i < this.outcomes.length; i += 1) {
+        const outcome = this.outcomes[i];
+        const all = splitList(outcome.dataset.whenAll);
+        const any = splitList(outcome.dataset.whenAny);
+        const allOk = all.every((flag) => set.has(flag));
+        const anyOk = any.length === 0 || any.some((flag) => set.has(flag));
+        if (allOk && anyOk) return outcome;
+      }
+      return this.outcomes[this.outcomes.length - 1] || null;
+    }
+
+    complete() {
+      const flags = this.collectFlags();
+      const outcome = this.matchOutcome(flags);
+      const code = this.generateCode();
+
+      this.steps.forEach((s) => { s.hidden = true; });
+      this.nav.hidden = true;
+      // Bar style shows "Complete" on the result; the step tracker is hidden.
+      if (this.progressEl) {
+        if (this.progressEl.dataset.progressStyle === 'bar') {
+          this.progressEl.hidden = false;
+          this.renderProgressBar(true);
+        } else {
+          this.progressEl.hidden = true;
+        }
+      }
+      this.resultWrap.hidden = false;
+      this.outcomes.forEach((o) => { o.hidden = o !== outcome; });
+      this.renderSummary(true);
+
+      let outcomeId = null;
+      if (outcome) {
+        outcomeId = outcome.dataset.outcomeId || null;
+        const codeEl = outcome.querySelector('[data-dga-decision-tool-code]');
+        if (codeEl) codeEl.textContent = code || '';
+        this.wireCopy(outcome);
+        outcome.setAttribute('tabindex', '-1');
+        outcome.focus();
+      }
+      this.announce(Drupal.t('Assessment complete. Your reference code is ready below.'));
+
+      const detail = {
+        questionSetId: this.id,
+        outcomeId,
+        flags,
+        referenceCode: code,
+      };
+      this.root.dispatchEvent(new CustomEvent('civictheme:decision-tool:complete', {
+        bubbles: true,
+        detail,
+      }));
+
+      if (this.storageKey) {
+        try {
+          window.sessionStorage.setItem(this.storageKey, JSON.stringify(detail));
+        } catch (e) {
+          // sessionStorage can be unavailable (private mode, disabled); the
+          // event is still dispatched, so the host is not blocked.
+        }
+      }
+    }
+
+    wireCopy(outcome) {
+      const wrap = outcome.querySelector('[data-dga-decision-tool-copy]');
+      if (!wrap || wrap.dataset.bound === 'true') return;
+      const btn = wrap.querySelector('.ct-button');
+      const codeEl = outcome.querySelector('[data-dga-decision-tool-code]');
+      if (!btn || !codeEl) return;
+      wrap.dataset.bound = 'true';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const text = codeEl.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(
+            () => this.announce(Drupal.t('Reference code copied to the clipboard.')),
+            () => this.selectCode(codeEl)
+          );
+        } else {
+          this.selectCode(codeEl);
+        }
+      });
+    }
+
+    selectCode(codeEl) {
+      if (typeof window.getSelection === 'undefined') return;
+      const range = document.createRange();
+      range.selectNodeContents(codeEl);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      this.announce(Drupal.t('Reference code selected. Press Control or Command, then C, to copy.'));
+    }
+
+    /** Opaque, cryptographically-random base32 code with a Crockford check. */
+    generateCode() {
+      const cryptoObj = window.crypto || window.msCrypto;
+      if (!cryptoObj || typeof cryptoObj.getRandomValues !== 'function') {
+        if (window.console) {
+          window.console.warn('[dga-decision-tool] Web Crypto unavailable; no reference code generated.');
+        }
+        return null;
+      }
+      const bytes = new Uint8Array(CODE_LENGTH);
+      cryptoObj.getRandomValues(bytes);
+      let data = '';
+      let acc = 0;
+      for (let i = 0; i < CODE_LENGTH; i += 1) {
+        const value = bytes[i] % 32;
+        data += ALPHABET.charAt(value);
+        acc = (acc * 32 + value) % 37;
+      }
+      return `${data.slice(0, 4)}-${data.slice(4, 8)}-${CHECK_ALPHABET.charAt(acc)}`;
+    }
+
+    announce(message) {
+      if (this.statusEl) this.statusEl.textContent = message;
+    }
+  }
+})(window.Drupal, window.once);
+
+// Static-page driver. Drupal core runs Drupal.attachBehaviors() after page load
+// and each AJAX swap; without it the behaviour above is registered but never
+// attached. Provide a minimal runner on DOMContentLoaded and on each DOM
+// mutation so async-rendered stories still trigger. once() inside the behaviour
+// deduplicates, so repeated calls are cheap. Inert on Drupal, where
+// attachBehaviors is already a function.
+(function () {
+  'use strict';
+  if (typeof window.Drupal === 'undefined' || typeof window.Drupal.attachBehaviors === 'function') {
+    return;
+  }
+  const attach = (context) => {
+    Object.values(window.Drupal.behaviors).forEach((b) => {
+      if (b && typeof b.attach === 'function') b.attach(context || document);
+    });
+  };
+  window.Drupal.attachBehaviors = attach;
+  const run = () => attach(document);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  new MutationObserver(run).observe(
+    document.body || document.documentElement,
+    { childList: true, subtree: true }
+  );
+})();
+
+});
+document.addEventListener('DOMContentLoaded', () => {
+/**
  * CivicTheme Chart component.
  */
 
@@ -2344,6 +2933,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // realistic chart label.
   const MAX_CELL_CHARS = 500;
 
+  // Presentation properties inlined onto a cloned <svg> at export time, so the
+  // standalone SVG / PNG renders without the page CSS or the --bdga-chart-*
+  // custom properties the on-page chart resolves against.
+  const EXPORT_STYLE_PROPS = [
+    'fill', 'fill-opacity', 'stroke', 'stroke-width', 'stroke-opacity',
+    'stroke-dasharray', 'stroke-linecap', 'stroke-linejoin', 'opacity',
+    'color', 'font-family', 'font-size', 'font-weight', 'font-style',
+    'text-anchor', 'dominant-baseline', 'letter-spacing', 'visibility',
+  ];
+
+  // Funnel + chevron icons copied from the tabs mobile disclosure (tabs.twig)
+  // so the filter controls reuse that disclosure's look. Static trusted markup.
+  // eslint-disable-next-line max-len
+  const FILTER_ICON_SVG = '<svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>';
+  // eslint-disable-next-line max-len
+  const FILTER_CHEVRON_SVG = '<svg class="ct-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.6072 8.38619C18.3583 8.13884 18.0217 8 17.6709 8C17.32 8 16.9834 8.13884 16.7346 8.38619L11.9668 13.0876L7.26542 8.38619C7.01659 8.13884 6.67999 8 6.32913 8C5.97827 8 5.64167 8.13884 5.39284 8.38619C5.26836 8.50965 5.16956 8.65654 5.10214 8.81838C5.03471 8.98022 5 9.1538 5 9.32912C5 9.50445 5.03471 9.67803 5.10214 9.83987C5.16956 10.0017 5.26836 10.1486 5.39284 10.2721L11.0239 15.9031C11.1473 16.0276 11.2942 16.1264 11.4561 16.1938C11.6179 16.2612 11.7915 16.2959 11.9668 16.2959C12.1421 16.2959 12.3157 16.2612 12.4775 16.1938C12.6394 16.1264 12.7863 16.0276 12.9097 15.9031L18.6072 10.2721C18.7316 10.1486 18.8304 10.0017 18.8979 9.83987C18.9653 9.67803 19 9.50445 19 9.32912C19 9.1538 18.9653 8.98022 18.8979 8.81838C18.8304 8.65654 18.7316 8.50965 18.6072 8.38619Z"/></svg>';
+
   // Ordinal rank table for sankey node labels. Used to:
   //   (a) sort group colour assignment so e.g. "High" always gets the
   //       darkest sequential shade regardless of where it appears in the
@@ -2389,34 +2995,29 @@ document.addEventListener('DOMContentLoaded', () => {
     return 0;
   }
 
-  // IBM Carbon Charts 14-series Categorical palette (light theme defaults).
-  // Sourced from packages/core/scss/_color-palette.scss in
-  // carbon-design-system/carbon-charts. Dark-theme equivalents are declared
-  // in chart.css under
-  // .ct-theme-dark .bdga-chart and override these defaults via CSS custom
-  // properties at render time.
+  // digital.gov.au data-vis categorical palette (light) - the navy-anchored ONS
+  // set, mirroring the --dga-data-vis-categorical-* tokens in chart.scss. Six
+  // fixed, CVD-tuned colours; series past 6 cycle the set (forcing texture
+  // beyond 6, so the repeats stay distinguishable, is still to be wired). This
+  // is the no-CSS fallback; .ct-theme-dark .bdga-chart in chart.css overrides.
   //
   // The CSS-variable hook (--bdga-chart-c1..c14, --bdga-chart-s1..s6) lets a
-  // sub-theme swap palettes without touching this file.
+  // consumer swap palettes without touching this file.
   const PALETTE_DEFAULT = [
-    '#6929c4', // purple 70   - series 1 (default for single-series charts)
-    '#1192e8', // cyan 50
-    '#005d5d', // teal 70
-    '#9f1853', // magenta 70
-    '#fa4d56', // red 50
-    '#520408', // red 90
-    '#198038', // green 60
-    '#002d9c', // blue 80
-    '#ee5396', // magenta 50
-    '#b28600', // yellow 50
-    '#009d9a', // teal 50
-    '#012749', // cyan 90
-    '#8a3800', // orange 70
-    '#a56eff', // purple 50
+    '#1e3c50', // navy (primary, anchor) - series 1
+    '#28a197', // turquoise
+    '#801650', // dark pink
+    '#f46a25', // orange
+    '#a285d1', // light purple
+    '#3d3d3d', // dark grey
+    '#1e3c50', '#28a197', '#801650', '#f46a25', '#a285d1', '#3d3d3d', // 7-12: cycle
+    '#1e3c50', '#28a197', // 13-14: cycle
   ];
-  // Sequential ramp for charts with >14 series: progressively lighter purples
-  // anchored on series-1 (purple 70). Dark theme overrides via CSS.
-  const SEQUENTIAL_DEFAULT = ['#6929c4', '#8a3ffc', '#a56eff', '#be95ff', '#d4bbff', '#e8daff'];
+  // Sequential navy ramp (digital.gov.au), darkest -> pale grey, mirroring the
+  // --bdga-chart-s* tokens in chart.scss. Drives ordinal colouring (sankey/flow
+  // node ranks) and overflow shades for many-series charts. OKLCH-tuned steps;
+  // s6 is the no-data pale grey. Dark theme overrides via CSS.
+  const SEQUENTIAL_DEFAULT = ['#001d33', '#003c61', '#015e8c', '#5693bd', '#aed0e8', '#f0eeee'];
 
   /**
    * Resolve a CSS custom property against a DOM element, with fallback.
@@ -2492,7 +3093,9 @@ document.addEventListener('DOMContentLoaded', () => {
         this.maxRows = config.max_rows || MAX_ROWS;
         this.xLabel = config.x_label || this.xKey;
         this.yLabel = config.y_label || (this.yKeys.length === 1 ? this.yKeys[0] : '');
-        this.colorBy = config.color_by === 'category' ? 'category' : 'series';
+        // 'series' | 'category' | 'single' | a row field name to colour by.
+        // Passed through verbatim; the renderers interpret it (no auto-detect).
+        this.colorBy = config.color_by || 'series';
         // Sankey / flow shape - parallel to rows. drawSankey / drawFlow
         // ignore rows entirely and read these instead.
         this.nodes = Array.isArray(config.nodes) ? config.nodes : null;
@@ -2501,6 +3104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.medianValue = (typeof config.median_value === 'number' && Number.isFinite(config.median_value))
           ? config.median_value
           : null;
+        this.filters = Array.isArray(config.filters) ? config.filters : [];
       }
       else {
         this.id = root.dataset.bdgaChartId;
@@ -2518,6 +3122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.nodes = null;
         this.links = null;
         this.medianValue = null;
+        this.filters = [];
       }
 
       // Toolbar (optional, Phase 1). References resolve to null when the
@@ -2557,6 +3162,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.zoomGroupEl = root.querySelector('[data-bdga-chart-zoom-group]');
       this.zoom = !!this.zoomGroupEl;
       this.zoomWindow = null;
+
+      // Filters (optional): author-declared client-side filter controls, built
+      // into the filter bar by setupFilters() on first draw. The full dataset
+      // is kept in fullRows so re-filtering always restarts from complete.
+      this.filtersBarEl = root.querySelector('[data-bdga-chart-filters-bar]');
+      this.activeFilters = new Map();
+      this.fullRows = null;
     }
 
     /**
@@ -2604,7 +3216,9 @@ document.addEventListener('DOMContentLoaded', () => {
           rows = this.readTable();
         }
         if (!rows.length) return this.fail('No rows in data island or fallback table');
-        this.draw(rows);
+        this.fullRows = rows;
+        this.setupFilters();
+        this.drawFiltered();
       } catch (err) {
         this.fail(err && err.message ? err.message : String(err));
       }
@@ -2851,6 +3465,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
+      // Image exports capture the rendered SVG, not the source data, so they
+      // are offered in every source mode (including url mode).
+      items.push(
+        this.imageMenuItem(Drupal.t('Download image (PNG)'), () => this.downloadPng()),
+        this.imageMenuItem(Drupal.t('Download image (SVG)'), () => this.downloadSvg()),
+      );
+
       if (!items.length) {
         const wrap = this.menuButtonEl && this.menuButtonEl.closest('.bdga-chart__menu-wrap');
         if (wrap) wrap.remove();
@@ -2965,15 +3586,43 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setStatus(Drupal.t('No data available to download yet.'));
         return;
       }
-      const base = String(this.id || 'chart').replace(/[^\w-]+/g, '-');
+      const base = this.exportBase();
+      const info = this.exportSource();
       if (fmt === 'json') {
-        this.downloadBlob(`${base}.json`, 'application/json', JSON.stringify(rows, null, 2));
+        // Envelope the rows with provenance. `rows` is kept as the data key so
+        // the file round-trips through the chart's own JSON parser.
+        const payload = { source: this.exportSourceMeta(info), rows };
+        this.downloadBlob(`${base}.json`, 'application/json', JSON.stringify(payload, null, 2));
         this.setStatus(Drupal.t('Data downloaded as JSON.'));
       }
       else {
-        this.downloadBlob(`${base}.csv`, 'text/csv;charset=utf-8', this.toCsv(rows));
+        this.downloadBlob(`${base}.csv`, 'text/csv;charset=utf-8', this.exportSourceComment(info) + this.toCsv(rows));
         this.setStatus(Drupal.t('Data downloaded as CSV.'));
       }
+    }
+
+    /** Provenance object for the JSON export envelope. */
+    exportSourceMeta(info) {
+      const src = info || this.exportSource();
+      const meta = { title: src.title, retrieved: src.retrieved };
+      const url = src.landing || src.sourceUrl;
+      if (url) meta.url = url;
+      if (src.publisher) meta.publisher = src.publisher;
+      return meta;
+    }
+
+    /**
+     * Leading comment lines for the CSV export carrying the same source line as
+     * the image exports. CSV has no metadata standard; `#` comments are the
+     * common convention (pandas/csvkit honour `comment='#'`).
+     */
+    exportSourceComment(info) {
+      const src = info || this.exportSource();
+      const url = src.landing || src.sourceUrl;
+      const lines = url
+        ? [`# Source: ${url} (${src.publisher || 'source'})`, `# Retrieved: ${src.retrieved.slice(0, 10)}`]
+        : [`# ${src.title}`, `# Generated: ${src.retrieved.slice(0, 10)}`];
+      return `${lines.join('\r\n')}\r\n`;
     }
 
     /**
@@ -3025,8 +3674,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return `${head}\r\n${body}\r\n`;
     }
 
-    downloadBlob(filename, mime, text) {
-      const blob = new Blob([text], { type: mime });
+    saveBlob(filename, blob) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -3036,6 +3684,241 @@ document.addEventListener('DOMContentLoaded', () => {
       a.remove();
       // Revoke on the next tick, once the download navigation has started.
       window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    }
+
+    downloadBlob(filename, mime, text) {
+      this.saveBlob(filename, new Blob([text], { type: mime }));
+    }
+
+    // -- Image export (PNG / SVG) --------------------------------------------
+    //
+    // Capture the rendered <svg> as a standalone file. Both work in every
+    // source mode because they read the drawn chart, not the source data.
+
+    /** A menu-item button wired to an image-export action. */
+    imageMenuItem(label, action) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bdga-chart__menu-item';
+      b.setAttribute('role', 'menuitem');
+      b.textContent = label;
+      b.addEventListener('click', () => {
+        action();
+        this.closeMenu(true);
+      });
+      return b;
+    }
+
+    /** The rendered <svg>, or null before the first draw. */
+    chartSvg() {
+      return this.canvas ? this.canvas.querySelector('svg') : null;
+    }
+
+    /** Filename stem shared by every export. */
+    exportBase() {
+      return String(this.id || 'chart').replace(/[^\w-]+/g, '-');
+    }
+
+    /** Opaque backdrop for the PNG - SVG areas are otherwise transparent. */
+    exportBackground() {
+      const probe = this.root || this.canvas;
+      if (probe) {
+        const bg = window.getComputedStyle(probe).backgroundColor;
+        if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') return bg;
+      }
+      const dark = this.root && this.root.classList.contains('ct-theme-dark');
+      return dark ? '#000000' : '#ffffff';
+    }
+
+    /**
+     * Copy presentation-affecting computed styles from the live SVG subtree
+     * onto its detached clone, recursing in lockstep. The on-page chart leans
+     * on external CSS + --bdga-chart-* custom properties; inlining makes the
+     * serialised copy self-contained.
+     */
+    inlineSvgStyles(srcEl, cloneEl) {
+      const cs = window.getComputedStyle(srcEl);
+      let decl = '';
+      EXPORT_STYLE_PROPS.forEach((prop) => {
+        const val = cs.getPropertyValue(prop);
+        if (val) decl += `${prop}:${val};`;
+      });
+      if (decl) cloneEl.setAttribute('style', decl);
+      const src = srcEl.children;
+      const clone = cloneEl.children;
+      for (let i = 0; i < src.length; i += 1) {
+        if (clone[i]) this.inlineSvgStyles(src[i], clone[i]);
+      }
+    }
+
+    /** Clip a string to n chars with an ellipsis, for the visible caption. */
+    clip(str, n) {
+      const s = String(str);
+      return s.length > n ? `${s.slice(0, n - 1)}…` : s;
+    }
+
+    /**
+     * Provenance for the export: chart title, the data source (landing page
+     * preferred over the raw endpoint), publisher host, and a retrieval
+     * timestamp. Only url-mode charts have an external source; local data
+     * yields title + date only.
+     */
+    exportSource() {
+      const titleEl = this.root && this.root.querySelector('.bdga-chart__title');
+      const title = (titleEl && titleEl.textContent.trim()) || this.id || 'Chart';
+      let sourceUrl = '';
+      let landing = '';
+      let publisher = '';
+      if (this.mode === 'url') {
+        sourceUrl = this.url || '';
+        landing = this.sourcePage || '';
+        const probe = landing || sourceUrl;
+        if (probe) {
+          try { publisher = new URL(probe).hostname.replace(/^www\./, ''); } catch { /* leave empty */ }
+        }
+      }
+      return { title, sourceUrl, landing, publisher, retrieved: new Date().toISOString() };
+    }
+
+    /**
+     * Inject SVG provenance into the export clone (no effect on the live
+     * chart): a <title> + <desc> for assistive tech, and a Dublin Core
+     * <metadata> block (dc:title, dc:source, dc:publisher, dc:date) for
+     * machine-readable attribution. Source / publisher are emitted only for
+     * url-mode data.
+     */
+    injectProvenance(svg, info) {
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      const RDFNS = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+      const DCNS = 'http://purl.org/dc/elements/1.1/';
+      const sourceText = info.landing || info.sourceUrl;
+
+      const title = document.createElementNS(SVGNS, 'title');
+      title.textContent = info.title;
+      const desc = document.createElementNS(SVGNS, 'desc');
+      desc.textContent = sourceText
+        ? `${info.title}. Source: ${sourceText} (${info.publisher || 'source'}), retrieved ${info.retrieved.slice(0, 10)}.`
+        : `${info.title}. Generated ${info.retrieved.slice(0, 10)}.`;
+
+      const metadata = document.createElementNS(SVGNS, 'metadata');
+      const rdf = document.createElementNS(RDFNS, 'rdf:RDF');
+      const description = document.createElementNS(RDFNS, 'rdf:Description');
+      const dc = (local, value) => {
+        if (!value) return;
+        const el = document.createElementNS(DCNS, `dc:${local}`);
+        el.textContent = value;
+        description.appendChild(el);
+      };
+      dc('title', info.title);
+      dc('source', sourceText);
+      dc('publisher', info.publisher);
+      dc('date', info.retrieved);
+      rdf.appendChild(description);
+      metadata.appendChild(rdf);
+
+      // <title> first (accessible name), then <desc>, then <metadata>.
+      svg.insertBefore(metadata, svg.firstChild);
+      svg.insertBefore(desc, metadata);
+      svg.insertBefore(title, desc);
+    }
+
+    /**
+     * Serialise the live <svg> into a standalone, portable string: inline the
+     * computed styles (so it renders without the page CSS), add a Dublin Core
+     * <metadata> block + <title>/<desc>, and - when the data has a source -
+     * bake a "Source:" caption into an added bottom band so the attribution
+     * survives PNG rasterisation too. Returns { string, width, height } or null
+     * when nothing has been drawn yet.
+     */
+    serializeSvg() {
+      const svgEl = this.chartSvg();
+      if (!svgEl) return null;
+      const rect = svgEl.getBoundingClientRect();
+      const vb = svgEl.viewBox && svgEl.viewBox.baseVal;
+      const baseW = Math.round((vb && vb.width) || rect.width || 600);
+      const baseH = Math.round((vb && vb.height) || rect.height || 400);
+
+      const clone = svgEl.cloneNode(true);
+      // Inline styles BEFORE adding export-only nodes, so the lockstep walk
+      // with the live tree stays index-aligned.
+      this.inlineSvgStyles(svgEl, clone);
+
+      const info = this.exportSource();
+      const caption = info.landing || info.publisher || info.sourceUrl;
+      let height = baseH;
+
+      if (caption) {
+        // Grow a bottom band for a baked source line - the only attribution
+        // that survives PNG rasterisation (metadata / desc do not).
+        const band = 22;
+        height = baseH + band;
+        clone.setAttribute('viewBox', `0 0 ${baseW} ${height}`);
+        const dark = this.root && this.root.classList.contains('ct-theme-dark');
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', '8');
+        text.setAttribute('y', String(height - 7));
+        text.setAttribute('style', `font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:${dark ? '#cfcfcf' : '#5a5a5a'};`);
+        text.textContent = `Source: ${this.clip(caption, 96)}  ·  Retrieved ${info.retrieved.slice(0, 10)}`;
+        clone.appendChild(text);
+      }
+
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+      clone.setAttribute('width', String(baseW));
+      clone.setAttribute('height', String(height));
+      this.injectProvenance(clone, info);
+
+      const string = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n${new XMLSerializer().serializeToString(clone)}`;
+      return { string, width: baseW, height };
+    }
+
+    downloadSvg() {
+      const out = this.serializeSvg();
+      if (!out) {
+        this.setStatus(Drupal.t('No chart available to download yet.'));
+        return;
+      }
+      this.downloadBlob(`${this.exportBase()}.svg`, 'image/svg+xml;charset=utf-8', out.string);
+      this.setStatus(Drupal.t('Chart downloaded as SVG.'));
+    }
+
+    downloadPng() {
+      const out = this.serializeSvg();
+      if (!out) {
+        this.setStatus(Drupal.t('No chart available to download yet.'));
+        return;
+      }
+      const scale = window.devicePixelRatio || 1;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(out.width * scale));
+      canvas.height = Math.max(1, Math.round(out.height * scale));
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        this.setStatus(Drupal.t('PNG export is not supported in this browser.'));
+        return;
+      }
+      ctx.scale(scale, scale);
+      ctx.fillStyle = this.exportBackground();
+      ctx.fillRect(0, 0, out.width, out.height);
+      const svgUrl = URL.createObjectURL(new Blob([out.string], { type: 'image/svg+xml;charset=utf-8' }));
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, out.width, out.height);
+        URL.revokeObjectURL(svgUrl);
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            this.setStatus(Drupal.t('PNG export failed.'));
+            return;
+          }
+          this.saveBlob(`${this.exportBase()}.png`, blob);
+          this.setStatus(Drupal.t('Chart downloaded as PNG.'));
+        }, 'image/png');
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(svgUrl);
+        this.setStatus(Drupal.t('PNG export failed.'));
+      };
+      img.src = svgUrl;
     }
 
     // -- Legend + series toggle (Phase 2) ------------------------------------
@@ -3223,8 +4106,67 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     emphasizeSeries(key) {
       if (!this.canvas) return;
+      // key === null is the universal restore: clear every opacity the emphasis
+      // paths set (series groups, individual marks, sankey links).
+      if (key === null) {
+        this.canvas.querySelectorAll('[data-bdga-series],[data-bdga-point]')
+          .forEach((m) => { m.style.opacity = ''; });
+        this.canvas.querySelectorAll('.bdga-chart__sankey-link')
+          .forEach((m) => { m.style.opacity = ''; });
+        return;
+      }
       this.canvas.querySelectorAll('[data-bdga-series]').forEach((m) => {
-        m.style.opacity = key === null || m.getAttribute('data-bdga-series') === key ? '' : '0.3';
+        m.style.opacity = m.getAttribute('data-bdga-series') === key ? '' : '0.3';
+      });
+    }
+
+    /**
+     * Emphasize what a hovered/focused mark belongs to; dim the rest to 30%.
+     * Multi-series charts emphasize the whole series. Charts that colour marks
+     * by a per-mark dimension (color_by a category/field) or sankey/flow nodes
+     * emphasize the single mark (and, for sankey, its connected links). Plain
+     * single-colour charts have nothing to dim.
+     */
+    emphasizePoint(pt) {
+      if (!pt || !this.canvas) return;
+      const sEl = pt.closest('[data-bdga-series]');
+      const seriesKey = sEl && sEl.getAttribute('data-bdga-series');
+      if (seriesKey && this.yKeys.length > 1) {
+        this.emphasizeSeries(seriesKey);
+        return;
+      }
+      const isFlow = this.type === 'sankey' || this.type === 'flow';
+      const cb = this.colorBy;
+      const perMark = cb && cb !== 'series' && cb !== 'single';
+      if (!perMark && !isFlow) return;
+      this.canvas.querySelectorAll('[data-bdga-point]').forEach((m) => {
+        m.style.opacity = m === pt ? '' : '0.3';
+      });
+      if (isFlow) {
+        const node = window.d3.select(pt).datum();
+        const id = node && node.id;
+        this.canvas.querySelectorAll('.bdga-chart__sankey-link').forEach((l) => {
+          const ld = window.d3.select(l).datum();
+          const s = ld && ld.source && ld.source.id;
+          const t = ld && ld.target && ld.target.id;
+          l.style.opacity = id && (s === id || t === id) ? '' : '0.2';
+        });
+      }
+    }
+
+    /**
+     * Carbon emphasis-by-fade for a single flow: raise the hovered link to full
+     * opacity and drop every other link to 20%, so one path reads cleanly out
+     * of a dense diagram. Nodes are left untouched - the flow is emphasised.
+     * Restored by emphasizeSeries(null), which clears every link's inline
+     * opacity, so a stale highlight can't survive a redraw or a mouseout.
+     */
+    emphasizeLink(linkEl) {
+      if (!linkEl || !this.canvas) return;
+      this.canvas.querySelectorAll('.bdga-chart__sankey-link').forEach((l) => {
+        // Explicit '1' beats the generic group-hover rule, which would else
+        // hold the focused link at 0.85 while its parent <g> is hovered.
+        l.style.opacity = l === linkEl ? '1' : '0.2';
       });
     }
 
@@ -3324,24 +4266,33 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.pointNavBound) return;
       this.pointNavBound = true;
       this.canvas.addEventListener('keydown', (e) => this.onPointKeydown(e));
-      // Pointer + focus parity for the tooltip.
+      // Pointer + focus parity for the tooltip and series emphasis: hovering or
+      // keyboard-focusing a point shows its label and dims the other series,
+      // mirroring the legend.
       this.canvas.addEventListener('mouseover', (e) => {
         const pt = e.target.closest('[data-bdga-point]');
-        if (pt) this.showPointTooltip(pt);
+        if (pt) { this.showPointTooltip(pt); this.emphasizePoint(pt); return; }
+        // Flows (sankey/flow links) are hover-only emphasis targets: pointer
+        // affordance on a path that AT reaches through the node labels + table.
+        const link = e.target.closest('[data-bdga-link]');
+        if (link) { this.showPointTooltip(link); this.emphasizeLink(link); }
       });
       this.canvas.addEventListener('mouseout', (e) => {
         const pt = e.target.closest('[data-bdga-point]');
-        if (pt) this.hidePointTooltip();
+        if (pt) { this.hidePointTooltip(); this.emphasizeSeries(null); return; }
+        const link = e.target.closest('[data-bdga-link]');
+        if (link) { this.hidePointTooltip(); this.emphasizeSeries(null); }
       });
       this.canvas.addEventListener('focusin', (e) => {
         const pt = e.target.closest && e.target.closest('[data-bdga-point]');
         if (!pt) return;
         this.syncFocusPos(pt);
         this.showPointTooltip(pt);
+        this.emphasizePoint(pt);
       });
       this.canvas.addEventListener('focusout', (e) => {
         const pt = e.target.closest && e.target.closest('[data-bdga-point]');
-        if (pt) this.hidePointTooltip();
+        if (pt) { this.hidePointTooltip(); this.emphasizeSeries(null); }
       });
     }
 
@@ -3560,7 +4511,9 @@ document.addEventListener('DOMContentLoaded', () => {
       this.setStatus(
         Drupal.t('Chart loaded. @count rows.', { '@count': rows.length })
       );
-      this.draw(rows);
+      this.fullRows = rows;
+      this.setupFilters();
+      this.drawFiltered();
     }
 
     extractCkanRows(payload) {
@@ -3852,6 +4805,155 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tgtTh) tgtTh.textContent = prefixes[1];
     }
 
+    // -- Filters (interactive, client-side) ----------------------------------
+    //
+    // Author-declared filters ({ key, label?, values? }, via config_json) build
+    // one control per dimension. Within a filter the selected values are OR-ed;
+    // across filters they are AND-ed. The renderer owns the controls + redraw;
+    // the fallback data table stays complete (filters affect only the visual).
+
+    /** Distinct non-empty stringified values of a column, first-seen order. */
+    distinctValues(rows, key) {
+      const seen = new Set();
+      const out = [];
+      rows.forEach((r) => {
+        const v = String(r[key] ?? '');
+        if (v !== '' && !seen.has(v)) { seen.add(v); out.push(v); }
+      });
+      return out;
+    }
+
+    /**
+     * Build the filter controls from this.filters into the filter bar. No-op
+     * without configured filters, a bar element, or for the node-link types.
+     * Every filter starts fully selected.
+     */
+    setupFilters() {
+      if (!this.filtersBarEl || !this.filters.length) return;
+      if (this.type === 'sankey' || this.type === 'flow') return;
+      const rows = this.fullRows || [];
+      this.activeFilters = new Map();
+      const groups = [];
+      this.filters.forEach((f, idx) => {
+        if (!f || !f.key) return;
+        const values = (Array.isArray(f.values) && f.values.length)
+          ? f.values.map(String)
+          : this.distinctValues(rows, f.key);
+        if (!values.length) return;
+        this.activeFilters.set(f.key, new Set(values));
+        groups.push(this.buildFilterControl(f, values, idx));
+      });
+      if (!groups.length) return;
+      this.filtersBarEl.replaceChildren(...groups);
+      this.filtersBarEl.hidden = false;
+    }
+
+    /**
+     * One filter's disclosure. Reuses the tabs mobile-disclosure shell - funnel
+     * icon, label, chevron - opening to a checkbox per value.
+     */
+    buildFilterControl(f, values, idx) {
+      const label = f.label || f.key;
+      // CivicTheme checkbox/label theming keys on the theme class being on the
+      // element itself, so mirror the chart's theme onto each control.
+      const themeClass = this.root && this.root.classList.contains('ct-theme-dark')
+        ? 'ct-theme-dark'
+        : 'ct-theme-light';
+      const details = document.createElement('details');
+      details.className = 'bdga-chart__filter';
+
+      const summary = document.createElement('summary');
+      summary.className = 'bdga-chart__filter-summary';
+      const icon = document.createElement('span');
+      icon.className = 'bdga-chart__filter-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = FILTER_ICON_SVG;
+      const labelEl = document.createElement('span');
+      labelEl.className = 'bdga-chart__filter-label';
+      labelEl.textContent = `${label}: ${values.length} of ${values.length}`;
+      const chevron = document.createElement('span');
+      chevron.className = 'bdga-chart__filter-chevron';
+      chevron.setAttribute('aria-hidden', 'true');
+      chevron.innerHTML = FILTER_CHEVRON_SVG;
+      summary.append(icon, labelEl, chevron);
+      details.appendChild(summary);
+
+      const fieldset = document.createElement('fieldset');
+      fieldset.className = 'bdga-chart__filter-options';
+      const legend = document.createElement('legend');
+      legend.className = 'visually-hidden';
+      legend.textContent = label;
+      fieldset.appendChild(legend);
+      const base = `${this.id || 'chart'}-f${idx}`;
+      values.forEach((val, vIdx) => {
+        const optionId = `${base}-o${vIdx}`;
+        const option = document.createElement('div');
+        option.className = 'bdga-chart__filter-option';
+        // CivicTheme checkbox atom: a styled <input class="ct-checkbox"> with a
+        // sibling <label> (ct-checkbox's CSS keys on `input + label`).
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = `ct-checkbox ${themeClass}`;
+        checkbox.id = optionId;
+        checkbox.checked = true;
+        checkbox.value = val;
+        checkbox.addEventListener('change', () => {
+          this.onFilterChange(f.key, val, checkbox.checked, labelEl, label, values.length);
+        });
+        const optionLabel = document.createElement('label');
+        optionLabel.className = `ct-label ct-label--small ct-checkbox__label ${themeClass}`;
+        optionLabel.setAttribute('for', optionId);
+        optionLabel.textContent = val;
+        option.append(checkbox, optionLabel);
+        fieldset.appendChild(option);
+      });
+      details.appendChild(fieldset);
+      return details;
+    }
+
+    onFilterChange(key, value, checked, labelEl, label, total) {
+      const active = this.activeFilters.get(key);
+      if (!active) return;
+      if (checked) active.add(value); else active.delete(value);
+      if (labelEl) labelEl.textContent = `${label}: ${active.size} of ${total}`;
+      this.drawFiltered();
+    }
+
+    /** Rows passing every filter (the row's value is in that filter's set). */
+    applyFilters(rows) {
+      if (!this.activeFilters || !this.activeFilters.size) return rows;
+      const entries = Array.from(this.activeFilters.entries());
+      return rows.filter((row) => entries.every(([key, active]) => active.has(String(row[key] ?? ''))));
+    }
+
+    /** Draw the filtered view, or an empty state when nothing matches. */
+    drawFiltered() {
+      const rows = this.applyFilters(this.fullRows || []);
+      if (!rows.length) {
+        this.showFilterEmptyState();
+        return;
+      }
+      this.draw(rows);
+      if (this.activeFilters && this.activeFilters.size) {
+        this.setStatus(Drupal.t('Showing @n of @total rows.', {
+          '@n': rows.length,
+          '@total': (this.fullRows || []).length,
+        }));
+      }
+    }
+
+    showFilterEmptyState() {
+      this.lastDrawData = [];
+      if (this.canvas) {
+        this.canvas.replaceChildren();
+        const p = document.createElement('p');
+        p.className = 'bdga-chart__empty';
+        p.textContent = Drupal.t('No data matches the selected filters.');
+        this.canvas.appendChild(p);
+      }
+      this.setStatus(Drupal.t('No data matches the selected filters.'));
+    }
+
     draw(rows) {
       // Remember the inputs and the width we drew at so the ResizeObserver can
       // re-lay-out crisply on a container-width change. URL-mode reuses these
@@ -4049,14 +5151,33 @@ document.addEventListener('DOMContentLoaded', () => {
       // per-category colouring via field_bdga_p_chart_color_by when the X
       // axis is categorical (e.g. agency types) and colour reinforces the
       // distinction between bars.
-      const colorByCategory = this.colorBy === 'category' && this.yKeys.length === 1;
       const palette = this.palette;
-      const barFill = colorByCategory
-        ? (_d, i) =>
-            i < palette.categorical.length
-              ? palette.categorical[i]
-              : shadeSequential(palette, i, rows.length)
-        : palette.single;
+      // Per-bar colour is opt-in and explicit via color_by:
+      //  - a row field name -> colour by that field (sequential ramp when the
+      //    values are rankable/ordinal e.g. confidence tiers, else categorical)
+      //  - 'category'       -> one categorical colour per X-position (few only)
+      //  - else             -> single navy. The default: on a large name axis
+      //    colour carries no meaning, so the filter and data table do the work.
+      const cb = this.colorBy;
+      const colorField = (cb && cb !== 'series' && cb !== 'category' && cb !== 'single'
+        && rows[0] && Object.prototype.hasOwnProperty.call(rows[0], cb)) ? cb : null;
+      let barFill;
+      if (colorField) {
+        const cats = Array.from(new Set(rows.map((r) => r[colorField])));
+        if (cats.every((c) => rankOf(c) !== null)) {
+          const ordered = [...cats].sort((a, b) => rankOf(a) - rankOf(b));
+          barFill = (d) => shadeSequential(palette, ordered.indexOf(d[colorField]), ordered.length);
+        } else {
+          const scale = d3.scaleOrdinal().domain(cats).range(palette.categorical);
+          barFill = (d) => scale(d[colorField]);
+        }
+      } else if (cb === 'category' && this.yKeys.length === 1) {
+        barFill = (_d, i) => (i < palette.categorical.length
+          ? palette.categorical[i]
+          : shadeSequential(palette, i, rows.length));
+      } else {
+        barFill = palette.single;
+      }
 
       const bars = svg
         .append('g')
@@ -4865,24 +5986,33 @@ document.addEventListener('DOMContentLoaded', () => {
           .text(meta_.prefix);
       });
 
-      // Links underneath the node rects so they appear to plug in.
+      // Flow label shared by the native <title> (non-JS / fallback) and the
+      // comparative tooltip shown on hover - source → target with the value,
+      // the way Carbon labels an emphasised flow.
+      const flowLabel = (d) => {
+        let base = `${d.source.id} → ${d.target.id}: ${this.formatValue(d.value)}`;
+        if (typeof d.budget === 'number') {
+          base += ` ($${d.budget.toFixed(2)}B)`;
+        }
+        return base;
+      };
+
+      // Links underneath the node rects so they appear to plug in. Each is a
+      // hover-emphasis target (data-bdga-link) carrying its comparative label;
+      // the group stays aria-hidden so flows reach AT once, through the table.
       const linkGroup = svg.append('g').attr('fill', 'none').attr('aria-hidden', 'true');
       linkGroup
         .selectAll('path')
         .data(graph.links)
         .join('path')
         .attr('class', 'bdga-chart__sankey-link')
+        .attr('data-bdga-link', '')
+        .attr('aria-label', flowLabel)
         .attr('d', d3.sankeyLinkHorizontal())
         .attr('stroke', (d) => colorByNode.get(d.source.id) || palette.single)
         .attr('stroke-width', (d) => Math.max(1, d.width))
         .append('title')
-        .text((d) => {
-          let base = `${d.source.id  } → ${  d.target.id  }: ${  d.value}`;
-          if (typeof d.budget === 'number') {
-            base += ` ($${  d.budget.toFixed(2)  }B)`;
-          }
-          return base;
-        });
+        .text(flowLabel);
 
       // Column count for placement decisions. d.layer is the column
       // index set by nodeAlign above; d.depth would be topology and
@@ -5512,6 +6642,49 @@ document.querySelectorAll('.ct-tabs').forEach((tabs) => {
   new CivicThemeTabs(tabs);
 });
 
+/**
+ * CivicTheme Tabs mobile disclosure (collapse_mobile, links-only).
+ *
+ * Below the m breakpoint the links collapse into a <details>; at and above m
+ * the summary is hidden by CSS and the bar shows. Force the disclosure open on
+ * desktop and closed on mobile, toggling only when the breakpoint is actually
+ * crossed so a user's manual open/close is preserved within a breakpoint. Runs
+ * as its own pass: CivicThemeTabs early-returns without panels, so it never
+ * reaches links-only tabs.
+ */
+function CivicThemeTabsDisclosure(el) {
+  if (!el) {
+    return;
+  }
+
+  this.el = el;
+  this.summary = el.querySelector('summary');
+
+  if (!this.summary) {
+    return;
+  }
+
+  this.wasDesktop = null;
+  this.syncListener = this.sync.bind(this);
+  this.sync();
+  window.addEventListener('resize', this.syncListener, false);
+}
+
+CivicThemeTabsDisclosure.prototype.sync = function () {
+  // CSS hides the summary at >= m, so a hidden summary means desktop. Keeps the
+  // breakpoint value in the SCSS rather than duplicated as a literal here.
+  const isDesktop = window.getComputedStyle(this.summary).display === 'none';
+
+  if (isDesktop !== this.wasDesktop) {
+    this.el.open = isDesktop;
+    this.wasDesktop = isDesktop;
+  }
+};
+
+document.querySelectorAll('[data-tabs-disclosure]').forEach((el) => {
+  new CivicThemeTabsDisclosure(el);
+});
+
 });
 document.addEventListener('DOMContentLoaded', () => {
 /**
@@ -5528,14 +6701,23 @@ function CivicThemeTableOfContents(el) {
   this.target = el;
   this.position = this.target.getAttribute('data-table-of-contents-position').trim();
   this.theme = this.target.hasAttribute('data-table-of-contents-theme') ? this.target.getAttribute('data-table-of-contents-theme').trim() : 'light';
-  this.anchorSelector = this.target.hasAttribute('data-table-of-contents-anchor-selector') ? this.target.getAttribute('data-table-of-contents-anchor-selector').trim() : 'h2';
-  this.anchorScopeSelector = this.target.hasAttribute('data-table-of-contents-anchor-scope-selector') ? this.target.getAttribute('data-table-of-contents-anchor-scope-selector').trim() : '.ct-basic-content';
   this.title = this.target.hasAttribute('data-table-of-contents-title') ? this.target.getAttribute('data-table-of-contents-title').trim() : '';
+  this.anchorScopeSelector = this.target.hasAttribute('data-table-of-contents-anchor-scope-selector') ? this.target.getAttribute('data-table-of-contents-anchor-scope-selector').trim() : '.ct-basic-content';
+  this.excludeSelector = this.target.hasAttribute('data-table-of-contents-exclude-selector') ? this.target.getAttribute('data-table-of-contents-exclude-selector').trim() : '';
 
-  // Normalise attribute values.
+  // Heading depth. Explicit anchor selector wins; otherwise build a selector
+  // from the min/max heading levels.
+  this.minLevel = this.normaliseLevel(this.target.getAttribute('data-table-of-contents-min-level'), 2);
+  this.maxLevel = this.normaliseLevel(this.target.getAttribute('data-table-of-contents-max-level'), 3);
+  if (this.maxLevel < this.minLevel) {
+    this.maxLevel = this.minLevel;
+  }
+  const explicitAnchorSelector = this.target.hasAttribute('data-table-of-contents-anchor-selector') ? this.target.getAttribute('data-table-of-contents-anchor-selector').trim() : '';
+  this.anchorSelector = explicitAnchorSelector !== '' ? explicitAnchorSelector : this.buildAnchorSelector(this.minLevel, this.maxLevel);
+
+  // Normalise remaining attribute values.
   this.position = ['before', 'after', 'prepend', 'append'].indexOf(this.position.trim()) > 0 ? this.position : 'before';
   this.theme = this.theme === 'dark' ? 'dark' : 'light';
-  this.anchorSelector = this.anchorSelector !== '' ? this.anchorSelector : 'h2';
   this.anchorScopeSelector = this.anchorScopeSelector !== '' ? this.anchorScopeSelector : '.ct-basic-content';
 
   // Initialise component.
@@ -5558,7 +6740,7 @@ CivicThemeTableOfContents.prototype.init = function () {
     html += this.renderTitle(this.title);
   }
 
-  html += this.renderLinks(links);
+  html += this.renderLinks(this.buildTree(links));
 
   html = this.renderContainer(html, this.theme, this.position);
 
@@ -5574,6 +6756,11 @@ CivicThemeTableOfContents.prototype.findLinks = function (anchorSelector, scopeS
     elScope.querySelectorAll(anchorSelector).forEach((elAnchor) => {
       // Skip headings marked to be excluded from TOC.
       if (elAnchor.hasAttribute('data-toc-exclude')) {
+        return;
+      }
+
+      // Skip headings matching the exclude selector.
+      if (this.isExcluded(elAnchor)) {
         return;
       }
 
@@ -5606,6 +6793,7 @@ CivicThemeTableOfContents.prototype.findLinks = function (anchorSelector, scopeS
       links.push({
         title: anchorText,
         url,
+        level: this.headingLevel(elAnchor),
       });
 
       // Update anchor with the id. This will "fix" any anchors with duplicated
@@ -5620,18 +6808,44 @@ CivicThemeTableOfContents.prototype.findLinks = function (anchorSelector, scopeS
   return links;
 };
 
+/**
+ * Nest a flat, document-ordered list of headings by their level.
+ */
+CivicThemeTableOfContents.prototype.buildTree = function (links) {
+  const root = { children: [] };
+  const stack = [{ node: root, level: this.minLevel - 1 }];
+
+  links.forEach((link) => {
+    const node = { title: link.title, url: link.url, children: [] };
+
+    // Climb back up to the correct parent for this heading level.
+    while (stack.length > 1 && stack[stack.length - 1].level >= link.level) {
+      stack.pop();
+    }
+
+    stack[stack.length - 1].node.children.push(node);
+    stack.push({ node, level: link.level });
+  });
+
+  return root.children;
+};
+
 CivicThemeTableOfContents.prototype.renderTitle = function (title) {
   return `<h2 class="ct-table-of-contents__title">${title}</h2>`;
 };
 
-CivicThemeTableOfContents.prototype.renderLinks = function (links) {
-  let html = '';
+CivicThemeTableOfContents.prototype.renderLinks = function (nodes, isChild) {
+  if (!nodes.length) {
+    return '';
+  }
 
-  html += `<ul class="ct-table-of-contents__links">`;
-  for (const i in links) {
+  const listClass = isChild ? 'ct-table-of-contents__links ct-table-of-contents__links--child' : 'ct-table-of-contents__links';
+  let html = `<ul class="${listClass}">`;
+  for (const i in nodes) {
     html += `
       <li class="ct-table-of-contents__link-item">
-        <a class="ct-table-of-contents__link" href="${links[i].url}">${links[i].title}</a>
+        <a class="ct-table-of-contents__link" href="${nodes[i].url}">${nodes[i].title}</a>
+        ${nodes[i].children.length ? this.renderLinks(nodes[i].children, true) : ''}
       </li>
     `;
   }
@@ -5661,6 +6875,51 @@ CivicThemeTableOfContents.prototype.makeAnchorId = function (str) {
     .replace(/[_.~"<>%|'!*();:@&=+$,/?%#[\]{}\n`^\\]/gim, '')
     .replace(/(^\s+)|(\s+$)/gim, '')
     .replace(/\s+/gm, '-');
+};
+
+/**
+ * Clamp a level attribute value to the 2-6 heading range.
+ */
+CivicThemeTableOfContents.prototype.normaliseLevel = function (value, fallback) {
+  const level = parseInt(value, 10);
+  if (Number.isNaN(level)) {
+    return fallback;
+  }
+  return Math.min(6, Math.max(2, level));
+};
+
+/**
+ * Build an anchor selector (e.g. 'h2, h3') from a min/max heading level.
+ */
+CivicThemeTableOfContents.prototype.buildAnchorSelector = function (min, max) {
+  const selectors = [];
+  for (let level = min; level <= max; level++) {
+    selectors.push(`h${level}`);
+  }
+  return selectors.join(', ');
+};
+
+/**
+ * Resolve a heading element's level, falling back to minLevel for non-headings.
+ */
+CivicThemeTableOfContents.prototype.headingLevel = function (el) {
+  const match = /^h([1-6])$/i.exec(el.tagName);
+  return match ? parseInt(match[1], 10) : this.minLevel;
+};
+
+/**
+ * Whether an element matches the configured exclude selector.
+ */
+CivicThemeTableOfContents.prototype.isExcluded = function (el) {
+  if (this.excludeSelector === '') {
+    return false;
+  }
+  try {
+    return el.matches(this.excludeSelector);
+  } catch (e) {
+    // Invalid selector: exclude nothing rather than break generation.
+    return false;
+  }
 };
 
 document.querySelectorAll('[data-table-of-contents-position]').forEach((el) => {
