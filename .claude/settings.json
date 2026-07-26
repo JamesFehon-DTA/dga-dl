@@ -1,5 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "drupal.org",
+        "www.drupal.org"
+      ]
+    }
+  },
   "hooks": {
     "Stop": [
       {
