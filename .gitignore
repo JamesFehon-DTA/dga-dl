@@ -24,7 +24,9 @@ CNAME
 .claude/settings.local.json
 .claude/worktrees/
 
-# Synced from civictheme-uikit docs-live by scripts/sync-guidance.mjs
+# Synced from civictheme-uikit docs-live by scripts/sync-content.mjs
 src/content/patterns/
 src/content/templates/
 src/content/foundations/
+src/content/components/
+src/content/components-advanced/

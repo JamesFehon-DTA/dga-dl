@@ -37,8 +37,16 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content: EntryContent } = await render(entry);
+
+// Synced component docs carry no demo markup; the demo association is a
+// dga-dl convention – render the demo iframe when a matching file exists.
+const demos = import.meta.glob('../assets/demos/*.html');
+const hasDemo =
+  (entry.collection === 'components' || entry.collection === 'components-advanced') &&
+  `../assets/demos/${entry.id}.html` in demos;
 ---
 
 <Content title={entry.data.title} description={entry.data.description}>
-  <EntryContent components={{ Demo }} />
+  {hasDemo && <Demo name={entry.id} />}
+  <EntryContent />
 </Content>

@@ -1,9 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// foundations, patterns and templates are synced from the civictheme-uikit
-// docs-live ref by scripts/sync-guidance.mjs (gitignored, not authored here).
-// components and components-advanced remain local.
+// All five collections are synced from the civictheme-uikit docs-live ref by
+// scripts/sync-content.mjs (gitignored, not authored here). Component docs are
+// routed into components/ vs components-advanced/ by requires-cms-config.
 
 const baseFields = {
   title: z.string(),
@@ -25,6 +25,7 @@ const components = defineCollection({
   schema: z.object({
     ...baseFields,
     'component-type': z.enum(['Content', 'Data', 'Forms', 'Layout', 'Navigation']),
+    'rendered-by': z.array(z.string()).optional(),
   }),
 });
 
@@ -33,6 +34,8 @@ const componentsAdvanced = defineCollection({
   schema: z.object({
     ...baseFields,
     'component-type': z.enum(['Content', 'Data', 'Forms', 'Layout', 'Navigation']),
+    'rendered-by': z.array(z.string()).optional(),
+    'requires-cms-config': z.literal(true),
   }),
 });
 

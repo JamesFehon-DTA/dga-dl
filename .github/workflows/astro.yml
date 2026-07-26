@@ -6,11 +6,12 @@ on:
     branches: [main]
   # Manual runs from the Actions tab.
   workflow_dispatch:
-  # Fired by the UIKit release workflow (JamesFehon-DTA/civictheme-uikit) when a
-  # new @dta-au/civictheme-twig version is published. client_payload.version is
-  # the published version to pin.
+  # uikit-released: fired by the UIKit release workflow when a new
+  # @dta-au/civictheme-twig version is published; client_payload.version is the
+  # version to pin. docs-updated: fired on push to docs-live so content
+  # advances rebuild the site without waiting for a release.
   repository_dispatch:
-    types: [uikit-released]
+    types: [uikit-released, docs-updated]
 
 permissions:
   # contents: write lets the dispatch build commit the bumped pin back to main.
@@ -42,7 +43,9 @@ jobs:
         run: npm ci
 
       - name: Bump and pin UIKit version (on UIKit release)
-        if: github.event_name == 'repository_dispatch'
+        # event.action carries the dispatch type; docs-updated must skip the
+        # pin step (its payload has no version) and go straight to the build.
+        if: github.event.action == 'uikit-released'
         env:
           NEW_VERSION: ${{ github.event.client_payload.version }}
         run: |
