@@ -5,15 +5,27 @@ interface Props {
   title: string;
   description?: string;
   lead?: string;
+  // Full-width pages drop the reserved (empty) left sidebar columns.
+  fullWidth?: boolean;
+  // Generate the "On this page" table of contents directly below the page
+  // introduction, before the first H2 – see /patterns/in-page-navigation/.
+  toc?: boolean;
 }
 
-const { title, description, lead } = Astro.props;
+const { title, description, lead, fullWidth = false, toc = false } = Astro.props;
 ---
 
 <BaseLayout title={title}>
   <main
     id="main-content"
-    class="ct-layout ct-layout--no-top-right ct-layout--no-bottom-right ct-vertical-spacing--top"
+    class:list={[
+      'ct-layout',
+      'ct-layout--no-top-right',
+      'ct-layout--no-bottom-right',
+      fullWidth && 'ct-layout--no-top-left',
+      fullWidth && 'ct-layout--no-bottom-left',
+      'ct-vertical-spacing--top',
+    ]}
     role="main"
   >
     <div class="ct-layout__inner container" data-masonry="true">
@@ -21,6 +33,14 @@ const { title, description, lead } = Astro.props;
         <h1>{title}</h1>
         {lead && <p class="ct-text-large">{lead}</p>}
         {description && <p class="ct-text-large">{description}</p>}
+        {toc && (
+          <div
+            data-table-of-contents-position="before"
+            data-table-of-contents-title="On this page"
+            data-table-of-contents-min-level="2"
+            data-table-of-contents-max-level="4"
+          ></div>
+        )}
         <div class="ct-theme-light ct-basic-content ct-vertical-spacing--top">
           <div class="container">
             <div class="row">
@@ -32,15 +52,29 @@ const { title, description, lead } = Astro.props;
         </div>
       </section>
 
-      <aside class="ct-layout__sidebar_top_left">
-        <slot name="sidebar-top-left" />
-      </aside>
+      {!fullWidth && (
+        <aside class="ct-layout__sidebar_top_left">
+          <slot name="sidebar-top-left" />
+        </aside>
+      )}
 
-      <aside class="ct-layout__sidebar_bottom_left">
-        <slot name="sidebar-bottom-left" />
-      </aside>
+      {!fullWidth && (
+        <aside class="ct-layout__sidebar_bottom_left">
+          <slot name="sidebar-bottom-left" />
+        </aside>
+      )}
     </div>
   </main>
+  <style is:global>
+    /* Table of contents: H4 entries hold the H3 indent, one size smaller
+       (documented at /components/table-of-contents/). */
+    .ct-table-of-contents__links--child .ct-table-of-contents__links--child {
+      padding-left: 0;
+    }
+    .ct-table-of-contents__links--child .ct-table-of-contents__links--child .ct-table-of-contents__link {
+      font-size: 0.8125rem;
+    }
+  </style>
   <script>
     import '../scripts/colour-swatches';
   </script>

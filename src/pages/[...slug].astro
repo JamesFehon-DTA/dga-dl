@@ -44,9 +44,18 @@ const demos = import.meta.glob('../assets/demos/*.html');
 const hasDemo =
   (entry.collection === 'components' || entry.collection === 'components-advanced') &&
   `../assets/demos/${entry.id}.html` in demos;
+
+// Foundations pages have no section sidebar, so they render full width with
+// an "On this page" table of contents below the introduction.
+const isFoundations = entry.collection === 'foundations';
 ---
 
-<Content title={entry.data.title} description={entry.data.description}>
+<Content
+  title={entry.data.title}
+  description={entry.data.description}
+  fullWidth={isFoundations}
+  toc={isFoundations}
+>
   {hasDemo && <Demo name={entry.id} />}
   <EntryContent />
 </Content>
