@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
-    "@dta-au/civictheme-twig": "1.17.0",
+    "@dta-au/civictheme-twig": "1.17.1",
     "astro": "^6.0.0",
     "remark-deflist": "^1.0.0",
     "unist-util-visit": "^5.1.0"
