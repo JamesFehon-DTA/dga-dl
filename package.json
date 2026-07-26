@@ -17,9 +17,9 @@
     "deploy": "npm run a11y && surge ./dist publisher-digital-govau.surge.sh"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/mdx": "^5.0.6",
     "@dta-au/civictheme-twig": "1.16.1",
-    "astro": "^6.0.0",
+    "astro": "^6.4.8",
     "remark-deflist": "^1.0.0",
     "unist-util-visit": "^5.1.0"
   },
