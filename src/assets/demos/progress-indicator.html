@@ -1,0 +1,246 @@
+<div class="progress-nav ct-theme-light" style="padding: 1.5rem;background: var(--ct-color-light-background-light);">
+  <div class="progress-nav__header">
+    <span class="progress-nav__heading">Progress</span>
+
+    <p class="progress-nav__summary">
+      <span class="progress-nav__counter">
+        <span class="ct-visually-hidden">Step</span>
+        <span class="progress-nav__current-step">4</span>
+        <span class="progress-nav__total-steps">of 7</span>
+      </span>
+    </p>
+  </div>
+
+  <ol class="progress-nav__list">
+    <li class="progress-nav__item progress-nav__item--completed">
+      <a
+        href="#agency"
+        class="progress-nav__link"
+        aria-describedby="progress-nav-1-status"
+      >
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="7 12.5 10.5 16 17 9"></polyline>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">Agency details</span>
+      </a>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-1-status"
+      >
+        Completed
+      </span>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--completed">
+      <a
+        href="#contact"
+        class="progress-nav__link"
+        aria-describedby="progress-nav-2-status"
+      >
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="7 12.5 10.5 16 17 9"></polyline>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">Contact information</span>
+      </a>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-2-status"
+      >
+        Completed
+      </span>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--saved">
+      <a
+        href="#eligibility"
+        class="progress-nav__link"
+        aria-describedby="progress-nav-3-status"
+      >
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline
+              points="7 12.5 10.5 16 17 9"
+              stroke-dasharray="2 1.5"
+            ></polyline>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">Eligibility</span>
+      </a>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-3-status"
+      >
+        Saved
+      </span>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--in-progress is-active">
+      <a
+        href="#capabilities"
+        class="progress-nav__link"
+        aria-describedby="progress-nav-4-status"
+        aria-current="step"
+      >
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">
+          Digital capabilities
+          <small class="progress-nav__meta">Step 4 of 7</small>
+        </span>
+      </a>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-4-status"
+      >
+        In progress
+      </span>
+
+      <ol class="progress-nav__sub-list">
+        <li
+          class="progress-nav__item progress-nav__item--level-2 progress-nav__item--in-progress is-active"
+        >
+          <a
+            href="#cloud"
+            class="progress-nav__link"
+            aria-describedby="progress-nav-4-sub-status"
+            aria-current="step"
+          >
+            <span class="progress-nav__indicator" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                focusable="false"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </span>
+
+            <span class="progress-nav__label">Cloud and infrastructure</span>
+          </a>
+
+          <span
+            class="progress-nav__status ct-visually-hidden"
+            id="progress-nav-4-sub-status"
+          >
+            In progress
+          </span>
+        </li>
+      </ol>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--todo">
+      <span class="progress-nav__link">
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10" stroke-dasharray="3 3"></circle>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">Digital maturity</span>
+      </span>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-5-status"
+      >
+        Not started
+      </span>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--error">
+      <a
+        href="#documents"
+        class="progress-nav__link"
+        aria-describedby="progress-nav-6-status"
+      >
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="10,7 14,7 13,13.5 11,13.5"></polygon>
+            <circle cx="12" cy="16.5" r="1"></circle>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">Supporting documents</span>
+      </a>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-6-status"
+      >
+        There is a problem
+      </span>
+    </li>
+
+    <li class="progress-nav__item progress-nav__item--cannot-start-yet">
+      <span class="progress-nav__link" aria-disabled="true">
+        <span class="progress-nav__indicator" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+          >
+            <rect x="5" y="11" width="14" height="10" rx="1"></rect>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+          </svg>
+        </span>
+
+        <span class="progress-nav__label">
+          Review and submit
+          <span class="progress-nav__hint">Complete all sections first</span>
+        </span>
+      </span>
+
+      <span
+        class="progress-nav__status ct-visually-hidden"
+        id="progress-nav-7-status"
+      >
+        Cannot start yet
+      </span>
+    </li>
+  </ol>
+</div>
