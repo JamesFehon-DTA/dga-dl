@@ -1,22 +1,22 @@
 ---
 layout: content
 title: 'Table of contents'
-description: 'In-page navigation generated from the H2 headings on a page.'
+description: 'In-page navigation generated from the headings on a page.'
 component-type: Navigation
 url: '/'
 ---
 
-Use a table of contents to help users scan the structure of a long page and jump directly to a section. It generates automatically from the H2 headings on the page. Authors enable it per page, not by building the list manually. It renders as an anchored list at the top of the content area, before the first H2.
+Use a table of contents to help users scan the structure of a long page and jump directly to a section. It generates automatically from the headings on the page: H2 headings sit at the top level, H3 headings nest one step under their parent H2, and H4 headings hold that indent one size smaller. Authors enable it per page, not by building the list manually. It renders as an anchored list at the top of the content area, before the first H2.
 
 ## When to use
 
-- the page is a long or medium-length guide with multiple H2 sections
-- the page has four or more H2 headings
+- the page is a long or medium-length guide with multiple sections
+- the page has four or more headings (H2 to H4)
 - users benefit from scanning the page structure before deciding which section to read
 
 ## When not to use
 
-- the page has fewer than four H2 headings – a short page does not need navigation
+- the page has fewer than four headings – a short page does not need navigation
 - the page is a step-by-step wizard flow where users must progress linearly
 - the section already has page-level navigation provided by [Sub-nav](/components/sub-nav/)
 
